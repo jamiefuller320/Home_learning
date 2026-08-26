@@ -34,7 +34,16 @@ source material → topic map → draft pack → human review → published
                      language log / send to the team inbox
 ```
 
-If a sentence is hard to picture, the parent (or we) flags it at the end of Stage 1 or Stage 2. Testers send the note with no GitHub account. It lands in `language_notes` for review, then the topic file is rewritten.
+If a sentence is hard to picture, the parent (or we) flags it at the end of Stage 1 or Stage 2. Testers send the note with no GitHub account. It lands in `language_notes` for **review**, not as an automatic rewrite.
+
+A note is a signal that a tired parent could not picture something. We do not paste the suggested sentence. Treat each open row as:
+
+1. **Find the stuck picture.** Which words failed, in which sentence?
+2. **Keep the school method.** If the suggestion would teach a rival method, drop a needed term, or make the maths vaguer, skip it and write why on the row (`npx tsx scripts/language-notes.ts decline <id> <reason>`).
+3. **Rewrite in everyday words.** Use the note’s *intent*. Use their wording only when it is already a sentence a tired parent would say.
+4. **Close the row with a note.** `done <id> <what we changed>` after the topic file changes; `declined <id> <why we skipped>`. The reason lives on the row (`review_note`), not only in the PR.
+
+Needed classroom words (for example *number bond*, once explained) stay. Jargon we never needed (*layer*, *how the fact is built*) goes.
 
 | Stage | What happens | Exit test |
 |---|---|---|

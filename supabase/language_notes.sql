@@ -13,8 +13,12 @@ create table if not exists public.language_notes (
   unclear text not null,
   clearer text not null default '',
   page_path text not null,
-  status text not null default 'open'
+  status text not null default 'open',
+  review_note text not null default ''
 );
+
+alter table public.language_notes
+  add column if not exists review_note text not null default '';
 
 alter table public.language_notes enable row level security;
 

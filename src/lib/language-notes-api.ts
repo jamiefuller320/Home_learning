@@ -15,6 +15,7 @@ export type LanguageNoteRow = {
   clearer: string;
   page_path: string;
   status: string;
+  review_note?: string;
 };
 
 export function readPublicSupabaseEnv(): { url: string; anonKey: string } | null {
@@ -42,7 +43,8 @@ export function rowToLanguageNote(row: LanguageNoteRow): LanguageNote {
   const section = LANGUAGE_SECTIONS.includes(row.section as LanguageSection)
     ? (row.section as LanguageSection)
     : "parent";
-  const status: LanguageNoteStatus = row.status === "done" ? "done" : "open";
+  const status: LanguageNoteStatus =
+    row.status === "done" ? "done" : row.status === "declined" ? "declined" : "open";
   return {
     id: row.id,
     createdAt: row.created_at,
@@ -53,6 +55,7 @@ export function rowToLanguageNote(row: LanguageNoteRow): LanguageNote {
     clearer: row.clearer,
     pagePath: row.page_path,
     status,
+    reviewNote: row.review_note?.trim() || "",
   };
 }
 

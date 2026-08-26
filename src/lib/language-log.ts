@@ -3,7 +3,8 @@ export const GITHUB_REPO = "jamiefuller320/Home_learning";
 
 export const LANGUAGE_SECTIONS = ["parent", "home"] as const;
 export type LanguageSection = (typeof LANGUAGE_SECTIONS)[number];
-export type LanguageNoteStatus = "open" | "done";
+export const LANGUAGE_NOTE_STATUSES = ["open", "done", "declined"] as const;
+export type LanguageNoteStatus = (typeof LANGUAGE_NOTE_STATUSES)[number];
 
 export type LanguageNote = {
   id: string;
@@ -15,6 +16,8 @@ export type LanguageNote = {
   clearer: string;
   pagePath: string;
   status: LanguageNoteStatus;
+  /** Maintainer note: what changed, or why the suggestion was skipped. */
+  reviewNote?: string;
 };
 
 export const SECTION_LABEL: Record<LanguageSection, string> = {

@@ -28,9 +28,9 @@ export const factsWithin10: Topic = {
     "School wants these facts to become fluent — available without a long count — because later maths uses them constantly. Year 1 starts within 10. Twenty can wait until these feel easy.",
   parentBriefing: {
     inPlainEnglish:
-      "A number fact is a small truth such as 6 + 4 = 10 or 7 − 2 = 5. Fluency does not mean shouting answers against a timer. It means the child does not have to start at 1 and climb every time. Fingers, pictures, and objects are allowed. They are how the fact is built.",
+      "A number fact is a small truth such as 6 + 4 = 10 or 7 − 2 = 5. Fluency does not mean shouting answers against a timer. It means the child does not have to start at 1 and climb every time. Fingers, pictures, and objects are allowed. The child uses them to see 6 and 4 making 10, before the fact lives in their head.",
     howSchoolTeachesIt:
-      "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts. They will teach families of facts together: 6 + 4, 4 + 6, 10 − 4, 10 − 6. That is why you will hear ‘number bonds’. The bond is the relationship, not a worksheet brand.",
+      "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts. They will teach families of facts together: 6 + 4, 4 + 6, 10 − 4, 10 − 6. School often calls that pair a number bond — two parts that make a whole, not a worksheet brand.",
     sayThis: [
       "6 and what make 10?",
       "If 4 is one part and 6 is the other part, what is the whole?",
@@ -45,7 +45,7 @@ export const factsWithin10: Topic = {
     commonMisconceptions: [
       {
         misconception: "They can do 3 + 2 with objects but go blank when they see 3 + 2 written.",
-        why: "The symbols are a later layer than the idea.",
+        why: "They can see it with objects first. The written 3 + 2 is a later step, not a different sum.",
         instead: "Build it with objects, say it in words, then show the symbols as a caption, not as the starting point.",
       },
       {
