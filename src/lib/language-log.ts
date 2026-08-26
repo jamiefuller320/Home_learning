@@ -88,3 +88,31 @@ export function buildGitHubIssueUrl(note: Pick<LanguageNote, "topicId" | "topicT
   });
   return `https://github.com/${GITHUB_REPO}/issues/new?${params.toString()}`;
 }
+
+export const FEEDBACK_EMAIL = process.env.NEXT_PUBLIC_FEEDBACK_EMAIL || "jamiefuller@live.co.uk";
+export const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${FEEDBACK_EMAIL}`;
+
+export function formatNoteForSharing(
+  note: Pick<LanguageNote, "topicId" | "topicTitle" | "section" | "unclear" | "clearer" | "pagePath">,
+): string {
+  const clearer = note.clearer.trim();
+  return [
+    `Language note: ${note.topicTitle}`,
+    SECTION_LABEL[note.section],
+    "",
+    `What was unclear: ${note.unclear.trim()}`,
+    clearer ? `Clearer way to say it: ${clearer}` : "Clearer way to say it: (none suggested)",
+    "",
+    `Page: ${note.pagePath}`,
+  ].join("\n");
+}
+
+export function buildMailtoUrl(
+  note: Pick<LanguageNote, "topicId" | "topicTitle" | "section" | "unclear" | "clearer" | "pagePath">,
+): string {
+  const params = new URLSearchParams({
+    subject: buildIssueTitle(note),
+    body: formatNoteForSharing(note),
+  });
+  return `mailto:${FEEDBACK_EMAIL}?${params.toString()}`;
+}

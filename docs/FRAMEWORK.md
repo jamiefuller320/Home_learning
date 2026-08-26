@@ -31,10 +31,10 @@ We are not building a child-facing lesson platform, a homework-doer, or a scrape
 ```
 source material → topic map → draft pack → human review → published
                               ↑
-                     language log / GitHub issue
+                     language log / send, share or copy
 ```
 
-If a sentence is hard to picture, the parent (or we) flags it at the end of Stage 1 or Stage 2. That note goes into the in-app language log and can open a GitHub issue. The fix is a rewrite in the topic file — the same loop we used for “clap when they land”.
+If a sentence is hard to picture, the parent (or we) flags it at the end of Stage 1 or Stage 2. Testers send, share, or copy the note — they do not need a GitHub account. The fix is a rewrite in the topic file.
 
 | Stage | What happens | Exit test |
 |---|---|---|

@@ -2,14 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import {
-  buildGitHubIssueUrl,
-  GITHUB_REPO,
-  readLanguageLog,
-  SECTION_LABEL,
-  updateLanguageNote,
-  type LanguageNote,
-} from "@/lib/language-log";
+import { NoteSendActions } from "@/components/NoteSendActions";
+import { readLanguageLog, SECTION_LABEL, updateLanguageNote, type LanguageNote } from "@/lib/language-log";
 
 export function LanguageLog() {
   const [notes, setNotes] = useState<LanguageNote[]>([]);
@@ -30,7 +24,7 @@ export function LanguageLog() {
         </li>
         <li className="rounded-2xl bg-white/70 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">2. Keep the note</p>
-          <p className="mt-2 text-ink-soft">It lands here on this device, and can open a GitHub issue.</p>
+          <p className="mt-2 text-ink-soft">It lands here on this device. Send, share, or copy it — no GitHub needed.</p>
         </li>
         <li className="rounded-2xl bg-white/70 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">3. Rewrite</p>
@@ -39,14 +33,7 @@ export function LanguageLog() {
       </ol>
 
       <p className="text-sm text-ink-soft">
-        Open issues in the repo:{" "}
-        <a
-          className="underline decoration-rule underline-offset-2 hover:text-teal"
-          href={`https://github.com/${GITHUB_REPO}/issues?q=is%3Aissue+label%3Alanguage`}
-        >
-          label “language”
-        </a>
-        . Notes below stay in this browser until you clear site data.
+        Testers do not need a GitHub account. Notes stay in this browser; Send / Share / Copy gets them to the team.
       </p>
 
       <section>
@@ -113,15 +100,9 @@ function LanguageNoteCard({
           {note.clearer}
         </p>
       ) : null}
-      <div className="mt-4 flex flex-wrap gap-3 text-sm">
-        <a
-          href={buildGitHubIssueUrl(note)}
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-full bg-teal px-4 py-2 font-semibold text-white hover:bg-teal-deep"
-        >
-          Open GitHub issue
-        </a>
+      <div className="mt-4 space-y-3">
+        <NoteSendActions note={note} />
+        <div className="flex flex-wrap gap-3 text-sm">
         <Link href={`/year-1-maths/${note.topicId}`} className="rounded-full border border-rule px-4 py-2 hover:border-teal">
           Open topic
         </Link>
@@ -135,6 +116,7 @@ function LanguageNoteCard({
             Reopen
           </button>
         ) : null}
+        </div>
       </div>
     </article>
   );

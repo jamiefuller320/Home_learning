@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { NoteSendActions } from "@/components/NoteSendActions";
 import type { Topic } from "@/content/schema";
 import {
   addLanguageNote,
-  buildGitHubIssueUrl,
   createNoteId,
   SECTION_LABEL,
   type LanguageNote,
@@ -42,27 +42,17 @@ export function LanguageFeedback({ topic, section }: { topic: Topic; section: La
   }
 
   if (saved) {
-    const issueUrl = buildGitHubIssueUrl(saved);
     return (
       <div className="no-print rounded-2xl border border-teal/30 bg-white/80 p-5">
-        <p className="font-semibold text-ink">Saved to the language log.</p>
-        <p className="mt-2 text-ink-soft">
-          Next: open a GitHub issue so we can rewrite this on the next pass, or keep collecting notes
-          in the log.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-3">
-          <a
-            href={issueUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full bg-teal px-4 py-2 font-semibold text-white hover:bg-teal-deep"
-          >
-            Open GitHub issue
-          </a>
-          <Link href="/language" className="rounded-full border border-rule px-4 py-2 hover:border-teal">
+        <p className="font-semibold text-ink">Note saved on this device.</p>
+        <div className="mt-3">
+          <NoteSendActions note={saved} />
+        </div>
+        <div className="mt-4 flex flex-wrap gap-3 text-sm">
+          <Link href="/language" className="text-teal underline">
             View language log
           </Link>
-          <button type="button" className="text-sm text-ink-soft underline" onClick={() => setSaved(null)}>
+          <button type="button" className="text-ink-soft underline" onClick={() => setSaved(null)}>
             Add another note
           </button>
         </div>
@@ -81,7 +71,7 @@ export function LanguageFeedback({ topic, section }: { topic: Topic; section: La
         I don’t understand something in this section
       </button>
       <p className="mt-1 text-sm text-ink-soft">
-        {SECTION_LABEL[section]}. Flag a phrase now so we can rewrite it.
+        {SECTION_LABEL[section]}. No GitHub account needed — send, share, or copy the note.
       </p>
       {open ? (
         <form className="mt-4 space-y-4" onSubmit={handleSubmit}>
@@ -107,7 +97,7 @@ export function LanguageFeedback({ topic, section }: { topic: Topic; section: La
             />
           </label>
           <button type="submit" className="rounded-full bg-teal px-4 py-2 font-semibold text-white hover:bg-teal-deep">
-            Save to the language log
+            Send this note
           </button>
         </form>
       ) : null}

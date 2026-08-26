@@ -42,11 +42,12 @@ export default function HowItWorksPage() {
         <h2 className="serif text-3xl text-ink">If the words are muddy</h2>
         <p className="mt-3">
           At the end of the parent briefing and the home pack there is a button: “I don’t understand
-          something in this section.” That saves a note to the{" "}
+          something in this section.” Testers can send, share, or copy that note — no GitHub
+          account. Notes also sit in the{" "}
           <Link href="/language" className="font-semibold text-teal hover:underline">
             language log
           </Link>{" "}
-          and can open a GitHub issue so we can rewrite the sentence.
+          on this device.
         </p>
       </section>
       <section>

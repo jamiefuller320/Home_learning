@@ -1,5 +1,12 @@
 import assert from "node:assert/strict";
-import { buildGitHubIssueUrl, buildIssueBody, buildIssueTitle } from "../src/lib/language-log";
+import {
+  buildGitHubIssueUrl,
+  buildIssueBody,
+  buildIssueTitle,
+  buildMailtoUrl,
+  FEEDBACK_EMAIL,
+  formatNoteForSharing,
+} from "../src/lib/language-log";
 
 const note = {
   topicId: "counting-within-100",
@@ -23,5 +30,14 @@ const url = buildGitHubIssueUrl(note);
 assert.ok(url.startsWith("https://github.com/jamiefuller320/Home_learning/issues/new?"));
 assert.ok(url.includes("labels=language"));
 assert.ok(url.includes(encodeURIComponent("[Language]")));
+
+const shared = formatNoteForSharing(note);
+assert.match(shared, /What was unclear/);
+assert.match(shared, /clap once when they land/i);
+assert.doesNotMatch(shared, /GitHub issue/);
+
+const mailto = buildMailtoUrl(note);
+assert.ok(mailto.startsWith(`mailto:${FEEDBACK_EMAIL}?`));
+assert.ok(mailto.includes("subject="));
 
 console.log("Language-log helpers look good.");
