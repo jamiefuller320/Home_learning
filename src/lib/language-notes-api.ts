@@ -15,6 +15,7 @@ export type LanguageNoteRow = {
   clearer: string;
   page_path: string;
   status: string;
+  review_note?: string;
 };
 
 export function readPublicSupabaseEnv(): { url: string; anonKey: string } | null {
@@ -54,6 +55,7 @@ export function rowToLanguageNote(row: LanguageNoteRow): LanguageNote {
     clearer: row.clearer,
     pagePath: row.page_path,
     status,
+    reviewNote: row.review_note?.trim() || "",
   };
 }
 

@@ -16,6 +16,8 @@ export type LanguageNote = {
   clearer: string;
   pagePath: string;
   status: LanguageNoteStatus;
+  /** Maintainer note: what changed, or why the suggestion was skipped. */
+  reviewNote?: string;
 };
 
 export const SECTION_LABEL: Record<LanguageSection, string> = {

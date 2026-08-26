@@ -55,4 +55,19 @@ const declined = rowToLanguageNote({
 });
 assert.equal(declined.status, "declined");
 
+const reviewed = rowToLanguageNote({
+  id: "44444444-4444-4444-4444-444444444444",
+  created_at: "2026-08-26T10:00:00.000Z",
+  topic_id: "facts-within-10",
+  topic_title: "Number facts within 10",
+  section: "parent",
+  unclear: "They are how the fact is built",
+  clearer: "They are the components that allow the fact to be built",
+  page_path: "/year-1-maths/facts-within-10/",
+  status: "done",
+  review_note: "Intent kept; wording was still abstract. Now: see 6 and 4 making 10.",
+});
+assert.equal(reviewed.reviewNote, "Intent kept; wording was still abstract. Now: see 6 and 4 making 10.");
+assert.ok(!("review_note" in noteToInsertRow(note)));
+
 console.log("Language-notes API helpers look good.");

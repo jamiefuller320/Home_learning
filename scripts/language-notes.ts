@@ -6,8 +6,9 @@
  *
  *   npx tsx scripts/language-notes.ts list
  *   npx tsx scripts/language-notes.ts list all
- *   npx tsx scripts/language-notes.ts done <id>
- *   npx tsx scripts/language-notes.ts decline <id>
+ *   npx tsx scripts/language-notes.ts done <id> <what we changed>
+ *   npx tsx scripts/language-notes.ts decline <id> <why we skipped>
+ *   npx tsx scripts/language-notes.ts annotate <id> <note>
  */
 
 import { rowToLanguageNote, type LanguageNoteRow } from "../src/lib/language-notes-api";
@@ -52,6 +53,7 @@ function printNotes(notes: ReturnType<typeof rowToLanguageNote>[], label: string
     console.log(`  ${note.topicTitle} (${note.topicId}) · ${note.section}`);
     console.log(`  Unclear: ${note.unclear}`);
     if (note.clearer) console.log(`  Clearer: ${note.clearer}`);
+    if (note.reviewNote) console.log(`  Review: ${note.reviewNote}`);
     console.log(`  Page: ${note.pagePath}`);
     console.log("");
   }
@@ -65,31 +67,50 @@ async function listNotes(all: boolean): Promise<void> {
   printNotes(rows.map(rowToLanguageNote), all ? "recorded" : "open");
 }
 
-async function setStatus(id: string, status: "done" | "declined"): Promise<void> {
+async function patchNote(id: string, update: { status?: "done" | "declined"; review_note: string }): Promise<void> {
   await rest<LanguageNoteRow[]>(`/rest/v1/language_notes?id=eq.${encodeURIComponent(id)}`, {
     method: "PATCH",
     headers: { Prefer: "return=representation" },
-    body: JSON.stringify({ status }),
+    body: JSON.stringify(update),
   });
-  console.log(`Marked ${id} ${status}.`);
+}
+
+function usage(): never {
+  console.error(
+    "Usage: npx tsx scripts/language-notes.ts list [all]|done <id> <note>|decline <id> <note>|annotate <id> <note>",
+  );
+  process.exit(1);
 }
 
 async function main() {
-  const [command, arg] = process.argv.slice(2);
+  const [command, id, ...noteWords] = process.argv.slice(2);
+  const reviewNote = noteWords.join(" ").trim();
+
   if (command === "list") {
-    await listNotes(arg === "all");
+    await listNotes(id === "all");
     return;
   }
-  if (command === "done" && arg) {
-    await setStatus(arg, "done");
+  if (!id || !reviewNote) usage();
+
+  if (command === "done") {
+    await patchNote(id, { status: "done", review_note: reviewNote });
+    console.log(`Marked ${id} done.`);
+    console.log(`Review: ${reviewNote}`);
     return;
   }
-  if (command === "decline" && arg) {
-    await setStatus(arg, "declined");
+  if (command === "decline") {
+    await patchNote(id, { status: "declined", review_note: reviewNote });
+    console.log(`Marked ${id} declined.`);
+    console.log(`Review: ${reviewNote}`);
     return;
   }
-  console.error("Usage: npx tsx scripts/language-notes.ts list [all]|done <id>|decline <id>");
-  process.exit(1);
+  if (command === "annotate") {
+    await patchNote(id, { review_note: reviewNote });
+    console.log(`Annotated ${id}.`);
+    console.log(`Review: ${reviewNote}`);
+    return;
+  }
+  usage();
 }
 
 main().catch((error) => {
