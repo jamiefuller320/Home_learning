@@ -12,6 +12,8 @@ export const oclockAndHalfPast: Topic = {
   year: 1,
   subject: "maths",
   strand: "Measurement",
+  prerequisites: ["numbers-to-20", "halves"],
+  glossaryTerms: ["half"],
   parentMinutes: 7,
   homeMinutes: 12,
   householdItems: ["A real analogue clock or watch, or a paper plate with two card hands", "A reference to daily events (lunch, bedtime)"],

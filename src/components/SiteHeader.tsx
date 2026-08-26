@@ -10,6 +10,9 @@ export function SiteHeader() {
         <Link href="/year-1-maths" className="hover:text-teal">
           Year 1 maths
         </Link>
+        <Link href="/year-1-maths/glossary" className="hover:text-teal">
+          Glossary
+        </Link>
         <Link href="/how-it-works" className="hover:text-teal">
           How it works
         </Link>

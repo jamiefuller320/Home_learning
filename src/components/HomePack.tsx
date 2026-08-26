@@ -1,4 +1,5 @@
 import { LanguageFeedback } from "@/components/LanguageFeedback";
+import { GlossaryText } from "@/components/GlossaryText";
 import { NumberLineGuide } from "@/components/NumberLineGuide";
 import type { Topic } from "@/content/schema";
 
@@ -18,7 +19,9 @@ export function HomePack({ topic }: { topic: Topic }) {
 
       <div>
         <h3 className="serif text-2xl text-ink">Set up</h3>
-        <p className="mt-3 text-lg leading-8 text-ink-soft">{homePack.setup}</p>
+        <p className="mt-3 text-lg leading-8 text-ink-soft">
+          <GlossaryText text={homePack.setup} />
+        </p>
       </div>
 
       <div className="rounded-2xl border border-teal/30 bg-white p-6">
@@ -26,14 +29,16 @@ export function HomePack({ topic }: { topic: Topic }) {
         <h3 className="serif mt-2 text-3xl text-ink">{homePack.activity.title}</h3>
         <ol className="mt-5 list-decimal space-y-3 pl-5 text-lg leading-8 text-ink">
           {homePack.activity.steps.map((step) => (
-            <li key={step}>{step}</li>
+            <li key={step}>
+              <GlossaryText text={step} />
+            </li>
           ))}
         </ol>
         {homePack.activity.numberLine ? <NumberLineGuide guide={homePack.activity.numberLine} /> : null}
         {homePack.activity.tip ? (
           <p className="mt-5 border-t border-rule pt-4 text-ink-soft">
             <span className="font-semibold text-ink">Tip: </span>
-            {homePack.activity.tip}
+            <GlossaryText text={homePack.activity.tip} />
           </p>
         ) : null}
       </div>
@@ -45,19 +50,21 @@ export function HomePack({ topic }: { topic: Topic }) {
           {homePack.check.map((item, index) => (
             <article key={item.prompt} className="rounded-2xl border border-rule bg-white/70 p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">Check {index + 1}</p>
-              <p className="mt-2 text-lg font-semibold text-ink">{item.prompt}</p>
+              <p className="mt-2 text-lg font-semibold text-ink">
+                <GlossaryText text={item.prompt} />
+              </p>
               <p className="mt-3 text-ink-soft">
                 <span className="font-semibold text-sage">Looks like: </span>
-                {item.looksLike}
+                <GlossaryText text={item.looksLike} />
               </p>
               <p className="mt-1 text-ink-soft">
                 <span className="font-semibold text-clay">Not yet: </span>
-                {item.notYet}
+                <GlossaryText text={item.notYet} />
               </p>
               {item.nudge ? (
                 <p className="mt-2 text-ink-soft">
                   <span className="font-semibold text-ink">Try this: </span>
-                  {item.nudge}
+                  <GlossaryText text={item.nudge} />
                 </p>
               ) : null}
             </article>
@@ -68,13 +75,13 @@ export function HomePack({ topic }: { topic: Topic }) {
       {homePack.stretch ? (
         <p className="text-lg leading-8 text-ink-soft">
           <span className="font-semibold text-ink">If they are still keen: </span>
-          {homePack.stretch}
+          <GlossaryText text={homePack.stretch} />
         </p>
       ) : null}
 
       <p className="rounded-2xl bg-[#f6e4e0] px-5 py-4 text-lg leading-8 text-ink">
         <span className="font-semibold">Stop when </span>
-        {homePack.stopRule}
+        <GlossaryText text={homePack.stopRule} />
       </p>
 
       <LanguageFeedback topic={topic} section="home" />

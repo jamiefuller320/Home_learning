@@ -12,6 +12,8 @@ export const numbersTo20: Topic = {
   year: 1,
   subject: "maths",
   strand: "Number and place value",
+  prerequisites: ["counting-within-100"],
+  glossaryTerms: ["number-line", "number-track"],
   parentMinutes: 7,
   homeMinutes: 12,
   householdItems: ["A strip of paper or the edge of a table", "A pen or raisins to mark places", "Small toys or spoons as counters"],

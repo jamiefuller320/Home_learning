@@ -26,3 +26,7 @@ export const year1MathsTopics: Topic[] = [
 export function getTopicBySlug(slug: string): Topic | undefined {
   return year1MathsTopics.find((topic) => topic.slug === slug);
 }
+
+export function getTopicById(id: string): Topic | undefined {
+  return year1MathsTopics.find((topic) => topic.id === id);
+}
