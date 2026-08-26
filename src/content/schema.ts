@@ -41,10 +41,18 @@ export type HomeActivity = {
   numberLine?: NumberLineGuide;
 };
 
+export type SayThisPrompt = {
+  prompt: string;
+  /** What the parent might hear — optional reveal, not coaching the child. */
+  listenFor?: string;
+};
+
+export type SayThisItem = string | SayThisPrompt;
+
 export type ParentBriefing = {
   inPlainEnglish: string;
   howSchoolTeachesIt: string;
-  sayThis: string[];
+  sayThis: SayThisItem[];
   avoidThis: string[];
   commonMisconceptions: Misconception[];
   youAreReadyWhen: string;

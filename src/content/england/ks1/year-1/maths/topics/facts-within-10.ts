@@ -17,7 +17,7 @@ export const factsWithin10: Topic = {
   parentMinutes: 8,
   homeMinutes: 15,
   householdItems: [
-    "Ten objects of two colours or types (forks and spoons, red and green Lego, raisins and almonds)",
+    "Ten objects of two colours or types (such as forks and spoons, red and green Lego, raisins and almonds)",
     "A homemade ten-frame with exactly 10 cells: two rows of five circles on paper, a 10-hole muffin tin, or an egg box with 10 holes left open",
   ],
   statutoryOutcomes: [
@@ -48,7 +48,7 @@ export const factsWithin10: Topic = {
       {
         misconception: "They can do 3 + 2 with objects but go blank when they see 3 + 2 written.",
         why: "They can see it with objects first. The written 3 + 2 is a later step, not a different sum.",
-        instead: "Build it with objects, say it in words, then show the symbols as a caption, not as the starting point.",
+        instead: "Build it with objects, say it in words, then show the symbols written underneath — not as the starting point.",
       },
       {
         misconception: "They always count all, even for 9 + 1.",
@@ -76,16 +76,19 @@ export const factsWithin10: Topic = {
         prompt: "Show 8 on the frame. How many more to make 10?",
         looksLike: "They see 2 empty spaces, or count the empties once.",
         notYet: "They recount all 8 from the start and still cannot name the complement.",
+        nudge: "Count the empty spaces on the frame, or ask what goes with 8 to make 10.",
       },
       {
         prompt: "4 and 6 make…?",
         looksLike: "10, with or without the frame nearby.",
         notYet: "A long count of all ten fingers as if the fact is new each time, after several repeats.",
+        nudge: "Fill 4 and 6 on the frame together. Say the total without counting from 1.",
       },
       {
         prompt: "10 take away 1.",
         looksLike: "9, perhaps by imagining one space emptying.",
         notYet: "They remove an object at random or say 10, not linking subtraction to the bond.",
+        nudge: "Remove one object or cover one space. How many are left?",
       },
     ],
     stretch: "Ask “7 and 3 make 10. What is 3 and 7?” If they can swap the two parts and still get 10, the idea is sticking.",

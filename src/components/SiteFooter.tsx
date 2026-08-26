@@ -12,6 +12,11 @@ export function SiteFooter() {
         </a>
         .
       </p>
+      <p className="mt-3">
+        <a href="/maintenance" className="underline decoration-rule underline-offset-2 hover:text-teal">
+          Maintainer
+        </a>
+      </p>
     </footer>
   );
 }

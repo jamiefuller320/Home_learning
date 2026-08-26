@@ -1,5 +1,6 @@
 import { LanguageFeedback } from "@/components/LanguageFeedback";
 import { GlossaryText } from "@/components/GlossaryText";
+import { SayThisList } from "@/components/SayThisList";
 import type { Topic } from "@/content/schema";
 
 export function ParentBriefing({ topic }: { topic: Topic }) {
@@ -24,13 +25,7 @@ export function ParentBriefing({ topic }: { topic: Topic }) {
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-2xl bg-[#e5efe8] p-5">
           <h3 className="font-semibold text-sage">Say this</h3>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-ink">
-            {parentBriefing.sayThis.map((line) => (
-              <li key={line}>
-                <GlossaryText text={line} />
-              </li>
-            ))}
-          </ul>
+          <SayThisList items={parentBriefing.sayThis} />
         </div>
         <div className="rounded-2xl bg-[#f6e4e0] p-5">
           <h3 className="font-semibold text-clay">Avoid this</h3>

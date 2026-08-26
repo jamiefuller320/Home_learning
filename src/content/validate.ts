@@ -1,6 +1,6 @@
 import { sortTopicsByPrerequisites } from "./england/ks1/year-1/maths/curriculum";
 import { glossaryTerms } from "./glossary";
-import { CONTENT_LIMITS, type Topic } from "./schema";
+import { CONTENT_LIMITS, type SayThisItem, type Topic } from "./schema";
 
 export type ValidationIssue = {
   topicId: string;
@@ -10,6 +10,10 @@ export type ValidationIssue = {
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const GLOSSARY_IDS = new Set(glossaryTerms.map((term) => term.id));
+
+function sayThisPromptText(item: SayThisItem): string {
+  return typeof item === "string" ? item : item.prompt;
+}
 
 function requiredText(value: string, field: string, topicId: string, issues: ValidationIssue[]) {
   if (!value || !value.trim()) {
@@ -75,6 +79,10 @@ export function validateTopic(topic: Topic): ValidationIssue[] {
   if (topic.parentBriefing.sayThis.length < CONTENT_LIMITS.minSayThis) {
     issues.push({ topicId: id, field: "parentBriefing.sayThis", message: `need at least ${CONTENT_LIMITS.minSayThis} prompts` });
   }
+
+  topic.parentBriefing.sayThis.forEach((item, index) => {
+    requiredText(sayThisPromptText(item), `parentBriefing.sayThis[${index}]`, id, issues);
+  });
 
   if (topic.parentBriefing.avoidThis.length < CONTENT_LIMITS.minAvoidThis) {
     issues.push({ topicId: id, field: "parentBriefing.avoidThis", message: `need at least ${CONTENT_LIMITS.minAvoidThis} cautions` });
