@@ -5,7 +5,9 @@
  * (or SUPABASE_URL). The service role is never shipped to the site.
  *
  *   npx tsx scripts/language-notes.ts list
+ *   npx tsx scripts/language-notes.ts list all
  *   npx tsx scripts/language-notes.ts done <id>
+ *   npx tsx scripts/language-notes.ts decline <id>
  */
 
 import { rowToLanguageNote, type LanguageNoteRow } from "../src/lib/language-notes-api";
@@ -39,18 +41,14 @@ async function rest<T>(path: string, init: RequestInit = {}): Promise<T> {
   return (await response.json()) as T;
 }
 
-async function listOpenNotes(): Promise<void> {
-  const rows = await rest<LanguageNoteRow[]>(
-    "/rest/v1/language_notes?select=*&status=eq.open&order=created_at.asc",
-  );
-  const notes = rows.map(rowToLanguageNote);
+function printNotes(notes: ReturnType<typeof rowToLanguageNote>[], label: string) {
   if (notes.length === 0) {
-    console.log("No open language notes.");
+    console.log(`No ${label} language notes.`);
     return;
   }
-  console.log(`${notes.length} open note(s):\n`);
+  console.log(`${notes.length} ${label} note(s):\n`);
   for (const note of notes) {
-    console.log(`- ${note.id}`);
+    console.log(`- ${note.id} [${note.status}]`);
     console.log(`  ${note.topicTitle} (${note.topicId}) · ${note.section}`);
     console.log(`  Unclear: ${note.unclear}`);
     if (note.clearer) console.log(`  Clearer: ${note.clearer}`);
@@ -59,26 +57,38 @@ async function listOpenNotes(): Promise<void> {
   }
 }
 
-async function markDone(id: string): Promise<void> {
+async function listNotes(all: boolean): Promise<void> {
+  const query = all
+    ? "/rest/v1/language_notes?select=*&order=created_at.asc"
+    : "/rest/v1/language_notes?select=*&status=eq.open&order=created_at.asc";
+  const rows = await rest<LanguageNoteRow[]>(query);
+  printNotes(rows.map(rowToLanguageNote), all ? "recorded" : "open");
+}
+
+async function setStatus(id: string, status: "done" | "declined"): Promise<void> {
   await rest<LanguageNoteRow[]>(`/rest/v1/language_notes?id=eq.${encodeURIComponent(id)}`, {
     method: "PATCH",
     headers: { Prefer: "return=representation" },
-    body: JSON.stringify({ status: "done" }),
+    body: JSON.stringify({ status }),
   });
-  console.log(`Marked ${id} done.`);
+  console.log(`Marked ${id} ${status}.`);
 }
 
 async function main() {
-  const [command, id] = process.argv.slice(2);
+  const [command, arg] = process.argv.slice(2);
   if (command === "list") {
-    await listOpenNotes();
+    await listNotes(arg === "all");
     return;
   }
-  if (command === "done" && id) {
-    await markDone(id);
+  if (command === "done" && arg) {
+    await setStatus(arg, "done");
     return;
   }
-  console.error("Usage: npx tsx scripts/language-notes.ts list|done <id>");
+  if (command === "decline" && arg) {
+    await setStatus(arg, "declined");
+    return;
+  }
+  console.error("Usage: npx tsx scripts/language-notes.ts list [all]|done <id>|decline <id>");
   process.exit(1);
 }
 

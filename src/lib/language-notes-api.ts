@@ -42,7 +42,8 @@ export function rowToLanguageNote(row: LanguageNoteRow): LanguageNote {
   const section = LANGUAGE_SECTIONS.includes(row.section as LanguageSection)
     ? (row.section as LanguageSection)
     : "parent";
-  const status: LanguageNoteStatus = row.status === "done" ? "done" : "open";
+  const status: LanguageNoteStatus =
+    row.status === "done" ? "done" : row.status === "declined" ? "declined" : "open";
   return {
     id: row.id,
     createdAt: row.created_at,

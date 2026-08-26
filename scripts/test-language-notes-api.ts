@@ -42,4 +42,17 @@ const unknownSection = rowToLanguageNote({
 assert.equal(unknownSection.section, "parent");
 assert.equal(unknownSection.status, "done");
 
+const declined = rowToLanguageNote({
+  id: "33333333-3333-3333-3333-333333333333",
+  created_at: "2026-08-26T10:00:00.000Z",
+  topic_id: "facts-within-10",
+  topic_title: "Number facts within 10",
+  section: "parent",
+  unclear: "layer",
+  clearer: "learning stage",
+  page_path: "/year-1-maths/facts-within-10/",
+  status: "declined",
+});
+assert.equal(declined.status, "declined");
+
 console.log("Language-notes API helpers look good.");
