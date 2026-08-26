@@ -55,6 +55,8 @@ npx tsx scripts/process-language-notes.ts route  # open approval issues for feat
 npx tsx scripts/language-notes.ts list           # read the inbox
 ```
 
+Maintainer UI: `/maintenance` (linked discreetly in the footer). Paste the Supabase **service_role** key to unlock; it stays in session storage on that device only. The page shows feature requests, open language fixes, lessons flagged for repeated feedback, and supports mark done / decline / annotate.
+
 A note is a signal that a tired parent could not picture something. We do not paste the suggested sentence. Treat each open row as:
 
 1. **Find the stuck picture.** Which words failed, in which sentence?
