@@ -21,7 +21,7 @@ export function SkillsTree({ topics }: { topics: Topic[] }) {
           return (
             <li key={topic.id} className="border-l-2 border-teal/30 pl-4">
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <Link href={`/year-1-maths/${topic.slug}`} className="serif text-xl text-ink hover:text-teal">
+                <Link href={`/year-1-maths/${topic.slug}`} prefetch={false} className="serif text-xl text-ink hover:text-teal">
                   {topic.shortTitle}
                 </Link>
                 <span className="text-xs text-ink-soft">{topic.strand}</span>
@@ -34,6 +34,7 @@ export function SkillsTree({ topics }: { topics: Topic[] }) {
                       {index > 0 ? (index === prerequisites.length - 1 ? " and " : ", ") : null}
                       <Link
                         href={`/year-1-maths/${prerequisite.slug}`}
+                        prefetch={false}
                         className="font-medium text-teal hover:underline"
                       >
                         {prerequisite.shortTitle}

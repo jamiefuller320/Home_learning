@@ -56,6 +56,10 @@ a {
   background: #d7e6e3;
 }
 
+.glossary-term details[open] > summary {
+  color: var(--teal);
+}
+
 @media print {
   body {
     background: white;

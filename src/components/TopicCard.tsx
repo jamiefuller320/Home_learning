@@ -6,6 +6,7 @@ export function TopicCard({ topic, briefingDone }: { topic: Topic; briefingDone?
   return (
     <Link
       href={`/year-1-maths/${topic.slug}`}
+      prefetch={false}
       className="block rounded-2xl border border-rule bg-white/70 p-5 transition hover:border-teal hover:bg-white"
     >
       <div className="flex flex-wrap items-center gap-2 text-xs text-ink-soft">

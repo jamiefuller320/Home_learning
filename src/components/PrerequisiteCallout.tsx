@@ -20,6 +20,7 @@ export function PrerequisiteCallout({ topic, topics }: { topic: Topic; topics: T
           <li key={prerequisite.id}>
             <Link
               href={`/year-1-maths/${prerequisite.slug}`}
+              prefetch={false}
               className="font-medium text-teal hover:underline"
             >
               {prerequisite.title}

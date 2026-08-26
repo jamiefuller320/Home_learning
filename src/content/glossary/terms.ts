@@ -99,7 +99,32 @@ export const glossaryTerms: GlossaryTerm[] = [
     plainEnglish:
       "One of two equal parts of a whole. Both halves must match — there is no ‘bigger half’. Half past on a clock uses this same idea of splitting an hour in two.",
     seeAlso: ["partition"],
-    relatedTopics: ["halves", "oclock-and-half-past"],
+    relatedTopics: ["halves", "oclock-and-half-past", "quarters"],
+  },
+  {
+    id: "quarter",
+    term: "quarter",
+    aliases: ["quarters"],
+    plainEnglish:
+      "One of four equal parts of a whole. Like halves, the parts must match — four uneven slices are not quarters. Two quarters make a half; four quarters make the whole again.",
+    seeAlso: ["half", "partition"],
+    relatedTopics: ["quarters"],
+  },
+  {
+    id: "number-word",
+    term: "number word",
+    aliases: ["number words", "in words"],
+    plainEnglish:
+      "How we write a number using letters — fourteen, not 14. School expects children to link teen words to numerals, especially eleven, twelve, and the -teen numbers.",
+    relatedTopics: ["number-words-to-20"],
+  },
+  {
+    id: "compare-length",
+    term: "longer and shorter",
+    aliases: ["longer", "shorter", "taller", "shorter than", "longer than", "tall", "short"],
+    plainEnglish:
+      "Words for comparing how far something stretches (longer, shorter) or how high it reaches (taller, shorter). Line objects up at the same starting point before you compare.",
+    relatedTopics: ["comparing-length"],
   },
   {
     id: "2d-shape",
