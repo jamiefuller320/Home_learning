@@ -19,9 +19,9 @@ export function HomePack({ topic }: { topic: Topic }) {
 
       <div>
         <h3 className="serif text-2xl text-ink">Set up</h3>
-        <p className="mt-3 text-lg leading-8 text-ink-soft">
+        <div className="mt-3 text-lg leading-8 text-ink-soft">
           <GlossaryText text={homePack.setup} />
-        </p>
+        </div>
       </div>
 
       <div className="rounded-2xl border border-teal/30 bg-white p-6">
@@ -36,10 +36,10 @@ export function HomePack({ topic }: { topic: Topic }) {
         </ol>
         {homePack.activity.numberLine ? <NumberLineGuide guide={homePack.activity.numberLine} /> : null}
         {homePack.activity.tip ? (
-          <p className="mt-5 border-t border-rule pt-4 text-ink-soft">
+          <div className="mt-5 border-t border-rule pt-4 text-ink-soft">
             <span className="font-semibold text-ink">Tip: </span>
             <GlossaryText text={homePack.activity.tip} />
-          </p>
+          </div>
         ) : null}
       </div>
 
@@ -50,22 +50,22 @@ export function HomePack({ topic }: { topic: Topic }) {
           {homePack.check.map((item, index) => (
             <article key={item.prompt} className="rounded-2xl border border-rule bg-white/70 p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">Check {index + 1}</p>
-              <p className="mt-2 text-lg font-semibold text-ink">
+              <div className="mt-2 text-lg font-semibold text-ink">
                 <GlossaryText text={item.prompt} />
-              </p>
-              <p className="mt-3 text-ink-soft">
+              </div>
+              <div className="mt-3 text-ink-soft">
                 <span className="font-semibold text-sage">Looks like: </span>
                 <GlossaryText text={item.looksLike} />
-              </p>
-              <p className="mt-1 text-ink-soft">
+              </div>
+              <div className="mt-1 text-ink-soft">
                 <span className="font-semibold text-clay">Not yet: </span>
                 <GlossaryText text={item.notYet} />
-              </p>
+              </div>
               {item.nudge ? (
-                <p className="mt-2 text-ink-soft">
+                <div className="mt-2 text-ink-soft">
                   <span className="font-semibold text-ink">Try this: </span>
                   <GlossaryText text={item.nudge} />
-                </p>
+                </div>
               ) : null}
             </article>
           ))}
@@ -73,16 +73,16 @@ export function HomePack({ topic }: { topic: Topic }) {
       </div>
 
       {homePack.stretch ? (
-        <p className="text-lg leading-8 text-ink-soft">
+        <div className="text-lg leading-8 text-ink-soft">
           <span className="font-semibold text-ink">If they are still keen: </span>
           <GlossaryText text={homePack.stretch} />
-        </p>
+        </div>
       ) : null}
 
-      <p className="rounded-2xl bg-[#f6e4e0] px-5 py-4 text-lg leading-8 text-ink">
+      <div className="rounded-2xl bg-[#f6e4e0] px-5 py-4 text-lg leading-8 text-ink">
         <span className="font-semibold">Stop when </span>
         <GlossaryText text={homePack.stopRule} />
-      </p>
+      </div>
 
       <LanguageFeedback topic={topic} section="home" />
     </section>
