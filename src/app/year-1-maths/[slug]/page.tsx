@@ -22,5 +22,5 @@ export default async function TopicPage({ params }: PageProps) {
   const { slug } = await params;
   const topic = getTopicBySlug(slug);
   if (!topic) notFound();
-  return <TopicExperience topic={topic} />;
+  return <TopicExperience topic={topic} topics={year1MathsTopics} />;
 }

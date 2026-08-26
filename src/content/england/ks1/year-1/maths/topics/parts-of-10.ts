@@ -12,6 +12,8 @@ export const partsOf10: Topic = {
   year: 1,
   subject: "maths",
   strand: "Addition and subtraction",
+  prerequisites: ["numbers-to-20"],
+  glossaryTerms: ["compose", "partition", "part-whole", "conservation-of-number", "number-bond"],
   parentMinutes: 7,
   homeMinutes: 12,
   householdItems: ["Up to 10 identical objects (buttons, crayons, grapes)", "A plate or piece of paper torn into a ‘whole’ and two ‘parts’"],

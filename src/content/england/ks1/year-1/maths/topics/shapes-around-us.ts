@@ -12,6 +12,8 @@ export const shapesAroundUs: Topic = {
   year: 1,
   subject: "maths",
   strand: "Geometry",
+  prerequisites: [],
+  glossaryTerms: ["2d-shape", "3d-shape"],
   parentMinutes: 7,
   homeMinutes: 15,
   householdItems: ["Food boxes, tins, balls, a toilet roll, a book, a ball of playdough or a cushion", "A window, a clock, a slice of toast or a mat"],

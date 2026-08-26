@@ -12,6 +12,8 @@ export const countingWithin100: Topic = {
   year: 1,
   subject: "maths",
   strand: "Number and place value",
+  prerequisites: [],
+  glossaryTerms: [],
   parentMinutes: 6,
   homeMinutes: 12,
   householdItems: ["Stairs, steps, or a walking route", "A handful of dried pasta, coins, or Lego"],
