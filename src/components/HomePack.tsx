@@ -1,4 +1,5 @@
 import { LanguageFeedback } from "@/components/LanguageFeedback";
+import { NumberLineGuide } from "@/components/NumberLineGuide";
 import type { Topic } from "@/content/schema";
 
 export function HomePack({ topic }: { topic: Topic }) {
@@ -28,6 +29,7 @@ export function HomePack({ topic }: { topic: Topic }) {
             <li key={step}>{step}</li>
           ))}
         </ol>
+        {homePack.activity.numberLine ? <NumberLineGuide guide={homePack.activity.numberLine} /> : null}
         {homePack.activity.tip ? (
           <p className="mt-5 border-t border-rule pt-4 text-ink-soft">
             <span className="font-semibold text-ink">Tip: </span>
@@ -52,6 +54,12 @@ export function HomePack({ topic }: { topic: Topic }) {
                 <span className="font-semibold text-clay">Not yet: </span>
                 {item.notYet}
               </p>
+              {item.nudge ? (
+                <p className="mt-2 text-ink-soft">
+                  <span className="font-semibold text-ink">Try this: </span>
+                  {item.nudge}
+                </p>
+              ) : null}
             </article>
           ))}
         </div>

@@ -24,12 +24,21 @@ export type CheckItem = {
   prompt: string;
   looksLike: string;
   notYet: string;
+  nudge?: string;
+};
+
+export type NumberLineGuide = {
+  start: number;
+  end: number;
+  marks: number[];
+  caption: string;
 };
 
 export type HomeActivity = {
   title: string;
   steps: string[];
   tip?: string;
+  numberLine?: NumberLineGuide;
 };
 
 export type ParentBriefing = {

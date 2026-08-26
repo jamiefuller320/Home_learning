@@ -46,8 +46,8 @@ Keep the whole briefing under about eight minutes of reading. Use short paragrap
 |---|---|
 | `householdItems` | Things already at home. If it is not on this list, the activity cannot need it. Name sizes when kit varies (egg boxes are 6, 10 or 12 holes; you need 10 cells open) |
 | `setup` | How to clear a corner of the table |
-| `activity` | Exactly one activity. Steps a parent can follow without scrolling back |
-| `check` | Three tiny probes: `prompt`, `looksLike`, `notYet` |
+| `activity` | Exactly one activity. Start with an explicit set-up step. Add a `numberLine` picture when “left / middle / right” is the idea |
+| `check` | Three tiny probes: `prompt`, `looksLike`, `notYet`, and a `nudge` that says what to try next |
 | `stretch` | Optional extra if the child is still keen |
 | `stopRule` | When to stop, including “this is becoming a row” |
 

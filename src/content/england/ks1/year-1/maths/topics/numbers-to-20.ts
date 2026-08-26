@@ -48,38 +48,51 @@ export const numbersTo20: Topic = {
       {
         misconception: "They can say one more, but point to the wrong side of the line.",
         why: "Left and right on a line is a new code.",
-        instead: "Stand the line on the floor with shoes as 0 and 20 and walk it.",
+        instead:
+          "Make a line on the floor. Put a shoe at the left end for 0 and a shoe at the right end for 20. Walk along it together.",
       },
     ],
     youAreReadyWhen: "You can draw a rough 0–20 line, forget to write 8, and know roughly where it belongs.",
   },
   homePack: {
-    setup: "Draw a long line on paper or use the table edge. Mark only 0 at one end and 20 at the other. Leave the middle empty.",
+    setup:
+      "Clear a strip of table, or find a long piece of paper. You are going to make a number line that only shows the two ends. Nothing goes in the middle until your child puts it there.",
     activity: {
       title: "Empty line",
       steps: [
-        "Ask: “Where does 10 live?” Place a raisin or spoon there. Check it is roughly in the middle.",
+        "Set up the empty line: draw one long straight line. Write 0 at the left end and 20 at the right end. Leave the middle blank.",
+        "Ask: “Where does 10 live?” Place a raisin or spoon there. Check it is roughly in the middle, halfway from 0 to 20.",
         "Give three numbers — 4, 15 and 11 — one at a time. Your child places a mark or toy for each.",
         "Ask which of two placed numbers is more, and which is closer to 10.",
         "Finish with “one more than 9” and “one less than 16”, pointing to the place before naming it if they can.",
       ],
-      tip: "If placing is wild, write 0, 5, 10, 15, 20 as fence posts first, then hide the 5 and 15 and try again.",
+      numberLine: {
+        start: 0,
+        end: 20,
+        marks: [0, 5, 10, 15, 20],
+        caption:
+          "If placing is all over the place, write these five numbers on the line first. They are evenly spaced guides — like fence posts along a path. Then cover 5 and 15 and try 4, 11 and 15 again.",
+      },
+      tip: "The picture above is the extra help. Start with only 0 and 20 showing. Add the extra marks only if your child needs them.",
     },
     check: [
       {
         prompt: "Point to about where 10 is on a 0–20 line that only shows 0 and 20.",
         looksLike: "Near the middle, not next to 0 or 20.",
         notYet: "They guess an end, or count from 1 along the whole line every time.",
+        nudge: "Walk from the 0 end toward 20 together. Stop when you think you are halfway. That spot is about 10.",
       },
       {
         prompt: "Which is less, 8 or 13?",
         looksLike: "They use position or ‘8 is before 10’ rather than starting a full count.",
         notYet: "They cannot decide without counting both sets of objects.",
+        nudge: "Put a mark for 8 and a mark for 13. The one nearer 0 is less.",
       },
       {
         prompt: "What is one more than 19?",
         looksLike: "20, said with some certainty.",
         notYet: "They say 21, or go back to 1, or do not know what ‘one more’ means.",
+        nudge: "One more means the next step after 19 on the line. Point just past 19. That mark is 20.",
       },
     ],
     stretch: "Ask them to place 7 and 17 and talk about what is the same about the words and what is different about the place.",
