@@ -14,7 +14,10 @@ export const factsWithin10: Topic = {
   strand: "Number facts",
   parentMinutes: 8,
   homeMinutes: 15,
-  householdItems: ["Ten objects of two colours or types (forks and spoons, red and green Lego, raisins and almonds)", "A muffin tin, egg box, or drawn ten-frame (two rows of five)"],
+  householdItems: [
+    "Ten objects of two colours or types (forks and spoons, red and green Lego, raisins and almonds)",
+    "A homemade ten-frame with exactly 10 cells: two rows of five circles on paper, a 10-hole muffin tin, or an egg box with 10 holes left open",
+  ],
   statutoryOutcomes: [
     "Represent and use number bonds and related subtraction facts within 20",
     "Add and subtract one-digit and two-digit numbers to 20, including 0",
@@ -54,7 +57,8 @@ export const factsWithin10: Topic = {
     youAreReadyWhen: "You can show 7 on a ten-frame and see, without counting from 1, that 3 empty spaces make 10.",
   },
   homePack: {
-    setup: "Make a ten-frame: an egg box with two spaces hidden, a muffin tin, or two rows of five circles on paper. Have ten objects ready.",
+    setup:
+      "You need a ten-frame: a grid of exactly 10 spaces, in two rows of five. Egg boxes and muffin tins come in different sizes (6, 10 or 12 holes are common). Count the holes first. If you have a 12-hole box, cover 2 holes so 10 are left open. A 6-hole box is not enough on its own — use paper instead, and draw two rows of five circles. Have ten objects ready.",
     activity: {
       title: "Make 10 in two colours",
       steps: [
@@ -82,7 +86,7 @@ export const factsWithin10: Topic = {
         notYet: "They remove an object at random or say 10, not linking subtraction to the bond.",
       },
     ],
-    stretch: "Ask “7 and 3 make 10. What is 3 and 7?” If they grin and swap, the relationship is landing.",
+    stretch: "Ask “7 and 3 make 10. What is 3 and 7?” If they can swap the two parts and still get 10, the idea is sticking.",
     stopRule: "Fifteen minutes or three bonds, whichever comes first. If they get silly or tearful, pack the objects away mid-success.",
   },
   reviewStatus: "draft",

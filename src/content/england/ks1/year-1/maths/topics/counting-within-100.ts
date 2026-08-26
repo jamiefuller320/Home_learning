@@ -27,7 +27,7 @@ export const countingWithin100: Topic = {
     inPlainEnglish:
       "Counting is not just reciting 1, 2, 3. Year 1 children need to start from any number, keep going past 20 and 30 without a wobble, and count backwards as well as forwards. They also need to count objects, not only words: one touch, one word, one thing.",
     howSchoolTeachesIt:
-      "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square. Teachers often start from a number in the middle — 16, 28, 45 — so children do not lean on the song. They will also count back, which feels much harder and is worth a little extra practice at home.",
+      "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square. Teachers often start from a number in the middle — 16, 28, 45 — so children do not only rely on the 1, 2, 3 song. They will also count back, which feels much harder and is worth a little extra practice at home.",
     sayThis: [
       "Start at 14. What comes next?",
       "Can you count back from 20? I’ll do the first two with you: 20, 19…",
@@ -37,7 +37,7 @@ export const countingWithin100: Topic = {
     avoidThis: [
       "Always starting at 1. That hides the gaps.",
       "Rushing to 100 as a performance. A calm count from 27 to 40 is more useful.",
-      "Correcting every stumble instantly. Give a beat, then offer the next number if they stall.",
+      "Correcting every stumble instantly. Pause for a moment, then say the next number if they are stuck.",
     ],
     commonMisconceptions: [
       {
@@ -58,12 +58,12 @@ export const countingWithin100: Topic = {
     activity: {
       title: "Start anywhere",
       steps: [
-        "You say a starting number between 8 and 25. Your child counts on ten more. Clap once when they land.",
-        "Swap: they pick the start, you count, and they catch any slip.",
+        "You say a starting number between 8 and 25. Your child counts on ten more numbers. Clap each time they say a number in the sequence.",
+        "Swap: they pick the starting number, you count on ten more, and they stop you if you say a wrong number.",
         "Do two backwards counts from a number they know well, such as 15 or 20.",
-        "Finish by counting a handful of objects into a bowl, moving each one. Ask “how many in the bowl?” without recounting if they can hold the last number.",
+        "Finish by counting a handful of objects into a bowl, moving each one as you say its number. Ask “how many in the bowl?” See if they can answer with the last number they said, without starting the count again.",
       ],
-      tip: "If teens are wobbly, stay in 10–20 for the whole session. Getting 100 on the board is not the goal.",
+      tip: "If the teen numbers (13, 14, 15…) are shaky, stay in 10–20 for the whole session. You do not need to reach 100 tonight.",
     },
     check: [
       {
@@ -78,7 +78,7 @@ export const countingWithin100: Topic = {
       },
       {
         prompt: "Put 14 objects in a line. How many?",
-        looksLike: "One-to-one counting and they trust the last number said.",
+        looksLike: "They touch each object once and know the last number they said is how many there are.",
         notYet: "They skip objects, double-count, or cannot say the total at the end.",
       },
     ],

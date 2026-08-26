@@ -29,7 +29,7 @@ Do not invent outcome codes. If a topic is a parent-friendly split of a larger b
 
 ## Parent briefing
 
-Keep the whole briefing under about eight minutes of reading. Use short paragraphs.
+Keep the whole briefing under about eight minutes of reading. Use short paragraphs. Write as you would say it to a tired parent: no “when they land”, “on the board”, or other classroom shorthand.
 
 | Field | Purpose |
 |---|---|
@@ -44,7 +44,7 @@ Keep the whole briefing under about eight minutes of reading. Use short paragrap
 
 | Field | Purpose |
 |---|---|
-| `householdItems` | Things already at home. If it is not on this list, the activity cannot need it |
+| `householdItems` | Things already at home. If it is not on this list, the activity cannot need it. Name sizes when kit varies (egg boxes are 6, 10 or 12 holes; you need 10 cells open) |
 | `setup` | How to clear a corner of the table |
 | `activity` | Exactly one activity. Steps a parent can follow without scrolling back |
 | `check` | Three tiny probes: `prompt`, `looksLike`, `notYet` |
