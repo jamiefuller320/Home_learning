@@ -70,7 +70,7 @@ Later ingestion (Oak API, a new National Curriculum) should write into the same 
 
 | Choice | Why |
 |---|---|
-| Next.js App Router + TypeScript | Room to grow routes and SEO without a rewrite |
+| Next.js App Router + TypeScript, static export | Room to grow routes, and it can ship to GitHub Pages with no server |
 | Topics as TypeScript modules | Typed, reviewable, no CMS yet |
 | localStorage progress | No accounts, no child data |
 | No auth, no analytics, no child UI | Smaller safeguarding surface |

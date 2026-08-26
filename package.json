@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "npm run validate:content && next build",
-    "start": "next start",
+    "start": "serve out",
+    "preview": "serve out",
+    "preview:pages": "GITHUB_PAGES=true npm run build && node scripts/preview-pages.mjs",
     "lint": "next lint",
     "validate:content": "tsx scripts/validate-content.ts",
     "test": "tsx scripts/validate-content.ts"
@@ -27,6 +29,7 @@
     "@types/react-dom": "^19.2.5",
     "eslint": "^9.39.5",
     "eslint-config-next": "^15.5.9",
+    "serve": "^14.2.6",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.12",
     "typescript": "^5.9.3"
