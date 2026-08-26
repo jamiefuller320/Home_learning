@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f4efe6;
+  --paper-deep: #ebe3d4;
+  --ink: #1d2a28;
+  --ink-soft: #3d4f4b;
+  --rule: #cfc3ae;
+  --teal: #1f5f59;
+  --teal-deep: #164843;
+  --sage: #2f6a4a;
+  --clay: #9a4336;
+  --amber: #8a5a20;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+  --color-teal: var(--teal);
+  --color-teal-deep: var(--teal-deep);
+  --color-sage: var(--sage);
+  --color-clay: var(--clay);
+  --color-amber: var(--amber);
+  --font-serif: var(--font-newsreader), "Iowan Old Style", "Palatino Linotype", serif;
+  --font-sans: var(--font-source-sans), "Source Sans 3", "Segoe UI", sans-serif;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  background:
+    radial-gradient(circle at top, rgba(31, 95, 89, 0.06), transparent 36%),
+    var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+.serif {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: #d7e6e3;
+}
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-pack {
+    box-shadow: none;
+    background: white;
+  }
+}
