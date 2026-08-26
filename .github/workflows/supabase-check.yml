@@ -1,0 +1,88 @@
+name: Check Supabase secrets
+
+# Confirms NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY
+# can reach the project. Prints status only — never echoes secret values.
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/supabase-check.yml"
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${SUPABASE_URL:-}" ] || [ -z "${SUPABASE_ANON_KEY:-}" ]; then
+            echo "Home_learning is missing NEXT_PUBLIC_SUPABASE_URL and/or NEXT_PUBLIC_SUPABASE_ANON_KEY."
+            echo "Add both under Settings → Secrets and variables → Actions, then re-run this workflow."
+            exit 1
+          fi
+
+          URL="${SUPABASE_URL%/}"
+          case "$URL" in
+            https://*.supabase.co) echo "URL shape: looks like a Supabase project host." ;;
+            https://*) echo "URL shape: https host (not the usual *.supabase.co form)." ;;
+            *) echo "URL shape: unexpected. It should be the Project URL from Supabase → Settings → API."; exit 1 ;;
+          esac
+
+          echo "Anon key present: yes (length ${#SUPABASE_ANON_KEY})"
+
+          host="${URL#https://}"
+          host="${host%%/*}"
+          if ! getent hosts "$host" >/dev/null; then
+            echo "DNS: could not resolve $host"
+            echo "That usually means the free-tier project is paused or the URL is wrong."
+            echo "Restore the project in the Supabase dashboard, then re-run."
+            exit 1
+          fi
+          echo "DNS: host resolved."
+
+          http_for() {
+            local path="$1"
+            local code
+            code=$(curl -sS -o /tmp/supabase-check-body.json -w "%{http_code}" \
+              --connect-timeout 20 --max-time 40 \
+              "${URL}${path}" \
+              -H "apikey: ${SUPABASE_ANON_KEY}" \
+              -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+              -H "Accept: application/json" \
+              -H "Prefer: count=exact") || code="curl-failed"
+            printf '%s' "$code"
+          }
+
+          health=$(http_for "/auth/v1/health")
+          notes=$(http_for "/rest/v1/language_notes?select=id&limit=1")
+          shortlists=$(http_for "/rest/v1/shortlists?select=id&limit=1")
+          echo "Auth health: HTTP ${health}"
+          echo "language_notes: HTTP ${notes}"
+          echo "shortlists: HTTP ${shortlists}"
+
+          case "$health" in
+            200) echo "Secrets work: the project accepted the anon key." ;;
+            *)
+              echo "Secrets did not authenticate. Check the Project URL and anon (public) key, not the service_role key."
+              exit 1
+              ;;
+          esac
+
+          case "$notes" in
+            200|206) echo "language_notes table: reachable (RLS allowed this select, or the table is empty and readable)." ;;
+            401|403) echo "language_notes table: exists and is locked to readers (expected for insert-only tester notes)." ;;
+            404) echo "language_notes table: not created yet. Secrets still work; add the table before testers send notes." ;;
+            *) echo "language_notes: unexpected HTTP ${notes}." ;;
+          esac
+
+          case "$shortlists" in
+            200|206|401|403) echo "shortlists table: this looks like the School Compass project, not a dedicated Home Learning one." ;;
+            404) echo "shortlists table: absent (fine for a Home Learning-only project)." ;;
+          esac
