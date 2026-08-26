@@ -22,8 +22,33 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
 npm run validate:content   # every topic must satisfy the content model
-npm run build
+npm run build              # static export into /out
+npm run preview            # serve /out locally
 ```
+
+## GitHub Pages
+
+The app is a static export so it can run on GitHub Pages.
+
+Expected URL after the first successful deploy:
+
+https://jamiefuller320.github.io/Home_learning/
+
+One-time repo setup:
+
+1. In the repo, open **Settings → Pages**.
+2. Set **Source** to **GitHub Actions**.
+3. Merge to `main` (that publishes automatically), or run **Deploy to GitHub Pages** from the Actions tab.
+
+The workflow builds with `GITHUB_PAGES=true` so asset paths include the `/Home_learning` project prefix. `.nojekyll` is included so Pages does not ignore the `_next` folder.
+
+To preview that prefix locally:
+
+```bash
+npm run preview:pages
+```
+
+Then open http://localhost:4173/Home_learning/
 
 ## Project map
 
