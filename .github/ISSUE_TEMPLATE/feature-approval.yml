@@ -1,0 +1,46 @@
+name: Feature approval
+description: New product behaviour from a language feedback note — needs maintainer approval before implementation.
+title: "[Feature] "
+labels: ["feature-request", "needs-approval"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when feedback asks for **new behaviour** (UI, interaction, or product change), not just clearer wording.
+
+        **To approve:** add the `approved` label, then run a Cloud Agent or implement manually.
+
+        **To decline:** close the issue and mark the language note declined:
+        `npx tsx scripts/language-notes.ts decline <note-id> "<reason>"`
+  - type: input
+    id: language_note_id
+    attributes:
+      label: Language note id (if from Supabase)
+      placeholder: 41df55ed-bdd0-4472-b761-98497d2c82ae
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+    validations:
+      required: true
+  - type: dropdown
+    id: section
+    attributes:
+      label: Section
+      options:
+        - Stage 1 · Parent briefing
+        - Stage 2 · Home pack
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: What was requested
+      description: Quote the feedback or describe the new behaviour.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why this might be worth doing
+      description: Optional. Parent need, scope, risks.

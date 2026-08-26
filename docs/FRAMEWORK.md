@@ -36,6 +36,25 @@ source material → topic map → draft pack → human review → published
 
 If a sentence is hard to picture, the parent (or we) flags it at the end of Stage 1 or Stage 2. Testers send the note with no GitHub account. It lands in `language_notes` for **review**, not as an automatic rewrite.
 
+### Daily processing
+
+Open notes are swept **once a day** (and on manual trigger) by the GitHub Action `.github/workflows/language-notes-process.yml`, which runs `npx tsx scripts/process-language-notes.ts route`.
+
+| Kind | How it is detected | What happens |
+|---|---|---|
+| **Language** | Wording, clarity, pattern on existing content | No approval. Apply a rewrite that fixes the stuck picture (do not paste the tester’s sentence unless it already fits). Mark the row `done`. |
+| **Feature** | UI, interaction, or new product behaviour | Open a GitHub issue with labels `feature-request` and `needs-approval`. Add the `approved` label when ready to build. |
+
+Manual trigger: GitHub → Actions → **Process language notes** → **Run workflow**.
+
+Maintainer commands:
+
+```bash
+npx tsx scripts/process-language-notes.ts list   # classify open notes
+npx tsx scripts/process-language-notes.ts route  # open approval issues for features
+npx tsx scripts/language-notes.ts list           # read the inbox
+```
+
 A note is a signal that a tired parent could not picture something. We do not paste the suggested sentence. Treat each open row as:
 
 1. **Find the stuck picture.** Which words failed, in which sentence?

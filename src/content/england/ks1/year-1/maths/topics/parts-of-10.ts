@@ -29,10 +29,22 @@ export const partsOf10: Topic = {
     howSchoolTeachesIt:
       "You will see a ‘cherry’ or part–whole drawing: one circle for the whole, two circles for the parts, with lines joining them. Teachers also hide some objects under a cloth: “5 in the whole, 2 showing, how many hiding?” That is subtraction as missing part, not as ‘take away’ only.",
     sayThis: [
-      "The whole is 7. Show me two parts that make 7.",
-      "Is there another way? 7 can be made in more than one way.",
-      "You hid some. I can see 3. The whole was 8. How many are hiding?",
-      "Moving them apart did not make more or less. Check by pushing them back together.",
+      {
+        prompt: "The whole is 7. Show me two parts that make 7.",
+        listenFor: "Any pair that adds to 7, such as 3 and 4 or 5 and 2.",
+      },
+      {
+        prompt: "Is there another way? 7 can be made in more than one way.",
+        listenFor: "A different split from the first one they gave.",
+      },
+      {
+        prompt: "You hid some. I can see 3. The whole was 8. How many are hiding?",
+        listenFor: "5 — the part they cannot see.",
+      },
+      {
+        prompt: "Moving them apart did not make more or less. Check by pushing them back together.",
+        listenFor: "Still 8 when pushed back together.",
+      },
     ],
     avoidThis: [
       "Only ever using 5 + 5 or 10 + 0. The interesting work is the other splits.",
@@ -70,16 +82,19 @@ export const partsOf10: Topic = {
         prompt: "Show two ways to make 6.",
         looksLike: "Two different pairs, such as 1+5 and 3+3, with objects.",
         notYet: "Only one way, or the parts no longer add to 6.",
+        nudge: "Split 6 into two groups twice. Do you get different pairs?",
       },
       {
         prompt: "Whole is 9, one part is 2. Other part?",
         looksLike: "7, after thinking or using objects.",
         notYet: "They add 9 and 2, or guess a number bigger than 9.",
+        nudge: "Nine is the whole. Two are showing. Count what's left, or hide 2 and count the rest.",
       },
       {
         prompt: "I split 8 into 5 and 3. Have I still got 8?",
         looksLike: "Yes, and they can push them together to show it.",
         notYet: "They think there are now 5, or 3, or 13.",
+        nudge: "Push the two groups back together and count. Still eight?",
       },
     ],
     stretch: "Ask them to tell you a split you must hide. They become the teacher for one turn.",
