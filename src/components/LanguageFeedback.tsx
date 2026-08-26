@@ -46,7 +46,7 @@ export function LanguageFeedback({ topic, section }: { topic: Topic; section: La
       <div className="no-print rounded-2xl border border-teal/30 bg-white/80 p-5">
         <p className="font-semibold text-ink">Note saved on this device.</p>
         <div className="mt-3">
-          <NoteSendActions note={saved} />
+          <NoteSendActions note={saved} autoSend />
         </div>
         <div className="mt-4 flex flex-wrap gap-3 text-sm">
           <Link href="/language" className="text-teal underline">
@@ -71,7 +71,7 @@ export function LanguageFeedback({ topic, section }: { topic: Topic; section: La
         I don’t understand something in this section
       </button>
       <p className="mt-1 text-sm text-ink-soft">
-        {SECTION_LABEL[section]}. No GitHub account needed — send, share, or copy the note.
+        {SECTION_LABEL[section]}. No GitHub account needed — send it to the team, or share/copy.
       </p>
       {open ? (
         <form className="mt-4 space-y-4" onSubmit={handleSubmit}>

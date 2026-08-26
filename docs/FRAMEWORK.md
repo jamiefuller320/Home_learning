@@ -31,10 +31,10 @@ We are not building a child-facing lesson platform, a homework-doer, or a scrape
 ```
 source material → topic map → draft pack → human review → published
                               ↑
-                     language log / send, share or copy
+                     language log / send to the team inbox
 ```
 
-If a sentence is hard to picture, the parent (or we) flags it at the end of Stage 1 or Stage 2. Testers send, share, or copy the note — they do not need a GitHub account. The fix is a rewrite in the topic file.
+If a sentence is hard to picture, the parent (or we) flags it at the end of Stage 1 or Stage 2. Testers send the note with no GitHub account. It lands in `language_notes` for review, then the topic file is rewritten.
 
 | Stage | What happens | Exit test |
 |---|---|---|

@@ -24,7 +24,7 @@ export function LanguageLog() {
         </li>
         <li className="rounded-2xl bg-white/70 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">2. Keep the note</p>
-          <p className="mt-2 text-ink-soft">It lands here on this device. Send, share, or copy it — no GitHub needed.</p>
+          <p className="mt-2 text-ink-soft">Send to the team stores it for review. Share or copy still works with no GitHub.</p>
         </li>
         <li className="rounded-2xl bg-white/70 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">3. Rewrite</p>
@@ -33,7 +33,7 @@ export function LanguageLog() {
       </ol>
 
       <p className="text-sm text-ink-soft">
-        Testers do not need a GitHub account. Notes stay in this browser; Send / Share / Copy gets them to the team.
+        Testers do not need a GitHub account. Send to the team stores the note for review and a lesson rewrite.
       </p>
 
       <section>

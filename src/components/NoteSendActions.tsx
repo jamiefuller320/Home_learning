@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   buildGitHubIssueUrl,
   buildMailtoUrl,
@@ -9,11 +9,20 @@ import {
   formatNoteForSharing,
   type LanguageNote,
 } from "@/lib/language-log";
+import { submitLanguageNoteToSupabase } from "@/lib/language-notes-api";
 
 type SendState = "idle" | "sending" | "sent" | "failed";
+type SentVia = "inbox" | "email";
 
-export function NoteSendActions({ note }: { note: LanguageNote }) {
+export function NoteSendActions({
+  note,
+  autoSend = false,
+}: {
+  note: LanguageNote;
+  autoSend?: boolean;
+}) {
   const [sendState, setSendState] = useState<SendState>("idle");
+  const [sentVia, setSentVia] = useState<SentVia>("inbox");
   const [copied, setCopied] = useState(false);
   const [shared, setShared] = useState(false);
   const [showGithub, setShowGithub] = useState(false);
@@ -23,6 +32,13 @@ export function NoteSendActions({ note }: { note: LanguageNote }) {
   async function sendToInbox() {
     setSendState("sending");
     try {
+      const stored = await submitLanguageNoteToSupabase(note);
+      if (stored.ok) {
+        setSentVia("inbox");
+        setSendState("sent");
+        return;
+      }
+
       const response = await fetch(FORMSUBMIT_ENDPOINT, {
         method: "POST",
         headers: {
@@ -41,11 +57,19 @@ export function NoteSendActions({ note }: { note: LanguageNote }) {
         }),
       });
       if (!response.ok) throw new Error("send failed");
+      setSentVia("email");
       setSendState("sent");
     } catch {
       setSendState("failed");
     }
   }
+
+  useEffect(() => {
+    if (!autoSend) return;
+    void sendToInbox();
+    // Send once when this note is first saved.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoSend, note.id]);
 
   async function copyNote() {
     try {
@@ -100,7 +124,11 @@ export function NoteSendActions({ note }: { note: LanguageNote }) {
         </a>
       </div>
       {sendState === "sent" ? (
-        <p className="text-sm text-sage">The note is on its way to {FEEDBACK_EMAIL}.</p>
+        <p className="text-sm text-sage">
+          {sentVia === "inbox"
+            ? "The team has your note. We’ll use it to clear up the wording."
+            : `The note is on its way to ${FEEDBACK_EMAIL}.`}
+        </p>
       ) : null}
       {sendState === "failed" ? (
         <p className="text-sm text-clay">

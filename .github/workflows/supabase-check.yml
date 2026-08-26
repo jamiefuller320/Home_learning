@@ -5,9 +5,14 @@ name: Check Supabase secrets
 
 on:
   workflow_dispatch:
+  schedule:
+    # Free-tier projects pause after ~7 days of silence.
+    - cron: "0 7 */3 * *"
   pull_request:
     paths:
       - ".github/workflows/supabase-check.yml"
+      - "src/lib/language-notes-api.ts"
+      - "supabase/language_notes.sql"
 
 permissions: {}
 
@@ -78,8 +83,14 @@ jobs:
           case "$notes" in
             200|206) echo "language_notes table: reachable (RLS allowed this select, or the table is empty and readable)." ;;
             401|403) echo "language_notes table: exists and is locked to readers (expected for insert-only tester notes)." ;;
-            404) echo "language_notes table: not created yet. Secrets still work; add the table before testers send notes." ;;
-            *) echo "language_notes: unexpected HTTP ${notes}." ;;
+            404)
+              echo "language_notes table: not created yet. Run supabase/language_notes.sql in the SQL editor."
+              exit 1
+              ;;
+            *)
+              echo "language_notes: unexpected HTTP ${notes}."
+              exit 1
+              ;;
           esac
 
           case "$shortlists" in
