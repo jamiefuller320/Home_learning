@@ -7,7 +7,7 @@ You read a short briefing on how school teaches an idea now. Then you get one 10
 ## First slice
 
 - England, KS1, Year 1 maths
-- Ten topics, including the ready-to-progress spine plus halves, coins and time
+- Thirteen topics, including the ready-to-progress spine plus halves, quarters, coins, time, number words, and comparing length
 - Two stages on every topic: parent briefing, then home pack
 - Content stays `draft` until a human has reviewed the method
 
