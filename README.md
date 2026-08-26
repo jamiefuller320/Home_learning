@@ -38,7 +38,7 @@ One-time repo setup:
 
 1. In the repo, open **Settings → Pages**.
 2. Set **Source** to **GitHub Actions**.
-3. Merge this branch to `main`, or run the **Deploy to GitHub Pages** workflow from the Actions tab.
+3. Merge to `main` (that publishes automatically), or run **Deploy to GitHub Pages** from the Actions tab.
 
 The workflow builds with `GITHUB_PAGES=true` so asset paths include the `/Home_learning` project prefix. `.nojekyll` is included so Pages does not ignore the `_next` folder.
 
