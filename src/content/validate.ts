@@ -1,3 +1,5 @@
+import { sortTopicsByPrerequisites } from "./england/ks1/year-1/maths/curriculum";
+import { glossaryTerms } from "./glossary";
 import { CONTENT_LIMITS, type SayThisItem, type Topic } from "./schema";
 
 export type ValidationIssue = {
@@ -7,6 +9,7 @@ export type ValidationIssue = {
 };
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const GLOSSARY_IDS = new Set(glossaryTerms.map((term) => term.id));
 
 function sayThisPromptText(item: SayThisItem): string {
   return typeof item === "string" ? item : item.prompt;
@@ -107,6 +110,66 @@ export function validateTopic(topic: Topic): ValidationIssue[] {
     requiredText(item.notYet, `homePack.check[${index}].notYet`, id, issues);
   });
 
+  for (const prerequisiteId of topic.prerequisites) {
+    if (!SLUG.test(prerequisiteId)) {
+      issues.push({
+        topicId: id,
+        field: "prerequisites",
+        message: `prerequisite "${prerequisiteId}" must be lowercase hyphenated`,
+      });
+    }
+    if (prerequisiteId === topic.id) {
+      issues.push({ topicId: id, field: "prerequisites", message: "cannot list itself as a prerequisite" });
+    }
+  }
+
+  for (const termId of topic.glossaryTerms) {
+    if (!GLOSSARY_IDS.has(termId)) {
+      issues.push({
+        topicId: id,
+        field: "glossaryTerms",
+        message: `unknown glossary term "${termId}"`,
+      });
+    }
+  }
+
+  return issues;
+}
+
+export function validateGlossary(relatedTopicIds: Set<string>): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+
+  for (const term of glossaryTerms) {
+    if (!SLUG.test(term.id)) {
+      issues.push({ topicId: term.id, field: "id", message: "must be lowercase hyphenated" });
+    }
+    requiredText(term.term, "term", term.id, issues);
+    requiredText(term.plainEnglish, "plainEnglish", term.id, issues);
+
+    for (const relatedTopicId of term.relatedTopics ?? []) {
+      if (!relatedTopicIds.has(relatedTopicId)) {
+        issues.push({
+          topicId: term.id,
+          field: "relatedTopics",
+          message: `unknown topic "${relatedTopicId}"`,
+        });
+      }
+    }
+
+    for (const seeAlsoId of term.seeAlso ?? []) {
+      if (!GLOSSARY_IDS.has(seeAlsoId)) {
+        issues.push({
+          topicId: term.id,
+          field: "seeAlso",
+          message: `unknown glossary term "${seeAlsoId}"`,
+        });
+      }
+      if (seeAlsoId === term.id) {
+        issues.push({ topicId: term.id, field: "seeAlso", message: "cannot reference itself" });
+      }
+    }
+  }
+
   return issues;
 }
 
@@ -122,6 +185,41 @@ export function validateTopics(topics: Topic[]): ValidationIssue[] {
     slugs.add(topic.slug);
     issues.push(...validateTopic(topic));
   }
+
+  for (const topic of topics) {
+    for (const prerequisiteId of topic.prerequisites) {
+      if (!ids.has(prerequisiteId)) {
+        issues.push({
+          topicId: topic.id,
+          field: "prerequisites",
+          message: `unknown prerequisite "${prerequisiteId}"`,
+        });
+      }
+    }
+
+    for (const termId of topic.glossaryTerms) {
+      const term = glossaryTerms.find((entry) => entry.id === termId);
+      if (term && !(term.relatedTopics ?? []).includes(topic.id)) {
+        issues.push({
+          topicId: topic.id,
+          field: "glossaryTerms",
+          message: `term "${termId}" does not list this topic in relatedTopics`,
+        });
+      }
+    }
+  }
+
+  try {
+    sortTopicsByPrerequisites(topics);
+  } catch (error) {
+    issues.push({
+      topicId: "curriculum",
+      field: "prerequisites",
+      message: error instanceof Error ? error.message : "invalid prerequisite graph",
+    });
+  }
+
+  issues.push(...validateGlossary(ids));
 
   return issues;
 }

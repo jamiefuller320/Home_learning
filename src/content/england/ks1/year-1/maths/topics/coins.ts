@@ -12,6 +12,8 @@ export const coins: Topic = {
   year: 1,
   subject: "maths",
   strand: "Measurement",
+  prerequisites: ["counting-in-steps", "numbers-to-20"],
+  glossaryTerms: ["skip-counting"],
   parentMinutes: 6,
   homeMinutes: 12,
   householdItems: ["A small pile of real coins if you have them (1p, 2p, 5p, 10p, 20p, 50p, £1, £2)", "Otherwise, drawings on scraps of paper labelled with the values"],

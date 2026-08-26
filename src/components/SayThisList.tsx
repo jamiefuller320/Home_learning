@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { GlossaryText } from "@/components/GlossaryText";
 import type { SayThisItem } from "@/content/schema";
 import { sayThisHasListenFor, sayThisListenFor, sayThisPrompt } from "@/lib/say-this";
 
@@ -25,11 +26,11 @@ export function SayThisList({ items }: { items: SayThisItem[] }) {
           const listenFor = sayThisListenFor(item);
           return (
             <li key={prompt}>
-              {prompt}
+              <GlossaryText text={prompt} />
               {showListenFor && listenFor ? (
                 <p className="mt-1 text-sm text-ink-soft">
                   <span className="font-semibold text-ink">Might sound like: </span>
-                  {listenFor}
+                  <GlossaryText text={listenFor} />
                 </p>
               ) : null}
             </li>

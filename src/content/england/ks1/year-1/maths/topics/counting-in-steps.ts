@@ -12,6 +12,8 @@ export const countingInSteps: Topic = {
   year: 1,
   subject: "maths",
   strand: "Number facts",
+  prerequisites: ["numbers-to-20"],
+  glossaryTerms: ["skip-counting", "number-line"],
   parentMinutes: 6,
   homeMinutes: 12,
   householdItems: ["Pairs of socks or shoes", "Hands, a 5p or 10p coin if you have one", "A small staircase or hallway"],

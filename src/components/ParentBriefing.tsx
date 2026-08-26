@@ -1,4 +1,5 @@
 import { LanguageFeedback } from "@/components/LanguageFeedback";
+import { GlossaryText } from "@/components/GlossaryText";
 import { SayThisList } from "@/components/SayThisList";
 import type { Topic } from "@/content/schema";
 
@@ -9,12 +10,16 @@ export function ParentBriefing({ topic }: { topic: Topic }) {
     <section className="space-y-8">
       <div>
         <h3 className="serif text-2xl text-ink">In plain English</h3>
-        <p className="mt-3 text-lg leading-8 text-ink-soft">{parentBriefing.inPlainEnglish}</p>
+        <p className="mt-3 text-lg leading-8 text-ink-soft">
+          <GlossaryText text={parentBriefing.inPlainEnglish} />
+        </p>
       </div>
 
       <div>
         <h3 className="serif text-2xl text-ink">How school typically teaches it</h3>
-        <p className="mt-3 text-lg leading-8 text-ink-soft">{parentBriefing.howSchoolTeachesIt}</p>
+        <p className="mt-3 text-lg leading-8 text-ink-soft">
+          <GlossaryText text={parentBriefing.howSchoolTeachesIt} />
+        </p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -26,7 +31,9 @@ export function ParentBriefing({ topic }: { topic: Topic }) {
           <h3 className="font-semibold text-clay">Avoid this</h3>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-ink">
             {parentBriefing.avoidThis.map((line) => (
-              <li key={line}>{line}</li>
+              <li key={line}>
+                <GlossaryText text={line} />
+              </li>
             ))}
           </ul>
         </div>
@@ -37,14 +44,16 @@ export function ParentBriefing({ topic }: { topic: Topic }) {
         <div className="mt-4 space-y-4">
           {parentBriefing.commonMisconceptions.map((item) => (
             <article key={item.misconception} className="rounded-2xl border border-rule bg-white/60 p-5">
-              <p className="font-semibold text-ink">{item.misconception}</p>
+              <p className="font-semibold text-ink">
+                <GlossaryText text={item.misconception} />
+              </p>
               <p className="mt-2 text-ink-soft">
                 <span className="font-semibold text-ink">Why: </span>
-                {item.why}
+                <GlossaryText text={item.why} />
               </p>
               <p className="mt-1 text-ink-soft">
                 <span className="font-semibold text-ink">Instead: </span>
-                {item.instead}
+                <GlossaryText text={item.instead} />
               </p>
             </article>
           ))}
@@ -53,7 +62,7 @@ export function ParentBriefing({ topic }: { topic: Topic }) {
 
       <p className="rounded-2xl bg-paper-deep px-5 py-4 text-lg leading-8 text-ink">
         <span className="font-semibold">You are ready when </span>
-        {parentBriefing.youAreReadyWhen}
+        <GlossaryText text={parentBriefing.youAreReadyWhen} />
       </p>
 
       <LanguageFeedback topic={topic} section="parent" />

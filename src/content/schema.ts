@@ -77,6 +77,10 @@ export type Topic = {
   year: 1;
   subject: Subject;
   strand: string;
+  /** Topic ids that should feel solid before this one. Empty means no required prior step. */
+  prerequisites: string[];
+  /** Glossary term ids highlighted in this topic’s text. */
+  glossaryTerms: string[];
   parentMinutes: number;
   homeMinutes: number;
   householdItems: string[];
@@ -87,6 +91,19 @@ export type Topic = {
   parentBriefing: ParentBriefing;
   homePack: HomePack;
   reviewStatus: ReviewStatus;
+};
+
+export type GlossaryTerm = {
+  id: string;
+  /** Display label, e.g. “ten-frame”. */
+  term: string;
+  /** Extra phrases to auto-link in lesson text (longest matches win). */
+  aliases?: string[];
+  plainEnglish: string;
+  /** Other glossary ids to cross-link. */
+  seeAlso?: string[];
+  /** Topic ids where this term matters most. */
+  relatedTopics?: string[];
 };
 
 export const CONTENT_LIMITS = {

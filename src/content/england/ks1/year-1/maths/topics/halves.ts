@@ -12,6 +12,8 @@ export const halves: Topic = {
   year: 1,
   subject: "maths",
   strand: "Fractions",
+  prerequisites: ["parts-of-10"],
+  glossaryTerms: ["half", "partition"],
   parentMinutes: 6,
   homeMinutes: 12,
   householdItems: ["A piece of toast, a banana, a sandwich, or a sheet of paper", "An even number of snacks (6, 8 or 10)", "A cup of water if you do not mind a small spill"],

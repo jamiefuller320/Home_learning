@@ -12,6 +12,8 @@ export const plusMinusEquals: Topic = {
   year: 1,
   subject: "maths",
   strand: "Addition and subtraction",
+  prerequisites: ["parts-of-10"],
+  glossaryTerms: ["part-whole"],
   parentMinutes: 8,
   homeMinutes: 12,
   householdItems: ["Two plates or pieces of paper", "Up to 10 small objects", "A pen and scrap paper"],

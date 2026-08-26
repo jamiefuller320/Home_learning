@@ -7,8 +7,9 @@ import { emptyProgress, readProgress, writeProgress, type TopicProgress } from "
 import { DraftBadge } from "./DraftBadge";
 import { HomePack } from "./HomePack";
 import { ParentBriefing } from "./ParentBriefing";
+import { PrerequisiteCallout } from "./PrerequisiteCallout";
 
-export function TopicExperience({ topic }: { topic: Topic }) {
+export function TopicExperience({ topic, topics }: { topic: Topic; topics: Topic[] }) {
   const [progress, setProgress] = useState<TopicProgress>(emptyProgress);
   const [readyChecked, setReadyChecked] = useState(false);
   const [showPack, setShowPack] = useState(false);
@@ -53,6 +54,8 @@ export function TopicExperience({ topic }: { topic: Topic }) {
       <h1 className="serif mt-4 text-4xl leading-tight text-ink sm:text-5xl">{topic.title}</h1>
       <p className="mt-4 text-xl leading-8 text-ink-soft">{topic.summary}</p>
       <p className="mt-4 text-lg leading-8 text-ink">{topic.whyThisMatters}</p>
+
+      <PrerequisiteCallout topic={topic} topics={topics} />
 
       <ol className="no-print mt-8 grid gap-3 sm:grid-cols-2">
         <li className="rounded-2xl bg-teal px-5 py-4 text-white">

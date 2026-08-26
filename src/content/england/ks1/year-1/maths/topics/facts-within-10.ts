@@ -12,6 +12,8 @@ export const factsWithin10: Topic = {
   year: 1,
   subject: "maths",
   strand: "Number facts",
+  prerequisites: ["parts-of-10", "numbers-to-20"],
+  glossaryTerms: ["ten-frame", "number-bond", "part-whole", "number-fact", "fluency"],
   parentMinutes: 8,
   homeMinutes: 15,
   householdItems: [
