@@ -39,6 +39,17 @@ export default function HowItWorksPage() {
         </p>
       </section>
       <section>
+        <h2 className="serif text-3xl text-ink">If the words are muddy</h2>
+        <p className="mt-3">
+          At the end of the parent briefing and the home pack there is a button: “I don’t understand
+          something in this section.” That saves a note to the{" "}
+          <Link href="/language" className="font-semibold text-teal hover:underline">
+            language log
+          </Link>{" "}
+          and can open a GitHub issue so we can rewrite the sentence.
+        </p>
+      </section>
+      <section>
         <h2 className="serif text-3xl text-ink">Draft on purpose</h2>
         <p className="mt-3">
           A wrong method is worse than no help. Every pack is marked draft until a teacher or

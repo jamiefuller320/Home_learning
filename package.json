@@ -11,7 +11,7 @@
     "preview:pages": "GITHUB_PAGES=true npm run build && node scripts/preview-pages.mjs",
     "lint": "next lint",
     "validate:content": "tsx scripts/validate-content.ts",
-    "test": "tsx scripts/validate-content.ts"
+    "test": "tsx scripts/validate-content.ts && tsx scripts/test-language-log.ts"
   },
   "engines": {
     "node": ">=20"

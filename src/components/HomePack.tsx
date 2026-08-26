@@ -1,3 +1,4 @@
+import { LanguageFeedback } from "@/components/LanguageFeedback";
 import type { Topic } from "@/content/schema";
 
 export function HomePack({ topic }: { topic: Topic }) {
@@ -67,6 +68,8 @@ export function HomePack({ topic }: { topic: Topic }) {
         <span className="font-semibold">Stop when </span>
         {homePack.stopRule}
       </p>
+
+      <LanguageFeedback topic={topic} section="home" />
     </section>
   );
 }

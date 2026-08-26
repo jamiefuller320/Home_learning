@@ -1,3 +1,4 @@
+import { LanguageFeedback } from "@/components/LanguageFeedback";
 import type { Topic } from "@/content/schema";
 
 export function ParentBriefing({ topic }: { topic: Topic }) {
@@ -57,6 +58,8 @@ export function ParentBriefing({ topic }: { topic: Topic }) {
         <span className="font-semibold">You are ready when </span>
         {parentBriefing.youAreReadyWhen}
       </p>
+
+      <LanguageFeedback topic={topic} section="parent" />
     </section>
   );
 }
