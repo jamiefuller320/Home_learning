@@ -30,7 +30,11 @@ We are not building a child-facing lesson platform, a homework-doer, or a scrape
 
 ```
 source material → topic map → draft pack → human review → published
+                              ↑
+                     language log / GitHub issue
 ```
+
+If a sentence is hard to picture, the parent (or we) flags it at the end of Stage 1 or Stage 2. That note goes into the in-app language log and can open a GitHub issue. The fix is a rewrite in the topic file — the same loop we used for “clap when they land”.
 
 | Stage | What happens | Exit test |
 |---|---|---|

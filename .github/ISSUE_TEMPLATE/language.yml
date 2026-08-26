@@ -1,0 +1,38 @@
+name: Language improvement
+description: Something in a parent briefing or home pack was hard to understand.
+title: "[Language] "
+labels: ["language"]
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      placeholder: Counting forwards and backwards within 100
+    validations:
+      required: true
+  - type: dropdown
+    id: section
+    attributes:
+      label: Section
+      options:
+        - Stage 1 · Parent briefing
+        - Stage 2 · Home pack
+    validations:
+      required: true
+  - type: textarea
+    id: unclear
+    attributes:
+      label: What was unclear
+      description: Quote the phrase, or say what you could not picture.
+    validations:
+      required: true
+  - type: textarea
+    id: clearer
+    attributes:
+      label: A clearer way to say it
+      description: Optional. A sentence a tired parent would understand.
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      placeholder: https://jamiefuller320.github.io/Home_learning/year-1-maths/...

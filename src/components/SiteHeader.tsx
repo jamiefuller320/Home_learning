@@ -13,6 +13,9 @@ export function SiteHeader() {
         <Link href="/how-it-works" className="hover:text-teal">
           How it works
         </Link>
+        <Link href="/language" className="hover:text-teal">
+          Language log
+        </Link>
       </nav>
     </header>
   );
