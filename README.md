@@ -59,7 +59,7 @@ Then open http://localhost:4173/Home_learning/
 | `docs/CONTENT_MODEL.md` | Rules for a topic pack |
 | `src/content/england/ks1/year-1/maths/` | The first-slice topics |
 | `src/app` | Parent-facing reader |
-| `/language` | Language-improvement log (unclear phrases → GitHub issue → rewrite) |
+| `/language` | Language-improvement log (unclear phrases → team inbox → rewrite) |
 
 ## Licence note
 
