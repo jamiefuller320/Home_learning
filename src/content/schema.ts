@@ -1,0 +1,87 @@
+export const JURISDICTIONS = ["england"] as const;
+export const KEY_STAGES = ["ks1"] as const;
+export const SUBJECTS = ["maths"] as const;
+export const REVIEW_STATUSES = ["draft", "reviewed"] as const;
+
+export type Jurisdiction = (typeof JURISDICTIONS)[number];
+export type KeyStage = (typeof KEY_STAGES)[number];
+export type Subject = (typeof SUBJECTS)[number];
+export type ReviewStatus = (typeof REVIEW_STATUSES)[number];
+
+export type Source = {
+  label: string;
+  url: string;
+  note: string;
+};
+
+export type Misconception = {
+  misconception: string;
+  why: string;
+  instead: string;
+};
+
+export type CheckItem = {
+  prompt: string;
+  looksLike: string;
+  notYet: string;
+};
+
+export type HomeActivity = {
+  title: string;
+  steps: string[];
+  tip?: string;
+};
+
+export type ParentBriefing = {
+  inPlainEnglish: string;
+  howSchoolTeachesIt: string;
+  sayThis: string[];
+  avoidThis: string[];
+  commonMisconceptions: Misconception[];
+  youAreReadyWhen: string;
+};
+
+export type HomePack = {
+  setup: string;
+  activity: HomeActivity;
+  check: CheckItem[];
+  stretch?: string;
+  stopRule: string;
+};
+
+export type Topic = {
+  id: string;
+  slug: string;
+  title: string;
+  shortTitle: string;
+  summary: string;
+  jurisdiction: Jurisdiction;
+  keyStage: KeyStage;
+  year: 1;
+  subject: Subject;
+  strand: string;
+  parentMinutes: number;
+  homeMinutes: number;
+  householdItems: string[];
+  statutoryOutcomes: string[];
+  readyToProgress: string[];
+  sources: Source[];
+  whyThisMatters: string;
+  parentBriefing: ParentBriefing;
+  homePack: HomePack;
+  reviewStatus: ReviewStatus;
+};
+
+export const CONTENT_LIMITS = {
+  minParentMinutes: 5,
+  maxParentMinutes: 8,
+  minHomeMinutes: 10,
+  maxHomeMinutes: 15,
+  minChecks: 3,
+  maxChecks: 3,
+  minSayThis: 3,
+  minAvoidThis: 2,
+  minMisconceptions: 2,
+  minSources: 1,
+  minActivitySteps: 3,
+} as const;
