@@ -51,6 +51,17 @@ export default function HowItWorksPage() {
         </p>
       </section>
       <section>
+        <h2 className="serif text-3xl text-ink">A watchable briefing</h2>
+        <p className="mt-3">
+          One pack has a generated reading of the written Stage 1, aimed at tired parents and at
+          teachers checking the method. The page stays the source. See{" "}
+          <Link href="/for-schools" className="font-semibold text-teal hover:underline">
+            for schools
+          </Link>
+          .
+        </p>
+      </section>
+      <section>
         <h2 className="serif text-3xl text-ink">Draft on purpose</h2>
         <p className="mt-3">
           A wrong method is worse than no help. Every pack is marked draft until a teacher or

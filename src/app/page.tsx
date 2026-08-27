@@ -28,6 +28,12 @@ export default function HomePage() {
         >
           How this works
         </Link>
+        <Link
+          href="/for-schools"
+          className="rounded-full border border-rule px-6 py-3 font-semibold text-ink hover:border-teal"
+        >
+          For schools
+        </Link>
       </div>
 
       <section className="mt-16 grid gap-4 sm:grid-cols-3">

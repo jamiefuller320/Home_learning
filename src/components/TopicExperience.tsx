@@ -4,6 +4,7 @@ import { DraftBadge } from "./DraftBadge";
 import { HomePack } from "./HomePack";
 import { ParentBriefing } from "./ParentBriefing";
 import { PrerequisiteCallout } from "./PrerequisiteCallout";
+import { ParentVideo } from "./ParentVideo";
 import { TopicStageFlow } from "./TopicStageFlow";
 
 export function TopicExperience({ topic, topics }: { topic: Topic; topics: Topic[] }) {
@@ -28,6 +29,7 @@ export function TopicExperience({ topic, topics }: { topic: Topic; topics: Topic
       <h1 className="serif mt-4 text-4xl leading-tight text-ink sm:text-5xl">{topic.title}</h1>
       <p className="mt-4 text-xl leading-8 text-ink-soft">{topic.summary}</p>
       <p className="mt-4 text-lg leading-8 text-ink">{topic.whyThisMatters}</p>
+      {topic.parentVideo ? <ParentVideo src={topic.parentVideo.src} caption={topic.parentVideo.caption} /> : null}
 
       <PrerequisiteCallout topic={topic} topics={topics} />
 

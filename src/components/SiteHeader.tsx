@@ -6,7 +6,7 @@ export function SiteHeader() {
       <Link href="/" className="serif text-xl tracking-tight text-ink">
         Home Learning
       </Link>
-      <nav className="flex gap-5 text-sm text-ink-soft">
+      <nav className="flex flex-wrap justify-end gap-x-5 gap-y-2 text-sm text-ink-soft">
         <Link href="/year-1-maths" className="hover:text-teal">
           Year 1 maths
         </Link>
@@ -15,6 +15,9 @@ export function SiteHeader() {
         </Link>
         <Link href="/how-it-works" className="hover:text-teal">
           How it works
+        </Link>
+        <Link href="/for-schools" className="hover:text-teal">
+          For schools
         </Link>
         <Link href="/language" className="hover:text-teal">
           Language log
