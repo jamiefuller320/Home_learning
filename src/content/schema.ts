@@ -91,6 +91,11 @@ export type Topic = {
   parentBriefing: ParentBriefing;
   homePack: HomePack;
   reviewStatus: ReviewStatus;
+  /** Optional generated parent-briefing preview. The written pack stays the source. */
+  parentVideo?: {
+    src: string;
+    caption: string;
+  };
 };
 
 export type GlossaryTerm = {

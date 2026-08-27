@@ -11,9 +11,10 @@
     "preview:pages": "GITHUB_PAGES=true npm run build && node scripts/preview-pages.mjs",
     "lint": "next lint",
     "validate:content": "tsx scripts/validate-content.ts",
-    "test": "tsx scripts/validate-content.ts && tsx scripts/test-language-log.ts && tsx scripts/test-language-notes-api.ts && tsx scripts/test-language-note-routing.ts && tsx scripts/test-topic-feedback-summary.ts",
+    "test": "tsx scripts/validate-content.ts && tsx scripts/test-language-log.ts && tsx scripts/test-language-notes-api.ts && tsx scripts/test-language-note-routing.ts && tsx scripts/test-topic-feedback-summary.ts && tsx scripts/test-parent-video-script.ts",
     "language-notes": "tsx scripts/language-notes.ts",
-    "process-language-notes": "tsx scripts/process-language-notes.ts"
+    "process-language-notes": "tsx scripts/process-language-notes.ts",
+    "render:parent-video": "tsx scripts/render-parent-video.ts"
   },
   "engines": {
     "node": ">=20"

@@ -58,6 +58,24 @@ Keep the whole briefing under about eight minutes of reading. Use short paragrap
 
 If you cannot fit the idea into those budgets, split the topic.
 
+## Optional parent video
+
+`parentVideo` is a generated reading of the written briefing, not a second lesson.
+
+| Field | Rules |
+|---|---|
+| `src` | Path under `public/`, usually `/videos/<id>-parent-briefing.mp4` |
+| `caption` | Say that the page is the source, and that the film is a reading |
+
+Do not invent method in the film. Compile the spoken script from existing topic fields (`src/lib/parent-video-script.ts`), then render:
+
+```bash
+# Needs FAL_KEY (Kokoro British voice) plus Chrome and ffmpeg
+npm run render:parent-video -- facts-within-10
+```
+
+Re-render after a language change. Do not generate classroom footage or pictures of children.
+
 ## Review status
 
 `draft` means “structurally complete, not yet teacher-checked”. The app shows that badge on purpose. Do not mark `reviewed` without a named review in the topic file comment or a later review log.

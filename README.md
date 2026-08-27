@@ -10,6 +10,7 @@ You read a short briefing on how school teaches an idea now. Then you get one 10
 - Thirteen topics, including the ready-to-progress spine plus halves, quarters, coins, time, number words, and comparing length
 - Two stages on every topic: parent briefing, then home pack
 - Content stays `draft` until a human has reviewed the method
+- One proof-of-concept parent video (`Number facts within 10`) on `/for-schools` — an AI voice reading the written pack, not a child lesson
 
 ## Run it
 
@@ -49,6 +50,15 @@ npm run preview:pages
 ```
 
 Then open http://localhost:4173/Home_learning/
+
+## Parent-video proof of concept
+
+The `/for-schools` page and the Number facts within 10 topic can show a generated reading of the written Stage 1. Slides are ours; the voice is British TTS. Re-render after you change that pack:
+
+```bash
+# Needs FAL_KEY, Chrome, and ffmpeg. Does not invent method.
+npm run render:parent-video -- facts-within-10
+```
 
 ## Project map
 

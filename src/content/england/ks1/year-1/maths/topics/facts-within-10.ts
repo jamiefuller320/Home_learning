@@ -95,4 +95,9 @@ export const factsWithin10: Topic = {
     stopRule: "Fifteen minutes or three bonds, whichever comes first. If they get silly or tearful, pack the objects away mid-success.",
   },
   reviewStatus: "draft",
+  parentVideo: {
+    src: "/videos/facts-within-10-parent-briefing.mp4",
+    caption:
+      "A generated reading of this briefing, for tired parents and for teachers checking the method. The words on this page are the source.",
+  },
 };
