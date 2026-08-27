@@ -108,6 +108,7 @@ export function validateTopic(topic: Topic): ValidationIssue[] {
     requiredText(item.prompt, `homePack.check[${index}].prompt`, id, issues);
     requiredText(item.looksLike, `homePack.check[${index}].looksLike`, id, issues);
     requiredText(item.notYet, `homePack.check[${index}].notYet`, id, issues);
+    requiredText(item.nudge ?? "", `homePack.check[${index}].nudge`, id, issues);
   });
 
   for (const prerequisiteId of topic.prerequisites) {

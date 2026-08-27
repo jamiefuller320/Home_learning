@@ -24,12 +24,12 @@ export const countingWithin100: Topic = {
   readyToProgress: ["1NPV-1"],
   sources: [NC_MATHS, DFE_Y1_MATHS],
   whyThisMatters:
-    "If counting is only a song that starts at 1, children get stuck the moment school asks “what comes after 37?” Secure counting is the base for almost every later number idea.",
+    "If counting is only the list that always starts at 1, children get stuck the moment school asks “what comes after 37?” Secure counting is the base for almost every later number idea.",
   parentBriefing: {
     inPlainEnglish:
       "Counting is not just reciting 1, 2, 3. Year 1 children need to start from any number, keep going past 20 and 30 without a wobble, and count backwards as well as forwards. They also need to count objects, not only words: one touch, one word, one thing.",
     howSchoolTeachesIt:
-      "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square. Teachers often start from a number in the middle — 16, 28, 45 — so children do not only rely on the 1, 2, 3 song. They will also count back, which feels much harder and is worth a little extra practice at home.",
+      "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square. Teachers often start from a number in the middle — 16, 28, 45 — so children do not only rely on the count that always starts at 1. They will also count back, which feels much harder and is worth a little extra practice at home.",
     sayThis: [
       "Start at 14. What comes next?",
       "Can you count back from 20? I’ll do the first two with you: 20, 19…",
@@ -56,7 +56,7 @@ export const countingWithin100: Topic = {
     youAreReadyWhen: "You can start at a random number under 40 and count on ten more, then back again, without treating it as a test.",
   },
   homePack: {
-    setup: "You need a short walk, the stairs, or a pile of about 20 objects. Phones away. This should feel like a game, not a recitation exam.",
+    setup: "You need about 20 objects — or you can use the stairs or a short walk. Phones away. This should feel like a game, not a recitation exam.",
     activity: {
       title: "Start anywhere",
       steps: [

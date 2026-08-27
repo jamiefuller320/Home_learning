@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MaintainerUnlock } from "@/components/MaintainerUnlock";
+import { PackLearningReview } from "@/components/PackLearningReview";
 import { SECTION_LABEL, type LanguageNote } from "@/lib/language-log";
 import { classifyLanguageNote, hasApprovalIssueLink } from "@/lib/language-note-routing";
 import {
@@ -19,6 +20,7 @@ import {
 } from "@/lib/topic-feedback-summary";
 
 type LoadState = "idle" | "loading" | "error";
+type MaintainerTab = "learnings" | "inbox";
 
 function formatWhen(iso: string): string {
   if (!iso) return "—";
@@ -38,6 +40,7 @@ function alertStyles(level: TopicFeedbackSummary["alertLevel"]): string {
 }
 
 export function MaintenanceDashboard() {
+  const [tab, setTab] = useState<MaintainerTab>("learnings");
   const [credentials, setCredentials] = useState<MaintainerCredentials | null>(null);
   const [notes, setNotes] = useState<LanguageNote[]>([]);
   const [loadState, setLoadState] = useState<LoadState>("idle");
@@ -72,6 +75,7 @@ export function MaintenanceDashboard() {
 
   async function handleUnlock(creds: MaintainerCredentials) {
     setCredentials(creds);
+    setTab("inbox");
     await loadNotes(creds);
   }
 
@@ -88,12 +92,31 @@ export function MaintenanceDashboard() {
     setNotes((current) => current.map((note) => (note.id === id ? updated : note)));
   }
 
-  if (!credentials) {
-    return <MaintainerUnlock onUnlock={handleUnlock} />;
-  }
-
   return (
     <div className="space-y-10">
+      <div className="flex flex-wrap gap-3 text-sm">
+        <button
+          type="button"
+          className={`rounded-full px-4 py-2 font-semibold ${tab === "learnings" ? "bg-teal text-white" : "border border-rule text-ink hover:border-teal"}`}
+          onClick={() => setTab("learnings")}
+        >
+          Pack learnings
+        </button>
+        <button
+          type="button"
+          className={`rounded-full px-4 py-2 font-semibold ${tab === "inbox" ? "bg-teal text-white" : "border border-rule text-ink hover:border-teal"}`}
+          onClick={() => setTab("inbox")}
+        >
+          Inbox
+        </button>
+      </div>
+
+      {tab === "learnings" ? <PackLearningReview /> : null}
+
+      {tab === "inbox" && !credentials ? <MaintainerUnlock onUnlock={handleUnlock} /> : null}
+
+      {tab === "inbox" && credentials ? (
+        <>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm text-ink-soft">
           Connected to Supabase · {notes.length} note{notes.length === 1 ? "" : "s"} loaded
@@ -211,6 +234,8 @@ export function MaintenanceDashboard() {
           ))}
         </div>
       </section>
+        </>
+      ) : null}
     </div>
   );
 }
