@@ -219,7 +219,10 @@ async function main() {
 
   const listPath = path.join(WORK, "concat.txt");
   writeFileSync(listPath, listLines.join("\n") + "\n");
-  const outPath = path.join(ROOT, "public/videos", `${topic.id}-parent-briefing.mp4`);
+  const outName =
+    topic.parentVideo?.src.replace(/^\/videos\//, "").replace(/[?#].*$/, "") ||
+    `${topic.id}-parent-briefing.mp4`;
+  const outPath = path.join(ROOT, "public/videos", outName);
   run("ffmpeg", ["-y", "-f", "concat", "-safe", "0", "-i", listPath, "-c", "copy", outPath]);
 
   if (!existsSync(outPath)) throw new Error("Render finished but the mp4 is missing.");

@@ -20,7 +20,7 @@ export default function ForSchoolsPage() {
       </p>
 
       <ParentVideo
-        src="/videos/facts-within-10-parent-briefing.mp4"
+        src="/videos/facts-within-10-parent-briefing-v2.mp4"
         caption="Proof of concept: an AI voice reading the written Number facts within 10 briefing, in short beats so the pauses sit on the thoughts. The pictures are our guide, ten-frame, and part–whole slides — not generated classroom footage. If the page changes, we re-render the film."
       />
 
