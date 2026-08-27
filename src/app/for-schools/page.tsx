@@ -21,7 +21,7 @@ export default function ForSchoolsPage() {
 
       <ParentVideo
         src="/videos/facts-within-10-parent-briefing.mp4"
-        caption="Proof of concept: an AI voice reading the written Number facts within 10 briefing. The pictures are our slides, not generated classroom footage. If the page changes, we re-render the film."
+        caption="Proof of concept: an AI voice reading the written Number facts within 10 briefing, in short beats so the pauses sit on the thoughts. The pictures are our guide, ten-frame, and part–whole slides — not generated classroom footage. If the page changes, we re-render the film."
       />
 
       <section>
@@ -43,6 +43,18 @@ export default function ForSchoolsPage() {
             on the page, or email {FEEDBACK_EMAIL}.
           </li>
         </ol>
+      </section>
+
+      <section>
+        <h2 className="serif text-3xl text-ink">How the film is made</h2>
+        <p className="mt-3">
+          The voice reads the pack in short spoken beats, not one long paragraph. Punctuation and
+          a pause after each thought do the pacing — this model has no emphasis markup. The adult
+          with the mug is the same drawing in every film. The ten-frame and part–whole picture
+          change when the script reaches that fact. We can later time those pictures more tightly,
+          or swap the voice for one that accepts SSML. We will not generate footage of children
+          or invent a method picture that is not on the page.
+        </p>
       </section>
 
       <section>

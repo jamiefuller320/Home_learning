@@ -53,7 +53,7 @@ Then open http://localhost:4173/Home_learning/
 
 ## Parent-video proof of concept
 
-The `/for-schools` page and the Number facts within 10 topic can show a generated reading of the written Stage 1. Slides are ours; the voice is British TTS. Re-render after you change that pack:
+The `/for-schools` page and the Number facts within 10 topic can show a generated reading of the written Stage 1. The voice reads short beats (punctuation plus silence). Slides reuse one adult guide plus ten-frame and part–whole pictures. Re-render after you change that pack:
 
 ```bash
 # Needs FAL_KEY, Chrome, and ffmpeg. Does not invent method.

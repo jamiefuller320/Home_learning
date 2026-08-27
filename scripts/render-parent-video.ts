@@ -2,16 +2,22 @@
  * Render one parent-briefing preview from a topic file.
  *
  * Voice: Fal Kokoro British English (needs FAL_KEY).
- * Pictures: our slides only — no generated classroom footage.
+ * Pictures: our slides and diagrams only — no generated classroom footage.
  *
  *   npx tsx scripts/render-parent-video.ts facts-within-10
  */
 
 import { spawnSync } from "node:child_process";
-import { mkdirSync, writeFileSync, rmSync, existsSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { getTopicById } from "../src/content/england/ks1/year-1/maths/topics";
-import { buildParentVideoScript, type VideoScene } from "../src/lib/parent-video-script";
+import {
+  allBeats,
+  buildParentVideoScript,
+  type VideoBeat,
+  type VideoScene,
+} from "../src/lib/parent-video-script";
+import { escapeHtml, guideSvg, SLIDE_CSS, visualHtml } from "../src/lib/parent-video-visuals";
 
 const ROOT = path.resolve(__dirname, "..");
 const WORK = path.join(ROOT, ".video-work");
@@ -28,54 +34,24 @@ function run(command: string, args: string[], timeoutMs = 120_000) {
   return result;
 }
 
-function escapeHtml(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
-function tenFrameHtml(filled: number): string {
-  const cells = Array.from({ length: 10 }, (_, index) => {
-    const on = index < filled;
-    return `<span class="cell ${on ? "on" : ""}"></span>`;
-  }).join("");
-  return `<div class="frame" aria-hidden="true">${cells}</div>
-    <p class="caption">A ten-frame: two rows of five. Here, 6 filled and 4 empty.</p>`;
-}
-
-function slideHtml(scene: VideoScene): string {
-  const lines = scene.lines.map((line) => `<p class="line">${escapeHtml(line)}</p>`).join("");
-  const frame = scene.tenFrame ? tenFrameHtml(scene.tenFrame.filled) : "";
+function slideHtml(scene: VideoScene, beat: VideoBeat): string {
+  const visual = beat.visual ? `<div class="visual">${visualHtml(beat.visual)}</div>` : "";
   return `<!doctype html>
 <html lang="en-GB">
 <head>
   <meta charset="utf-8" />
-  <style>
-    html, body { margin: 0; width: 1280px; height: 720px; }
-    body {
-      box-sizing: border-box;
-      padding: 56px 72px;
-      background: #f4efe6;
-      color: #1d2a28;
-      font-family: "Source Sans 3", "Segoe UI", sans-serif;
-    }
-    .kicker { color: #1f5f59; font-size: 22px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
-    h1 { font-family: Georgia, "Iowan Old Style", serif; font-size: 44px; line-height: 1.15; margin: 16px 0 24px; font-weight: 500; }
-    .line { font-size: 28px; line-height: 1.4; color: #3d4f4b; margin: 0 0 14px; max-width: 42rem; }
-    .frame { display: grid; grid-template-columns: repeat(5, 56px); gap: 10px; margin: 28px 0 12px; }
-    .cell { width: 56px; height: 56px; border-radius: 999px; border: 3px solid #1f5f59; background: transparent; }
-    .cell.on { background: #1f5f59; }
-    .caption { font-size: 20px; color: #3d4f4b; }
-    .mark { position: absolute; right: 72px; bottom: 40px; color: #1f5f59; font-size: 18px; }
-  </style>
+  <style>${SLIDE_CSS}</style>
 </head>
 <body>
-  <p class="kicker">${escapeHtml(scene.kicker)}</p>
-  <h1>${escapeHtml(scene.heading)}</h1>
-  ${lines}
-  ${frame}
+  <div class="layout">
+    <div class="copy">
+      <p class="kicker">${escapeHtml(scene.kicker)}</p>
+      <h1>${escapeHtml(scene.heading)}</h1>
+      <p class="line">${escapeHtml(beat.line)}</p>
+    </div>
+    ${visual}
+  </div>
+  ${guideSvg(beat.guide ?? "present")}
   <p class="mark">Home Learning · generated from the written pack</p>
 </body>
 </html>`;
@@ -91,7 +67,7 @@ async function speak(text: string, dest: string): Promise<void> {
       Authorization: `Key ${key}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ prompt: text, voice: "bf_emma", speed: 0.95 }),
+    body: JSON.stringify({ prompt: text, voice: "bf_emma", speed: 0.9 }),
   });
   if (!response.ok) {
     throw new Error(`TTS failed (${response.status}): ${(await response.text()).slice(0, 200)}`);
@@ -150,6 +126,29 @@ function audioSeconds(wavPath: string): number {
   return seconds;
 }
 
+function toWav(src: string, dest: string) {
+  run("ffmpeg", ["-y", "-i", src, "-ac", "1", "-ar", "24000", "-c:a", "pcm_s16le", dest]);
+}
+
+function silenceWav(dest: string, seconds: number) {
+  run("ffmpeg", [
+    "-y",
+    "-f",
+    "lavfi",
+    "-i",
+    "anullsrc=channel_layout=mono:sample_rate=24000",
+    "-t",
+    seconds.toFixed(2),
+    dest,
+  ]);
+}
+
+function concatWav(parts: string[], dest: string) {
+  const listPath = dest + ".txt";
+  writeFileSync(listPath, parts.map((part) => `file '${part}'`).join("\n") + "\n");
+  run("ffmpeg", ["-y", "-f", "concat", "-safe", "0", "-i", listPath, "-c", "copy", dest]);
+}
+
 async function main() {
   const topicId = process.argv[2] || "facts-within-10";
   const topic = getTopicById(topicId);
@@ -161,65 +160,70 @@ async function main() {
   mkdirSync(path.join(ROOT, "public/videos"), { recursive: true });
 
   const listLines: string[] = [];
+  let beatIndex = 0;
 
-  for (const [index, scene] of script.scenes.entries()) {
-    const stem = String(index).padStart(2, "0") + "-" + scene.id;
-    const htmlPath = path.join(WORK, `${stem}.html`);
-    const pngPath = path.join(WORK, `${stem}.png`);
-    const wavPath = path.join(WORK, `${stem}.wav`);
-    const mp4Path = path.join(WORK, `${stem}.mp4`);
+  for (const scene of script.scenes) {
+    for (const beat of scene.beats) {
+      const stem = String(beatIndex).padStart(2, "0") + "-" + scene.id;
+      const htmlPath = path.join(WORK, `${stem}.html`);
+      const pngPath = path.join(WORK, `${stem}.png`);
+      const rawPath = path.join(WORK, `${stem}-raw`);
+      const spokenPath = path.join(WORK, `${stem}-spoken.wav`);
+      const wavPath = path.join(WORK, `${stem}.wav`);
+      const mp4Path = path.join(WORK, `${stem}.mp4`);
 
-    writeFileSync(htmlPath, slideHtml(scene));
-    process.stdout.write(`Slide ${scene.id}…\n`);
-    screenshot(htmlPath, pngPath);
-    process.stdout.write(`Speaking ${scene.id}…\n`);
-    await speak(scene.spoken, wavPath);
-    const duration = audioSeconds(wavPath) + 0.4;
-    run("ffmpeg", [
-      "-y",
-      "-loop",
-      "1",
-      "-i",
-      pngPath,
-      "-i",
-      wavPath,
-      "-c:v",
-      "libx264",
-      "-tune",
-      "stillimage",
-      "-c:a",
-      "aac",
-      "-b:a",
-      "128k",
-      "-pix_fmt",
-      "yuv420p",
-      "-t",
-      duration.toFixed(2),
-      "-vf",
-      "scale=1280:720",
-      mp4Path,
-    ]);
-    listLines.push(`file '${mp4Path}'`);
+      writeFileSync(htmlPath, slideHtml(scene, beat));
+      process.stdout.write(`Slide ${scene.id} (${beatIndex + 1}/${allBeats(script).length})…\n`);
+      screenshot(htmlPath, pngPath);
+      process.stdout.write(`Speaking: ${beat.spoken.slice(0, 72)}…\n`);
+      await speak(beat.spoken, rawPath);
+      toWav(rawPath, spokenPath);
+
+      if (beat.pauseAfter > 0.05) {
+        const gapPath = path.join(WORK, `${stem}-gap.wav`);
+        silenceWav(gapPath, beat.pauseAfter);
+        concatWav([spokenPath, gapPath], wavPath);
+      } else {
+        copyFileSync(spokenPath, wavPath);
+      }
+
+      const duration = audioSeconds(wavPath);
+      run("ffmpeg", [
+        "-y",
+        "-loop",
+        "1",
+        "-i",
+        pngPath,
+        "-i",
+        wavPath,
+        "-c:v",
+        "libx264",
+        "-tune",
+        "stillimage",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "128k",
+        "-pix_fmt",
+        "yuv420p",
+        "-t",
+        duration.toFixed(2),
+        "-vf",
+        "scale=1280:720",
+        mp4Path,
+      ]);
+      listLines.push(`file '${mp4Path}'`);
+      beatIndex += 1;
+    }
   }
 
   const listPath = path.join(WORK, "concat.txt");
   writeFileSync(listPath, listLines.join("\n") + "\n");
   const outPath = path.join(ROOT, "public/videos", `${topic.id}-parent-briefing.mp4`);
-  run("ffmpeg", [
-    "-y",
-    "-f",
-    "concat",
-    "-safe",
-    "0",
-    "-i",
-    listPath,
-    "-c",
-    "copy",
-    outPath,
-  ]);
+  run("ffmpeg", ["-y", "-f", "concat", "-safe", "0", "-i", listPath, "-c", "copy", outPath]);
 
   if (!existsSync(outPath)) throw new Error("Render finished but the mp4 is missing.");
-  console.log(`Wrote ${outPath}`);
+  console.log(`Wrote ${outPath} (${beatIndex} beats)`);
 }
 
 main().catch((error) => {
