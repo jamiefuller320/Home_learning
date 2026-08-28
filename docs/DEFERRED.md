@@ -15,11 +15,12 @@ Status key: `parked` (good, later) · `research` (needs a decision) · `rejected
 | DEF-003 | White Rose / Power Maths / NCETM sequence tags | parked | Parents want “what we are doing this week” | Tag topics (`alignsWith: ["white-rose-y1-aut"]`) without reproducing scheme content |
 | DEF-004 | Wales, Scotland, Northern Ireland curricula | parked | Four different systems | England KS1 first. Revisit only after the parent loop works |
 | DEF-005 | 2028 National Curriculum remap | parked | Final programmes of study due spring 2027; first teaching Sept 2028 | Keep outcome codes and source URLs so remap is data, not a rewrite |
-| DEF-006 | KS2 maths | parked | Natural second key stage | Start after Year 1 and Year 2 packs are reviewed |
-| DEF-007 | KS3 / GCSE parent packs | parked | Different product: less parent time, more subject depth | Weak evidence for parent-as-teacher at secondary |
+| DEF-006 | KS2 maths | parked | Natural second key stage | Start after Year 1 and Year 2 packs are reviewed. Same parent-as-teacher model as KS1. |
+| DEF-007 | KS3 / GCSE parent refresh (helpful friend) | parked | Different product, after the primary loop is proven | Agreed 2026-08-28: beyond KS2 the job is to **upskill the parent**, not to teach the teenager. Refresh GCSE-level knowledge so a parent can be a helpful friend — stay in the conversation, ask one precise question, avoid their own schooldays method, know when to back off. Teenagers will not take the KS1 sit-down activity. Stage 2 becomes “how to be useful tonight”, not a household pack. Stacks on the primary concept spine (DEF-011) as a reactivation of earned terms, for continuity parents and walk-in Year 10 parents. Do not close a teaching gap or write a lesson for the teen. `avoidThis` is the main contamination field. |
 | DEF-008 | Science home investigations | parked | Lovely kitchen-table work; school sequences vary widely | After maths spine |
 | DEF-009 | English writing and SPaG at KS1 | parked | Terminology is school-specific; easy to teach a clashing method | Last KS1 academic track |
 | DEF-010 | EYFS / Reception bridge | parked | Different statutory framework (EYFS, not National Curriculum) | Useful feeder; do not mix into KS1 schema without a phase field |
+| DEF-011 | Term-unlock graph | parked | Year 1 glossary is still a list | A classroom term may be used freely only after its introducing lesson; earlier packs use the plain-English gloss. Primary earns the pictures; DEF-007 reactivates them. Needed before KS2 volume and before secondary refresh. |
 
 ## Phonics and reading
 
@@ -72,6 +73,7 @@ Status key: `parked` (good, later) · `research` (needs a decision) · `rejected
 |---|---|---|
 | DEF-060 | 2026-08-26 | Building a child homework auto-completer. Conflicts with principle 2 and EEF evidence on parents doing the thinking. |
 | DEF-061 | 2026-08-26 | Ingesting commercial scheme PDFs. Copyright and method-lock-in. |
+| DEF-062 | 2026-08-28 | Extending the KS1 parent-as-teacher home pack to KS3/GCSE. Teenagers are not receptive. Secondary is parent refresh so they can be a helpful friend (see DEF-007), not a pseudo-teacher. |
 
 ---
 

@@ -150,7 +150,7 @@ Separate spine. Must align to the child’s school phonics programme, not invent
 
 ### Later phases
 
-KS2 maths, science packs, school-scheme tags, Oak import, 2028 curriculum remap. All listed in `docs/DEFERRED.md`.
+KS2 maths (same parent-as-teacher model), science packs, school-scheme tags, Oak import, 2028 curriculum remap, and much later a **KS3/GCSE parent refresh**: upskill the adult to be a helpful friend, not a pseudo-teacher, by reactivating the primary concept spine. All listed in `docs/DEFERRED.md` (`DEF-006`, `DEF-007`, `DEF-011`).
 
 ## What we will not do in Phase 1
 
