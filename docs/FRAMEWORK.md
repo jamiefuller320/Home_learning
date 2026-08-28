@@ -55,7 +55,12 @@ npx tsx scripts/process-language-notes.ts route  # open approval issues for feat
 npx tsx scripts/language-notes.ts list           # read the inbox
 ```
 
-Maintainer UI: `/maintenance` (linked discreetly in the footer). Paste the Supabase **service_role** key to unlock; it stays in session storage on that device only. The page shows feature requests, open language fixes, lessons flagged for repeated feedback, and supports mark done / decline / annotate.
+Maintainer UI: `/maintenance` (linked discreetly in the footer).
+
+- **Pack learnings** (no unlock): scan every lesson against durable learnings in `src/content/learnings.ts`. Accept or decline each proposed revision. Declines stick (export/commit `learning-decisions.json`) so the same change does not bounce back. Accepteds export as JSON and apply with `npx tsx scripts/apply-learning-revisions.ts …`.
+- **Inbox** (service_role unlock): feature requests, open language fixes, lessons flagged for repeated feedback; mark done / decline / annotate.
+
+When a language note teaches a reusable rule, add it to `src/content/learnings.ts` (new id — do not rewrite an old id’s meaning). Future packs must pass validation that encodes hard rules (for example every check needs a `nudge`). Soft style rules stay as scan proposals.
 
 A note is a signal that a tired parent could not picture something. We do not paste the suggested sentence. Treat each open row as:
 
