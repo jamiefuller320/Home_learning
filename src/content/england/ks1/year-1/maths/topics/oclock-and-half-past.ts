@@ -16,7 +16,7 @@ export const oclockAndHalfPast: Topic = {
   glossaryTerms: ["half"],
   parentMinutes: 7,
   homeMinutes: 12,
-  householdItems: ["A real analogue clock or watch, or a paper plate with two card hands", "A reference to daily events (lunch, bedtime)"],
+  householdItems: ["A real analogue clock or watch, or a paper plate with two card hands", "A reference to daily events (such as lunch, bedtime)"],
   statutoryOutcomes: [
     "Tell the time to the hour and half past the hour and draw the hands on a clock face to show these times",
     "Recognise and use language relating to dates, including days of the week, weeks, months and years",

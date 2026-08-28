@@ -65,5 +65,7 @@ assert.ok(!pending.some((item) => item.id === proposals[0]!.id));
 const live = scanLearningRevisions();
 assert.ok(!live.some((item) => item.topicId === "counting-within-100" && item.learningId === "no-counting-as-song"));
 assert.ok(!live.some((item) => item.topicId === "comparing-length" && item.learningId === "check-needs-nudge"));
+assert.ok(!live.some((item) => item.topicId === "number-words-to-20" && item.learningId === "household-examples-such-as"));
+assert.ok(!live.some((item) => item.topicId === "coins" && item.learningId === "household-examples-such-as"));
 
 console.log("learning-revisions tests passed.");

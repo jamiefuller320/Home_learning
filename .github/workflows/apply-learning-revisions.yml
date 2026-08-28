@@ -1,0 +1,72 @@
+name: Apply learning revisions
+
+# When a maintainer commits exported acceptances to inbox/learning-revisions-accepted.json,
+# patch topic files, record decisions, validate, and commit back to main.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - inbox/learning-revisions-accepted.json
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-learning-revisions
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Check inbox has accepted revisions
+        id: inbox
+        run: |
+          node -e "
+            const fs = require('node:fs');
+            const path = 'inbox/learning-revisions-accepted.json';
+            if (!fs.existsSync(path)) {
+              console.log('has_accepted=false');
+              process.exit(0);
+            }
+            const payload = JSON.parse(fs.readFileSync(path, 'utf8'));
+            const count = Array.isArray(payload.accepted) ? payload.accepted.length : 0;
+            console.log('has_accepted=' + (count > 0 ? 'true' : 'false'));
+            console.log('accepted_count=' + count);
+          " >> "$GITHUB_OUTPUT"
+
+      - name: Apply accepted learning revisions
+        if: steps.inbox.outputs.has_accepted == 'true'
+        run: npm run apply-learning-revisions -- --record-decisions --archive
+
+      - name: Validate content and tests
+        if: steps.inbox.outputs.has_accepted == 'true'
+        run: npm test
+
+      - name: Commit applied revisions
+        if: steps.inbox.outputs.has_accepted == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/england/ks1/year-1/maths/topics/*.ts
+          git add src/content/learning-decisions.json
+          git add inbox/learning-revisions-accepted.json
+          if git diff --staged --quiet; then
+            echo "Nothing to commit after apply."
+            exit 0
+          fi
+          git commit -m "Apply accepted learning revisions from inbox"
+          git push
