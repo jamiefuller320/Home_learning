@@ -16,7 +16,7 @@ export const partsOf10: Topic = {
   glossaryTerms: ["compose", "partition", "part-whole", "conservation-of-number", "number-bond"],
   parentMinutes: 7,
   homeMinutes: 12,
-  householdItems: ["Up to 10 identical objects (buttons, crayons, grapes)", "A plate or piece of paper torn into a ‘whole’ and two ‘parts’"],
+  householdItems: ["Up to 10 identical objects (such as buttons, crayons, grapes)", "A plate or piece of paper torn into a ‘whole’ and two ‘parts’"],
   statutoryOutcomes: [
     "Represent and use number bonds and related subtraction facts within 20",
     "Read, write and interpret mathematical statements involving addition (+), subtraction (−) and equals (=) signs",

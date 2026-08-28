@@ -1,4 +1,30 @@
 {
   "version": 1,
-  "decisions": []
+  "decisions": [
+    {
+      "revisionId": "rev-239924df",
+      "decision": "accepted",
+      "decidedAt": "2026-08-28T05:15:02.278Z"
+    },
+    {
+      "revisionId": "rev-3b002fd0",
+      "decision": "accepted",
+      "decidedAt": "2026-08-28T05:15:02.278Z"
+    },
+    {
+      "revisionId": "rev-6a80fb86",
+      "decision": "accepted",
+      "decidedAt": "2026-08-28T05:15:02.278Z"
+    },
+    {
+      "revisionId": "rev-6e65cb62",
+      "decision": "accepted",
+      "decidedAt": "2026-08-28T05:15:02.278Z"
+    },
+    {
+      "revisionId": "rev-77c80f80",
+      "decision": "accepted",
+      "decidedAt": "2026-08-28T05:15:02.278Z"
+    }
+  ]
 }

@@ -73,7 +73,7 @@ export function PackLearningReview() {
       accepted: store.pendingApply,
     });
     setMessage(
-      "Downloaded learning-revisions-accepted.json — run: npx tsx scripts/apply-learning-revisions.ts learning-revisions-accepted.json",
+      "Downloaded learning-revisions-accepted.json — commit it to inbox/ on main to auto-apply via GitHub Actions, or run: npx tsx scripts/apply-learning-revisions.ts inbox/learning-revisions-accepted.json",
     );
   }
 
@@ -206,8 +206,10 @@ export function PackLearningReview() {
       )}
 
       <p className="text-sm text-ink-soft">
-        Apply accepted revisions locally with{" "}
-        <code className="text-xs">npx tsx scripts/apply-learning-revisions.ts learning-revisions-accepted.json</code>,
+        Commit exported acceptances to{" "}
+        <code className="text-xs">inbox/learning-revisions-accepted.json</code> on{" "}
+        <code className="text-xs">main</code> to auto-apply via GitHub Actions, or run locally with{" "}
+        <code className="text-xs">npx tsx scripts/apply-learning-revisions.ts --record-decisions --archive</code>,
         then commit the topic edits and an updated <code className="text-xs">learning-decisions.json</code>.
       </p>
     </div>

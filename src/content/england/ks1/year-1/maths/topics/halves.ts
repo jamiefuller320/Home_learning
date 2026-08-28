@@ -16,7 +16,7 @@ export const halves: Topic = {
   glossaryTerms: ["half", "partition"],
   parentMinutes: 6,
   homeMinutes: 12,
-  householdItems: ["A piece of toast, a banana, a sandwich, or a sheet of paper", "An even number of snacks (6, 8 or 10)", "A cup of water if you do not mind a small spill"],
+  householdItems: ["A piece of toast, a banana, a sandwich, or a sheet of paper", "An even number of snacks (such as 6, 8 or 10)", "A cup of water if you do not mind a small spill"],
   statutoryOutcomes: [
     "Recognise, find and name a half as 1 of 2 equal parts of an object, shape or quantity",
   ],

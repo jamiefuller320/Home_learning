@@ -19,7 +19,7 @@ export const numberWordsTo20: Topic = {
   householdItems: [
     "Small sticky notes or scraps of paper",
     "A pen",
-    "Up to 20 small objects (buttons, Lego bricks, grapes)",
+    "Up to 20 small objects (such as buttons, Lego bricks, grapes)",
   ],
   statutoryOutcomes: ["Read and write numbers from 1 to 20 in numerals and words"],
   readyToProgress: [],
