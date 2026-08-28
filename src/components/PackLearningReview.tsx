@@ -145,6 +145,53 @@ export function PackLearningReview() {
 
       {message ? <p className="rounded-2xl bg-[#e5efe8] px-4 py-3 text-sm text-ink">{message}</p> : null}
 
+      <section className="rounded-2xl border border-rule bg-white/70 p-5">
+        <h3 className="font-semibold text-ink">How to commit exports</h3>
+        <p className="mt-2 text-sm text-ink-soft">
+          Export buttons download a JSON file to your device only — nothing is sent to GitHub until you commit
+          the file yourself.
+        </p>
+        <ol className="mt-3 list-decimal space-y-3 pl-5 text-sm text-ink-soft">
+          <li>
+            Accept or decline proposals here, then click <strong className="text-ink">Export accepted</strong> or{" "}
+            <strong className="text-ink">Export decisions</strong>.
+          </li>
+          <li>
+            Put the download in the repo at the path below (create the folder on GitHub if needed):
+            <ul className="mt-2 list-disc space-y-1 pl-5">
+              <li>
+                Accepted queue → <code className="text-xs">inbox/learning-revisions-accepted.json</code>
+              </li>
+              <li>
+                All decisions (incl. declines) → <code className="text-xs">src/content/learning-decisions.json</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Commit and push to <code className="text-xs">main</code>. On GitHub: open the repo →{" "}
+            <strong className="text-ink">Add file</strong> → upload, or edit the file in the browser and save.
+          </li>
+          <li>
+            For acceptances, watch <strong className="text-ink">Actions → Apply learning revisions</strong>. The
+            workflow patches topic files, records decisions, clears the inbox, and commits back to{" "}
+            <code className="text-xs">main</code>.
+          </li>
+        </ol>
+        <p className="mt-3 text-sm text-ink-soft">
+          Advisory proposals (for example listenFor prompts) still need a hand edit in the topic file — the apply
+          script skips those even after you commit the export.
+        </p>
+        <details className="mt-3 text-sm text-ink-soft">
+          <summary className="cursor-pointer font-semibold text-ink">Terminal commands</summary>
+          <pre className="mt-2 overflow-x-auto rounded-xl bg-[#f4f0ea] p-3 text-xs text-ink">
+{`cp ~/Downloads/learning-revisions-accepted.json inbox/learning-revisions-accepted.json
+git add inbox/learning-revisions-accepted.json
+git commit -m "Queue accepted pack learning revisions"
+git push origin main`}
+          </pre>
+        </details>
+      </section>
+
       {topicsWithPending.length > 0 && selectedTopicId === "all" ? (
         <p className="text-sm text-ink-soft">
           Lessons with pending proposals:{" "}
@@ -204,14 +251,6 @@ export function PackLearningReview() {
           ))}
         </div>
       )}
-
-      <p className="text-sm text-ink-soft">
-        Commit exported acceptances to{" "}
-        <code className="text-xs">inbox/learning-revisions-accepted.json</code> on{" "}
-        <code className="text-xs">main</code> to auto-apply via GitHub Actions, or run locally with{" "}
-        <code className="text-xs">npx tsx scripts/apply-learning-revisions.ts --record-decisions --archive</code>,
-        then commit the topic edits and an updated <code className="text-xs">learning-decisions.json</code>.
-      </p>
     </div>
   );
 }

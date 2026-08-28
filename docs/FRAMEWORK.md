@@ -60,6 +60,26 @@ Maintainer UI: `/maintenance` (linked discreetly in the footer).
 - **Pack learnings** (no unlock): scan every lesson against durable learnings in `src/content/learnings.ts`. Accept or decline each proposed revision. Declines stick (export/commit `learning-decisions.json`) so the same change does not bounce back. Accepteds export as JSON; commit to `inbox/learning-revisions-accepted.json` on `main` to auto-apply via GitHub Actions, or run `npx tsx scripts/apply-learning-revisions.ts --record-decisions --archive`.
 - **Inbox** (service_role unlock): feature requests, open language fixes, lessons flagged for repeated feedback; mark done / decline / annotate.
 
+#### Committing pack-learning exports
+
+Export buttons on `/maintenance` → **Pack learnings** download JSON to your device only. Nothing reaches GitHub until you commit the file.
+
+1. Accept or decline proposals, then **Export accepted** and/or **Export decisions**.
+2. Save the download into the repo at:
+   - `inbox/learning-revisions-accepted.json` — accepted queue (triggers auto-apply)
+   - `src/content/learning-decisions.json` — all decisions, including sticky declines
+3. Commit and push to `main` (GitHub web UI: **Add file** → upload, or edit the file in the browser).
+4. For acceptances, check **Actions → Apply learning revisions**. The workflow patches topics, updates `learning-decisions.json`, clears the inbox, and commits back to `main`.
+
+Advisory proposals (for example listenFor prompts) still need a manual edit in the topic file — the apply script skips those.
+
+```bash
+cp ~/Downloads/learning-revisions-accepted.json inbox/learning-revisions-accepted.json
+git add inbox/learning-revisions-accepted.json
+git commit -m "Queue accepted pack learning revisions"
+git push origin main
+```
+
 When a language note teaches a reusable rule, add it to `src/content/learnings.ts` (new id — do not rewrite an old id’s meaning). Future packs must pass validation that encodes hard rules (for example every check needs a `nudge`). Soft style rules stay as scan proposals.
 
 A note is a signal that a tired parent could not picture something. We do not paste the suggested sentence. Treat each open row as:
