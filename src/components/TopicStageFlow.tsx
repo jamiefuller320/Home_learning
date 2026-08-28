@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
+import { STAGE_1_META, STAGE_2_META, StageMetaBox } from "@/components/StageMetaBox";
 import { emptyProgress, readProgress, writeProgress, type TopicProgress } from "@/lib/progress";
 
 export function TopicStageFlow({
@@ -55,7 +56,7 @@ export function TopicStageFlow({
 
       <section className="mt-12">
         <h2 className="serif text-3xl text-ink">Stage 1 · For you first</h2>
-        <p className="mt-2 text-ink-soft">Read this before you sit down with your child. No special kit.</p>
+        <StageMetaBox {...STAGE_1_META} />
         <div className="mt-8">{briefing}</div>
 
         <form
@@ -99,10 +100,7 @@ export function TopicStageFlow({
       {showPack ? (
         <section id="home-pack" className="mt-16 border-t border-rule pt-12">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <h2 className="serif text-3xl text-ink">Stage 2 · Tonight with your child</h2>
-              <p className="mt-2 text-ink-soft">One activity. Household things. A clear stop rule.</p>
-            </div>
+            <h2 className="serif text-3xl text-ink">Stage 2 · Tonight with your child</h2>
             <Link
               href={printPackHref}
               prefetch={false}
@@ -111,6 +109,7 @@ export function TopicStageFlow({
               Open print-friendly pack
             </Link>
           </div>
+          <StageMetaBox {...STAGE_2_META} />
           <div className="mt-8">{homePack}</div>
         </section>
       ) : null}
