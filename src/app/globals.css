@@ -60,6 +60,11 @@ a {
   color: var(--teal);
 }
 
+/* Hook for restyling StageMetaBox without touching every page */
+.stage-meta-box {
+  /* intentionally empty — override here when the look changes */
+}
+
 @media print {
   body {
     background: white;
