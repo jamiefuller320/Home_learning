@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function SiteFooter() {
   return (
     <footer className="no-print mt-16 border-t border-rule pt-6 text-sm leading-6 text-ink-soft">
@@ -13,9 +15,9 @@ export function SiteFooter() {
         .
       </p>
       <p className="mt-3">
-        <a href="/maintenance" className="underline decoration-rule underline-offset-2 hover:text-teal">
+        <Link href="/maintenance" className="underline decoration-rule underline-offset-2 hover:text-teal">
           Maintainer
-        </a>
+        </Link>
       </p>
     </footer>
   );
