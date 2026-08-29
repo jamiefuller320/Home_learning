@@ -42,7 +42,13 @@ Applied open `parent-video` notes from the script viewer. Method and intent firs
 | You want to see / They see | Separate cue beat; looksLike states empty spaces clearly |
 | Film handoff | Longer return-to-pack line |
 
-Rehearsal report is stale until `npm run rehearse:parent-video -- facts-within-10` is re-run (script hash changed).
+## 2026-08-29 voice
+
+- Switched Kokoro voice `bf_isabella` → `bf_alice` (brighter of the British female set).
+- Base speed `1.05` → `1.1` for a slightly more energetic delivery.
+- Re-rehearse before gated render; shipped mp4 still uses the previous voice until re-rendered.
+
+Rehearsal report is stale until `npm run rehearse:parent-video -- facts-within-10` is re-run (voice/speed changed).
 
 ## Spoken delivery check
 
