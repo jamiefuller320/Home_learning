@@ -10,6 +10,12 @@ export function escapeHtml(value: string): string {
 
 export type GuideSize = "corner" | "feature";
 
+/** Point only when a diagram is on screen — otherwise the arm aims at empty space. */
+export function resolveGuidePose(pose: GuidePose, hasVisual: boolean): GuidePose {
+  if (pose === "point" && !hasVisual) return "present";
+  return pose;
+}
+
 /**
  * Recurring adult guide character — not a child, not a cartoon teacher.
  * Same person every film; pose changes with the beat. `feature` is for
@@ -37,18 +43,21 @@ export function guideSvg(pose: GuidePose, size: GuideSize = "corner"): string {
     pose === "listen"
       ? `<path d="M72 128 C48 148 52 172 78 178" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>
          <ellipse cx="62" cy="118" rx="14" ry="11" fill="#c4a574"/>`
-      : `<path d="M78 132 C62 158 70 176 88 180" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`;
+      : pose === "point"
+        ? // Free the left side; mug stays down while the right hand points at the diagram.
+          `<path d="M78 132 C68 155 74 172 90 178" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`
+        : `<path d="M78 132 C62 158 70 176 88 180" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`;
 
+  // Corner guide sits bottom-left; diagram is upper-right — a short up-right jab, not a long noodle.
   const rightArm =
     pose === "point"
-      ? `<path d="M132 128 C168 112 198 88 222 68" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>
-         <circle cx="226" cy="64" r="8" fill="#c4a574"/>`
-      : pose === "listen"
-        ? `<path d="M132 132 C148 158 142 176 124 180" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`
-        : `<path d="M132 132 C148 158 142 176 124 180" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`;
+      ? `<path d="M138 122 L178 78" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>
+         <circle cx="182" cy="74" r="9" fill="#c4a574"/>
+         <path d="M186 68 L198 58" fill="none" stroke="#c4a574" stroke-width="5" stroke-linecap="round"/>`
+      : `<path d="M132 132 C148 158 142 176 124 180" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`;
 
   const mug =
-    pose === "listen"
+    pose === "listen" || pose === "point"
       ? ""
       : `<g transform="translate(118 148)">
            <rect x="0" y="0" width="28" height="24" rx="4" fill="#f4efe6" stroke="#8a5a20" stroke-width="2.5"/>
@@ -129,11 +138,12 @@ export function visualHtml(visual: VideoVisual): string {
 
 /** Slide body: diagram when present; otherwise feature the guide character. */
 export function slideVisualSlot(beatVisual: VideoVisual | undefined, pose: GuidePose): string {
+  const resolved = resolveGuidePose(pose, Boolean(beatVisual));
   if (beatVisual) {
     return `<div class="visual">${visualHtml(beatVisual)}</div>
-  ${guideSvg(pose, "corner")}`;
+  ${guideSvg(resolved, "corner")}`;
   }
-  return `<div class="visual visual-character">${guideSvg(pose, "feature")}</div>`;
+  return `<div class="visual visual-character">${guideSvg(resolved, "feature")}</div>`;
 }
 
 export const SLIDE_CSS = `

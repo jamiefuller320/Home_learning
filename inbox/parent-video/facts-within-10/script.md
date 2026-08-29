@@ -1,8 +1,8 @@
 # Parent video script · Number facts within 10
 
 Topic id: `facts-within-10`  
-Script hash: `eb949f0ad404d82e`  
-Beats: 51  
+Script hash: `021cd51cc6f624c0`  
+Beats: 50  
 
 Compiled from the written pack. **Edit the topic file to change wording** — this dump is for review, not a second authoring path.
 
@@ -48,7 +48,11 @@ Applied open `parent-video` notes from the script viewer. Method and intent firs
 - Base speed `1.05` → `1.1` for a slightly more energetic delivery.
 - Re-rehearse before gated render; shipped mp4 still uses the previous voice until re-rendered.
 
-Rehearsal report is stale until `npm run rehearse:parent-video -- facts-within-10` is re-run (voice/speed changed).
+## 2026-08-29 guide character test (v5)
+
+- Stronger adult guide drawing (hair, brows, smile by pose) — still not a child / cartoon teacher.
+- Feature size when there is no diagram; corner when ten-frame / part–whole / list is on screen.
+- Re-render as `facts-within-10-parent-briefing-v5.mp4` with Alice @ 1.1.
 
 ## Spoken delivery check
 
@@ -57,16 +61,15 @@ _No findings._
 
 ## open · Number facts within 10
 
-_Home Learning · Year 1 maths · draft_
+_Home Learning · Year 1 maths_
 
 1. `[title]` (0.50s gap) Number facts within 10.
 2. `[section]` (0.58s gap) This is a quick parent briefing.
 3. `[key]` (0.58s gap) Not a film for your child to watch!
 4. `[teach]` (0.58s gap) You learn the method here.
 5. `[teach]` (0.36s gap) Then you work from the written page, beside your child.
-6. `[aside]` (0.58s gap) This pack is still a draft…
-7. `[aside]` (0.58s gap) If anything clashes with how your school teaches…
-8. `[aside]` (0.70s gap) Follow the school…
+6. `[aside]` (0.58s gap) If anything clashes with how your school teaches…
+7. `[aside]` (0.70s gap) Follow the school…
 
 ## plain · In plain English
 
@@ -144,4 +147,4 @@ _For schools_
 
 1. `[aside]` (0.58s gap) If you teach Year 1…
 2. `[aside]` (0.58s gap) Tell us whether the method matches your school…
-3. `[aside]` (0.22s gap) The written pack is the source…
+3. `[aside]` (0.22s gap) Thanks for watching — enjoy the session together…

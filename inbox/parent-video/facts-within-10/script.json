@@ -1,7 +1,7 @@
 {
   "topicId": "facts-within-10",
   "title": "Number facts within 10",
-  "scriptHash": "eb949f0ad404d82e",
+  "scriptHash": "021cd51cc6f624c0",
   "delivery": {
     "topicId": "facts-within-10",
     "findings": [],
@@ -10,7 +10,7 @@
   "scenes": [
     {
       "id": "open",
-      "kicker": "Home Learning · Year 1 maths · draft",
+      "kicker": "Home Learning · Year 1 maths",
       "heading": "Number facts within 10",
       "beats": [
         {
@@ -46,13 +46,6 @@
           "line": "Then you work from the written page, beside your child.",
           "pauseAfter": 0.36,
           "prosody": "teach",
-          "guide": "listen"
-        },
-        {
-          "spoken": "This pack is still a draft…",
-          "line": "This pack is still a draft.",
-          "pauseAfter": 0.58,
-          "prosody": "aside",
           "guide": "listen"
         },
         {
@@ -160,7 +153,7 @@
           "line": "Two rows of five.",
           "pauseAfter": 0.36,
           "prosody": "teach",
-          "guide": "point"
+          "guide": "present"
         },
         {
           "spoken": "They pair that with a part–whole picture: one whole number made of two parts.",
@@ -194,28 +187,28 @@
           "line": "Such as: 6 plus 4.",
           "pauseAfter": 0.5,
           "prosody": "example",
-          "guide": "point"
+          "guide": "present"
         },
         {
           "spoken": "Or: 4 plus 6.",
           "line": "Or: 4 plus 6.",
           "pauseAfter": 0.5,
           "prosody": "example",
-          "guide": "point"
+          "guide": "present"
         },
         {
           "spoken": "Or: 10 take away 4.",
           "line": "Or: 10 take away 4.",
           "pauseAfter": 0.5,
           "prosody": "example",
-          "guide": "point"
+          "guide": "present"
         },
         {
           "spoken": "Or: 10 take away 6.",
           "line": "Or: 10 take away 6.",
           "pauseAfter": 0.5,
           "prosody": "example",
-          "guide": "point"
+          "guide": "present"
         },
         {
           "spoken": "School often calls that pair a number bond: two parts that make a whole.",
@@ -257,14 +250,14 @@
           "line": "Build it with objects, say it in words, then show the symbols written underneath.",
           "pauseAfter": 0.36,
           "prosody": "key",
-          "guide": "point"
+          "guide": "present"
         },
         {
           "spoken": "Don’t use words and symbols as the starting point.",
           "line": "Don’t use words and symbols as the starting point.",
           "pauseAfter": 0.7,
           "prosody": "key",
-          "guide": "point"
+          "guide": "present"
         }
       ]
     },
@@ -352,7 +345,7 @@
           "line": "Here’s what you’re aiming for.",
           "pauseAfter": 0.5,
           "prosody": "section",
-          "guide": "point"
+          "guide": "present"
         },
         {
           "spoken": "You can show 7 on a ten-frame and see, without counting from 1, that 3 empty spaces make 10.",
@@ -441,14 +434,14 @@
           "line": "Found this on YouTube?",
           "pauseAfter": 0.58,
           "prosody": "handoff",
-          "guide": "point"
+          "guide": "present"
         },
         {
           "spoken": "Use the link in the video description to open that page.",
           "line": "Use the link in the video description to open that page.",
           "pauseAfter": 0.7,
           "prosody": "handoff",
-          "guide": "point"
+          "guide": "present"
         }
       ]
     },
@@ -472,8 +465,8 @@
           "guide": "present"
         },
         {
-          "spoken": "The written pack is the source…",
-          "line": "The written pack is the source.",
+          "spoken": "Thanks for watching — enjoy the session together…",
+          "line": "Thanks for watching — enjoy the session together.",
           "pauseAfter": 0.22,
           "prosody": "aside",
           "guide": "present"
@@ -525,21 +518,13 @@
     {
       "path": "scenes.open.beats[5]",
       "sceneId": "open",
-      "spoken": "This pack is still a draft…",
-      "line": "This pack is still a draft.",
-      "pauseAfter": 0.58,
-      "prosody": "aside"
-    },
-    {
-      "path": "scenes.open.beats[6]",
-      "sceneId": "open",
       "spoken": "If anything clashes with how your school teaches…",
       "line": "If anything clashes with how your school teaches…",
       "pauseAfter": 0.58,
       "prosody": "aside"
     },
     {
-      "path": "scenes.open.beats[7]",
+      "path": "scenes.open.beats[6]",
       "sceneId": "open",
       "spoken": "Follow the school…",
       "line": "Follow the school.",
@@ -885,8 +870,8 @@
     {
       "path": "scenes.close.beats[2]",
       "sceneId": "close",
-      "spoken": "The written pack is the source…",
-      "line": "The written pack is the source.",
+      "spoken": "Thanks for watching — enjoy the session together…",
+      "line": "Thanks for watching — enjoy the session together.",
       "pauseAfter": 0.22,
       "prosody": "aside"
     }
