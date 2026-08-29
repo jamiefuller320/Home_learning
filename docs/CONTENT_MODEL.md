@@ -71,6 +71,14 @@ Do not invent method in the film. Compile spoken **beats** from existing topic f
 
 Write beats for the ear (punctuation, short clips, silence between thoughts). Split example sums into their own clips. Keep asides and website pointers as separate beats so the voice can change tone. Do not dump a whole page paragraph into one TTS call. Recheck the compiled script with the same held-out judge as the page (`npm run judge:lessons`).
 
+Pre-production (before paying for a full render):
+
+```bash
+npm run script:parent-video -- facts-within-10     # inbox/parent-video/<id>/script.md + delivery checks
+npm run rehearse:parent-video -- facts-within-10   # TTS-only + pace eval (needs FAL_KEY)
+npm run render:parent-video -- facts-within-10     # full film; gated on rehearsal unless --force
+```
+
 Lesson pictures are ours: a recurring adult guide, a ten-frame, and a part–whole diagram. They must show a fact already in the pack. Do not generate classroom footage, children, or a cartoon teacher.
 
 ```bash
@@ -78,7 +86,7 @@ Lesson pictures are ours: a recurring adult guide, a ten-frame, and a part–who
 npm run render:parent-video -- facts-within-10
 ```
 
-Re-render after a language change.
+Re-render after a language or script-shape change. The page stays the source beside the child.
 
 ## Review status
 

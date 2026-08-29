@@ -1,4 +1,5 @@
 import type { SayThisItem, Topic } from "@/content/schema";
+import { shapeProsody, type ProsodyRole } from "@/lib/parent-video-prosody";
 
 /** Gaps between clips — enough air for tone changes without dragging. */
 export const PAUSE = {
@@ -20,6 +21,8 @@ export type VideoBeat = {
   spoken: string;
   line: string;
   pauseAfter: number;
+  /** Delivery intent — Kokoro approximates via punctuation + speed (no SSML). */
+  prosody?: ProsodyRole;
   visual?: VideoVisual;
   guide?: GuidePose;
 };
@@ -184,42 +187,53 @@ export function spokenClips(text: string): string[] {
     .filter(Boolean);
 }
 
+function makeBeat(
+  text: string,
+  pauseAfter: number,
+  prosody: ProsodyRole,
+  extras: Partial<VideoBeat> = {},
+): VideoBeat {
+  const line = text.trim();
+  return {
+    spoken: shapeProsody(line, prosody),
+    line,
+    pauseAfter,
+    prosody,
+    ...extras,
+  };
+}
+
 function beatsFromClips(
   clips: string[],
   pauseAfter: number,
+  prosody: ProsodyRole,
   extras: Partial<VideoBeat> = {},
 ): VideoBeat[] {
-  return clips.map((clip, index) => {
+  return clips.map((clip) => {
     const isExample = /^(Such as:|Or:)/i.test(clip) || MATH_FACT.test(clip);
-    return {
-      spoken: clip,
-      line: clip,
-      pauseAfter: isExample ? PAUSE.item : pauseAfter,
-      ...extras,
-      ...(index === clips.length - 1 ? {} : {}),
-    };
+    const role: ProsodyRole = isExample ? "example" : prosody;
+    return makeBeat(clip, isExample ? PAUSE.item : pauseAfter, role, extras);
   });
 }
 
 function beatsFromText(
   text: string,
   pauseAfter: number,
+  prosody: ProsodyRole,
   extras: Partial<VideoBeat> = {},
 ): VideoBeat[] {
-  return beatsFromClips(spokenClips(text), pauseAfter, extras);
+  return beatsFromClips(spokenClips(text), pauseAfter, prosody, extras);
 }
 
 function linkBeats(
   lines: readonly string[],
   pauseAfter: number,
+  prosody: ProsodyRole,
   extras: Partial<VideoBeat> = {},
 ): VideoBeat[] {
-  return lines.map((line, index) => ({
-    spoken: line,
-    line,
-    pauseAfter: index === lines.length - 1 ? pauseAfter : PAUSE.aside,
-    ...extras,
-  }));
+  return lines.map((line, index) =>
+    makeBeat(line, index === lines.length - 1 ? pauseAfter : PAUSE.aside, prosody, extras),
+  );
 }
 
 function last<T>(items: T[]): T | undefined {
@@ -237,9 +251,11 @@ function checkBeats(topic: Topic): VideoBeat[] {
   const item = topic.homePack.check[0];
   if (!item) return [];
   return [
-    ...linkBeats(["One check from the page."], PAUSE.aside, { guide: "listen" }),
-    ...beatsFromClips(spokenClips(item.prompt), PAUSE.item, { guide: "listen" }),
-    ...beatsFromClips(spokenClips(`Looking for: ${item.looksLike}`), PAUSE.item, { guide: "listen" }),
+    ...linkBeats(["One check from the page."], PAUSE.aside, "aside", { guide: "listen" }),
+    ...beatsFromClips(spokenClips(item.prompt), PAUSE.item, "key", { guide: "listen" }),
+    ...beatsFromClips(spokenClips(`You want to see: ${item.looksLike}`), PAUSE.item, "key", {
+      guide: "listen",
+    }),
   ];
 }
 
@@ -248,7 +264,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
   const mix = briefing.commonMisconceptions[0];
   const firstStep = topic.homePack.activity.steps[0];
   const plainLines = takeSentences(briefing.inPlainEnglish, 3);
-  const schoolLines = takeSentences(briefing.howSchoolTeachesIt, 3);
+  const schoolLines = takeSentences(briefing.howSchoolTeachesIt, 4);
 
   const scenes: VideoScene[] = [
     {
@@ -257,9 +273,11 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       heading: topic.title,
       beats: withFinalPause(
         [
-          { spoken: `${topic.title}.`, line: topic.title, pauseAfter: PAUSE.item, guide: "present" },
-          ...linkBeats(SCRIPT_LINKS.open, PAUSE.sentence, { guide: "listen" }),
-          ...linkBeats(SCRIPT_LINKS.draft, PAUSE.sentence, { guide: "listen" }),
+          makeBeat(topic.title, PAUSE.item, "title", { guide: "present" }),
+          ...linkBeats([SCRIPT_LINKS.open[0]], PAUSE.aside, "section", { guide: "listen" }),
+          ...linkBeats([SCRIPT_LINKS.open[1]], PAUSE.aside, "key", { guide: "listen" }),
+          ...linkBeats(SCRIPT_LINKS.open.slice(2), PAUSE.sentence, "teach", { guide: "listen" }),
+          ...linkBeats(SCRIPT_LINKS.draft, PAUSE.sentence, "aside", { guide: "listen" }),
         ],
         PAUSE.section,
       ),
@@ -270,25 +288,30 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       heading: "In plain English",
       beats: withFinalPause(
         [
-          ...linkBeats(SCRIPT_LINKS.plain, PAUSE.item, { guide: "present" }),
+          ...linkBeats(SCRIPT_LINKS.plain, PAUSE.item, "section", { guide: "present" }),
           ...plainLines.flatMap((line, index) => {
             const clips = spokenClips(line);
             const isLast = index === plainLines.length - 1;
-            return clips.map((clip, clipIndex) => ({
-              spoken: clip,
-              line: clip,
-              pauseAfter: MATH_FACT.test(clip) || /^(Such as:|Or:)/i.test(clip) ? PAUSE.item : PAUSE.sentence,
-              guide: isLast && clipIndex === clips.length - 1 ? ("point" as const) : ("present" as const),
-              visual:
-                isLast && clipIndex === clips.length - 1
-                  ? {
-                      kind: "ten-frame" as const,
-                      filled: 6,
-                      other: 4,
-                      caption: "6 and 4 making 10, on a ten-frame.",
-                    }
-                  : undefined,
-            }));
+            return clips.map((clip, clipIndex) => {
+              const isExample = MATH_FACT.test(clip) || /^(Such as:|Or:)/i.test(clip);
+              return makeBeat(
+                clip,
+                isExample ? PAUSE.item : PAUSE.sentence,
+                isExample ? "example" : "teach",
+                {
+                  guide: isLast && clipIndex === clips.length - 1 ? ("point" as const) : ("present" as const),
+                  visual:
+                    isLast && clipIndex === clips.length - 1
+                      ? {
+                          kind: "ten-frame" as const,
+                          filled: 6,
+                          other: 4,
+                          caption: "6 and 4 making 10, on a ten-frame.",
+                        }
+                      : undefined,
+                },
+              );
+            });
           }),
         ],
         PAUSE.section,
@@ -300,7 +323,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       heading: "How school typically teaches it",
       beats: withFinalPause(
         [
-          ...linkBeats(SCRIPT_LINKS.school, PAUSE.item, {
+          ...linkBeats(SCRIPT_LINKS.school, PAUSE.item, "section", {
             guide: "point",
             visual: {
               kind: "ten-frame",
@@ -311,6 +334,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
           ...schoolLines.flatMap((line, index) => {
             const clips = spokenClips(line);
             return clips.map((clip, clipIndex) => {
+              const isExample = MATH_FACT.test(clip);
               const visual: VideoVisual | undefined =
                 clipIndex === 0 && index === 0
                   ? { kind: "ten-frame", filled: 0, caption: "Two rows of five. The frame is the picture, not the sum." }
@@ -330,13 +354,10 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
                           caption: "A number bond: two parts that make a whole.",
                         }
                       : undefined;
-              return {
-                spoken: clip,
-                line: clip,
-                pauseAfter: MATH_FACT.test(clip) ? PAUSE.item : PAUSE.sentence,
-                guide: "point" as const,
+              return makeBeat(clip, isExample ? PAUSE.item : PAUSE.sentence, isExample ? "example" : "teach", {
+                guide: "point",
                 visual,
-              };
+              });
             });
           }),
         ],
@@ -349,9 +370,13 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       heading: mix.misconception,
       beats: withFinalPause(
         [
-          ...linkBeats(SCRIPT_LINKS.mix, PAUSE.item, { guide: "listen" }),
-          ...beatsFromText(takeSentences(mix.misconception, 1).join(" "), PAUSE.sentence, { guide: "listen" }),
-          ...beatsFromText(takeSentences(mix.instead, 1).join(" "), PAUSE.sentence, { guide: "point" }),
+          ...linkBeats(SCRIPT_LINKS.mix, PAUSE.item, "section", { guide: "listen" }),
+          ...beatsFromText(takeSentences(mix.misconception, 1).join(" "), PAUSE.sentence, "teach", {
+            guide: "listen",
+          }),
+          ...beatsFromText(takeSentences(mix.instead, 1).join(" "), PAUSE.sentence, "key", {
+            guide: "point",
+          }),
         ],
         PAUSE.section,
       ),
@@ -362,11 +387,8 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       heading: topic.homePack.activity.title,
       beats: withFinalPause(
         [
-          ...linkBeats(SCRIPT_LINKS.tonight, PAUSE.sentence, { guide: "present" }),
-          {
-            spoken: forTheEar(`${topic.homePack.activity.title}.`),
-            line: topic.homePack.activity.title,
-            pauseAfter: PAUSE.item,
+          ...linkBeats(SCRIPT_LINKS.tonight, PAUSE.sentence, "section", { guide: "present" }),
+          makeBeat(topic.homePack.activity.title, PAUSE.item, "title", {
             guide: "point",
             visual: {
               kind: "ten-frame",
@@ -374,8 +396,8 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
               other: 4,
               caption: "Fill 6 of one type. The empty spaces are the other part.",
             },
-          },
-          ...beatsFromText(takeSentences(firstStep, 2).join(" "), PAUSE.sentence, {
+          }),
+          ...beatsFromText(takeSentences(firstStep, 2).join(" "), PAUSE.sentence, "teach", {
             guide: "point",
             visual: {
               kind: "ten-frame",
@@ -384,7 +406,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
               caption: "6 and 4 make 10.",
             },
           }),
-          ...beatsFromText(takeSentences(topic.homePack.stopRule, 1).join(" "), PAUSE.sentence, {
+          ...beatsFromText(takeSentences(topic.homePack.stopRule, 1).join(" "), PAUSE.sentence, "aside", {
             guide: "listen",
           }),
         ],
@@ -397,8 +419,8 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       heading: "What good looks like",
       beats: withFinalPause(
         [
-          ...linkBeats(SCRIPT_LINKS.criteria, PAUSE.item, { guide: "point" }),
-          ...beatsFromText(briefing.youAreReadyWhen, PAUSE.sentence, {
+          ...linkBeats(SCRIPT_LINKS.criteria, PAUSE.item, "section", { guide: "point" }),
+          ...beatsFromText(briefing.youAreReadyWhen, PAUSE.sentence, "key", {
             guide: "point",
             visual: {
               kind: "ten-frame",
@@ -417,8 +439,8 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       heading: "Open the written pack when you start",
       beats: withFinalPause(
         [
-          ...linkBeats(SCRIPT_LINKS.page, PAUSE.aside, { guide: "present" }),
-          ...linkBeats(SCRIPT_LINKS.youtube, PAUSE.aside, { guide: "point" }),
+          ...linkBeats(SCRIPT_LINKS.page, PAUSE.aside, "handoff", { guide: "present" }),
+          ...linkBeats(SCRIPT_LINKS.youtube, PAUSE.aside, "handoff", { guide: "point" }),
         ],
         PAUSE.section,
       ),
@@ -427,7 +449,10 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       id: "close",
       kicker: "For schools",
       heading: "Does this match how you teach it?",
-      beats: withFinalPause(linkBeats(SCRIPT_LINKS.close, PAUSE.sentence, { guide: "present" }), PAUSE.short),
+      beats: withFinalPause(
+        linkBeats(SCRIPT_LINKS.close, PAUSE.sentence, "aside", { guide: "present" }),
+        PAUSE.short,
+      ),
     },
   ];
 

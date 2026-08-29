@@ -32,7 +32,7 @@ export const factsWithin10: Topic = {
     inPlainEnglish:
       "A number fact is a small truth such as 6 + 4 = 10 or 7 − 2 = 5. Fluency does not mean shouting answers against a timer. It means the child does not have to start at 1 and climb every time. Fingers, pictures, and objects are allowed. The child uses them to see 6 and 4 making 10, before the fact lives in their head.",
     howSchoolTeachesIt:
-      "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts. They will teach families of facts together: 6 + 4, 4 + 6, 10 − 4, 10 − 6. School often calls that pair a number bond — two parts that make a whole, not a worksheet brand.",
+      "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts. They will teach families of facts together: 6 + 4, 4 + 6, 10 − 4, 10 − 6. School often calls that pair a number bond: two parts that make a whole. The name is just a label for that idea.",
     sayThis: [
       "6 and what make 10?",
       "If 4 is one part and 6 is the other part, what is the whole?",

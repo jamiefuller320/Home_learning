@@ -92,6 +92,15 @@ export const learnings: Learning[] = [
     sourceNoteIds: ["41df55ed-bdd0-4472-b761-98497d2c82ae"],
     structure: "say-this-listen-for",
   },
+  {
+    id: "no-worksheet-brand-aside",
+    kind: "phrase",
+    title: "Don’t call a number bond a “worksheet brand”",
+    principle:
+      "On the page, “not a worksheet brand” is a tidy aside. Aloud it sounds like a product quip. Say what the bond is, then that the name is just a label for the idea.",
+    find: "not a worksheet brand",
+    replace: "The name is just a label for that idea",
+  },
 ];
 
 export function getLearningById(id: string): Learning | undefined {

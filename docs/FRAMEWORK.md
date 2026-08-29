@@ -107,7 +107,22 @@ src/lib/progress.ts            local-only “I have got this” state
 
 Later ingestion (Oak API, a new National Curriculum) should write into the same schema. Do not grow a second content format.
 
-A parent video, if present, is a **concise briefing compiled from the pack**, not a second authoring path and not a full page reading. Teach the method quickly, outline the activity and checks, then send the parent to the written page for live steps. Compile speech from existing fields. Do not generate classroom footage. Re-render after language changes. The page stays the source beside the child.
+A parent video, if present, is a **concise briefing compiled from the pack**, not a second authoring path and not a full page reading. Teach the method quickly, outline the activity and checks, then send the parent to the written page for live steps. Compile speech from existing fields. Do not generate classroom footage.
+
+### Parent video production pipeline
+
+```
+pack edit → script:parent-video (readable dump + spoken-delivery checks)
+         → human notes in inbox/parent-video/<id>/
+         → rehearse:parent-video (TTS-only + pace eval)
+         → render:parent-video (full film; gated unless --force)
+```
+
+The dump is for review, not a second lesson file. Fix awkward lines in the topic pack (or add a learning), then re-preview. Spoken-delivery checks catch paper-OK / aloud-bad phrases (for example product-meta asides like “worksheet brand”). Rehearsal writes `inbox/parent-video/<id>/rehearsal-report.json`; full render refuses a missing, stale, or failing report unless `--force`.
+
+Kokoro has **no SSML**, so word-level stress is not available. Beats carry a **prosody role** (`title`, `section`, `key`, `teach`, `example`, `aside`, `handoff`) shown in the script dump; punctuation and a slight speed change approximate inflection. True SSML stressing stays deferred (ElevenLabs / Azure).
+
+UI: `/for-schools/script` shows the compiled script with colour-coded prosody. A **Comment** button on each beat saves a `language_notes` row with `section = parent-video` (same Supabase inbox / amendment loop as “I don’t understand”).
 
 ### Technical choices for the first slice
 

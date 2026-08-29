@@ -70,4 +70,17 @@ const reviewed = rowToLanguageNote({
 assert.equal(reviewed.reviewNote, "Intent kept; wording was still abstract. Now: see 6 and 4 making 10.");
 assert.ok(!("review_note" in noteToInsertRow(note)));
 
+const videoNote = noteToInsertRow({
+  ...note,
+  section: "parent-video",
+  unclear: "Beat: scenes.school.beats[3]\nSpoken: “6 plus 4.”\n\nRushes the example.",
+});
+assert.equal(videoNote.section, "parent-video");
+const videoRoundTrip = rowToLanguageNote({
+  id: "55555555-5555-5555-5555-555555555555",
+  created_at: "2026-08-29T10:00:00.000Z",
+  ...videoNote,
+});
+assert.equal(videoRoundTrip.section, "parent-video");
+
 console.log("Language-notes API helpers look good.");

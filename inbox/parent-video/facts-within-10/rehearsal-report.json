@@ -1,0 +1,503 @@
+{
+  "topicId": "facts-within-10",
+  "title": "Number facts within 10",
+  "scriptHash": "7457beadae9724bb",
+  "createdAt": "2026-08-29T09:20:15.936Z",
+  "status": "pass",
+  "delivery": {
+    "topicId": "facts-within-10",
+    "findings": [
+      {
+        "severity": "note",
+        "code": "ui-chrome-one-check",
+        "beatPath": "scenes.criteria.beats[2]",
+        "spoken": "One check from the page.",
+        "message": "Fine as a short bridge, but keep it brief — the check prompt should carry the meaning."
+      }
+    ],
+    "blockingCount": 0
+  },
+  "audioFindings": [],
+  "beats": [
+    {
+      "path": "scenes.open.beats[0]",
+      "sceneId": "open",
+      "spoken": "Number facts within 10.",
+      "line": "Number facts within 10",
+      "pauseAfter": 0.5,
+      "durationSec": 2.45,
+      "charsPerSec": 8.16326530612245,
+      "audioFile": ".video-work/rehearsal/facts-within-10/00.wav"
+    },
+    {
+      "path": "scenes.open.beats[1]",
+      "sceneId": "open",
+      "spoken": "Quick parent briefing.",
+      "line": "Quick parent briefing.",
+      "pauseAfter": 0.58,
+      "durationSec": 2.125,
+      "charsPerSec": 9.411764705882353,
+      "audioFile": ".video-work/rehearsal/facts-within-10/01.wav"
+    },
+    {
+      "path": "scenes.open.beats[2]",
+      "sceneId": "open",
+      "spoken": "Not a film for your child to watch!",
+      "line": "Not a film for your child to watch!",
+      "pauseAfter": 0.58,
+      "durationSec": 2.7,
+      "charsPerSec": 10.37037037037037,
+      "audioFile": ".video-work/rehearsal/facts-within-10/02.wav"
+    },
+    {
+      "path": "scenes.open.beats[3]",
+      "sceneId": "open",
+      "spoken": "You learn the method here.",
+      "line": "You learn the method here.",
+      "pauseAfter": 0.58,
+      "durationSec": 2.125,
+      "charsPerSec": 10.352941176470589,
+      "audioFile": ".video-work/rehearsal/facts-within-10/03.wav"
+    },
+    {
+      "path": "scenes.open.beats[4]",
+      "sceneId": "open",
+      "spoken": "Then you work from the written page, beside your child.",
+      "line": "Then you work from the written page, beside your child.",
+      "pauseAfter": 0.36,
+      "durationSec": 3.5,
+      "charsPerSec": 13.142857142857142,
+      "audioFile": ".video-work/rehearsal/facts-within-10/04.wav"
+    },
+    {
+      "path": "scenes.open.beats[5]",
+      "sceneId": "open",
+      "spoken": "This pack is still a draft.",
+      "line": "This pack is still a draft.",
+      "pauseAfter": 0.58,
+      "durationSec": 2.375,
+      "charsPerSec": 9.263157894736842,
+      "audioFile": ".video-work/rehearsal/facts-within-10/05.wav"
+    },
+    {
+      "path": "scenes.open.beats[6]",
+      "sceneId": "open",
+      "spoken": "If it clashes with how your school teaches…",
+      "line": "If it clashes with how your school teaches…",
+      "pauseAfter": 0.58,
+      "durationSec": 3.075,
+      "charsPerSec": 11.707317073170731,
+      "audioFile": ".video-work/rehearsal/facts-within-10/06.wav"
+    },
+    {
+      "path": "scenes.open.beats[7]",
+      "sceneId": "open",
+      "spoken": "Follow the school.",
+      "line": "Follow the school.",
+      "pauseAfter": 0.7,
+      "durationSec": 1.8,
+      "charsPerSec": 8.88888888888889,
+      "audioFile": ".video-work/rehearsal/facts-within-10/07.wav"
+    },
+    {
+      "path": "scenes.plain.beats[0]",
+      "sceneId": "plain",
+      "spoken": "Here’s the idea.",
+      "line": "Here’s the idea.",
+      "pauseAfter": 0.5,
+      "durationSec": 1.9,
+      "charsPerSec": 7.36842105263158,
+      "audioFile": ".video-work/rehearsal/facts-within-10/08.wav"
+    },
+    {
+      "path": "scenes.plain.beats[1]",
+      "sceneId": "plain",
+      "spoken": "A number fact is a small truth.",
+      "line": "A number fact is a small truth.",
+      "pauseAfter": 0.36,
+      "durationSec": 2.675,
+      "charsPerSec": 9.345794392523365,
+      "audioFile": ".video-work/rehearsal/facts-within-10/09.wav"
+    },
+    {
+      "path": "scenes.plain.beats[2]",
+      "sceneId": "plain",
+      "spoken": "Such as: 6 and 4 make 10.",
+      "line": "Such as: 6 and 4 make 10.",
+      "pauseAfter": 0.5,
+      "durationSec": 2.7,
+      "charsPerSec": 7.037037037037036,
+      "audioFile": ".video-work/rehearsal/facts-within-10/10.wav"
+    },
+    {
+      "path": "scenes.plain.beats[3]",
+      "sceneId": "plain",
+      "spoken": "Or: 7 take away 2 equals 5.",
+      "line": "Or: 7 take away 2 equals 5.",
+      "pauseAfter": 0.5,
+      "durationSec": 3.075,
+      "charsPerSec": 6.829268292682927,
+      "audioFile": ".video-work/rehearsal/facts-within-10/11.wav"
+    },
+    {
+      "path": "scenes.plain.beats[4]",
+      "sceneId": "plain",
+      "spoken": "Fluency does not mean shouting answers against a timer.",
+      "line": "Fluency does not mean shouting answers against a timer.",
+      "pauseAfter": 0.36,
+      "durationSec": 3.825,
+      "charsPerSec": 12.287581699346404,
+      "audioFile": ".video-work/rehearsal/facts-within-10/12.wav"
+    },
+    {
+      "path": "scenes.plain.beats[5]",
+      "sceneId": "plain",
+      "spoken": "It means the child does not have to start at 1 and climb every time.",
+      "line": "It means the child does not have to start at 1 and climb every time.",
+      "pauseAfter": 0.7,
+      "durationSec": 4.625,
+      "charsPerSec": 11.675675675675675,
+      "audioFile": ".video-work/rehearsal/facts-within-10/13.wav"
+    },
+    {
+      "path": "scenes.school.beats[0]",
+      "sceneId": "school",
+      "spoken": "And here’s how school typically teaches it.",
+      "line": "And here’s how school typically teaches it.",
+      "pauseAfter": 0.5,
+      "durationSec": 3.05,
+      "charsPerSec": 12.131147540983607,
+      "audioFile": ".video-work/rehearsal/facts-within-10/14.wav"
+    },
+    {
+      "path": "scenes.school.beats[1]",
+      "sceneId": "school",
+      "spoken": "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.",
+      "line": "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.",
+      "pauseAfter": 0.36,
+      "durationSec": 6.85,
+      "charsPerSec": 13.138686131386862,
+      "audioFile": ".video-work/rehearsal/facts-within-10/15.wav"
+    },
+    {
+      "path": "scenes.school.beats[2]",
+      "sceneId": "school",
+      "spoken": "They will teach families of facts together.",
+      "line": "They will teach families of facts together.",
+      "pauseAfter": 0.36,
+      "durationSec": 3.05,
+      "charsPerSec": 12.131147540983607,
+      "audioFile": ".video-work/rehearsal/facts-within-10/16.wav"
+    },
+    {
+      "path": "scenes.school.beats[3]",
+      "sceneId": "school",
+      "spoken": "6 plus 4.",
+      "line": "6 plus 4.",
+      "pauseAfter": 0.5,
+      "durationSec": 1.875,
+      "charsPerSec": 3.7333333333333334,
+      "audioFile": ".video-work/rehearsal/facts-within-10/17.wav"
+    },
+    {
+      "path": "scenes.school.beats[4]",
+      "sceneId": "school",
+      "spoken": "4 plus 6.",
+      "line": "4 plus 6.",
+      "pauseAfter": 0.5,
+      "durationSec": 1.9,
+      "charsPerSec": 3.68421052631579,
+      "audioFile": ".video-work/rehearsal/facts-within-10/18.wav"
+    },
+    {
+      "path": "scenes.school.beats[5]",
+      "sceneId": "school",
+      "spoken": "10 take away 4.",
+      "line": "10 take away 4.",
+      "pauseAfter": 0.5,
+      "durationSec": 2.15,
+      "charsPerSec": 5.5813953488372094,
+      "audioFile": ".video-work/rehearsal/facts-within-10/19.wav"
+    },
+    {
+      "path": "scenes.school.beats[6]",
+      "sceneId": "school",
+      "spoken": "10 take away 6.",
+      "line": "10 take away 6.",
+      "pauseAfter": 0.5,
+      "durationSec": 2.125,
+      "charsPerSec": 5.647058823529412,
+      "audioFile": ".video-work/rehearsal/facts-within-10/20.wav"
+    },
+    {
+      "path": "scenes.school.beats[7]",
+      "sceneId": "school",
+      "spoken": "School often calls that pair a number bond: two parts that make a whole.",
+      "line": "School often calls that pair a number bond: two parts that make a whole.",
+      "pauseAfter": 0.36,
+      "durationSec": 4.55,
+      "charsPerSec": 12.967032967032967,
+      "audioFile": ".video-work/rehearsal/facts-within-10/21.wav"
+    },
+    {
+      "path": "scenes.school.beats[8]",
+      "sceneId": "school",
+      "spoken": "The name is just a label for that idea.",
+      "line": "The name is just a label for that idea.",
+      "pauseAfter": 0.7,
+      "durationSec": 3.05,
+      "charsPerSec": 10.163934426229508,
+      "audioFile": ".video-work/rehearsal/facts-within-10/22.wav"
+    },
+    {
+      "path": "scenes.mix.beats[0]",
+      "sceneId": "mix",
+      "spoken": "One mix-up to watch for.",
+      "line": "One mix-up to watch for.",
+      "pauseAfter": 0.5,
+      "durationSec": 2.3,
+      "charsPerSec": 8.695652173913045,
+      "audioFile": ".video-work/rehearsal/facts-within-10/23.wav"
+    },
+    {
+      "path": "scenes.mix.beats[1]",
+      "sceneId": "mix",
+      "spoken": "They can do 3 plus 2 with objects but go blank when they see 3 plus 2 written.",
+      "line": "They can do 3 plus 2 with objects but go blank when they see 3 plus 2 written.",
+      "pauseAfter": 0.5,
+      "durationSec": 5.3,
+      "charsPerSec": 11.50943396226415,
+      "audioFile": ".video-work/rehearsal/facts-within-10/24.wav"
+    },
+    {
+      "path": "scenes.mix.beats[2]",
+      "sceneId": "mix",
+      "spoken": "Build it with objects, say it in words, then show the symbols written underneath.",
+      "line": "Build it with objects, say it in words, then show the symbols written underneath.",
+      "pauseAfter": 0.36,
+      "durationSec": 4.95,
+      "charsPerSec": 13.737373737373737,
+      "audioFile": ".video-work/rehearsal/facts-within-10/25.wav"
+    },
+    {
+      "path": "scenes.mix.beats[3]",
+      "sceneId": "mix",
+      "spoken": "Not as the starting point.",
+      "line": "Not as the starting point.",
+      "pauseAfter": 0.7,
+      "durationSec": 2.425,
+      "charsPerSec": 9.07216494845361,
+      "audioFile": ".video-work/rehearsal/facts-within-10/26.wav"
+    },
+    {
+      "path": "scenes.tonight.beats[0]",
+      "sceneId": "tonight",
+      "spoken": "Tonight’s activity.",
+      "line": "Tonight’s activity.",
+      "pauseAfter": 0.58,
+      "durationSec": 2.125,
+      "charsPerSec": 8.470588235294118,
+      "audioFile": ".video-work/rehearsal/facts-within-10/27.wav"
+    },
+    {
+      "path": "scenes.tonight.beats[1]",
+      "sceneId": "tonight",
+      "spoken": "Just the outline.",
+      "line": "Just the outline.",
+      "pauseAfter": 0.36,
+      "durationSec": 1.9,
+      "charsPerSec": 7.894736842105264,
+      "audioFile": ".video-work/rehearsal/facts-within-10/28.wav"
+    },
+    {
+      "path": "scenes.tonight.beats[2]",
+      "sceneId": "tonight",
+      "spoken": "Make 10 in two colours.",
+      "line": "Make 10 in two colours",
+      "pauseAfter": 0.5,
+      "durationSec": 2.325,
+      "charsPerSec": 8.172043010752688,
+      "audioFile": ".video-work/rehearsal/facts-within-10/29.wav"
+    },
+    {
+      "path": "scenes.tonight.beats[3]",
+      "sceneId": "tonight",
+      "spoken": "Fill the frame with 6 of one type.",
+      "line": "Fill the frame with 6 of one type.",
+      "pauseAfter": 0.36,
+      "durationSec": 2.775,
+      "charsPerSec": 9.72972972972973,
+      "audioFile": ".video-work/rehearsal/facts-within-10/30.wav"
+    },
+    {
+      "path": "scenes.tonight.beats[4]",
+      "sceneId": "tonight",
+      "spoken": "Ask how many empty spaces, then fill them with the other type.",
+      "line": "Ask how many empty spaces, then fill them with the other type.",
+      "pauseAfter": 0.36,
+      "durationSec": 4.25,
+      "charsPerSec": 12,
+      "audioFile": ".video-work/rehearsal/facts-within-10/31.wav"
+    },
+    {
+      "path": "scenes.tonight.beats[5]",
+      "sceneId": "tonight",
+      "spoken": "Fifteen minutes or three bonds, whichever comes first.",
+      "line": "Fifteen minutes or three bonds, whichever comes first.",
+      "pauseAfter": 0.7,
+      "durationSec": 3.725,
+      "charsPerSec": 12.61744966442953,
+      "audioFile": ".video-work/rehearsal/facts-within-10/32.wav"
+    },
+    {
+      "path": "scenes.criteria.beats[0]",
+      "sceneId": "criteria",
+      "spoken": "Here’s what you’re aiming for.",
+      "line": "Here’s what you’re aiming for.",
+      "pauseAfter": 0.5,
+      "durationSec": 2.55,
+      "charsPerSec": 10.19607843137255,
+      "audioFile": ".video-work/rehearsal/facts-within-10/33.wav"
+    },
+    {
+      "path": "scenes.criteria.beats[1]",
+      "sceneId": "criteria",
+      "spoken": "You can show 7 on a ten-frame and see, without counting from 1, that 3 empty spaces make 10.",
+      "line": "You can show 7 on a ten-frame and see, without counting from 1, that 3 empty spaces make 10.",
+      "pauseAfter": 0.36,
+      "durationSec": 6.3,
+      "charsPerSec": 11.746031746031747,
+      "audioFile": ".video-work/rehearsal/facts-within-10/34.wav"
+    },
+    {
+      "path": "scenes.criteria.beats[2]",
+      "sceneId": "criteria",
+      "spoken": "One check from the page.",
+      "line": "One check from the page.",
+      "pauseAfter": 0.58,
+      "durationSec": 2.2,
+      "charsPerSec": 9.09090909090909,
+      "audioFile": ".video-work/rehearsal/facts-within-10/35.wav"
+    },
+    {
+      "path": "scenes.criteria.beats[3]",
+      "sceneId": "criteria",
+      "spoken": "Show 8 on the frame.",
+      "line": "Show 8 on the frame.",
+      "pauseAfter": 0.5,
+      "durationSec": 2.075,
+      "charsPerSec": 7.710843373493975,
+      "audioFile": ".video-work/rehearsal/facts-within-10/36.wav"
+    },
+    {
+      "path": "scenes.criteria.beats[4]",
+      "sceneId": "criteria",
+      "spoken": "How many more to make 10?",
+      "line": "How many more to make 10?",
+      "pauseAfter": 0.5,
+      "durationSec": 2.275,
+      "charsPerSec": 8.791208791208792,
+      "audioFile": ".video-work/rehearsal/facts-within-10/37.wav"
+    },
+    {
+      "path": "scenes.criteria.beats[5]",
+      "sceneId": "criteria",
+      "spoken": "You want to see: They see 2 empty spaces, or count the empties once.",
+      "line": "You want to see: They see 2 empty spaces, or count the empties once.",
+      "pauseAfter": 0.7,
+      "durationSec": 4.65,
+      "charsPerSec": 11.82795698924731,
+      "audioFile": ".video-work/rehearsal/facts-within-10/38.wav"
+    },
+    {
+      "path": "scenes.page.beats[0]",
+      "sceneId": "page",
+      "spoken": "When you’re ready to sit down together…",
+      "line": "When you’re ready to sit down together…",
+      "pauseAfter": 0.58,
+      "durationSec": 2.65,
+      "charsPerSec": 12.452830188679245,
+      "audioFile": ".video-work/rehearsal/facts-within-10/39.wav"
+    },
+    {
+      "path": "scenes.page.beats[1]",
+      "sceneId": "page",
+      "spoken": "Open the written page.",
+      "line": "Open the written page.",
+      "pauseAfter": 0.58,
+      "durationSec": 2.175,
+      "charsPerSec": 8.735632183908047,
+      "audioFile": ".video-work/rehearsal/facts-within-10/40.wav"
+    },
+    {
+      "path": "scenes.page.beats[2]",
+      "sceneId": "page",
+      "spoken": "Keep it beside you for the steps, the words to say, and the live checks.",
+      "line": "Keep it beside you for the steps, the words to say, and the live checks.",
+      "pauseAfter": 0.58,
+      "durationSec": 4.325,
+      "charsPerSec": 13.410404624277456,
+      "audioFile": ".video-work/rehearsal/facts-within-10/41.wav"
+    },
+    {
+      "path": "scenes.page.beats[3]",
+      "sceneId": "page",
+      "spoken": "Don’t run the session from this film.",
+      "line": "Don’t run the session from this film.",
+      "pauseAfter": 0.58,
+      "durationSec": 2.675,
+      "charsPerSec": 11.588785046728972,
+      "audioFile": ".video-work/rehearsal/facts-within-10/42.wav"
+    },
+    {
+      "path": "scenes.page.beats[4]",
+      "sceneId": "page",
+      "spoken": "Found this on YouTube?",
+      "line": "Found this on YouTube?",
+      "pauseAfter": 0.58,
+      "durationSec": 2.2,
+      "charsPerSec": 8.636363636363635,
+      "audioFile": ".video-work/rehearsal/facts-within-10/43.wav"
+    },
+    {
+      "path": "scenes.page.beats[5]",
+      "sceneId": "page",
+      "spoken": "Use the link in the video description to open that page.",
+      "line": "Use the link in the video description to open that page.",
+      "pauseAfter": 0.7,
+      "durationSec": 3.8,
+      "charsPerSec": 12.105263157894738,
+      "audioFile": ".video-work/rehearsal/facts-within-10/44.wav"
+    },
+    {
+      "path": "scenes.close.beats[0]",
+      "sceneId": "close",
+      "spoken": "If you teach Year 1…",
+      "line": "If you teach Year 1…",
+      "pauseAfter": 0.58,
+      "durationSec": 2.3,
+      "charsPerSec": 6.9565217391304355,
+      "audioFile": ".video-work/rehearsal/facts-within-10/45.wav"
+    },
+    {
+      "path": "scenes.close.beats[1]",
+      "sceneId": "close",
+      "spoken": "Tell us whether the method matches your school.",
+      "line": "Tell us whether the method matches your school.",
+      "pauseAfter": 0.58,
+      "durationSec": 3,
+      "charsPerSec": 13.333333333333334,
+      "audioFile": ".video-work/rehearsal/facts-within-10/46.wav"
+    },
+    {
+      "path": "scenes.close.beats[2]",
+      "sceneId": "close",
+      "spoken": "The written pack is the source.",
+      "line": "The written pack is the source.",
+      "pauseAfter": 0.22,
+      "durationSec": 2.425,
+      "charsPerSec": 10.721649484536083,
+      "audioFile": ".video-work/rehearsal/facts-within-10/47.wav"
+    }
+  ]
+}

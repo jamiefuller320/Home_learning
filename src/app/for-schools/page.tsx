@@ -24,6 +24,14 @@ export default function ForSchoolsPage() {
         caption="Proof of concept: a concise AI parent briefing for Number facts within 10 — method, activity outline, and evaluation criteria — then a handoff to the written pack. Example sums and asides are separate spoken beats so pacing stays natural. The pictures are our guide, ten-frame, and part–whole slides — not generated classroom footage."
       />
 
+      <p className="text-ink-soft">
+        Review the pre-production script (colour-coded by how each line is spoken) and send beat
+        comments into the language inbox:{" "}
+        <Link href="/for-schools/script" className="font-semibold text-teal hover:underline">
+          Open script viewer →
+        </Link>
+      </p>
+
       <section>
         <h2 className="serif text-3xl text-ink">What we are asking</h2>
         <ol className="mt-3 list-decimal space-y-3 pl-6">
