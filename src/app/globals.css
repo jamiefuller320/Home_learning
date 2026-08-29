@@ -340,24 +340,23 @@ a {
 
 .year1-top-binder[data-tone="harbour"] {
   --binder-fill: #1f5f59;
-  --binder-sheet-inner: #f4efe6;
 }
 
-.year1-top-binder[data-tone="harbour"] .binder-sheet {
+.year1-top-binder[data-tone="harbour"] > .binder-sheet {
   background: linear-gradient(180deg, #1f5f59 0%, #1f5f59 2.75rem, var(--paper) 2.75rem);
   color: var(--ink);
 }
 
-.year1-top-binder[data-tone="harbour"] .binder-sheet-head {
+.year1-top-binder[data-tone="harbour"] > .binder-sheet > .binder-sheet-head {
   border-bottom-color: rgba(255, 255, 255, 0.18);
 }
 
-.year1-top-binder[data-tone="harbour"] .binder-sheet-head h3,
-.year1-top-binder[data-tone="harbour"] .binder-sheet-head p {
+.year1-top-binder[data-tone="harbour"] > .binder-sheet > .binder-sheet-head h3,
+.year1-top-binder[data-tone="harbour"] > .binder-sheet > .binder-sheet-head p {
   color: #f4efe6;
 }
 
-.year1-top-binder[data-tone="harbour"] .binder-sheet-body {
+.year1-top-binder[data-tone="harbour"] > .binder-sheet > .binder-sheet-body {
   margin-top: 0.35rem;
   padding: 1rem 0.15rem 0.25rem;
   border-radius: 0.75rem;

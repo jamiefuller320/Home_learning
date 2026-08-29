@@ -27,7 +27,8 @@ export function buildGlossaryMatchPatterns(terms: GlossaryTerm[] = glossaryTerms
   for (const term of terms) {
     const phrases = [term.term, ...(term.aliases ?? [])];
     for (const phrase of phrases) {
-      patterns.push({ termId: term.id, pattern: escapeRegex(phrase) });
+      // Word boundaries so aliases like “tall” do not split “stall”.
+      patterns.push({ termId: term.id, pattern: `\\b${escapeRegex(phrase)}\\b` });
     }
   }
 
