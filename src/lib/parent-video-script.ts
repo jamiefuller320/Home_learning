@@ -55,8 +55,8 @@ export const SCRIPT_LINKS = {
     "You learn the method here.",
     "Then you work from the written page, beside your child.",
   ],
+  /** School-takes-precedence aside — draft status stays a page badge, not spoken. */
   draft: [
-    "This pack is still a draft.",
     "If anything clashes with how your school teaches…",
     "Follow the school.",
   ],
@@ -81,7 +81,7 @@ export const SCRIPT_LINKS = {
   close: [
     "If you teach Year 1…",
     "Tell us whether the method matches your school.",
-    "The written pack is the source.",
+    "Thanks for watching — enjoy the session together.",
   ],
 } as const;
 
@@ -279,7 +279,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
   const scenes: VideoScene[] = [
     {
       id: "open",
-      kicker: "Home Learning · Year 1 maths · draft",
+      kicker: "Home Learning · Year 1 maths",
       heading: topic.title,
       beats: withFinalPause(
         [

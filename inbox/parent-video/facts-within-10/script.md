@@ -1,8 +1,8 @@
 # Parent video script · Number facts within 10
 
 Topic id: `facts-within-10`  
-Script hash: `eb949f0ad404d82e`  
-Beats: 51  
+Script hash: `021cd51cc6f624c0`  
+Beats: 50  
 
 Compiled from the written pack. **Edit the topic file to change wording** — this dump is for review, not a second authoring path.
 
@@ -51,16 +51,15 @@ _No findings._
 
 ## open · Number facts within 10
 
-_Home Learning · Year 1 maths · draft_
+_Home Learning · Year 1 maths_
 
 1. `[title]` (0.50s gap) Number facts within 10.
 2. `[section]` (0.58s gap) This is a quick parent briefing.
 3. `[key]` (0.58s gap) Not a film for your child to watch!
 4. `[teach]` (0.58s gap) You learn the method here.
 5. `[teach]` (0.36s gap) Then you work from the written page, beside your child.
-6. `[aside]` (0.58s gap) This pack is still a draft…
-7. `[aside]` (0.58s gap) If anything clashes with how your school teaches…
-8. `[aside]` (0.70s gap) Follow the school…
+6. `[aside]` (0.58s gap) If anything clashes with how your school teaches…
+7. `[aside]` (0.70s gap) Follow the school…
 
 ## plain · In plain English
 
@@ -138,4 +137,4 @@ _For schools_
 
 1. `[aside]` (0.58s gap) If you teach Year 1…
 2. `[aside]` (0.58s gap) Tell us whether the method matches your school…
-3. `[aside]` (0.22s gap) The written pack is the source…
+3. `[aside]` (0.22s gap) Thanks for watching — enjoy the session together…

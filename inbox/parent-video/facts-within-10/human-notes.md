@@ -24,4 +24,10 @@ Applied open `parent-video` notes from the script viewer. Method and intent firs
 | You want to see / They see | Separate cue beat; looksLike states empty spaces clearly |
 | Film handoff | Longer return-to-pack line |
 
+## 2026-08-29 trim draft + close
+
+- Dropped spoken “This pack is still a draft” (and “draft” from the open kicker) — page `DraftBadge` is enough.
+- Kept “If anything clashes… Follow the school.”
+- Replaced closing “The written pack is the source” with “Thanks for watching — enjoy the session together.” (handoff already covers the pack).
+
 Rehearsal report is stale until `npm run rehearse:parent-video -- facts-within-10` is re-run (script hash changed).
