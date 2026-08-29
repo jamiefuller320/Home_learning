@@ -1,7 +1,7 @@
 /**
  * Render one parent-briefing preview from a topic file.
  *
- * Voice: Fal Kokoro British English (needs FAL_KEY).
+ * Voice: Fal Kokoro British English (needs FAL_KEY) — see PARENT_VIDEO_TTS.
  * Pictures: our slides and diagrams only — no generated classroom footage.
  *
  *   npx tsx scripts/render-parent-video.ts facts-within-10
@@ -18,6 +18,7 @@ import {
   type VideoScene,
 } from "../src/lib/parent-video-script";
 import { escapeHtml, guideSvg, SLIDE_CSS, visualHtml } from "../src/lib/parent-video-visuals";
+import { PARENT_VIDEO_TTS } from "../src/lib/parent-video-voice";
 
 const ROOT = path.resolve(__dirname, "..");
 const WORK = path.join(ROOT, ".video-work");
@@ -61,13 +62,17 @@ async function speak(text: string, dest: string): Promise<void> {
   const key = process.env.FAL_KEY;
   if (!key) throw new Error("FAL_KEY is missing. Add it as a cloud or shell secret.");
 
-  const response = await fetch("https://fal.run/fal-ai/kokoro/british-english", {
+  const response = await fetch(PARENT_VIDEO_TTS.endpoint, {
     method: "POST",
     headers: {
       Authorization: `Key ${key}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ prompt: text, voice: "bf_emma", speed: 0.9 }),
+    body: JSON.stringify({
+      prompt: text,
+      voice: PARENT_VIDEO_TTS.voice,
+      speed: PARENT_VIDEO_TTS.speed,
+    }),
   });
   if (!response.ok) {
     throw new Error(`TTS failed (${response.status}): ${(await response.text()).slice(0, 200)}`);
