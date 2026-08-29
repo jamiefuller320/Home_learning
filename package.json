@@ -14,7 +14,7 @@
     "judge:lessons": "tsx scripts/judge-lessons.ts",
     "script:parent-video": "tsx scripts/preview-parent-video-script.ts",
     "rehearse:parent-video": "tsx scripts/rehearse-parent-video.ts",
-    "test": "tsx scripts/validate-content.ts && tsx scripts/test-language-log.ts && tsx scripts/test-language-notes-api.ts && tsx scripts/test-language-note-routing.ts && tsx scripts/test-topic-feedback-summary.ts && tsx scripts/test-parent-video-script.ts && tsx scripts/test-parent-video-pipeline.ts && tsx scripts/test-parent-video-prosody.ts && tsx scripts/test-parent-video-script-viewer.ts && tsx scripts/test-learning-revisions.ts && tsx scripts/test-held-out-judge.ts",
+    "test": "tsx scripts/validate-content.ts && tsx scripts/test-language-log.ts && tsx scripts/test-language-notes-api.ts && tsx scripts/test-language-note-routing.ts && tsx scripts/test-topic-feedback-summary.ts && tsx scripts/test-parent-video-script.ts && tsx scripts/test-parent-video-pipeline.ts && tsx scripts/test-parent-video-prosody.ts && tsx scripts/test-parent-video-script-viewer.ts && tsx scripts/test-parent-video-visuals.ts && tsx scripts/test-learning-revisions.ts && tsx scripts/test-held-out-judge.ts",
     "language-notes": "tsx scripts/language-notes.ts",
     "process-language-notes": "tsx scripts/process-language-notes.ts",
     "apply-learning-revisions": "tsx scripts/apply-learning-revisions.ts",
