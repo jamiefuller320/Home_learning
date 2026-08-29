@@ -20,8 +20,8 @@ export default function ForSchoolsPage() {
       </p>
 
       <ParentVideo
-        src="/videos/facts-within-10-parent-briefing-v3.mp4"
-        caption="Proof of concept: a concise AI parent briefing for Number facts within 10 — method, activity outline, and evaluation criteria — then a handoff to the written pack. Spoken with a livelier British Kokoro voice. The pictures are our guide, ten-frame, and part–whole slides — not generated classroom footage."
+        src="/videos/facts-within-10-parent-briefing-v4.mp4"
+        caption="Proof of concept: a concise AI parent briefing for Number facts within 10 — method, activity outline, and evaluation criteria — then a handoff to the written pack. Example sums and asides are separate spoken beats so pacing stays natural. The pictures are our guide, ten-frame, and part–whole slides — not generated classroom footage."
       />
 
       <section>
@@ -50,11 +50,13 @@ export default function ForSchoolsPage() {
         <p className="mt-3">
           The voice compiles a short lesson from the pack: the idea, how school teaches it, one
           mix-up, then tonight’s outline and what good looks like. It does not read every prompt
-          and step — those stay on the written page for use beside the child. We use a livelier
-          British Kokoro voice at near-natural pace; punctuation and short beats do the emphasis —
-          this model has no markup for tone. The adult with the mug is the same drawing in every
-          film. The ten-frame and part–whole picture change when the script reaches that fact. We
-          will not generate footage of children or invent a method picture that is not on the page.
+          and step — those stay on the written page for use beside the child. Example sums and
+          asides (including the YouTube link reminder) are separate spoken beats so the delivery
+          can change tone. We use a livelier British Kokoro voice at near-natural pace;
+          punctuation and short beats do the emphasis — this model has no markup for tone. The
+          adult with the mug is the same drawing in every film. The ten-frame and part–whole
+          picture change when the script reaches that fact. We will not generate footage of
+          children or invent a method picture that is not on the page.
         </p>
       </section>
 

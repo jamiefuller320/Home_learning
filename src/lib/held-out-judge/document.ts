@@ -2,7 +2,7 @@ import { sortTopicsByPrerequisites } from "@/content/england/ks1/year-1/maths/cu
 import type { Topic } from "@/content/schema";
 import { sayThisListenFor, sayThisPrompt } from "@/lib/say-this";
 import {
-  SCRIPT_LINKS,
+  SCRIPT_LINK_LINES,
   splitSentences,
   type ParentVideoScript,
   type VideoBeat,
@@ -10,7 +10,7 @@ import {
 import { CLASSROOM_TERMS } from "./rules";
 import type { JudgeDocument, JudgeSpan, JudgeSpanRole } from "./types";
 
-const SCRIPT_LINK_VALUES = new Set(Object.values(SCRIPT_LINKS).map((line) => normalize(line)));
+const SCRIPT_LINK_VALUES = new Set(SCRIPT_LINK_LINES.map((line) => normalize(line)));
 
 export function normalize(text: string): string {
   return text.replace(/\s+/g, " ").trim().toLowerCase();

@@ -69,7 +69,7 @@ If you cannot fit the idea into those budgets, split the topic.
 
 Do not invent method in the film. Compile spoken **beats** from existing topic fields (`src/lib/parent-video-script.ts`). Shape the film as: short open → concise teaching (plain English + school method + one mix-up) → outline of tonight’s activity and evaluation criteria → handoff to the written page (and a YouTube-description link reminder). Leave `sayThis`, `avoidThis`, and full step lists on the page so the parent can pause there beside the child.
 
-Write beats for the ear (punctuation, short clips, silence between thoughts). Do not dump a whole page paragraph into one TTS call. Recheck the compiled script with the same held-out judge as the page (`npm run judge:lessons`).
+Write beats for the ear (punctuation, short clips, silence between thoughts). Split example sums into their own clips. Keep asides and website pointers as separate beats so the voice can change tone. Do not dump a whole page paragraph into one TTS call. Recheck the compiled script with the same held-out judge as the page (`npm run judge:lessons`).
 
 Lesson pictures are ours: a recurring adult guide, a ten-frame, and a part–whole diagram. They must show a fact already in the pack. Do not generate classroom footage, children, or a cartoon teacher.
 
