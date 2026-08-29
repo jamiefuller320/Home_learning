@@ -162,11 +162,14 @@ export const POINTING_PATTERNS: PointingPattern[] = [
   },
 ];
 
-const MIDDLE_ANCHORS = /\b(number line|number track|line|row|0\b|end|between)\b/i;
+const MIDDLE_ANCHORS =
+  /\b(number line|number track|hundred square|track|line|row|0\b|end|between|equals sign|of the objects|spoon)\b/i;
 
 export function pointingHasAnchor(text: string, coverId: string): boolean {
   if (coverId === "ambiguity-the-middle") return MIDDLE_ANCHORS.test(text);
-  if (coverId === "ambiguity-left-right") return /\b(number line|number track|step|line)\b/i.test(text);
+  if (coverId === "ambiguity-left-right") {
+    return /\b(number line|number track|step|line|plate|object|equals)\b/i.test(text);
+  }
   if (coverId === "ambiguity-other-box") return /\b(two|both|first|one type|one colour|one color)\b/i.test(text);
   return false;
 }

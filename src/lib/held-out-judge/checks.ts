@@ -90,11 +90,14 @@ export function checkAccuracy(document: JudgeDocument): JudgeFinding[] {
 
 export function checkAmbiguity(document: JudgeDocument): JudgeFinding[] {
   const findings: JudgeFinding[] = [];
+  const spans = teachingSpans(document);
 
-  for (const span of teachingSpans(document)) {
+  for (const [index, span] of spans.entries()) {
+    const previous = [...spans.slice(0, index)].reverse().find((item) => item.fieldPath === span.fieldPath);
+    const inOrder = previous ? `${previous.text} ${span.text}` : span.text;
     for (const rule of POINTING_PATTERNS) {
       if (!rule.pattern.test(span.text)) continue;
-      if (pointingHasAnchor(span.text, rule.coverId)) continue;
+      if (pointingHasAnchor(inOrder, rule.coverId)) continue;
       findings.push(
         finding({
           check: "ambiguity",
@@ -116,7 +119,7 @@ function hasGloss(text: string, termId: string): boolean {
   const rule = CLASSROOM_TERMS.find((item) => item.id === termId);
   if (!rule) return false;
   const lower = text.toLowerCase();
-  if (/\b(means|is a|is an)\b/i.test(text) || text.includes("(")) return true;
+  if (/\b(means|is a|is an|is how)\b/i.test(text) || text.includes("(")) return true;
   return rule.glossHints.some((hint) => lower.includes(hint.toLowerCase()));
 }
 
@@ -126,7 +129,9 @@ export function checkAssumedKnowledge(document: JudgeDocument): JudgeFinding[] {
   const introduced = new Set<string>();
 
   for (const span of document.spans) {
-    if (span.role === "script-link" || span.role === "kit" || span.role === "caution") continue;
+    if (span.role === "script-link" || span.role === "script-visual" || span.role === "kit" || span.role === "caution") {
+      continue;
+    }
 
     const mentions = findTermMentions(span.text);
     for (const mention of mentions) {

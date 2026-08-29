@@ -177,6 +177,7 @@ export function projectTopic(topic: Topic, topics: Topic[]): JudgeDocument {
 
 function beatRole(beat: VideoBeat, sceneId: string): JudgeSpanRole {
   if (sceneId === "open" || sceneId === "close") return "script-link";
+  if (sceneId === "avoid") return "caution";
   if (SCRIPT_LINK_VALUES.has(normalize(beat.line)) || SCRIPT_LINK_VALUES.has(normalize(beat.spoken))) {
     return "script-link";
   }
