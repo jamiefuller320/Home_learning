@@ -23,6 +23,7 @@ import {
 } from "../src/lib/parent-video-script";
 import { assertReadyToRender } from "../src/lib/parent-video-pipeline";
 import { escapeHtml, guideSvg, SLIDE_CSS, visualHtml } from "../src/lib/parent-video-visuals";
+import { ttsSpeedForRole } from "../src/lib/parent-video-prosody";
 import { PARENT_VIDEO_TTS } from "../src/lib/parent-video-voice";
 
 const ROOT = path.resolve(__dirname, "..");
@@ -66,7 +67,7 @@ function slideHtml(scene: VideoScene, beat: VideoBeat): string {
 </html>`;
 }
 
-async function speak(text: string, dest: string): Promise<void> {
+async function speak(text: string, dest: string, speed = PARENT_VIDEO_TTS.speed): Promise<void> {
   const key = process.env.FAL_KEY;
   if (!key) throw new Error("FAL_KEY is missing. Add it as a cloud or shell secret.");
 
@@ -79,7 +80,7 @@ async function speak(text: string, dest: string): Promise<void> {
     body: JSON.stringify({
       prompt: text,
       voice: PARENT_VIDEO_TTS.voice,
-      speed: PARENT_VIDEO_TTS.speed,
+      speed,
     }),
   });
   if (!response.ok) {
@@ -194,7 +195,7 @@ async function main() {
       process.stdout.write(`Slide ${scene.id} (${beatIndex + 1}/${allBeats(script).length})…\n`);
       screenshot(htmlPath, pngPath);
       process.stdout.write(`Speaking: ${beat.spoken.slice(0, 72)}…\n`);
-      await speak(beat.spoken, rawPath);
+      await speak(beat.spoken, rawPath, ttsSpeedForRole(PARENT_VIDEO_TTS.speed, beat.prosody));
       toWav(rawPath, spokenPath);
 
       if (beat.pauseAfter > 0.05) {

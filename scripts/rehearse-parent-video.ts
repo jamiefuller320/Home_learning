@@ -27,6 +27,7 @@ import {
   type RehearsalBeat,
 } from "../src/lib/parent-video-pipeline";
 import { PARENT_VIDEO_TTS } from "../src/lib/parent-video-voice";
+import { ttsSpeedForRole, type ProsodyRole } from "../src/lib/parent-video-prosody";
 
 const ROOT = path.resolve(__dirname, "..");
 const topicId = process.argv[2] || "facts-within-10";
@@ -46,7 +47,7 @@ function run(command: string, args: string[], timeoutMs = 60_000) {
   return result;
 }
 
-async function speak(text: string, dest: string): Promise<void> {
+async function speak(text: string, dest: string, speed = PARENT_VIDEO_TTS.speed): Promise<void> {
   const key = process.env.FAL_KEY;
   if (!key) throw new Error("FAL_KEY is missing. Add it as a cloud or shell secret.");
 
@@ -59,7 +60,7 @@ async function speak(text: string, dest: string): Promise<void> {
     body: JSON.stringify({
       prompt: text,
       voice: PARENT_VIDEO_TTS.voice,
-      speed: PARENT_VIDEO_TTS.speed,
+      speed,
     }),
   });
   if (!response.ok) {
@@ -114,8 +115,11 @@ async function main() {
     const stem = String(index).padStart(2, "0");
     const rawPath = path.join(audioRoot, `${stem}.raw`);
     const wavPath = path.join(audioRoot, `${stem}.wav`);
-    process.stdout.write(`Rehearse ${index + 1}/${beats.length}: ${beat.spoken.slice(0, 64)}…\n`);
-    await speak(beat.spoken, rawPath);
+    const speed = ttsSpeedForRole(PARENT_VIDEO_TTS.speed, beat.prosody as ProsodyRole | undefined);
+    process.stdout.write(
+      `Rehearse ${index + 1}/${beats.length} [${beat.prosody ?? "teach"} @ ${speed}]: ${beat.spoken.slice(0, 48)}…\n`,
+    );
+    await speak(beat.spoken, rawPath, speed);
     toWav(rawPath, wavPath);
     const durationSec = audioSeconds(wavPath);
     const charsPerSec = beat.spoken.replace(/\s+/g, "").length / durationSec;

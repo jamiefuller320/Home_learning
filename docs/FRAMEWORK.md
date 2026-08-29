@@ -120,6 +120,8 @@ pack edit → script:parent-video (readable dump + spoken-delivery checks)
 
 The dump is for review, not a second lesson file. Fix awkward lines in the topic pack (or add a learning), then re-preview. Spoken-delivery checks catch paper-OK / aloud-bad phrases (for example product-meta asides like “worksheet brand”). Rehearsal writes `inbox/parent-video/<id>/rehearsal-report.json`; full render refuses a missing, stale, or failing report unless `--force`.
 
+Kokoro has **no SSML**, so word-level stress is not available. Beats carry a **prosody role** (`title`, `section`, `key`, `teach`, `example`, `aside`, `handoff`) shown in the script dump; punctuation and a slight speed change approximate inflection. True SSML stressing stays deferred (ElevenLabs / Azure).
+
 ### Technical choices for the first slice
 
 | Choice | Why |

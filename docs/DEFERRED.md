@@ -37,7 +37,7 @@ Status key: `parked` (good, later) · `research` (needs a decision) · `rejected
 | DEF-030 | Child-facing mode / games | parked | Changes safeguarding, data, and the product thesis | Parent-first is the wedge |
 | DEF-031 | Accounts, class codes, teacher dashboard | parked | Coordination is valuable; identity is expensive | Prove packs anonymously first |
 | DEF-032 | Printable PDF packs | parked | First slice is screen + household objects | Add a print stylesheet later; PDF generation after that |
-| DEF-033 | Short parent videos | research | Preview → rehearse → gated render now exists | Script from pack as concise lesson + task outline + page handoff. Pre-prod: `script:parent-video` dump + spoken-delivery checks; `rehearse:parent-video` TTS-only + pace eval; `render:parent-video` gated. Voice: Kokoro British `bf_isabella` near 1.05 (no SSML). Later: Remotion/Rive/SSML. Do not generate classroom footage. |
+| DEF-033 | Short parent videos | research | Preview → rehearse → gated render; prosody roles approximate inflection | Script from pack. Pre-prod dump + delivery checks + TTS rehearsal. Prosody roles on beats (punctuation + speed; Kokoro has no SSML). Later: Remotion/Rive/true SSML voice. Do not generate classroom footage. |
 | DEF-034 | SMS / WhatsApp “this week’s idea” | parked | EEF texting trials showed small gains | Needs school partnership and phone numbers |
 | DEF-035 | Progress that leaves the device | parked | We only store “I have got this” in localStorage | Avoid child-level tracking |
 | DEF-036 | Translations / EAL parent briefings | parked | Access matter; do not machine-translate method language without review | |

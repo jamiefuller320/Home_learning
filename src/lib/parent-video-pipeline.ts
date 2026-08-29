@@ -33,6 +33,7 @@ export type RehearsalBeat = {
   spoken: string;
   line: string;
   pauseAfter: number;
+  prosody?: string;
   durationSec?: number;
   charsPerSec?: number;
   audioFile?: string;
@@ -95,6 +96,7 @@ export function flattenBeats(script: ParentVideoScript): RehearsalBeat[] {
         spoken: beat.spoken,
         line: beat.line,
         pauseAfter: beat.pauseAfter,
+        prosody: beat.prosody,
       });
     });
   }
@@ -130,9 +132,10 @@ export function renderScriptMarkdown(
     "## How to use this in the learning loop",
     "",
     "1. Read the beats below (and listen after `npm run rehearse:parent-video`).",
-    "2. Add notes in `human-notes.md` in this folder.",
-    "3. Fix awkward lines in the topic pack (or add a learning), then re-run preview.",
-    "4. Rehearse audio before full production.",
+    "2. Prosody tags (`title`, `section`, `key`, `teach`, `example`, `aside`, `handoff`) are delivery intent — Kokoro approximates them with punctuation and speed (no SSML).",
+    "3. Add notes in `human-notes.md` in this folder.",
+    "4. Fix awkward lines in the topic pack (or add a learning), then re-run preview.",
+    "5. Rehearse audio before full production.",
     "",
   ];
 
@@ -152,7 +155,8 @@ export function renderScriptMarkdown(
   for (const scene of script.scenes) {
     lines.push(`## ${scene.id} · ${scene.heading}`, "", `_${scene.kicker}_`, "");
     scene.beats.forEach((beat: VideoBeat, index: number) => {
-      lines.push(`${index + 1}. (${beat.pauseAfter.toFixed(2)}s gap) ${beat.spoken}`);
+      const role = beat.prosody ?? "teach";
+      lines.push(`${index + 1}. \`[${role}]\` (${beat.pauseAfter.toFixed(2)}s gap) ${beat.spoken}`);
     });
     lines.push("");
   }
