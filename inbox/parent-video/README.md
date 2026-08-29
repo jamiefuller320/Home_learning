@@ -17,3 +17,5 @@ npm run render:parent-video -- facts-within-10    # full slides + film (gated)
 | `rehearsal.md` / `rehearsal-report.json` | Auto audio + delivery results |
 
 Do not treat these dumps as a second lesson authoring path. Fix wording in the topic pack, then re-preview.
+
+UI: open `/for-schools/script` for a colour-coded viewer. Beat comments go to Supabase `language_notes` (`section = parent-video`) and appear in the maintainer inbox.

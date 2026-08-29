@@ -16,6 +16,17 @@ export const PROSODY_ROLES = [
 
 export type ProsodyRole = (typeof PROSODY_ROLES)[number];
 
+/** Short labels for the script viewer legend. */
+export const PROSODY_LABEL: Record<ProsodyRole, string> = {
+  title: "Title",
+  section: "Section cue",
+  key: "Key line",
+  teach: "Teaching",
+  example: "Example sum",
+  aside: "Aside",
+  handoff: "Page handoff",
+};
+
 /** Speed multipliers relative to PARENT_VIDEO_TTS.speed. */
 export const PROSODY_SPEED: Record<ProsodyRole, number> = {
   title: 0.94,

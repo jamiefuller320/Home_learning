@@ -122,6 +122,8 @@ The dump is for review, not a second lesson file. Fix awkward lines in the topic
 
 Kokoro has **no SSML**, so word-level stress is not available. Beats carry a **prosody role** (`title`, `section`, `key`, `teach`, `example`, `aside`, `handoff`) shown in the script dump; punctuation and a slight speed change approximate inflection. True SSML stressing stays deferred (ElevenLabs / Azure).
 
+UI: `/for-schools/script` shows the compiled script with colour-coded prosody. A **Comment** button on each beat saves a `language_notes` row with `section = parent-video` (same Supabase inbox / amendment loop as “I don’t understand”).
+
 ### Technical choices for the first slice
 
 | Choice | Why |

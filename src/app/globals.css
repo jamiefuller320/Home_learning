@@ -65,6 +65,56 @@ a {
   /* intentionally empty — override here when the look changes */
 }
 
+/* —— Parent video script viewer (prosody colouring) —— */
+
+.prosody-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.prosody-chip {
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--prosody, var(--rule)) 35%, var(--rule));
+  background: color-mix(in srgb, var(--prosody, var(--teal)) 12%, white);
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.35rem 0.75rem;
+}
+
+.prosody-beat {
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--prosody, var(--rule)) 28%, var(--rule));
+  border-left-width: 5px;
+  border-left-color: var(--prosody, var(--teal));
+  background: color-mix(in srgb, var(--prosody, var(--teal)) 7%, white);
+  padding: 1rem 1.1rem;
+}
+
+.prosody-title {
+  --prosody: #164843;
+}
+.prosody-section {
+  --prosody: #1f5f59;
+}
+.prosody-key {
+  --prosody: #9a4336;
+}
+.prosody-teach {
+  --prosody: #3d4f4b;
+}
+.prosody-example {
+  --prosody: #2f6a4a;
+}
+.prosody-aside {
+  --prosody: #8a5a20;
+}
+.prosody-handoff {
+  --prosody: #1f5f59;
+}
+
 /* —— Ring-binder tabs (School Compass pattern, Home Learning tokens) —— */
 
 .binder {

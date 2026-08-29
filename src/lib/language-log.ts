@@ -1,7 +1,7 @@
 export const LANGUAGE_LOG_KEY = "home-learning-language-log-v1";
 export const GITHUB_REPO = "jamiefuller320/Home_learning";
 
-export const LANGUAGE_SECTIONS = ["parent", "home"] as const;
+export const LANGUAGE_SECTIONS = ["parent", "home", "parent-video"] as const;
 export type LanguageSection = (typeof LANGUAGE_SECTIONS)[number];
 export const LANGUAGE_NOTE_STATUSES = ["open", "done", "declined"] as const;
 export type LanguageNoteStatus = (typeof LANGUAGE_NOTE_STATUSES)[number];
@@ -23,6 +23,7 @@ export type LanguageNote = {
 export const SECTION_LABEL: Record<LanguageSection, string> = {
   parent: "Stage 1 · Parent briefing",
   home: "Stage 2 · Home pack",
+  "parent-video": "Parent video script",
 };
 
 export function createNoteId(): string {
