@@ -1,8 +1,8 @@
 {
   "topicId": "facts-within-10",
   "title": "Number facts within 10",
-  "scriptHash": "eb949f0ad404d82e",
-  "createdAt": "2026-08-29T17:29:06.953Z",
+  "scriptHash": "021cd51cc6f624c0",
+  "createdAt": "2026-08-29T21:48:15.620Z",
   "status": "pass",
   "delivery": {
     "topicId": "facts-within-10",
@@ -69,27 +69,16 @@
     {
       "path": "scenes.open.beats[5]",
       "sceneId": "open",
-      "spoken": "This pack is still a draft…",
-      "line": "This pack is still a draft.",
-      "pauseAfter": 0.58,
-      "prosody": "aside",
-      "durationSec": 2.15,
-      "charsPerSec": 10.232558139534884,
-      "audioFile": ".video-work/rehearsal/facts-within-10/05.wav"
-    },
-    {
-      "path": "scenes.open.beats[6]",
-      "sceneId": "open",
       "spoken": "If anything clashes with how your school teaches…",
       "line": "If anything clashes with how your school teaches…",
       "pauseAfter": 0.58,
       "prosody": "aside",
       "durationSec": 3.2,
       "charsPerSec": 13.125,
-      "audioFile": ".video-work/rehearsal/facts-within-10/06.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/05.wav"
     },
     {
-      "path": "scenes.open.beats[7]",
+      "path": "scenes.open.beats[6]",
       "sceneId": "open",
       "spoken": "Follow the school…",
       "line": "Follow the school.",
@@ -97,7 +86,7 @@
       "prosody": "aside",
       "durationSec": 1.65,
       "charsPerSec": 9.696969696969697,
-      "audioFile": ".video-work/rehearsal/facts-within-10/07.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/06.wav"
     },
     {
       "path": "scenes.plain.beats[0]",
@@ -108,7 +97,7 @@
       "prosody": "section",
       "durationSec": 1.9,
       "charsPerSec": 7.36842105263158,
-      "audioFile": ".video-work/rehearsal/facts-within-10/08.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/07.wav"
     },
     {
       "path": "scenes.plain.beats[1]",
@@ -119,7 +108,7 @@
       "prosody": "teach",
       "durationSec": 2.65,
       "charsPerSec": 9.433962264150944,
-      "audioFile": ".video-work/rehearsal/facts-within-10/09.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/08.wav"
     },
     {
       "path": "scenes.plain.beats[2]",
@@ -130,7 +119,7 @@
       "prosody": "example",
       "durationSec": 2.65,
       "charsPerSec": 7.169811320754717,
-      "audioFile": ".video-work/rehearsal/facts-within-10/10.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/09.wav"
     },
     {
       "path": "scenes.plain.beats[3]",
@@ -141,7 +130,7 @@
       "prosody": "example",
       "durationSec": 3.1,
       "charsPerSec": 6.774193548387097,
-      "audioFile": ".video-work/rehearsal/facts-within-10/11.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/10.wav"
     },
     {
       "path": "scenes.plain.beats[4]",
@@ -152,7 +141,7 @@
       "prosody": "teach",
       "durationSec": 3.825,
       "charsPerSec": 12.287581699346404,
-      "audioFile": ".video-work/rehearsal/facts-within-10/12.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/11.wav"
     },
     {
       "path": "scenes.plain.beats[5]",
@@ -163,7 +152,7 @@
       "prosody": "teach",
       "durationSec": 4.55,
       "charsPerSec": 11.868131868131869,
-      "audioFile": ".video-work/rehearsal/facts-within-10/13.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/12.wav"
     },
     {
       "path": "scenes.school.beats[0]",
@@ -174,7 +163,7 @@
       "prosody": "section",
       "durationSec": 2.975,
       "charsPerSec": 12.436974789915967,
-      "audioFile": ".video-work/rehearsal/facts-within-10/14.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/13.wav"
     },
     {
       "path": "scenes.school.beats[1]",
@@ -185,7 +174,7 @@
       "prosody": "teach",
       "durationSec": 2.475,
       "charsPerSec": 10.1010101010101,
-      "audioFile": ".video-work/rehearsal/facts-within-10/15.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/14.wav"
     },
     {
       "path": "scenes.school.beats[2]",
@@ -196,7 +185,7 @@
       "prosody": "teach",
       "durationSec": 1.875,
       "charsPerSec": 7.466666666666667,
-      "audioFile": ".video-work/rehearsal/facts-within-10/16.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/15.wav"
     },
     {
       "path": "scenes.school.beats[3]",
@@ -207,7 +196,7 @@
       "prosody": "teach",
       "durationSec": 4.55,
       "charsPerSec": 14.065934065934066,
-      "audioFile": ".video-work/rehearsal/facts-within-10/17.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/16.wav"
     },
     {
       "path": "scenes.school.beats[4]",
@@ -218,7 +207,7 @@
       "prosody": "teach",
       "durationSec": 2.875,
       "charsPerSec": 12.869565217391305,
-      "audioFile": ".video-work/rehearsal/facts-within-10/18.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/17.wav"
     },
     {
       "path": "scenes.school.beats[5]",
@@ -229,7 +218,7 @@
       "prosody": "example",
       "durationSec": 2.375,
       "charsPerSec": 5.894736842105263,
-      "audioFile": ".video-work/rehearsal/facts-within-10/19.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/18.wav"
     },
     {
       "path": "scenes.school.beats[6]",
@@ -240,7 +229,7 @@
       "prosody": "example",
       "durationSec": 2,
       "charsPerSec": 5,
-      "audioFile": ".video-work/rehearsal/facts-within-10/20.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/19.wav"
     },
     {
       "path": "scenes.school.beats[7]",
@@ -251,7 +240,7 @@
       "prosody": "example",
       "durationSec": 2.275,
       "charsPerSec": 6.593406593406594,
-      "audioFile": ".video-work/rehearsal/facts-within-10/21.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/20.wav"
     },
     {
       "path": "scenes.school.beats[8]",
@@ -262,7 +251,7 @@
       "prosody": "example",
       "durationSec": 2.25,
       "charsPerSec": 6.666666666666667,
-      "audioFile": ".video-work/rehearsal/facts-within-10/22.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/21.wav"
     },
     {
       "path": "scenes.school.beats[9]",
@@ -273,7 +262,7 @@
       "prosody": "teach",
       "durationSec": 4.4,
       "charsPerSec": 13.409090909090908,
-      "audioFile": ".video-work/rehearsal/facts-within-10/23.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/22.wav"
     },
     {
       "path": "scenes.mix.beats[0]",
@@ -284,7 +273,7 @@
       "prosody": "section",
       "durationSec": 2.475,
       "charsPerSec": 10.505050505050505,
-      "audioFile": ".video-work/rehearsal/facts-within-10/24.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/23.wav"
     },
     {
       "path": "scenes.mix.beats[1]",
@@ -295,7 +284,7 @@
       "prosody": "example",
       "durationSec": 5.525,
       "charsPerSec": 11.040723981900452,
-      "audioFile": ".video-work/rehearsal/facts-within-10/25.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/24.wav"
     },
     {
       "path": "scenes.mix.beats[2]",
@@ -306,7 +295,7 @@
       "prosody": "key",
       "durationSec": 4.85,
       "charsPerSec": 14.020618556701033,
-      "audioFile": ".video-work/rehearsal/facts-within-10/26.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/25.wav"
     },
     {
       "path": "scenes.mix.beats[3]",
@@ -317,7 +306,7 @@
       "prosody": "key",
       "durationSec": 3.45,
       "charsPerSec": 12.17391304347826,
-      "audioFile": ".video-work/rehearsal/facts-within-10/27.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/26.wav"
     },
     {
       "path": "scenes.tonight.beats[0]",
@@ -328,7 +317,7 @@
       "prosody": "section",
       "durationSec": 1.975,
       "charsPerSec": 9.11392405063291,
-      "audioFile": ".video-work/rehearsal/facts-within-10/28.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/27.wav"
     },
     {
       "path": "scenes.tonight.beats[1]",
@@ -339,7 +328,7 @@
       "prosody": "section",
       "durationSec": 5.1,
       "charsPerSec": 12.549019607843139,
-      "audioFile": ".video-work/rehearsal/facts-within-10/29.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/28.wav"
     },
     {
       "path": "scenes.tonight.beats[2]",
@@ -350,7 +339,7 @@
       "prosody": "title",
       "durationSec": 2.2,
       "charsPerSec": 8.636363636363635,
-      "audioFile": ".video-work/rehearsal/facts-within-10/30.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/29.wav"
     },
     {
       "path": "scenes.tonight.beats[3]",
@@ -361,7 +350,7 @@
       "prosody": "teach",
       "durationSec": 4.175,
       "charsPerSec": 11.736526946107785,
-      "audioFile": ".video-work/rehearsal/facts-within-10/31.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/30.wav"
     },
     {
       "path": "scenes.tonight.beats[4]",
@@ -372,7 +361,7 @@
       "prosody": "teach",
       "durationSec": 3.925,
       "charsPerSec": 12.993630573248408,
-      "audioFile": ".video-work/rehearsal/facts-within-10/32.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/31.wav"
     },
     {
       "path": "scenes.tonight.beats[5]",
@@ -383,7 +372,7 @@
       "prosody": "aside",
       "durationSec": 3.25,
       "charsPerSec": 13.23076923076923,
-      "audioFile": ".video-work/rehearsal/facts-within-10/33.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/32.wav"
     },
     {
       "path": "scenes.tonight.beats[6]",
@@ -394,7 +383,7 @@
       "prosody": "aside",
       "durationSec": 1.975,
       "charsPerSec": 10.126582278481012,
-      "audioFile": ".video-work/rehearsal/facts-within-10/34.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/33.wav"
     },
     {
       "path": "scenes.criteria.beats[0]",
@@ -405,7 +394,7 @@
       "prosody": "section",
       "durationSec": 2.4,
       "charsPerSec": 10.833333333333334,
-      "audioFile": ".video-work/rehearsal/facts-within-10/35.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/34.wav"
     },
     {
       "path": "scenes.criteria.beats[1]",
@@ -416,7 +405,7 @@
       "prosody": "key",
       "durationSec": 6.525,
       "charsPerSec": 11.340996168582375,
-      "audioFile": ".video-work/rehearsal/facts-within-10/36.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/35.wav"
     },
     {
       "path": "scenes.criteria.beats[2]",
@@ -427,7 +416,7 @@
       "prosody": "aside",
       "durationSec": 1.975,
       "charsPerSec": 10.126582278481012,
-      "audioFile": ".video-work/rehearsal/facts-within-10/37.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/36.wav"
     },
     {
       "path": "scenes.criteria.beats[3]",
@@ -438,7 +427,7 @@
       "prosody": "key",
       "durationSec": 1.925,
       "charsPerSec": 8.311688311688311,
-      "audioFile": ".video-work/rehearsal/facts-within-10/38.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/37.wav"
     },
     {
       "path": "scenes.criteria.beats[4]",
@@ -449,7 +438,7 @@
       "prosody": "key",
       "durationSec": 2.225,
       "charsPerSec": 8.988764044943819,
-      "audioFile": ".video-work/rehearsal/facts-within-10/39.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/38.wav"
     },
     {
       "path": "scenes.criteria.beats[5]",
@@ -460,7 +449,7 @@
       "prosody": "key",
       "durationSec": 2.325,
       "charsPerSec": 9.89247311827957,
-      "audioFile": ".video-work/rehearsal/facts-within-10/40.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/39.wav"
     },
     {
       "path": "scenes.criteria.beats[6]",
@@ -471,7 +460,7 @@
       "prosody": "key",
       "durationSec": 4.6,
       "charsPerSec": 12.173913043478262,
-      "audioFile": ".video-work/rehearsal/facts-within-10/41.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/40.wav"
     },
     {
       "path": "scenes.page.beats[0]",
@@ -482,7 +471,7 @@
       "prosody": "handoff",
       "durationSec": 2.5,
       "charsPerSec": 13.2,
-      "audioFile": ".video-work/rehearsal/facts-within-10/42.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/41.wav"
     },
     {
       "path": "scenes.page.beats[1]",
@@ -493,7 +482,7 @@
       "prosody": "handoff",
       "durationSec": 2,
       "charsPerSec": 9.5,
-      "audioFile": ".video-work/rehearsal/facts-within-10/43.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/42.wav"
     },
     {
       "path": "scenes.page.beats[2]",
@@ -504,7 +493,7 @@
       "prosody": "handoff",
       "durationSec": 3.95,
       "charsPerSec": 14.683544303797468,
-      "audioFile": ".video-work/rehearsal/facts-within-10/44.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/43.wav"
     },
     {
       "path": "scenes.page.beats[3]",
@@ -515,7 +504,7 @@
       "prosody": "handoff",
       "durationSec": 5.875,
       "charsPerSec": 14.638297872340425,
-      "audioFile": ".video-work/rehearsal/facts-within-10/45.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/44.wav"
     },
     {
       "path": "scenes.page.beats[4]",
@@ -526,7 +515,7 @@
       "prosody": "handoff",
       "durationSec": 2.05,
       "charsPerSec": 9.26829268292683,
-      "audioFile": ".video-work/rehearsal/facts-within-10/46.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/45.wav"
     },
     {
       "path": "scenes.page.beats[5]",
@@ -537,7 +526,7 @@
       "prosody": "handoff",
       "durationSec": 3.8,
       "charsPerSec": 12.105263157894738,
-      "audioFile": ".video-work/rehearsal/facts-within-10/47.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/46.wav"
     },
     {
       "path": "scenes.close.beats[0]",
@@ -548,7 +537,7 @@
       "prosody": "aside",
       "durationSec": 1.95,
       "charsPerSec": 8.205128205128206,
-      "audioFile": ".video-work/rehearsal/facts-within-10/48.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/47.wav"
     },
     {
       "path": "scenes.close.beats[1]",
@@ -559,18 +548,18 @@
       "prosody": "aside",
       "durationSec": 3,
       "charsPerSec": 13.333333333333334,
-      "audioFile": ".video-work/rehearsal/facts-within-10/49.wav"
+      "audioFile": ".video-work/rehearsal/facts-within-10/48.wav"
     },
     {
       "path": "scenes.close.beats[2]",
       "sceneId": "close",
-      "spoken": "The written pack is the source…",
-      "line": "The written pack is the source.",
+      "spoken": "Thanks for watching — enjoy the session together…",
+      "line": "Thanks for watching — enjoy the session together.",
       "pauseAfter": 0.22,
       "prosody": "aside",
-      "durationSec": 2.2,
-      "charsPerSec": 11.818181818181817,
-      "audioFile": ".video-work/rehearsal/facts-within-10/50.wav"
+      "durationSec": 3.075,
+      "charsPerSec": 13.658536585365853,
+      "audioFile": ".video-work/rehearsal/facts-within-10/49.wav"
     }
   ]
 }
