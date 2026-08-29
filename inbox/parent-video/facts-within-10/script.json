@@ -1,0 +1,761 @@
+{
+  "topicId": "facts-within-10",
+  "title": "Number facts within 10",
+  "scriptHash": "7457beadae9724bb",
+  "delivery": {
+    "topicId": "facts-within-10",
+    "findings": [
+      {
+        "severity": "note",
+        "code": "ui-chrome-one-check",
+        "beatPath": "scenes.criteria.beats[2]",
+        "spoken": "One check from the page.",
+        "message": "Fine as a short bridge, but keep it brief — the check prompt should carry the meaning."
+      }
+    ],
+    "blockingCount": 0
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "kicker": "Home Learning · Year 1 maths · draft",
+      "heading": "Number facts within 10",
+      "beats": [
+        {
+          "spoken": "Number facts within 10.",
+          "line": "Number facts within 10",
+          "pauseAfter": 0.5,
+          "guide": "present"
+        },
+        {
+          "spoken": "Quick parent briefing.",
+          "line": "Quick parent briefing.",
+          "pauseAfter": 0.58,
+          "guide": "listen"
+        },
+        {
+          "spoken": "Not a film for your child to watch!",
+          "line": "Not a film for your child to watch!",
+          "pauseAfter": 0.58,
+          "guide": "listen"
+        },
+        {
+          "spoken": "You learn the method here.",
+          "line": "You learn the method here.",
+          "pauseAfter": 0.58,
+          "guide": "listen"
+        },
+        {
+          "spoken": "Then you work from the written page, beside your child.",
+          "line": "Then you work from the written page, beside your child.",
+          "pauseAfter": 0.36,
+          "guide": "listen"
+        },
+        {
+          "spoken": "This pack is still a draft.",
+          "line": "This pack is still a draft.",
+          "pauseAfter": 0.58,
+          "guide": "listen"
+        },
+        {
+          "spoken": "If it clashes with how your school teaches…",
+          "line": "If it clashes with how your school teaches…",
+          "pauseAfter": 0.58,
+          "guide": "listen"
+        },
+        {
+          "spoken": "Follow the school.",
+          "line": "Follow the school.",
+          "pauseAfter": 0.7,
+          "guide": "listen"
+        }
+      ]
+    },
+    {
+      "id": "plain",
+      "kicker": "The idea",
+      "heading": "In plain English",
+      "beats": [
+        {
+          "spoken": "Here’s the idea.",
+          "line": "Here’s the idea.",
+          "pauseAfter": 0.5,
+          "guide": "present"
+        },
+        {
+          "spoken": "A number fact is a small truth.",
+          "line": "A number fact is a small truth.",
+          "pauseAfter": 0.36,
+          "guide": "present"
+        },
+        {
+          "spoken": "Such as: 6 and 4 make 10.",
+          "line": "Such as: 6 and 4 make 10.",
+          "pauseAfter": 0.5,
+          "guide": "present"
+        },
+        {
+          "spoken": "Or: 7 take away 2 equals 5.",
+          "line": "Or: 7 take away 2 equals 5.",
+          "pauseAfter": 0.5,
+          "guide": "present"
+        },
+        {
+          "spoken": "Fluency does not mean shouting answers against a timer.",
+          "line": "Fluency does not mean shouting answers against a timer.",
+          "pauseAfter": 0.36,
+          "guide": "present"
+        },
+        {
+          "spoken": "It means the child does not have to start at 1 and climb every time.",
+          "line": "It means the child does not have to start at 1 and climb every time.",
+          "pauseAfter": 0.7,
+          "guide": "point",
+          "visual": {
+            "kind": "ten-frame",
+            "filled": 6,
+            "other": 4,
+            "caption": "6 and 4 making 10, on a ten-frame."
+          }
+        }
+      ]
+    },
+    {
+      "id": "school",
+      "kicker": "At school",
+      "heading": "How school typically teaches it",
+      "beats": [
+        {
+          "spoken": "And here’s how school typically teaches it.",
+          "line": "And here’s how school typically teaches it.",
+          "pauseAfter": 0.5,
+          "guide": "point",
+          "visual": {
+            "kind": "ten-frame",
+            "filled": 0,
+            "caption": "A ten-frame: two rows of five, still empty."
+          }
+        },
+        {
+          "spoken": "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.",
+          "line": "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.",
+          "pauseAfter": 0.36,
+          "guide": "point",
+          "visual": {
+            "kind": "ten-frame",
+            "filled": 0,
+            "caption": "Two rows of five. The frame is the picture, not the sum."
+          }
+        },
+        {
+          "spoken": "They will teach families of facts together.",
+          "line": "They will teach families of facts together.",
+          "pauseAfter": 0.36,
+          "guide": "point",
+          "visual": {
+            "kind": "ten-frame",
+            "filled": 6,
+            "other": 4,
+            "caption": "A family of facts: 6 and 4, then 4 and 6."
+          }
+        },
+        {
+          "spoken": "6 plus 4.",
+          "line": "6 plus 4.",
+          "pauseAfter": 0.5,
+          "guide": "point"
+        },
+        {
+          "spoken": "4 plus 6.",
+          "line": "4 plus 6.",
+          "pauseAfter": 0.5,
+          "guide": "point"
+        },
+        {
+          "spoken": "10 take away 4.",
+          "line": "10 take away 4.",
+          "pauseAfter": 0.5,
+          "guide": "point"
+        },
+        {
+          "spoken": "10 take away 6.",
+          "line": "10 take away 6.",
+          "pauseAfter": 0.5,
+          "guide": "point"
+        },
+        {
+          "spoken": "School often calls that pair a number bond: two parts that make a whole.",
+          "line": "School often calls that pair a number bond: two parts that make a whole.",
+          "pauseAfter": 0.36,
+          "guide": "point",
+          "visual": {
+            "kind": "part-whole",
+            "whole": 10,
+            "left": 6,
+            "right": 4,
+            "caption": "A number bond: two parts that make a whole."
+          }
+        },
+        {
+          "spoken": "The name is just a label for that idea.",
+          "line": "The name is just a label for that idea.",
+          "pauseAfter": 0.7,
+          "guide": "point",
+          "visual": {
+            "kind": "part-whole",
+            "whole": 10,
+            "left": 6,
+            "right": 4,
+            "caption": "A number bond: two parts that make a whole."
+          }
+        }
+      ]
+    },
+    {
+      "id": "mix",
+      "kicker": "Watch for this",
+      "heading": "They can do 3 + 2 with objects but go blank when they see 3 + 2 written.",
+      "beats": [
+        {
+          "spoken": "One mix-up to watch for.",
+          "line": "One mix-up to watch for.",
+          "pauseAfter": 0.5,
+          "guide": "listen"
+        },
+        {
+          "spoken": "They can do 3 plus 2 with objects but go blank when they see 3 plus 2 written.",
+          "line": "They can do 3 plus 2 with objects but go blank when they see 3 plus 2 written.",
+          "pauseAfter": 0.5,
+          "guide": "listen"
+        },
+        {
+          "spoken": "Build it with objects, say it in words, then show the symbols written underneath.",
+          "line": "Build it with objects, say it in words, then show the symbols written underneath.",
+          "pauseAfter": 0.36,
+          "guide": "point"
+        },
+        {
+          "spoken": "Not as the starting point.",
+          "line": "Not as the starting point.",
+          "pauseAfter": 0.7,
+          "guide": "point"
+        }
+      ]
+    },
+    {
+      "id": "tonight",
+      "kicker": "Tonight · outline",
+      "heading": "Make 10 in two colours",
+      "beats": [
+        {
+          "spoken": "Tonight’s activity.",
+          "line": "Tonight’s activity.",
+          "pauseAfter": 0.58,
+          "guide": "present"
+        },
+        {
+          "spoken": "Just the outline.",
+          "line": "Just the outline.",
+          "pauseAfter": 0.36,
+          "guide": "present"
+        },
+        {
+          "spoken": "Make 10 in two colours.",
+          "line": "Make 10 in two colours",
+          "pauseAfter": 0.5,
+          "guide": "point",
+          "visual": {
+            "kind": "ten-frame",
+            "filled": 6,
+            "other": 4,
+            "caption": "Fill 6 of one type. The empty spaces are the other part."
+          }
+        },
+        {
+          "spoken": "Fill the frame with 6 of one type.",
+          "line": "Fill the frame with 6 of one type.",
+          "pauseAfter": 0.36,
+          "guide": "point",
+          "visual": {
+            "kind": "ten-frame",
+            "filled": 6,
+            "other": 4,
+            "caption": "6 and 4 make 10."
+          }
+        },
+        {
+          "spoken": "Ask how many empty spaces, then fill them with the other type.",
+          "line": "Ask how many empty spaces, then fill them with the other type.",
+          "pauseAfter": 0.36,
+          "guide": "point",
+          "visual": {
+            "kind": "ten-frame",
+            "filled": 6,
+            "other": 4,
+            "caption": "6 and 4 make 10."
+          }
+        },
+        {
+          "spoken": "Fifteen minutes or three bonds, whichever comes first.",
+          "line": "Fifteen minutes or three bonds, whichever comes first.",
+          "pauseAfter": 0.7,
+          "guide": "listen"
+        }
+      ]
+    },
+    {
+      "id": "criteria",
+      "kicker": "Tonight · criteria",
+      "heading": "What good looks like",
+      "beats": [
+        {
+          "spoken": "Here’s what you’re aiming for.",
+          "line": "Here’s what you’re aiming for.",
+          "pauseAfter": 0.5,
+          "guide": "point"
+        },
+        {
+          "spoken": "You can show 7 on a ten-frame and see, without counting from 1, that 3 empty spaces make 10.",
+          "line": "You can show 7 on a ten-frame and see, without counting from 1, that 3 empty spaces make 10.",
+          "pauseAfter": 0.36,
+          "guide": "point",
+          "visual": {
+            "kind": "ten-frame",
+            "filled": 7,
+            "caption": "7 filled. 3 empty spaces make 10."
+          }
+        },
+        {
+          "spoken": "One check from the page.",
+          "line": "One check from the page.",
+          "pauseAfter": 0.58,
+          "guide": "listen"
+        },
+        {
+          "spoken": "Show 8 on the frame.",
+          "line": "Show 8 on the frame.",
+          "pauseAfter": 0.5,
+          "guide": "listen"
+        },
+        {
+          "spoken": "How many more to make 10?",
+          "line": "How many more to make 10?",
+          "pauseAfter": 0.5,
+          "guide": "listen"
+        },
+        {
+          "spoken": "You want to see: They see 2 empty spaces, or count the empties once.",
+          "line": "You want to see: They see 2 empty spaces, or count the empties once.",
+          "pauseAfter": 0.7,
+          "guide": "listen"
+        }
+      ]
+    },
+    {
+      "id": "page",
+      "kicker": "Use the page",
+      "heading": "Open the written pack when you start",
+      "beats": [
+        {
+          "spoken": "When you’re ready to sit down together…",
+          "line": "When you’re ready to sit down together…",
+          "pauseAfter": 0.58,
+          "guide": "present"
+        },
+        {
+          "spoken": "Open the written page.",
+          "line": "Open the written page.",
+          "pauseAfter": 0.58,
+          "guide": "present"
+        },
+        {
+          "spoken": "Keep it beside you for the steps, the words to say, and the live checks.",
+          "line": "Keep it beside you for the steps, the words to say, and the live checks.",
+          "pauseAfter": 0.58,
+          "guide": "present"
+        },
+        {
+          "spoken": "Don’t run the session from this film.",
+          "line": "Don’t run the session from this film.",
+          "pauseAfter": 0.58,
+          "guide": "present"
+        },
+        {
+          "spoken": "Found this on YouTube?",
+          "line": "Found this on YouTube?",
+          "pauseAfter": 0.58,
+          "guide": "point"
+        },
+        {
+          "spoken": "Use the link in the video description to open that page.",
+          "line": "Use the link in the video description to open that page.",
+          "pauseAfter": 0.7,
+          "guide": "point"
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "kicker": "For schools",
+      "heading": "Does this match how you teach it?",
+      "beats": [
+        {
+          "spoken": "If you teach Year 1…",
+          "line": "If you teach Year 1…",
+          "pauseAfter": 0.58,
+          "guide": "present"
+        },
+        {
+          "spoken": "Tell us whether the method matches your school.",
+          "line": "Tell us whether the method matches your school.",
+          "pauseAfter": 0.58,
+          "guide": "present"
+        },
+        {
+          "spoken": "The written pack is the source.",
+          "line": "The written pack is the source.",
+          "pauseAfter": 0.22,
+          "guide": "present"
+        }
+      ]
+    }
+  ],
+  "beats": [
+    {
+      "path": "scenes.open.beats[0]",
+      "sceneId": "open",
+      "spoken": "Number facts within 10.",
+      "line": "Number facts within 10",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.open.beats[1]",
+      "sceneId": "open",
+      "spoken": "Quick parent briefing.",
+      "line": "Quick parent briefing.",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.open.beats[2]",
+      "sceneId": "open",
+      "spoken": "Not a film for your child to watch!",
+      "line": "Not a film for your child to watch!",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.open.beats[3]",
+      "sceneId": "open",
+      "spoken": "You learn the method here.",
+      "line": "You learn the method here.",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.open.beats[4]",
+      "sceneId": "open",
+      "spoken": "Then you work from the written page, beside your child.",
+      "line": "Then you work from the written page, beside your child.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.open.beats[5]",
+      "sceneId": "open",
+      "spoken": "This pack is still a draft.",
+      "line": "This pack is still a draft.",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.open.beats[6]",
+      "sceneId": "open",
+      "spoken": "If it clashes with how your school teaches…",
+      "line": "If it clashes with how your school teaches…",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.open.beats[7]",
+      "sceneId": "open",
+      "spoken": "Follow the school.",
+      "line": "Follow the school.",
+      "pauseAfter": 0.7
+    },
+    {
+      "path": "scenes.plain.beats[0]",
+      "sceneId": "plain",
+      "spoken": "Here’s the idea.",
+      "line": "Here’s the idea.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.plain.beats[1]",
+      "sceneId": "plain",
+      "spoken": "A number fact is a small truth.",
+      "line": "A number fact is a small truth.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.plain.beats[2]",
+      "sceneId": "plain",
+      "spoken": "Such as: 6 and 4 make 10.",
+      "line": "Such as: 6 and 4 make 10.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.plain.beats[3]",
+      "sceneId": "plain",
+      "spoken": "Or: 7 take away 2 equals 5.",
+      "line": "Or: 7 take away 2 equals 5.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.plain.beats[4]",
+      "sceneId": "plain",
+      "spoken": "Fluency does not mean shouting answers against a timer.",
+      "line": "Fluency does not mean shouting answers against a timer.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.plain.beats[5]",
+      "sceneId": "plain",
+      "spoken": "It means the child does not have to start at 1 and climb every time.",
+      "line": "It means the child does not have to start at 1 and climb every time.",
+      "pauseAfter": 0.7
+    },
+    {
+      "path": "scenes.school.beats[0]",
+      "sceneId": "school",
+      "spoken": "And here’s how school typically teaches it.",
+      "line": "And here’s how school typically teaches it.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.school.beats[1]",
+      "sceneId": "school",
+      "spoken": "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.",
+      "line": "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.school.beats[2]",
+      "sceneId": "school",
+      "spoken": "They will teach families of facts together.",
+      "line": "They will teach families of facts together.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.school.beats[3]",
+      "sceneId": "school",
+      "spoken": "6 plus 4.",
+      "line": "6 plus 4.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.school.beats[4]",
+      "sceneId": "school",
+      "spoken": "4 plus 6.",
+      "line": "4 plus 6.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.school.beats[5]",
+      "sceneId": "school",
+      "spoken": "10 take away 4.",
+      "line": "10 take away 4.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.school.beats[6]",
+      "sceneId": "school",
+      "spoken": "10 take away 6.",
+      "line": "10 take away 6.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.school.beats[7]",
+      "sceneId": "school",
+      "spoken": "School often calls that pair a number bond: two parts that make a whole.",
+      "line": "School often calls that pair a number bond: two parts that make a whole.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.school.beats[8]",
+      "sceneId": "school",
+      "spoken": "The name is just a label for that idea.",
+      "line": "The name is just a label for that idea.",
+      "pauseAfter": 0.7
+    },
+    {
+      "path": "scenes.mix.beats[0]",
+      "sceneId": "mix",
+      "spoken": "One mix-up to watch for.",
+      "line": "One mix-up to watch for.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.mix.beats[1]",
+      "sceneId": "mix",
+      "spoken": "They can do 3 plus 2 with objects but go blank when they see 3 plus 2 written.",
+      "line": "They can do 3 plus 2 with objects but go blank when they see 3 plus 2 written.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.mix.beats[2]",
+      "sceneId": "mix",
+      "spoken": "Build it with objects, say it in words, then show the symbols written underneath.",
+      "line": "Build it with objects, say it in words, then show the symbols written underneath.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.mix.beats[3]",
+      "sceneId": "mix",
+      "spoken": "Not as the starting point.",
+      "line": "Not as the starting point.",
+      "pauseAfter": 0.7
+    },
+    {
+      "path": "scenes.tonight.beats[0]",
+      "sceneId": "tonight",
+      "spoken": "Tonight’s activity.",
+      "line": "Tonight’s activity.",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.tonight.beats[1]",
+      "sceneId": "tonight",
+      "spoken": "Just the outline.",
+      "line": "Just the outline.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.tonight.beats[2]",
+      "sceneId": "tonight",
+      "spoken": "Make 10 in two colours.",
+      "line": "Make 10 in two colours",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.tonight.beats[3]",
+      "sceneId": "tonight",
+      "spoken": "Fill the frame with 6 of one type.",
+      "line": "Fill the frame with 6 of one type.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.tonight.beats[4]",
+      "sceneId": "tonight",
+      "spoken": "Ask how many empty spaces, then fill them with the other type.",
+      "line": "Ask how many empty spaces, then fill them with the other type.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.tonight.beats[5]",
+      "sceneId": "tonight",
+      "spoken": "Fifteen minutes or three bonds, whichever comes first.",
+      "line": "Fifteen minutes or three bonds, whichever comes first.",
+      "pauseAfter": 0.7
+    },
+    {
+      "path": "scenes.criteria.beats[0]",
+      "sceneId": "criteria",
+      "spoken": "Here’s what you’re aiming for.",
+      "line": "Here’s what you’re aiming for.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.criteria.beats[1]",
+      "sceneId": "criteria",
+      "spoken": "You can show 7 on a ten-frame and see, without counting from 1, that 3 empty spaces make 10.",
+      "line": "You can show 7 on a ten-frame and see, without counting from 1, that 3 empty spaces make 10.",
+      "pauseAfter": 0.36
+    },
+    {
+      "path": "scenes.criteria.beats[2]",
+      "sceneId": "criteria",
+      "spoken": "One check from the page.",
+      "line": "One check from the page.",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.criteria.beats[3]",
+      "sceneId": "criteria",
+      "spoken": "Show 8 on the frame.",
+      "line": "Show 8 on the frame.",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.criteria.beats[4]",
+      "sceneId": "criteria",
+      "spoken": "How many more to make 10?",
+      "line": "How many more to make 10?",
+      "pauseAfter": 0.5
+    },
+    {
+      "path": "scenes.criteria.beats[5]",
+      "sceneId": "criteria",
+      "spoken": "You want to see: They see 2 empty spaces, or count the empties once.",
+      "line": "You want to see: They see 2 empty spaces, or count the empties once.",
+      "pauseAfter": 0.7
+    },
+    {
+      "path": "scenes.page.beats[0]",
+      "sceneId": "page",
+      "spoken": "When you’re ready to sit down together…",
+      "line": "When you’re ready to sit down together…",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.page.beats[1]",
+      "sceneId": "page",
+      "spoken": "Open the written page.",
+      "line": "Open the written page.",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.page.beats[2]",
+      "sceneId": "page",
+      "spoken": "Keep it beside you for the steps, the words to say, and the live checks.",
+      "line": "Keep it beside you for the steps, the words to say, and the live checks.",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.page.beats[3]",
+      "sceneId": "page",
+      "spoken": "Don’t run the session from this film.",
+      "line": "Don’t run the session from this film.",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.page.beats[4]",
+      "sceneId": "page",
+      "spoken": "Found this on YouTube?",
+      "line": "Found this on YouTube?",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.page.beats[5]",
+      "sceneId": "page",
+      "spoken": "Use the link in the video description to open that page.",
+      "line": "Use the link in the video description to open that page.",
+      "pauseAfter": 0.7
+    },
+    {
+      "path": "scenes.close.beats[0]",
+      "sceneId": "close",
+      "spoken": "If you teach Year 1…",
+      "line": "If you teach Year 1…",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.close.beats[1]",
+      "sceneId": "close",
+      "spoken": "Tell us whether the method matches your school.",
+      "line": "Tell us whether the method matches your school.",
+      "pauseAfter": 0.58
+    },
+    {
+      "path": "scenes.close.beats[2]",
+      "sceneId": "close",
+      "spoken": "The written pack is the source.",
+      "line": "The written pack is the source.",
+      "pauseAfter": 0.22
+    }
+  ]
+}

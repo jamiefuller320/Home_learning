@@ -1,10 +1,15 @@
 /**
  * Render one parent-briefing preview from a topic file.
  *
+ * Pre-production gate (unless --force):
+ *   npm run script:parent-video -- <id>     # human-readable script + delivery checks
+ *   npm run rehearse:parent-video -- <id>   # TTS-only + pace eval
+ *
  * Voice: Fal Kokoro British English (needs FAL_KEY) — see PARENT_VIDEO_TTS.
  * Pictures: our slides and diagrams only — no generated classroom footage.
  *
  *   npx tsx scripts/render-parent-video.ts facts-within-10
+ *   npx tsx scripts/render-parent-video.ts facts-within-10 --force
  */
 
 import { spawnSync } from "node:child_process";
@@ -13,16 +18,19 @@ import path from "node:path";
 import { getTopicById } from "../src/content/england/ks1/year-1/maths/topics";
 import {
   allBeats,
-  buildParentVideoScript,
   type VideoBeat,
   type VideoScene,
 } from "../src/lib/parent-video-script";
+import { assertReadyToRender } from "../src/lib/parent-video-pipeline";
 import { escapeHtml, guideSvg, SLIDE_CSS, visualHtml } from "../src/lib/parent-video-visuals";
 import { PARENT_VIDEO_TTS } from "../src/lib/parent-video-voice";
 
 const ROOT = path.resolve(__dirname, "..");
 const WORK = path.join(ROOT, ".video-work");
 const CHROME = process.env.CHROME_PATH || "google-chrome";
+const args = process.argv.slice(2).filter((arg) => arg !== "--");
+const FORCE = args.includes("--force");
+const topicId = args.find((arg) => !arg.startsWith("--")) || "facts-within-10";
 
 function run(command: string, args: string[], timeoutMs = 120_000) {
   const result = spawnSync(command, args, { encoding: "utf8", timeout: timeoutMs });
@@ -155,11 +163,16 @@ function concatWav(parts: string[], dest: string) {
 }
 
 async function main() {
-  const topicId = process.argv[2] || "facts-within-10";
   const topic = getTopicById(topicId);
   if (!topic) throw new Error(`Unknown topic ${topicId}`);
 
-  const script = buildParentVideoScript(topic);
+  const { script, hash } = assertReadyToRender(ROOT, topic, { force: FORCE });
+  if (FORCE) {
+    console.log(`Render forced — skipping rehearsal gate (script ${hash}).`);
+  } else {
+    console.log(`Rehearsal gate passed (script ${hash}).`);
+  }
+
   rmSync(WORK, { recursive: true, force: true });
   mkdirSync(WORK, { recursive: true });
   mkdirSync(path.join(ROOT, "public/videos"), { recursive: true });

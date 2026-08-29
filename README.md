@@ -54,12 +54,16 @@ Then open http://localhost:4173/Home_learning/
 
 ## Parent-video proof of concept
 
-The `/for-schools` page and the Number facts within 10 topic can show a generated reading of the written Stage 1. The voice reads short beats (punctuation plus silence). Slides reuse one adult guide plus ten-frame and part–whole pictures. Re-render after you change that pack:
+The `/for-schools` page and the Number facts within 10 topic can show a generated parent briefing. The voice reads short beats (punctuation plus silence). Slides reuse one adult guide plus ten-frame and part–whole pictures.
 
 ```bash
 # Needs FAL_KEY, Chrome, and ffmpeg. Does not invent method.
-npm run render:parent-video -- facts-within-10
+npm run script:parent-video -- facts-within-10    # readable script + spoken-delivery checks
+npm run rehearse:parent-video -- facts-within-10  # TTS-only + pace eval
+npm run render:parent-video -- facts-within-10    # full film; gated on rehearsal
 ```
+
+Dumps land in `inbox/parent-video/<id>/` for human notes. Fix awkward wording in the topic pack, not in the dump.
 
 ## Project map
 

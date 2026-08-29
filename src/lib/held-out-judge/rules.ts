@@ -108,6 +108,7 @@ export const CLASSROOM_SHORTHAND: { coverId: string; pattern: RegExp; label: str
   { coverId: "style-walt", pattern: /\bWALT\b/, label: "WALT" },
   { coverId: "style-success-criteria", pattern: /\bsuccess criteria\b/i, label: "success criteria" },
   { coverId: "style-in-your-books", pattern: /\bin your books\b/i, label: "in your books" },
+  { coverId: "style-worksheet-brand", pattern: /\bworksheet brand\b/i, label: "worksheet brand" },
 ];
 
 export const METHOD_CLASHES: { coverId: string; pattern: RegExp; label: string }[] = [

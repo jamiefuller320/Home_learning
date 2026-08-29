@@ -239,7 +239,7 @@ function checkBeats(topic: Topic): VideoBeat[] {
   return [
     ...linkBeats(["One check from the page."], PAUSE.aside, { guide: "listen" }),
     ...beatsFromClips(spokenClips(item.prompt), PAUSE.item, { guide: "listen" }),
-    ...beatsFromClips(spokenClips(`Looking for: ${item.looksLike}`), PAUSE.item, { guide: "listen" }),
+    ...beatsFromClips(spokenClips(`You want to see: ${item.looksLike}`), PAUSE.item, { guide: "listen" }),
   ];
 }
 
@@ -248,7 +248,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
   const mix = briefing.commonMisconceptions[0];
   const firstStep = topic.homePack.activity.steps[0];
   const plainLines = takeSentences(briefing.inPlainEnglish, 3);
-  const schoolLines = takeSentences(briefing.howSchoolTeachesIt, 3);
+  const schoolLines = takeSentences(briefing.howSchoolTeachesIt, 4);
 
   const scenes: VideoScene[] = [
     {

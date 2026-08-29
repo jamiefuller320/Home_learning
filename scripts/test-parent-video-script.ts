@@ -43,6 +43,9 @@ assert.ok(spoken.toLowerCase().includes(factsWithin10.parentBriefing.youAreReady
 assert.match(spoken, /fifteen minutes or three bonds/i);
 assert.match(spoken, /How many more to make 10/i);
 assert.match(spoken, /Don.?t run the session from this film/i);
+assert.match(spoken, /You want to see:/i);
+assert.ok(!/worksheet brand/i.test(spoken), "worksheet-brand aside should not be filmed");
+assert.ok(!/^Looking for:/m.test(spoken), "UI chrome Looking for should not be filmed");
 
 // Example sums must be separate clips, not one rushed list.
 assert.match(spoken, /Such as:\s*6 and 4 make 10/i);
