@@ -21,7 +21,7 @@ export default function ForSchoolsPage() {
 
       <ParentVideo
         src="/videos/facts-within-10-parent-briefing-v2.mp4"
-        caption="Proof of concept: an AI voice reading the written Number facts within 10 briefing, in short beats so the pauses sit on the thoughts. The pictures are our guide, ten-frame, and part–whole slides — not generated classroom footage. If the page changes, we re-render the film."
+        caption="Proof of concept: a concise AI parent briefing for Number facts within 10 — method, activity outline, and evaluation criteria — then a handoff to the written pack. The pictures are our guide, ten-frame, and part–whole slides — not generated classroom footage. Re-render after the page or script shape changes."
       />
 
       <section>
@@ -48,12 +48,13 @@ export default function ForSchoolsPage() {
       <section>
         <h2 className="serif text-3xl text-ink">How the film is made</h2>
         <p className="mt-3">
-          The voice reads the pack in short spoken beats, not one long paragraph. Punctuation and
-          a pause after each thought do the pacing — this model has no emphasis markup. The adult
+          The voice compiles a short lesson from the pack: the idea, how school teaches it, one
+          mix-up, then tonight’s outline and what good looks like. It does not read every prompt
+          and step — those stay on the written page for use beside the child. Punctuation and a
+          pause after each thought do the pacing — this model has no emphasis markup. The adult
           with the mug is the same drawing in every film. The ten-frame and part–whole picture
-          change when the script reaches that fact. We can later time those pictures more tightly,
-          or swap the voice for one that accepts SSML. We will not generate footage of children
-          or invent a method picture that is not on the page.
+          change when the script reaches that fact. We will not generate footage of children or
+          invent a method picture that is not on the page.
         </p>
       </section>
 

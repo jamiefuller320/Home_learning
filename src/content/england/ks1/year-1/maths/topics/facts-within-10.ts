@@ -98,6 +98,6 @@ export const factsWithin10: Topic = {
   parentVideo: {
     src: "/videos/facts-within-10-parent-briefing-v2.mp4",
     caption:
-      "A generated reading of this briefing, in short beats, with our ten-frame and part–whole pictures. The words on this page are the source.",
+      "A short parent briefing: the method, tonight’s outline, and what good looks like. Keep this page open beside you for the steps, prompts, and checks — do not run the session from the film alone.",
   },
 };

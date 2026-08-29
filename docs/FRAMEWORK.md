@@ -107,7 +107,7 @@ src/lib/progress.ts            local-only “I have got this” state
 
 Later ingestion (Oak API, a new National Curriculum) should write into the same schema. Do not grow a second content format.
 
-A parent video, if present, is a **render of the written briefing**, not a second authoring path. Compile speech from existing fields. Do not generate classroom footage. Re-render after language changes. The page stays the source.
+A parent video, if present, is a **concise briefing compiled from the pack**, not a second authoring path and not a full page reading. Teach the method quickly, outline the activity and checks, then send the parent to the written page for live steps. Compile speech from existing fields. Do not generate classroom footage. Re-render after language changes. The page stays the source beside the child.
 
 ### Technical choices for the first slice
 
