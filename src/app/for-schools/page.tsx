@@ -60,7 +60,7 @@ export default function ForSchoolsPage() {
           mix-up, then tonight’s outline and what good looks like. It does not read every prompt
           and step — those stay on the written page for use beside the child. Example sums and
           asides (including the YouTube link reminder) are separate spoken beats so the delivery
-          can change tone. We use a livelier British Kokoro voice at near-natural pace;
+          can change tone. We use a brighter British Kokoro voice a touch above natural pace;
           punctuation and short beats do the emphasis — this model has no markup for tone. The
           adult with the mug is the same drawing in every film. The ten-frame and part–whole
           picture change when the script reaches that fact. We will not generate footage of
