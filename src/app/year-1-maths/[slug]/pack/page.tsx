@@ -38,7 +38,7 @@ export default async function PackPage({ params }: PageProps) {
         <span className="text-sm text-ink-soft">{topic.homeMinutes} minutes together</span>
       </div>
       <h1 className="serif mt-4 text-4xl text-ink">{topic.title}</h1>
-      <p className="mt-3 text-lg text-ink-soft">Home pack only. If you have not read Stage 1, go back and do that first.</p>
+      <p className="mt-3 text-lg text-ink-soft">Home pack only. If you have not read the parent lesson, go back and do that first.</p>
       <StageMetaBox {...STAGE_2_META} />
       <div className="mt-10">
         <HomePack topic={topic} />
