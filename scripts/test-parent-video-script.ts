@@ -110,8 +110,8 @@ assert.deepEqual(splitAsideRemark("Keep the frame — not a worksheet brand."), 
 assert.deepEqual(spokenClips("Listen. Then try."), ["Listen.", "Then try."]);
 assert.deepEqual(takeSentences("One. Two. Three.", 2), ["One.", "Two."]);
 
-assert.equal(PARENT_VIDEO_TTS.voice, "bf_isabella");
-assert.ok(PARENT_VIDEO_TTS.speed >= 1 && PARENT_VIDEO_TTS.speed <= 1.15, "voice should sit near natural pace, not slow audiobook");
+assert.equal(PARENT_VIDEO_TTS.voice, "bf_alice");
+assert.ok(PARENT_VIDEO_TTS.speed >= 1.05 && PARENT_VIDEO_TTS.speed <= 1.15, "voice should sit brisk-natural, not slow audiobook");
 
 const schoolVisuals = script.scenes
   .find((scene) => scene.id === "school")
