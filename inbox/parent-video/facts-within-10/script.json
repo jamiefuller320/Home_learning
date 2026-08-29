@@ -1,7 +1,7 @@
 {
   "topicId": "facts-within-10",
   "title": "Number facts within 10",
-  "scriptHash": "4140ef3a6c234bc7",
+  "scriptHash": "eb949f0ad404d82e",
   "delivery": {
     "topicId": "facts-within-10",
     "findings": [],
@@ -21,8 +21,8 @@
           "guide": "present"
         },
         {
-          "spoken": "Quick parent briefing.",
-          "line": "Quick parent briefing.",
+          "spoken": "This is a quick parent briefing.",
+          "line": "This is a quick parent briefing.",
           "pauseAfter": 0.58,
           "prosody": "section",
           "guide": "listen"
@@ -56,8 +56,8 @@
           "guide": "listen"
         },
         {
-          "spoken": "If it clashes with how your school teaches…",
-          "line": "If it clashes with how your school teaches…",
+          "spoken": "If anything clashes with how your school teaches…",
+          "line": "If anything clashes with how your school teaches…",
           "pauseAfter": 0.58,
           "prosody": "aside",
           "guide": "listen"
@@ -144,8 +144,8 @@
           }
         },
         {
-          "spoken": "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.",
-          "line": "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.",
+          "spoken": "Most schools use a ten-frame.",
+          "line": "Most schools use a ten-frame.",
           "pauseAfter": 0.36,
           "prosody": "teach",
           "guide": "point",
@@ -156,8 +156,15 @@
           }
         },
         {
-          "spoken": "They will teach families of facts together.",
-          "line": "They will teach families of facts together.",
+          "spoken": "Two rows of five.",
+          "line": "Two rows of five.",
+          "pauseAfter": 0.36,
+          "prosody": "teach",
+          "guide": "point"
+        },
+        {
+          "spoken": "They pair that with a part–whole picture: one whole number made of two parts.",
+          "line": "They pair that with a part–whole picture: one whole number made of two parts.",
           "pauseAfter": 0.36,
           "prosody": "teach",
           "guide": "point",
@@ -169,36 +176,8 @@
           }
         },
         {
-          "spoken": "6 plus 4.",
-          "line": "6 plus 4.",
-          "pauseAfter": 0.5,
-          "prosody": "example",
-          "guide": "point"
-        },
-        {
-          "spoken": "4 plus 6.",
-          "line": "4 plus 6.",
-          "pauseAfter": 0.5,
-          "prosody": "example",
-          "guide": "point"
-        },
-        {
-          "spoken": "10 take away 4.",
-          "line": "10 take away 4.",
-          "pauseAfter": 0.5,
-          "prosody": "example",
-          "guide": "point"
-        },
-        {
-          "spoken": "10 take away 6.",
-          "line": "10 take away 6.",
-          "pauseAfter": 0.5,
-          "prosody": "example",
-          "guide": "point"
-        },
-        {
-          "spoken": "School often calls that pair a number bond: two parts that make a whole.",
-          "line": "School often calls that pair a number bond: two parts that make a whole.",
+          "spoken": "They will teach families of facts together.",
+          "line": "They will teach families of facts together.",
           "pauseAfter": 0.36,
           "prosody": "teach",
           "guide": "point",
@@ -211,8 +190,36 @@
           }
         },
         {
-          "spoken": "The name is just a label for that idea.",
-          "line": "The name is just a label for that idea.",
+          "spoken": "Such as: 6 plus 4.",
+          "line": "Such as: 6 plus 4.",
+          "pauseAfter": 0.5,
+          "prosody": "example",
+          "guide": "point"
+        },
+        {
+          "spoken": "Or: 4 plus 6.",
+          "line": "Or: 4 plus 6.",
+          "pauseAfter": 0.5,
+          "prosody": "example",
+          "guide": "point"
+        },
+        {
+          "spoken": "Or: 10 take away 4.",
+          "line": "Or: 10 take away 4.",
+          "pauseAfter": 0.5,
+          "prosody": "example",
+          "guide": "point"
+        },
+        {
+          "spoken": "Or: 10 take away 6.",
+          "line": "Or: 10 take away 6.",
+          "pauseAfter": 0.5,
+          "prosody": "example",
+          "guide": "point"
+        },
+        {
+          "spoken": "School often calls that pair a number bond: two parts that make a whole.",
+          "line": "School often calls that pair a number bond: two parts that make a whole.",
           "pauseAfter": 0.7,
           "prosody": "teach",
           "guide": "point",
@@ -232,8 +239,8 @@
       "heading": "They can do 3 + 2 with objects but go blank when they see 3 + 2 written.",
       "beats": [
         {
-          "spoken": "One mix-up to watch for.",
-          "line": "One mix-up to watch for.",
+          "spoken": "Here’s one mix-up to watch for.",
+          "line": "Here’s one mix-up to watch for.",
           "pauseAfter": 0.5,
           "prosody": "section",
           "guide": "listen"
@@ -253,8 +260,8 @@
           "guide": "point"
         },
         {
-          "spoken": "Not as the starting point.",
-          "line": "Not as the starting point.",
+          "spoken": "Don’t use words and symbols as the starting point.",
+          "line": "Don’t use words and symbols as the starting point.",
           "pauseAfter": 0.7,
           "prosody": "key",
           "guide": "point"
@@ -274,8 +281,8 @@
           "guide": "present"
         },
         {
-          "spoken": "Just the outline.",
-          "line": "Just the outline.",
+          "spoken": "This is the task outline — look at the written instructions for the full task.",
+          "line": "This is the task outline — look at the written instructions for the full task.",
           "pauseAfter": 0.36,
           "prosody": "section",
           "guide": "present"
@@ -294,8 +301,8 @@
           }
         },
         {
-          "spoken": "Fill the frame with 6 of one type.",
-          "line": "Fill the frame with 6 of one type.",
+          "spoken": "Fill 6 spaces on the frame with one colour or type of object.",
+          "line": "Fill 6 spaces on the frame with one colour or type of object.",
           "pauseAfter": 0.36,
           "prosody": "teach",
           "guide": "point",
@@ -320,8 +327,15 @@
           }
         },
         {
-          "spoken": "Fifteen minutes or three bonds, whichever comes first…",
-          "line": "Fifteen minutes or three bonds, whichever comes first.",
+          "spoken": "Fifteen minutes, or three number bonds, is plenty…",
+          "line": "Fifteen minutes, or three number bonds, is plenty.",
+          "pauseAfter": 0.36,
+          "prosody": "aside",
+          "guide": "listen"
+        },
+        {
+          "spoken": "Whichever comes first…",
+          "line": "Whichever comes first.",
           "pauseAfter": 0.7,
           "prosody": "aside",
           "guide": "listen"
@@ -374,8 +388,15 @@
           "guide": "listen"
         },
         {
-          "spoken": "You want to see: They see 2 empty spaces, or count the empties once.",
-          "line": "You want to see: They see 2 empty spaces, or count the empties once.",
+          "spoken": "Here’s what you want to see.",
+          "line": "Here’s what you want to see.",
+          "pauseAfter": 0.58,
+          "prosody": "key",
+          "guide": "listen"
+        },
+        {
+          "spoken": "They can say there are 2 empty spaces, or count each empty cell once.",
+          "line": "They can say there are 2 empty spaces, or count each empty cell once.",
           "pauseAfter": 0.7,
           "prosody": "key",
           "guide": "listen"
@@ -409,8 +430,8 @@
           "guide": "present"
         },
         {
-          "spoken": "Don’t run the session from this film.",
-          "line": "Don’t run the session from this film.",
+          "spoken": "Don’t run the session from this film alone — return to the written pack when you sit down with your child.",
+          "line": "Don’t run the session from this film alone — return to the written pack when you sit down with your child.",
           "pauseAfter": 0.58,
           "prosody": "handoff",
           "guide": "present"
@@ -472,8 +493,8 @@
     {
       "path": "scenes.open.beats[1]",
       "sceneId": "open",
-      "spoken": "Quick parent briefing.",
-      "line": "Quick parent briefing.",
+      "spoken": "This is a quick parent briefing.",
+      "line": "This is a quick parent briefing.",
       "pauseAfter": 0.58,
       "prosody": "section"
     },
@@ -512,8 +533,8 @@
     {
       "path": "scenes.open.beats[6]",
       "sceneId": "open",
-      "spoken": "If it clashes with how your school teaches…",
-      "line": "If it clashes with how your school teaches…",
+      "spoken": "If anything clashes with how your school teaches…",
+      "line": "If anything clashes with how your school teaches…",
       "pauseAfter": 0.58,
       "prosody": "aside"
     },
@@ -584,13 +605,29 @@
     {
       "path": "scenes.school.beats[1]",
       "sceneId": "school",
-      "spoken": "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.",
-      "line": "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.",
+      "spoken": "Most schools use a ten-frame.",
+      "line": "Most schools use a ten-frame.",
       "pauseAfter": 0.36,
       "prosody": "teach"
     },
     {
       "path": "scenes.school.beats[2]",
+      "sceneId": "school",
+      "spoken": "Two rows of five.",
+      "line": "Two rows of five.",
+      "pauseAfter": 0.36,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.school.beats[3]",
+      "sceneId": "school",
+      "spoken": "They pair that with a part–whole picture: one whole number made of two parts.",
+      "line": "They pair that with a part–whole picture: one whole number made of two parts.",
+      "pauseAfter": 0.36,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.school.beats[4]",
       "sceneId": "school",
       "spoken": "They will teach families of facts together.",
       "line": "They will teach families of facts together.",
@@ -598,58 +635,50 @@
       "prosody": "teach"
     },
     {
-      "path": "scenes.school.beats[3]",
-      "sceneId": "school",
-      "spoken": "6 plus 4.",
-      "line": "6 plus 4.",
-      "pauseAfter": 0.5,
-      "prosody": "example"
-    },
-    {
-      "path": "scenes.school.beats[4]",
-      "sceneId": "school",
-      "spoken": "4 plus 6.",
-      "line": "4 plus 6.",
-      "pauseAfter": 0.5,
-      "prosody": "example"
-    },
-    {
       "path": "scenes.school.beats[5]",
       "sceneId": "school",
-      "spoken": "10 take away 4.",
-      "line": "10 take away 4.",
+      "spoken": "Such as: 6 plus 4.",
+      "line": "Such as: 6 plus 4.",
       "pauseAfter": 0.5,
       "prosody": "example"
     },
     {
       "path": "scenes.school.beats[6]",
       "sceneId": "school",
-      "spoken": "10 take away 6.",
-      "line": "10 take away 6.",
+      "spoken": "Or: 4 plus 6.",
+      "line": "Or: 4 plus 6.",
       "pauseAfter": 0.5,
       "prosody": "example"
     },
     {
       "path": "scenes.school.beats[7]",
       "sceneId": "school",
-      "spoken": "School often calls that pair a number bond: two parts that make a whole.",
-      "line": "School often calls that pair a number bond: two parts that make a whole.",
-      "pauseAfter": 0.36,
-      "prosody": "teach"
+      "spoken": "Or: 10 take away 4.",
+      "line": "Or: 10 take away 4.",
+      "pauseAfter": 0.5,
+      "prosody": "example"
     },
     {
       "path": "scenes.school.beats[8]",
       "sceneId": "school",
-      "spoken": "The name is just a label for that idea.",
-      "line": "The name is just a label for that idea.",
+      "spoken": "Or: 10 take away 6.",
+      "line": "Or: 10 take away 6.",
+      "pauseAfter": 0.5,
+      "prosody": "example"
+    },
+    {
+      "path": "scenes.school.beats[9]",
+      "sceneId": "school",
+      "spoken": "School often calls that pair a number bond: two parts that make a whole.",
+      "line": "School often calls that pair a number bond: two parts that make a whole.",
       "pauseAfter": 0.7,
       "prosody": "teach"
     },
     {
       "path": "scenes.mix.beats[0]",
       "sceneId": "mix",
-      "spoken": "One mix-up to watch for.",
-      "line": "One mix-up to watch for.",
+      "spoken": "Here’s one mix-up to watch for.",
+      "line": "Here’s one mix-up to watch for.",
       "pauseAfter": 0.5,
       "prosody": "section"
     },
@@ -672,8 +701,8 @@
     {
       "path": "scenes.mix.beats[3]",
       "sceneId": "mix",
-      "spoken": "Not as the starting point.",
-      "line": "Not as the starting point.",
+      "spoken": "Don’t use words and symbols as the starting point.",
+      "line": "Don’t use words and symbols as the starting point.",
       "pauseAfter": 0.7,
       "prosody": "key"
     },
@@ -688,8 +717,8 @@
     {
       "path": "scenes.tonight.beats[1]",
       "sceneId": "tonight",
-      "spoken": "Just the outline.",
-      "line": "Just the outline.",
+      "spoken": "This is the task outline — look at the written instructions for the full task.",
+      "line": "This is the task outline — look at the written instructions for the full task.",
       "pauseAfter": 0.36,
       "prosody": "section"
     },
@@ -704,8 +733,8 @@
     {
       "path": "scenes.tonight.beats[3]",
       "sceneId": "tonight",
-      "spoken": "Fill the frame with 6 of one type.",
-      "line": "Fill the frame with 6 of one type.",
+      "spoken": "Fill 6 spaces on the frame with one colour or type of object.",
+      "line": "Fill 6 spaces on the frame with one colour or type of object.",
       "pauseAfter": 0.36,
       "prosody": "teach"
     },
@@ -720,8 +749,16 @@
     {
       "path": "scenes.tonight.beats[5]",
       "sceneId": "tonight",
-      "spoken": "Fifteen minutes or three bonds, whichever comes first…",
-      "line": "Fifteen minutes or three bonds, whichever comes first.",
+      "spoken": "Fifteen minutes, or three number bonds, is plenty…",
+      "line": "Fifteen minutes, or three number bonds, is plenty.",
+      "pauseAfter": 0.36,
+      "prosody": "aside"
+    },
+    {
+      "path": "scenes.tonight.beats[6]",
+      "sceneId": "tonight",
+      "spoken": "Whichever comes first…",
+      "line": "Whichever comes first.",
       "pauseAfter": 0.7,
       "prosody": "aside"
     },
@@ -768,8 +805,16 @@
     {
       "path": "scenes.criteria.beats[5]",
       "sceneId": "criteria",
-      "spoken": "You want to see: They see 2 empty spaces, or count the empties once.",
-      "line": "You want to see: They see 2 empty spaces, or count the empties once.",
+      "spoken": "Here’s what you want to see.",
+      "line": "Here’s what you want to see.",
+      "pauseAfter": 0.58,
+      "prosody": "key"
+    },
+    {
+      "path": "scenes.criteria.beats[6]",
+      "sceneId": "criteria",
+      "spoken": "They can say there are 2 empty spaces, or count each empty cell once.",
+      "line": "They can say there are 2 empty spaces, or count each empty cell once.",
       "pauseAfter": 0.7,
       "prosody": "key"
     },
@@ -800,8 +845,8 @@
     {
       "path": "scenes.page.beats[3]",
       "sceneId": "page",
-      "spoken": "Don’t run the session from this film.",
-      "line": "Don’t run the session from this film.",
+      "spoken": "Don’t run the session from this film alone — return to the written pack when you sit down with your child.",
+      "line": "Don’t run the session from this film alone — return to the written pack when you sit down with your child.",
       "pauseAfter": 0.58,
       "prosody": "handoff"
     },
