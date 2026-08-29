@@ -40,10 +40,11 @@ assert.ok(spoken.includes("fluency does not mean shouting answers against a time
 assert.match(spoken, /ten-frame/i);
 assert.match(spoken, /number bond/i);
 assert.ok(spoken.toLowerCase().includes(factsWithin10.parentBriefing.youAreReadyWhen.toLowerCase().slice(0, 40)));
-assert.match(spoken, /fifteen minutes or three bonds/i);
+assert.match(spoken, /fifteen minutes.*three number bonds.*plenty/i);
 assert.match(spoken, /How many more to make 10/i);
-assert.match(spoken, /Don.?t run the session from this film/i);
-assert.match(spoken, /You want to see:/i);
+assert.match(spoken, /Don.?t run the session from this film alone/i);
+assert.match(spoken, /Here.?s what you want to see/i);
+assert.match(spoken, /2 empty spaces/i);
 assert.ok(!/worksheet brand/i.test(spoken), "worksheet-brand aside should not be filmed");
 assert.ok(!/^Looking for:/m.test(spoken), "UI chrome Looking for should not be filmed");
 
@@ -51,11 +52,11 @@ assert.ok(!/^Looking for:/m.test(spoken), "UI chrome Looking for should not be f
 assert.match(spoken, /Such as:\s*6 and 4 make 10/i);
 assert.match(spoken, /Or:\s*7 take away 2 equals 5/i);
 assert.ok(
-  spoken.split("\n").some((line) => /^6 plus 4\.?$/i.test(line.trim())),
+  spoken.split("\n").some((line) => /^(Such as:\s*)?6 plus 4\.?$/i.test(line.trim())),
   "family facts should be spoken one at a time",
 );
 assert.ok(
-  spoken.split("\n").some((line) => /^4 plus 6\.?$/i.test(line.trim())),
+  spoken.split("\n").some((line) => /^(Or:\s*)?4 plus 6\.?$/i.test(line.trim())),
   "family facts should be spoken one at a time",
 );
 
@@ -91,6 +92,16 @@ assert.deepEqual(
 assert.deepEqual(
   splitExampleSums("They will teach families of facts together: 6 + 4, 4 + 6, 10 − 4, 10 − 6."),
   ["They will teach families of facts together.", "6 plus 4.", "4 plus 6.", "10 take away 4.", "10 take away 6."],
+);
+assert.deepEqual(
+  splitExampleSums("They will teach families of facts together, such as: 6 + 4, 4 + 6, 10 − 4, 10 − 6."),
+  [
+    "They will teach families of facts together.",
+    "Such as: 6 plus 4.",
+    "Or: 4 plus 6.",
+    "Or: 10 take away 4.",
+    "Or: 10 take away 6.",
+  ],
 );
 assert.deepEqual(splitAsideRemark("Keep the frame — not a worksheet brand."), [
   "Keep the frame.",

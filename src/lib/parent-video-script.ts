@@ -50,26 +50,29 @@ function sayThisText(item: SayThisItem): string {
  */
 export const SCRIPT_LINKS = {
   open: [
-    "Quick parent briefing.",
+    "This is a quick parent briefing.",
     "Not a film for your child to watch!",
     "You learn the method here.",
     "Then you work from the written page, beside your child.",
   ],
   draft: [
     "This pack is still a draft.",
-    "If it clashes with how your school teaches…",
+    "If anything clashes with how your school teaches…",
     "Follow the school.",
   ],
   plain: ["Here’s the idea."],
   school: ["And here’s how school typically teaches it."],
-  mix: ["One mix-up to watch for."],
-  tonight: ["Tonight’s activity.", "Just the outline."],
+  mix: ["Here’s one mix-up to watch for."],
+  tonight: [
+    "Tonight’s activity.",
+    "This is the task outline — look at the written instructions for the full task.",
+  ],
   criteria: ["Here’s what you’re aiming for."],
   page: [
     "When you’re ready to sit down together…",
     "Open the written page.",
     "Keep it beside you for the steps, the words to say, and the live checks.",
-    "Don’t run the session from this film.",
+    "Don’t run the session from this film alone — return to the written pack when you sit down with your child.",
   ],
   youtube: [
     "Found this on YouTube?",
@@ -141,15 +144,23 @@ export function splitExampleSums(sentence: string): string[] {
   const text = forTheEar(sentence).trim();
   if (!text) return [];
 
-  const suchAs = text.match(/^(.*?)\bsuch as\b\s+(.+)$/i);
-  if (suchAs && looksLikeFactList(suchAs[2])) {
-    const lead = endSentence(suchAs[1].replace(/[,:]+$/, ""));
-    const facts = suchAs[2]
-      .split(/\s+—\s+or\s+|\s+or\s+/i)
-      .map((part) => part.trim().replace(/[.!?]+$/, ""))
-      .filter(Boolean)
-      .map((fact, index) => endSentence(index === 0 ? `Such as: ${fact}` : `Or: ${fact}`));
-    return [lead, ...facts].filter(Boolean);
+  // "such as …" / "such as: …" — put the link on the first example clip, not a lone "such as."
+  const suchAs = text.match(/^(.*?)\bsuch as\b[:\s]+(.+)$/i);
+  if (suchAs) {
+    const list = suchAs[2].replace(/^:\s*/, "");
+    if (looksLikeFactList(list)) {
+      const lead = endSentence(suchAs[1].replace(/[,:]+$/, ""));
+      const commaParts = list.split(/\s*,\s*/).map((part) => part.trim()).filter(Boolean);
+      const parts =
+        commaParts.length >= 2 && commaParts.filter((part) => MATH_FACT.test(part)).length >= 2
+          ? commaParts
+          : list.split(/\s+—\s+or\s+|\s+or\s+/i);
+      const facts = parts
+        .map((part) => part.trim().replace(/[.!?]+$/, ""))
+        .filter((part) => part && MATH_FACT.test(part))
+        .map((fact, index) => endSentence(index === 0 ? `Such as: ${fact}` : `Or: ${fact}`));
+      if (facts.length >= 2) return [lead, ...facts].filter(Boolean);
+    }
   }
 
   const colon = text.match(/^(.*?):\s*(.+)$/);
@@ -253,9 +264,8 @@ function checkBeats(topic: Topic): VideoBeat[] {
   return [
     ...linkBeats(["One check from the page."], PAUSE.aside, "aside", { guide: "listen" }),
     ...beatsFromClips(spokenClips(item.prompt), PAUSE.item, "key", { guide: "listen" }),
-    ...beatsFromClips(spokenClips(`You want to see: ${item.looksLike}`), PAUSE.item, "key", {
-      guide: "listen",
-    }),
+    ...linkBeats(["Here’s what you want to see."], PAUSE.aside, "key", { guide: "listen" }),
+    ...beatsFromClips(spokenClips(item.looksLike), PAUSE.item, "key", { guide: "listen" }),
   ];
 }
 

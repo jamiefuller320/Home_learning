@@ -32,7 +32,7 @@ export const factsWithin10: Topic = {
     inPlainEnglish:
       "A number fact is a small truth such as 6 + 4 = 10 or 7 − 2 = 5. Fluency does not mean shouting answers against a timer. It means the child does not have to start at 1 and climb every time. Fingers, pictures, and objects are allowed. The child uses them to see 6 and 4 making 10, before the fact lives in their head.",
     howSchoolTeachesIt:
-      "Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts. They will teach families of facts together: 6 + 4, 4 + 6, 10 − 4, 10 − 6. School often calls that pair a number bond: two parts that make a whole. The name is just a label for that idea.",
+      "Most schools use a ten-frame — two rows of five. They pair that with a part–whole picture: one whole number made of two parts. They will teach families of facts together, such as: 6 + 4, 4 + 6, 10 − 4, 10 − 6. School often calls that pair a number bond: two parts that make a whole. The name is just a label for that idea.",
     sayThis: [
       "6 and what make 10?",
       "If 4 is one part and 6 is the other part, what is the whole?",
@@ -48,7 +48,8 @@ export const factsWithin10: Topic = {
       {
         misconception: "They can do 3 + 2 with objects but go blank when they see 3 + 2 written.",
         why: "They can see it with objects first. The written 3 + 2 is a later step, not a different sum.",
-        instead: "Build it with objects, say it in words, then show the symbols written underneath — not as the starting point.",
+        instead:
+          "Build it with objects, say it in words, then show the symbols written underneath — don’t use words and symbols as the starting point.",
       },
       {
         misconception: "They always count all, even for 9 + 1.",
@@ -64,7 +65,7 @@ export const factsWithin10: Topic = {
     activity: {
       title: "Make 10 in two colours",
       steps: [
-        "Fill the frame with 6 of one type. Ask how many empty spaces, then fill them with the other type. Say “6 and 4 make 10”.",
+        "Fill 6 spaces on the frame with one colour or type of object. Ask how many empty spaces, then fill them with the other type. Say “6 and 4 make 10”.",
         "Tip them out and hide the 4. Ask “I still have 6. How many are hiding if the whole was 10?”",
         "Repeat with 5 and 5, then 9 and 1. Keep the language: part, part, whole.",
         "If that is steady, try 7 + 2 on the frame without making 10, just to see a fact that is not a bond to 10.",
@@ -74,7 +75,7 @@ export const factsWithin10: Topic = {
     check: [
       {
         prompt: "Show 8 on the frame. How many more to make 10?",
-        looksLike: "They see 2 empty spaces, or count the empties once.",
+        looksLike: "They can say there are 2 empty spaces, or count each empty cell once.",
         notYet: "They recount all 8 from the start and still cannot name the complement.",
         nudge: "Count the empty spaces on the frame, or ask what goes with 8 to make 10.",
       },
@@ -92,7 +93,8 @@ export const factsWithin10: Topic = {
       },
     ],
     stretch: "Ask “7 and 3 make 10. What is 3 and 7?” If they can swap the two parts and still get 10, the idea is sticking.",
-    stopRule: "Fifteen minutes or three bonds, whichever comes first. If they get silly or tearful, pack the objects away mid-success.",
+    stopRule:
+      "Fifteen minutes, or three number bonds, is plenty — whichever comes first. If they get silly or tearful, pack the objects away mid-success.",
   },
   reviewStatus: "draft",
   parentVideo: {

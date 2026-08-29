@@ -1,8 +1,8 @@
 # Parent video script · Number facts within 10
 
 Topic id: `facts-within-10`  
-Script hash: `4140ef3a6c234bc7`  
-Beats: 48  
+Script hash: `eb949f0ad404d82e`  
+Beats: 51  
 
 Compiled from the written pack. **Edit the topic file to change wording** — this dump is for review, not a second authoring path.
 
@@ -24,6 +24,26 @@ Compiled from the written pack. **Edit the topic file to change wording** — th
 - Rewrote the pack to: explain the bond, then “The name is just a label for that idea.”
 - Spoken-delivery check now blocks `worksheet brand` / `not a … brand` so this does not slip back into a film.
 
+## 2026-08-29 script comments (same decision rules)
+
+Applied open `parent-video` notes from the script viewer. Method and intent first; not a blind paste of “clearer” text. Duplicate open-line note declined.
+
+| Note | Change |
+| --- | --- |
+| Open too short | “This is a quick parent briefing.” |
+| If it clashes | “If anything clashes…” |
+| Ten-frame aside | Em-dash so “two rows of five” is its own aside clip |
+| Families of facts | “such as:” linking; splitter keeps “Such as:” on the first example |
+| Mix-up cue | “Here’s one mix-up…” |
+| Starting point | “don’t use words and symbols as the starting point” |
+| Just the outline | Fuller outline + point to written instructions |
+| Fill the frame | “Fill 6 spaces… with one colour or type of object” |
+| Stop rule | “Fifteen minutes, or three number bonds, is plenty…” |
+| You want to see / They see | Separate cue beat; looksLike states empty spaces clearly |
+| Film handoff | Longer return-to-pack line |
+
+Rehearsal report is stale until `npm run rehearse:parent-video -- facts-within-10` is re-run (script hash changed).
+
 ## Spoken delivery check
 
 _No findings._
@@ -34,12 +54,12 @@ _No findings._
 _Home Learning · Year 1 maths · draft_
 
 1. `[title]` (0.50s gap) Number facts within 10.
-2. `[section]` (0.58s gap) Quick parent briefing.
+2. `[section]` (0.58s gap) This is a quick parent briefing.
 3. `[key]` (0.58s gap) Not a film for your child to watch!
 4. `[teach]` (0.58s gap) You learn the method here.
 5. `[teach]` (0.36s gap) Then you work from the written page, beside your child.
 6. `[aside]` (0.58s gap) This pack is still a draft…
-7. `[aside]` (0.58s gap) If it clashes with how your school teaches…
+7. `[aside]` (0.58s gap) If anything clashes with how your school teaches…
 8. `[aside]` (0.70s gap) Follow the school…
 
 ## plain · In plain English
@@ -58,34 +78,36 @@ _The idea_
 _At school_
 
 1. `[section]` (0.50s gap) And here’s how school typically teaches it.
-2. `[teach]` (0.36s gap) Most schools use a ten-frame (two rows of five) and a part–whole picture: one whole number made of two parts.
-3. `[teach]` (0.36s gap) They will teach families of facts together.
-4. `[example]` (0.50s gap) 6 plus 4.
-5. `[example]` (0.50s gap) 4 plus 6.
-6. `[example]` (0.50s gap) 10 take away 4.
-7. `[example]` (0.50s gap) 10 take away 6.
-8. `[teach]` (0.36s gap) School often calls that pair a number bond: two parts that make a whole.
-9. `[teach]` (0.70s gap) The name is just a label for that idea.
+2. `[teach]` (0.36s gap) Most schools use a ten-frame.
+3. `[teach]` (0.36s gap) Two rows of five.
+4. `[teach]` (0.36s gap) They pair that with a part–whole picture: one whole number made of two parts.
+5. `[teach]` (0.36s gap) They will teach families of facts together.
+6. `[example]` (0.50s gap) Such as: 6 plus 4.
+7. `[example]` (0.50s gap) Or: 4 plus 6.
+8. `[example]` (0.50s gap) Or: 10 take away 4.
+9. `[example]` (0.50s gap) Or: 10 take away 6.
+10. `[teach]` (0.70s gap) School often calls that pair a number bond: two parts that make a whole.
 
 ## mix · They can do 3 + 2 with objects but go blank when they see 3 + 2 written.
 
 _Watch for this_
 
-1. `[section]` (0.50s gap) One mix-up to watch for.
+1. `[section]` (0.50s gap) Here’s one mix-up to watch for.
 2. `[example]` (0.50s gap) They can do 3 plus 2 with objects but go blank when they see 3 plus 2 written.
 3. `[key]` (0.36s gap) Build it with objects, say it in words, then show the symbols written underneath.
-4. `[key]` (0.70s gap) Not as the starting point.
+4. `[key]` (0.70s gap) Don’t use words and symbols as the starting point.
 
 ## tonight · Make 10 in two colours
 
 _Tonight · outline_
 
 1. `[section]` (0.58s gap) Tonight’s activity.
-2. `[section]` (0.36s gap) Just the outline.
+2. `[section]` (0.36s gap) This is the task outline — look at the written instructions for the full task.
 3. `[title]` (0.50s gap) Make 10 in two colours.
-4. `[teach]` (0.36s gap) Fill the frame with 6 of one type.
+4. `[teach]` (0.36s gap) Fill 6 spaces on the frame with one colour or type of object.
 5. `[teach]` (0.36s gap) Ask how many empty spaces, then fill them with the other type.
-6. `[aside]` (0.70s gap) Fifteen minutes or three bonds, whichever comes first…
+6. `[aside]` (0.36s gap) Fifteen minutes, or three number bonds, is plenty…
+7. `[aside]` (0.70s gap) Whichever comes first…
 
 ## criteria · What good looks like
 
@@ -96,7 +118,8 @@ _Tonight · criteria_
 3. `[aside]` (0.58s gap) One check from the page…
 4. `[key]` (0.50s gap) Show 8 on the frame.
 5. `[key]` (0.50s gap) How many more to make 10?
-6. `[key]` (0.70s gap) You want to see: They see 2 empty spaces, or count the empties once.
+6. `[key]` (0.58s gap) Here’s what you want to see.
+7. `[key]` (0.70s gap) They can say there are 2 empty spaces, or count each empty cell once.
 
 ## page · Open the written pack when you start
 
@@ -105,7 +128,7 @@ _Use the page_
 1. `[handoff]` (0.58s gap) When you’re ready to sit down together…
 2. `[handoff]` (0.58s gap) Open the written page.
 3. `[handoff]` (0.58s gap) Keep it beside you for the steps, the words to say, and the live checks.
-4. `[handoff]` (0.58s gap) Don’t run the session from this film.
+4. `[handoff]` (0.58s gap) Don’t run the session from this film alone — return to the written pack when you sit down with your child.
 5. `[handoff]` (0.58s gap) Found this on YouTube?
 6. `[handoff]` (0.70s gap) Use the link in the video description to open that page.
 
