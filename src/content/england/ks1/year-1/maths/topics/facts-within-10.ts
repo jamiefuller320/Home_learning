@@ -96,7 +96,7 @@ export const factsWithin10: Topic = {
   },
   reviewStatus: "draft",
   parentVideo: {
-    src: "/videos/facts-within-10-parent-briefing-v2.mp4",
+    src: "/videos/facts-within-10-parent-briefing-v3.mp4",
     caption:
       "A short parent briefing: the method, tonight’s outline, and what good looks like. Keep this page open beside you for the steps, prompts, and checks — do not run the session from the film alone.",
   },

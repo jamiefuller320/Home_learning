@@ -10,6 +10,7 @@ import {
   spokenCorpus,
   takeSentences,
 } from "../src/lib/parent-video-script";
+import { PARENT_VIDEO_TTS } from "../src/lib/parent-video-voice";
 
 const script = buildParentVideoScript(factsWithin10);
 const spoken = spokenCorpus(script);
@@ -24,9 +25,9 @@ assert.ok(
   beats.every((beat) => beat.spoken.length > 0 && beat.spoken.length < 280),
   "each beat should stay short enough for Kokoro pacing",
 );
-assert.ok(beats.some((beat) => beat.pauseAfter >= 0.5), "list and section beats need a real pause");
+assert.ok(beats.some((beat) => beat.pauseAfter >= 0.5), "section beats need a real pause");
 
-assert.match(spoken, /short parent briefing/i);
+assert.match(spoken, /Quick parent briefing/i);
 assert.match(spoken, /not a film for your child/i);
 assert.match(spoken, /written page/i);
 assert.match(spoken, /follow the school/i);
@@ -38,7 +39,7 @@ assert.match(spoken, /number bond/i);
 assert.ok(spoken.toLowerCase().includes(factsWithin10.parentBriefing.youAreReadyWhen.toLowerCase().slice(0, 40)));
 assert.match(spoken, /fifteen minutes or three bonds/i);
 assert.match(spoken, /How many more to make 10/i);
-assert.match(spoken, /Do not run the session from this film/i);
+assert.match(spoken, /Don.?t run the session from this film/i);
 
 // Say-this and avoid lists stay on the written pack for live use beside the child.
 for (const line of sayThisLines(factsWithin10)) {
@@ -48,9 +49,13 @@ for (const line of factsWithin10.parentBriefing.avoidThis) {
   assert.ok(!spoken.includes(forTheEar(line)) && !spoken.includes(line), `avoidThis should not be filmed: ${line}`);
 }
 
-assert.equal(forTheEar("6 + 4 = 10 or 7 − 2 = 5"), "6 and 4 make 10... or 7 take away 2 equals 5");
+assert.equal(forTheEar("6 + 4 = 10 or 7 − 2 = 5"), "6 and 4 make 10 — or 7 take away 2 equals 5");
 assert.equal(forTheEar("They can do 3 + 2 with objects."), "They can do 3 plus 2 with objects.");
+assert.equal(forTheEar("Listen... then try."), "Listen — then try.");
 assert.deepEqual(takeSentences("One. Two. Three.", 2), ["One.", "Two."]);
+
+assert.equal(PARENT_VIDEO_TTS.voice, "bf_isabella");
+assert.ok(PARENT_VIDEO_TTS.speed >= 1 && PARENT_VIDEO_TTS.speed <= 1.15, "voice should sit near natural pace, not slow audiobook");
 
 const schoolVisuals = script.scenes
   .find((scene) => scene.id === "school")

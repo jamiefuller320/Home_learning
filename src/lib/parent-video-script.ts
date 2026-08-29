@@ -1,10 +1,11 @@
 import type { SayThisItem, Topic } from "@/content/schema";
 
+/** Gaps between clips — keep them short so the film does not drag under Kokoro. */
 export const PAUSE = {
-  short: 0.28,
-  sentence: 0.42,
-  item: 0.58,
-  section: 0.75,
+  short: 0.2,
+  sentence: 0.32,
+  item: 0.45,
+  section: 0.55,
 } as const;
 
 export type GuidePose = "present" | "point" | "listen";
@@ -46,32 +47,36 @@ function sayThisText(item: SayThisItem): string {
  */
 export const SCRIPT_LINKS = {
   open:
-    "This is a short parent briefing... not a film for your child to watch. You learn the method here. Then you work from the written page, beside your child.",
+    "Quick parent briefing — not a film for your child to watch! You learn the method here. Then you work from the written page, beside your child.",
   draft:
-    "This pack is still a draft. If it clashes with how your school teaches... follow the school.",
-  plain: "Here is the idea.",
-  school: "How school typically teaches it.",
+    "This pack is still a draft. If it clashes with how your school teaches — follow the school.",
+  plain: "Here’s the idea.",
+  school: "And here’s how school typically teaches it.",
   mix: "One mix-up to watch for.",
-  tonight: "Tonight’s activity, in outline only.",
-  criteria: "What you are aiming for.",
+  tonight: "Tonight’s activity — just the outline.",
+  criteria: "Here’s what you’re aiming for.",
   page:
-    "When you are ready to sit down together... open the written page. Keep it beside you for the steps, the words to say, and the live checks. Do not run the session from this film.",
+    "When you’re ready to sit down together — open the written page. Keep it beside you for the steps, the words to say, and the live checks. Don’t run the session from this film.",
   youtube:
-    "If you found this on YouTube... use the link in the video description to open that page.",
+    "Found this on YouTube? Use the link in the video description to open that page.",
   close:
-    "If you teach Year 1... tell us whether the method matches your school. The written pack is the source.",
+    "If you teach Year 1 — tell us whether the method matches your school. The written pack is the source.",
 } as const;
 
-/** Kokoro has no SSML. Punctuation and short clips are the only pacing levers. */
+/**
+ * Kokoro has no SSML. Punctuation shapes pitch and pause:
+ * questions lift, em-dashes become light holds, commas keep flow.
+ */
 export function forTheEar(text: string): string {
   return text
     .replace(/(\d)\s*[+＋]\s*(\d)\s*=\s*(\d)/g, "$1 and $2 make $3")
     .replace(/(\d)\s*[−–]\s*(\d)\s*=\s*(\d)/g, "$1 take away $2 equals $3")
     .replace(/(\d)\s*[+＋]\s*(\d)/g, "$1 plus $2")
     .replace(/(\d)\s*[−–]\s*(\d)/g, "$1 take away $2")
-    .replace(/ make (\d+) or /g, " make $1... or ")
-    .replace(/ — /g, "... ")
+    .replace(/ make (\d+) or /g, " make $1 — or ")
+    .replace(/ — /g, " — ")
     .replace(/ – /g, ", ")
+    .replace(/\.\.\./g, " — ")
     .replace(/\s+/g, " ")
     .trim();
 }
