@@ -14,6 +14,7 @@
 import { spawnSync } from "node:child_process";
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import type { Topic } from "../src/content/schema";
 import { getTopicById } from "../src/content/england/ks1/year-1/maths/topics";
 import { deliveryBlocksProduction } from "../src/lib/parent-video-delivery";
 import {
@@ -29,11 +30,14 @@ import { PARENT_VIDEO_TTS } from "../src/lib/parent-video-voice";
 
 const ROOT = path.resolve(__dirname, "..");
 const topicId = process.argv[2] || "facts-within-10";
-const topic = getTopicById(topicId);
-if (!topic) {
-  console.error(`Unknown topic ${topicId}`);
-  process.exit(1);
+
+function requireTopic(id: string): Topic {
+  const found = getTopicById(id);
+  if (!found) throw new Error(`Unknown topic ${id}`);
+  return found;
 }
+
+const topic = requireTopic(topicId);
 
 function run(command: string, args: string[], timeoutMs = 60_000) {
   const result = spawnSync(command, args, { encoding: "utf8", timeout: timeoutMs });
