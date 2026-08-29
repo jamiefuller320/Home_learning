@@ -9,12 +9,8 @@ export function SkillsTree({ topics }: { topics: Topic[] }) {
   const ordered = sortTopicsByPrerequisites(topics);
 
   return (
-    <nav aria-label="Year 1 maths skills tree" className="rounded-2xl border border-rule bg-white/70 p-5">
-      <h2 className="serif text-2xl text-ink">Skills tree</h2>
-      <p className="mt-2 text-ink-soft">
-        Topics build on each other. If something feels unclear, follow the link back a step rather than pushing on.
-      </p>
-      <ol className="mt-6 space-y-4">
+    <nav aria-label="Year 1 maths skills tree">
+      <ol className="space-y-4">
         {ordered.map((topic) => {
           const prerequisites = getPrerequisiteTopics(topic, topics);
 

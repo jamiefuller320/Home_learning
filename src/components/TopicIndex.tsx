@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import type { Topic } from "@/content/schema";
 import { countFinishedBriefings, readAllProgress } from "@/lib/progress";
-import { SkillsTree } from "./SkillsTree";
 import { TopicCard } from "./TopicCard";
 
 export function TopicIndex({ topics }: { topics: Topic[] }) {
@@ -25,10 +24,7 @@ export function TopicIndex({ topics }: { topics: Topic[] }) {
       <p className="text-sm text-ink-soft">
         {finishedCount} of {topics.length} briefings marked ready on this device.
       </p>
-      <div className="mt-6">
-        <SkillsTree topics={topics} />
-      </div>
-      <div className="mt-10 space-y-4">
+      <div className="mt-6 space-y-4">
         {topics.map((topic) => (
           <TopicCard key={topic.id} topic={topic} briefingDone={done[topic.slug]} />
         ))}
