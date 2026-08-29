@@ -8,36 +8,80 @@ export function escapeHtml(value: string): string {
     .replaceAll('"', "&quot;");
 }
 
-/** Recurring adult guide — not a child, not a cartoon teacher. Same drawing, three poses. */
-export function guideSvg(pose: GuidePose): string {
-  const arm =
+export type GuideSize = "corner" | "feature";
+
+/**
+ * Recurring adult guide character — not a child, not a cartoon teacher.
+ * Same person every film; pose changes with the beat. `feature` is for
+ * beats with no diagram so the character can carry the frame.
+ */
+export function guideSvg(pose: GuidePose, size: GuideSize = "corner"): string {
+  const smile =
+    pose === "listen"
+      ? `<path d="M92 78 q10 4 20 0" fill="none" stroke="#1d2a28" stroke-width="2.2" stroke-linecap="round"/>`
+      : pose === "point"
+        ? `<path d="M92 76 q10 8 20 0" fill="none" stroke="#1d2a28" stroke-width="2.4" stroke-linecap="round"/>`
+        : `<path d="M92 77 q10 6 20 0" fill="none" stroke="#1d2a28" stroke-width="2.2" stroke-linecap="round"/>`;
+
+  const brows =
+    pose === "listen"
+      ? `<path d="M78 58 q8 -6 16 0" fill="none" stroke="#1d2a28" stroke-width="2" stroke-linecap="round"/>
+         <path d="M108 58 q8 -6 16 0" fill="none" stroke="#1d2a28" stroke-width="2" stroke-linecap="round"/>`
+      : pose === "point"
+        ? `<path d="M78 60 q8 -8 16 -2" fill="none" stroke="#1d2a28" stroke-width="2" stroke-linecap="round"/>
+           <path d="M108 58 q8 -8 16 -2" fill="none" stroke="#1d2a28" stroke-width="2" stroke-linecap="round"/>`
+        : `<path d="M78 60 q8 -5 16 0" fill="none" stroke="#1d2a28" stroke-width="2" stroke-linecap="round"/>
+           <path d="M108 60 q8 -5 16 0" fill="none" stroke="#1d2a28" stroke-width="2" stroke-linecap="round"/>`;
+
+  const leftArm =
+    pose === "listen"
+      ? `<path d="M72 128 C48 148 52 172 78 178" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>
+         <ellipse cx="62" cy="118" rx="14" ry="11" fill="#c4a574"/>`
+      : `<path d="M78 132 C62 158 70 176 88 180" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`;
+
+  const rightArm =
     pose === "point"
-      ? `<path d="M62 86 C78 80 96 70 112 58" fill="none" stroke="#164843" stroke-width="6" stroke-linecap="round"/>
-         <circle cx="114" cy="56" r="5" fill="#c4a574"/>`
+      ? `<path d="M132 128 C168 112 198 88 222 68" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>
+         <circle cx="226" cy="64" r="8" fill="#c4a574"/>`
       : pose === "listen"
-        ? `<path d="M38 92 C28 104 30 118 42 122" fill="none" stroke="#164843" stroke-width="6" stroke-linecap="round"/>
-           <ellipse cx="34" cy="78" rx="9" ry="7" fill="#c4a574"/>`
-        : `<path d="M40 96 C34 110 38 120 48 122" fill="none" stroke="#164843" stroke-width="6" stroke-linecap="round"/>
-           <path d="M80 96 C86 110 82 120 72 122" fill="none" stroke="#164843" stroke-width="6" stroke-linecap="round"/>`;
+        ? `<path d="M132 132 C148 158 142 176 124 180" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`
+        : `<path d="M132 132 C148 158 142 176 124 180" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`;
 
   const mug =
     pose === "listen"
       ? ""
-      : `<rect x="70" y="92" width="18" height="16" rx="3" fill="#f4efe6" stroke="#8a5a20" stroke-width="2"/>
-         <path d="M88 96 h6 a5 5 0 0 1 0 10 h-6" fill="none" stroke="#8a5a20" stroke-width="2"/>`;
+      : `<g transform="translate(118 148)">
+           <rect x="0" y="0" width="28" height="24" rx="4" fill="#f4efe6" stroke="#8a5a20" stroke-width="2.5"/>
+           <path d="M28 6 h8 a7 7 0 0 1 0 14 h-8" fill="none" stroke="#8a5a20" stroke-width="2.5"/>
+           <ellipse cx="14" cy="3" rx="10" ry="3" fill="#d8c4a0" opacity="0.7"/>
+         </g>`;
 
-  const tilt = pose === "listen" ? `transform="rotate(-8 60 70)"` : "";
+  const tilt = pose === "listen" ? `transform="rotate(-6 102 120)"` : "";
+  const klass = size === "feature" ? "guide guide-feature" : "guide guide-corner";
 
-  return `<svg class="guide" viewBox="0 0 128 150" aria-hidden="true">
+  return `<svg class="${klass}" viewBox="0 0 240 220" aria-hidden="true">
     <g ${tilt}>
-      <circle cx="60" cy="38" r="20" fill="#c4a574"/>
-      <circle cx="53" cy="36" r="2.4" fill="#1d2a28"/>
-      <circle cx="67" cy="36" r="2.4" fill="#1d2a28"/>
-      <path d="M44 36 h8 M68 36 h8" stroke="#1d2a28" stroke-width="1.6" stroke-linecap="round"/>
-      <path d="M54 46 q6 5 12 0" fill="none" stroke="#1d2a28" stroke-width="1.8" stroke-linecap="round"/>
-      <rect x="38" y="58" width="44" height="52" rx="16" fill="#1f5f59"/>
+      <!-- soft ground shadow -->
+      <ellipse cx="108" cy="206" rx="54" ry="8" fill="#1d2a28" opacity="0.08"/>
+      <!-- hair -->
+      <ellipse cx="102" cy="52" rx="42" ry="36" fill="#3a2a1c"/>
+      <!-- head -->
+      <circle cx="102" cy="64" r="34" fill="#c4a574"/>
+      <!-- hair fringe -->
+      <path d="M68 54 C78 34 126 34 136 54 C120 48 84 48 68 54" fill="#3a2a1c"/>
+      ${brows}
+      <!-- eyes -->
+      <circle cx="88" cy="66" r="4" fill="#1d2a28"/>
+      <circle cx="116" cy="66" r="4" fill="#1d2a28"/>
+      <circle cx="89.5" cy="64.5" r="1.2" fill="#f4efe6"/>
+      <circle cx="117.5" cy="64.5" r="1.2" fill="#f4efe6"/>
+      ${smile}
+      <!-- torso -->
+      <path d="M58 108 C62 96 142 96 146 108 L152 176 C152 188 62 188 58 176 Z" fill="#1f5f59"/>
+      <path d="M78 108 C92 118 112 118 126 108" fill="none" stroke="#164843" stroke-width="3" stroke-linecap="round"/>
       ${mug}
-      ${arm}
+      ${leftArm}
+      ${rightArm}
     </g>
   </svg>`;
 }
@@ -83,6 +127,15 @@ export function visualHtml(visual: VideoVisual): string {
   return listHtml(visual.items, visual.highlight);
 }
 
+/** Slide body: diagram when present; otherwise feature the guide character. */
+export function slideVisualSlot(beatVisual: VideoVisual | undefined, pose: GuidePose): string {
+  if (beatVisual) {
+    return `<div class="visual">${visualHtml(beatVisual)}</div>
+  ${guideSvg(pose, "corner")}`;
+  }
+  return `<div class="visual visual-character">${guideSvg(pose, "feature")}</div>`;
+}
+
 export const SLIDE_CSS = `
     html, body { margin: 0; width: 1280px; height: 720px; }
     body {
@@ -98,6 +151,7 @@ export const SLIDE_CSS = `
     .layout { display: flex; gap: 40px; align-items: flex-start; }
     .copy { flex: 1 1 52%; min-width: 0; }
     .visual { flex: 1 1 42%; min-width: 0; }
+    .visual-character { display: flex; align-items: flex-end; justify-content: center; min-height: 420px; padding-top: 24px; }
     .line { font-size: 26px; line-height: 1.4; color: #3d4f4b; margin: 0 0 12px; max-width: 36rem; }
     .frame { display: grid; grid-template-columns: repeat(5, 52px); gap: 10px; margin: 8px 0 12px; }
     .cell { width: 52px; height: 52px; border-radius: 999px; border: 3px solid #1f5f59; background: transparent; }
@@ -119,6 +173,7 @@ export const SLIDE_CSS = `
     }
     .list-item { font-size: 22px; line-height: 1.35; color: #7a6d5c; margin: 0 0 10px; }
     .list-item.on { color: #1d2a28; font-weight: 700; }
-    .guide { position: absolute; left: 36px; bottom: 18px; width: 88px; height: auto; }
+    .guide-corner { position: absolute; left: 28px; bottom: 16px; width: 118px; height: auto; }
+    .guide-feature { width: 320px; height: auto; }
     .mark { position: absolute; right: 64px; bottom: 28px; color: #1f5f59; font-size: 16px; }
 `;

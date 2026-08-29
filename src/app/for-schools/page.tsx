@@ -62,9 +62,10 @@ export default function ForSchoolsPage() {
           asides (including the YouTube link reminder) are separate spoken beats so the delivery
           can change tone. We use a brighter British Kokoro voice a touch above natural pace;
           punctuation and short beats do the emphasis — this model has no markup for tone. The
-          adult with the mug is the same drawing in every film. The ten-frame and part–whole
-          picture change when the script reaches that fact. We will not generate footage of
-          children or invent a method picture that is not on the page.
+          adult guide character (mug, teal jumper) is the same drawing in every film — featured
+          when there is no diagram, tucked in the corner when the ten-frame or part–whole picture
+          is on screen. Those diagrams change when the script reaches that fact. We will not
+          generate footage of children or invent a method picture that is not on the page.
         </p>
       </section>
 

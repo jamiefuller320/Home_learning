@@ -22,7 +22,7 @@ import {
   type VideoScene,
 } from "../src/lib/parent-video-script";
 import { assertReadyToRender } from "../src/lib/parent-video-pipeline";
-import { escapeHtml, guideSvg, SLIDE_CSS, visualHtml } from "../src/lib/parent-video-visuals";
+import { escapeHtml, slideVisualSlot, SLIDE_CSS } from "../src/lib/parent-video-visuals";
 import { ttsSpeedForRole } from "../src/lib/parent-video-prosody";
 import { PARENT_VIDEO_TTS } from "../src/lib/parent-video-voice";
 
@@ -45,7 +45,7 @@ function run(command: string, args: string[], timeoutMs = 120_000) {
 }
 
 function slideHtml(scene: VideoScene, beat: VideoBeat): string {
-  const visual = beat.visual ? `<div class="visual">${visualHtml(beat.visual)}</div>` : "";
+  const pose = beat.guide ?? "present";
   return `<!doctype html>
 <html lang="en-GB">
 <head>
@@ -59,9 +59,8 @@ function slideHtml(scene: VideoScene, beat: VideoBeat): string {
       <h1>${escapeHtml(scene.heading)}</h1>
       <p class="line">${escapeHtml(beat.line)}</p>
     </div>
-    ${visual}
+    ${slideVisualSlot(beat.visual, pose)}
   </div>
-  ${guideSvg(beat.guide ?? "present")}
   <p class="mark">Home Learning · generated from the written pack</p>
 </body>
 </html>`;

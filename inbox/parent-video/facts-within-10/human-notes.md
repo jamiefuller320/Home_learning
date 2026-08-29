@@ -30,4 +30,8 @@ Applied open `parent-video` notes from the script viewer. Method and intent firs
 - Base speed `1.05` → `1.1` for a slightly more energetic delivery.
 - Re-rehearse before gated render; shipped mp4 still uses the previous voice until re-rendered.
 
-Rehearsal report is stale until `npm run rehearse:parent-video -- facts-within-10` is re-run (voice/speed changed).
+## 2026-08-29 guide character test (v5)
+
+- Stronger adult guide drawing (hair, brows, smile by pose) — still not a child / cartoon teacher.
+- Feature size when there is no diagram; corner when ten-frame / part–whole / list is on screen.
+- Re-render as `facts-within-10-parent-briefing-v5.mp4` with Alice @ 1.1.
