@@ -48,12 +48,12 @@ export function guideSvg(pose: GuidePose, size: GuideSize = "corner"): string {
           `<path d="M78 132 C68 155 74 172 90 178" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`
         : `<path d="M78 132 C62 158 70 176 88 180" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`;
 
-  // Corner guide sits bottom-left; diagram is upper-right — a short up-right jab, not a long noodle.
+  // Corner guide sits under the diagram; jab straight up at the frame, not off into empty space.
   const rightArm =
     pose === "point"
-      ? `<path d="M138 122 L178 78" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>
-         <circle cx="182" cy="74" r="9" fill="#c4a574"/>
-         <path d="M186 68 L198 58" fill="none" stroke="#c4a574" stroke-width="5" stroke-linecap="round"/>`
+      ? `<path d="M128 112 L128 38" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>
+         <circle cx="128" cy="30" r="9" fill="#c4a574"/>
+         <path d="M128 22 L128 12" fill="none" stroke="#c4a574" stroke-width="5" stroke-linecap="round"/>`
       : `<path d="M132 132 C148 158 142 176 124 180" fill="none" stroke="#164843" stroke-width="9" stroke-linecap="round"/>`;
 
   const mug =
@@ -140,8 +140,11 @@ export function visualHtml(visual: VideoVisual): string {
 export function slideVisualSlot(beatVisual: VideoVisual | undefined, pose: GuidePose): string {
   const resolved = resolveGuidePose(pose, Boolean(beatVisual));
   if (beatVisual) {
-    return `<div class="visual">${visualHtml(beatVisual)}</div>
-  ${guideSvg(resolved, "corner")}`;
+    // Keep the guide under the diagram so “point” aims at something on screen.
+    return `<div class="visual visual-with-guide">
+      ${visualHtml(beatVisual)}
+      ${guideSvg(resolved, "corner")}
+    </div>`;
   }
   return `<div class="visual visual-character">${guideSvg(resolved, "feature")}</div>`;
 }
@@ -161,6 +164,7 @@ export const SLIDE_CSS = `
     .layout { display: flex; gap: 40px; align-items: flex-start; }
     .copy { flex: 1 1 52%; min-width: 0; }
     .visual { flex: 1 1 42%; min-width: 0; }
+    .visual-with-guide { position: relative; padding-bottom: 112px; min-height: 280px; display: flex; flex-direction: column; align-items: flex-start; }
     .visual-character { display: flex; align-items: flex-end; justify-content: center; min-height: 420px; padding-top: 24px; }
     .line { font-size: 26px; line-height: 1.4; color: #3d4f4b; margin: 0 0 12px; max-width: 36rem; }
     .frame { display: grid; grid-template-columns: repeat(5, 52px); gap: 10px; margin: 8px 0 12px; }
@@ -183,7 +187,7 @@ export const SLIDE_CSS = `
     }
     .list-item { font-size: 22px; line-height: 1.35; color: #7a6d5c; margin: 0 0 10px; }
     .list-item.on { color: #1d2a28; font-weight: 700; }
-    .guide-corner { position: absolute; left: 28px; bottom: 16px; width: 118px; height: auto; }
+    .guide-corner { position: absolute; left: 72px; bottom: 0; width: 108px; height: auto; }
     .guide-feature { width: 320px; height: auto; }
     .mark { position: absolute; right: 64px; bottom: 28px; color: #1f5f59; font-size: 16px; }
 `;
