@@ -112,13 +112,13 @@ export function proposeCoversFromMisses(cases: EvalCase[], report: CoverageRepor
 export function evalCasesFromLanguageNotes(notes: LanguageNote[]): EvalCase[] {
   return notes
     .filter((note) => note.status === "done" || note.status === "declined")
-    .map((note) => ({
+    .map((note): EvalCase => ({
       id: `note-${note.id}`,
       topicId: note.topicId,
       excerpt: note.unclear.trim(),
       expectedCheck: note.status === "declined" ? null : "style",
       note: note.reviewNote || note.unclear,
-      source: "language-note" as const,
+      source: "language-note",
     }))
     .filter((item) => item.excerpt.length > 0);
 }
