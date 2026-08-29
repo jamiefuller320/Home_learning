@@ -54,6 +54,13 @@ Applied open `parent-video` notes from the script viewer. Method and intent firs
 - Feature size when there is no diagram; corner when ten-frame / part–whole / list is on screen.
 - Re-render as `facts-within-10-parent-briefing-v5.mp4` with Alice @ 1.1.
 
+## 2026-08-29 fix draft, goodbye, point arm (v6)
+
+- Dropped spoken “This pack is still a draft” and “draft” from the open kicker (page badge is enough). Kept school-takes-precedence aside.
+- Close ends with “Thanks for watching — enjoy the session together.” instead of restating the pack as source.
+- Point pose only when a diagram is on screen; short up-right jab toward the visual (no long noodle arm into empty space).
+- Re-render as `facts-within-10-parent-briefing-v6.mp4`.
+
 ## Spoken delivery check
 
 _No findings._
