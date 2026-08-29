@@ -47,7 +47,7 @@ function run(command: string, args: string[], timeoutMs = 60_000) {
   return result;
 }
 
-async function speak(text: string, dest: string, speed = PARENT_VIDEO_TTS.speed): Promise<void> {
+async function speak(text: string, dest: string, speed: number = PARENT_VIDEO_TTS.speed): Promise<void> {
   const key = process.env.FAL_KEY;
   if (!key) throw new Error("FAL_KEY is missing. Add it as a cloud or shell secret.");
 
