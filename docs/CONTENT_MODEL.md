@@ -67,7 +67,7 @@ If you cannot fit the idea into those budgets, split the topic.
 | `src` | Path under `public/`, usually `/videos/<id>-parent-briefing.mp4` |
 | `caption` | Say that the page is the source, and that the film is a reading |
 
-Do not invent method in the film. Compile spoken **beats** from existing topic fields (`src/lib/parent-video-script.ts`). Write those beats for the ear (punctuation, short clips, silence between thoughts). Do not dump a whole page paragraph into one TTS call.
+Do not invent method in the film. Compile spoken **beats** from existing topic fields (`src/lib/parent-video-script.ts`). Write those beats for the ear (punctuation, short clips, silence between thoughts). Do not dump a whole page paragraph into one TTS call. Recheck the compiled script with the same held-out judge as the page (`npm run judge:lessons`).
 
 Lesson pictures are ours: a recurring adult guide, a ten-frame, and a part–whole diagram. They must show a fact already in the pack. Do not generate classroom footage, children, or a cartoon teacher.
 

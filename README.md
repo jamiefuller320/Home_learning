@@ -23,6 +23,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
 npm run validate:content   # every topic must satisfy the content model
+npm run judge:lessons      # held-out second reader on packs, then compiled video scripts
 npm run build              # static export into /out
 npm run preview            # serve /out locally
 ```

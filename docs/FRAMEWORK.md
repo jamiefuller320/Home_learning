@@ -36,6 +36,8 @@ source material → topic map → draft pack → human review → published
 
 If a sentence is hard to picture, the parent (or we) flags it at the end of Stage 1 or Stage 2. Testers send the note with no GitHub account. It lands in `language_notes` for **review**, not as an automatic rewrite.
 
+A held-out judge (`src/lib/held-out-judge`, `npm run judge:lessons`) is a second reader. It does not rewrite. It scores the written pack, then the same checks again on the compiled video script. Checks: language accurate, meaning unambiguous (two-picture test), assumed knowledge, house style, and coherence after a change. Closed language notes become exam questions; clustered misses can be promoted into a new learning or probe. Declines stay sticky. The judge never publishes method.
+
 ### Daily processing
 
 Open notes are swept **once a day** (and on manual trigger) by the GitHub Action `.github/workflows/language-notes-process.yml`, which runs `npx tsx scripts/process-language-notes.ts route`.
