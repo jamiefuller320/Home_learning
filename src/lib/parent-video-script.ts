@@ -55,8 +55,8 @@ export const SCRIPT_LINKS = {
     "You learn the method here.",
     "Then you work from the written page, beside your child.",
   ],
+  /** School-takes-precedence aside — draft status stays a page badge, not spoken. */
   draft: [
-    "This pack is still a draft.",
     "If anything clashes with how your school teaches…",
     "Follow the school.",
   ],
@@ -81,7 +81,7 @@ export const SCRIPT_LINKS = {
   close: [
     "If you teach Year 1…",
     "Tell us whether the method matches your school.",
-    "The written pack is the source.",
+    "Thanks for watching — enjoy the session together.",
   ],
 } as const;
 
@@ -279,7 +279,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
   const scenes: VideoScene[] = [
     {
       id: "open",
-      kicker: "Home Learning · Year 1 maths · draft",
+      kicker: "Home Learning · Year 1 maths",
       heading: topic.title,
       beats: withFinalPause(
         [
@@ -365,7 +365,8 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
                         }
                       : undefined;
               return makeBeat(clip, isExample ? PAUSE.item : PAUSE.sentence, isExample ? "example" : "teach", {
-                guide: "point",
+                // Only point when a diagram is on screen — otherwise the arm aims at empty space.
+                guide: visual ? "point" : "present",
                 visual,
               });
             });
@@ -385,7 +386,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
             guide: "listen",
           }),
           ...beatsFromText(takeSentences(mix.instead, 1).join(" "), PAUSE.sentence, "key", {
-            guide: "point",
+            guide: "present",
           }),
         ],
         PAUSE.section,
@@ -429,7 +430,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       heading: "What good looks like",
       beats: withFinalPause(
         [
-          ...linkBeats(SCRIPT_LINKS.criteria, PAUSE.item, "section", { guide: "point" }),
+          ...linkBeats(SCRIPT_LINKS.criteria, PAUSE.item, "section", { guide: "present" }),
           ...beatsFromText(briefing.youAreReadyWhen, PAUSE.sentence, "key", {
             guide: "point",
             visual: {
@@ -450,7 +451,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       beats: withFinalPause(
         [
           ...linkBeats(SCRIPT_LINKS.page, PAUSE.aside, "handoff", { guide: "present" }),
-          ...linkBeats(SCRIPT_LINKS.youtube, PAUSE.aside, "handoff", { guide: "point" }),
+          ...linkBeats(SCRIPT_LINKS.youtube, PAUSE.aside, "handoff", { guide: "present" }),
         ],
         PAUSE.section,
       ),
