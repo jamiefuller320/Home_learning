@@ -9,6 +9,8 @@ export type StageMeta = {
   equipment: string;
 };
 
+export type StageMetaField = { key: keyof StageMeta; label: string };
+
 export const STAGE_1_META: StageMeta = {
   when: "Read this first, before sitting down with your child",
   why: "Learn the topic before teaching",
@@ -21,9 +23,15 @@ export const STAGE_2_META: StageMeta = {
   equipment: "Household items",
 };
 
-const FIELDS: { key: keyof StageMeta; label: string }[] = [
+export const STAGE_1_FIELDS: StageMetaField[] = [
   { key: "when", label: "When" },
   { key: "why", label: "Why" },
+  { key: "equipment", label: "Equipment" },
+];
+
+export const STAGE_2_FIELDS: StageMetaField[] = [
+  { key: "when", label: "When" },
+  { key: "why", label: "What" },
   { key: "equipment", label: "Equipment" },
 ];
 
@@ -31,17 +39,18 @@ export function StageMetaBox({
   when,
   why,
   equipment,
+  fields = STAGE_1_FIELDS,
   className = "",
-}: StageMeta & { className?: string }) {
+}: StageMeta & { fields?: StageMetaField[]; className?: string }) {
   const values: StageMeta = { when, why, equipment };
 
   return (
     <aside className={`stage-meta-box mt-4 rounded-2xl border border-rule bg-white/70 px-5 py-4 ${className}`.trim()}>
       <dl className="grid gap-4 sm:grid-cols-3">
-        {FIELDS.map(({ key, label }) => (
+        {fields.map(({ key, label }) => (
           <div key={key}>
             <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">{label}</dt>
-            <dd className="mt-1 text-ink leading-6">{values[key]}</dd>
+            <dd className="mt-1 text-ink leading-6 text-pretty">{values[key]}</dd>
           </div>
         ))}
       </dl>

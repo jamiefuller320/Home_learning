@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { BinderContinue } from "@/components/BinderContinue";
 import { BinderTabs, type BinderTabItem } from "@/components/BinderTabs";
 import { GlossaryIndex } from "@/components/GlossaryIndex";
-import { STAGE_1_META, STAGE_2_META, StageMetaBox } from "@/components/StageMetaBox";
+import { STAGE_1_META, STAGE_2_META, STAGE_2_FIELDS, StageMetaBox } from "@/components/StageMetaBox";
 import { emptyProgress, readProgress, writeProgress, type TopicProgress } from "@/lib/progress";
 
 export type LessonTabId = "summary" | "video" | "parent" | "tasks" | "check";
@@ -208,7 +208,7 @@ export function LessonBinder({
     body = (
       <>
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <StageMetaBox {...STAGE_2_META} className="mt-0 flex-1" />
+          <StageMetaBox {...STAGE_2_META} fields={STAGE_2_FIELDS} className="mt-0 flex-1" />
           <Link
             href={printPackHref}
             prefetch={false}

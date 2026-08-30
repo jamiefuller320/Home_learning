@@ -24,12 +24,12 @@ export const countingWithin100: Topic = {
   readyToProgress: ["1NPV-1"],
   sources: [NC_MATHS, DFE_Y1_MATHS],
   whyThisMatters:
-    "If counting is only the list that always starts at 1, children get stuck the moment school asks “what comes after 37?” Secure counting is the base for almost every later number idea.",
+    "If counting is only a list that always starts at 1, children get stuck the moment school asks “what comes after 37?” Secure counting is the base for almost every later number idea.",
   parentBriefing: {
     inPlainEnglish:
-      "Counting is not just reciting 1, 2, 3. Year 1 children need to start from any number, keep going past 20 and 30 without a wobble, and count backwards as well as forwards. They also need to count objects, not only words: one touch, one word, one thing.",
+      "Counting is not just reciting 1, 2, 3. Year 1 children need to start from any number, keep going past 20 and 30 without a wobble, and count backwards as well as forwards. They also need to count objects, not only words: one touch = one word = one thing.",
     howSchoolTeachesIt:
-      "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square. Teachers often start from a number in the middle — 16, 28, 45 — so children do not only rely on the count that always starts at 1. They will also count back, which feels much harder and is worth a little extra practice at home.",
+      "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square. Teachers often start from a number in the middle — 16, 28, 45 — so children do not only rely on a count that always starts at 1. They will also count back, which feels much harder and is worth a little extra practice at home.",
     sayThis: [
       {
         prompt: "Start at 14. What comes next?",
@@ -54,7 +54,7 @@ export const countingWithin100: Topic = {
         instead: "Slow down on 12–20. Say “thirteen, that’s three and ten” and show it with ten fingers plus three.",
       },
       {
-        misconception: "When counting objects they recount, skip, or say more words than things.",
+        misconception: "When counting objects they re-count, skip, or say more words than objects.",
         why: "Saying the list and matching it to objects are two skills.",
         instead: "Move each object as it is counted. No moving, no word.",
       },
@@ -62,7 +62,7 @@ export const countingWithin100: Topic = {
     youAreReadyWhen: "You can start at a random number under 40 and count on ten more, then back again, without treating it as a test.",
   },
   homePack: {
-    setup: "You need about 20 objects — or you can use the stairs or a short walk. Phones away. This should feel like a game, not a recitation exam.",
+    setup: "You need about 20 objects, or you can use the stairs or a short walk. Put phones away. This should feel like a game, not a recitation exam.",
     activity: {
       title: "Start anywhere",
       steps: [
@@ -76,7 +76,7 @@ export const countingWithin100: Topic = {
     check: [
       {
         prompt: "Start at 17. Count on to 25.",
-        looksLike: "They keep the sequence without going back to 1. A short pause is fine.",
+        looksLike: "They keep the sequence without going back to 1. Brief pauses are fine.",
         notYet: "They restart at 1, or jump 19 to 21, or stall and guess.",
         nudge: "Whisper the numbers after 17 together: 18, 19, 20… Keep going to 25.",
       },

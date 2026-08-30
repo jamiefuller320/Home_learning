@@ -20,7 +20,7 @@ export function HomeTasks({ topic }: { topic: Topic }) {
 
       <div>
         <h3 className="serif text-2xl text-ink">Set up</h3>
-        <div className="mt-3 text-lg leading-8 text-ink-soft">
+        <div className="mt-3 text-lg leading-8 text-ink-soft text-pretty">
           <GlossaryText text={homePack.setup} />
         </div>
       </div>
@@ -28,7 +28,7 @@ export function HomeTasks({ topic }: { topic: Topic }) {
       <div className="rounded-2xl border border-teal/30 bg-white p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">Tonight’s activity</p>
         <h3 className="serif mt-2 text-3xl text-ink">{homePack.activity.title}</h3>
-        <ol className="mt-5 list-decimal space-y-3 pl-5 text-lg leading-8 text-ink">
+        <ol className="mt-5 list-decimal space-y-3 pl-5 text-lg leading-8 text-ink text-pretty">
           {homePack.activity.steps.map((step) => (
             <li key={step}>
               <GlossaryText text={step} />
@@ -75,11 +75,11 @@ export function UnderstandingCheck({ topic }: { topic: Topic }) {
               <div className="mt-2 text-lg font-semibold text-ink">
                 <GlossaryText text={item.prompt} />
               </div>
-              <div className="mt-3 text-ink-soft">
+              <div className="mt-3 text-ink-soft text-pretty">
                 <span className="font-semibold text-sage">Looks like: </span>
                 <GlossaryText text={item.looksLike} />
               </div>
-              <div className="mt-1 text-ink-soft">
+              <div className="mt-1 text-ink-soft text-pretty">
                 <span className="font-semibold text-clay">Not yet: </span>
                 <GlossaryText text={item.notYet} />
               </div>
