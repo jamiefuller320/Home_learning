@@ -20,7 +20,6 @@ import path from "node:path";
 import { getTopicBySlug, year1MathsTopics } from "../src/content/england/ks1/year-1/maths/topics";
 import { presentationLearnings } from "../src/content/presentation-learnings";
 import {
-  assessPackRelease,
   groupSweepByLearning,
   mergePackReleaseFile,
   planGlobalRevisionSweep,
@@ -28,6 +27,7 @@ import {
   releaseBlockers,
   upsertReleaseEntry,
 } from "../src/lib/pack-release";
+import { assessPackReleaseServer } from "../src/lib/pack-release-server";
 
 const PACK_RELEASE_PATH = path.join(process.cwd(), "src/content/pack-release.json");
 
@@ -62,7 +62,7 @@ function printStatus(topicId: string) {
   if (!topic) throw new Error(`Unknown topic: ${topicId}`);
 
   const releaseFile = readPackReleaseFile();
-  const status = assessPackRelease(topic, releaseFile);
+  const status = assessPackReleaseServer(topic, releaseFile);
   const blockers = releaseBlockers(status);
 
   console.log(`\nPack release: ${status.topicTitle} (${status.topicId})`);

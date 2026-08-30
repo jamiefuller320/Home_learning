@@ -114,7 +114,7 @@ export function PackLearningReview() {
   }
 
   function exportGlobalSweep(topicId: string) {
-    const sweep = planGlobalRevisionSweep(topicId);
+    const sweep = planGlobalRevisionSweep(topicId, year1MathsTopics);
     downloadJson("global-revision-sweep.json", sweep);
     setMessage(
       `Downloaded global revision sweep triggered by ${topicId} — ${sweep.pending.length} pending proposal(s) across ${sweep.draftTopicIds.length} draft pack(s). Review and accept on this page, then export the apply queue.`,

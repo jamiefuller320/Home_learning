@@ -1,8 +1,6 @@
 import packReleaseFile from "@/content/pack-release.json";
 import type { ReviewStatus, Topic } from "@/content/schema";
 import { validateTopic, type ValidationIssue } from "@/content/validate";
-import { buildParentVideoScript } from "@/lib/parent-video-script";
-import { readRehearsalReport, scriptFingerprint } from "@/lib/parent-video-pipeline";
 import {
   filterPendingRevisions,
   groupRevisionsByTopic,
@@ -31,6 +29,7 @@ export type PackReleaseEntry = {
 
 export type VideoReleaseSignal =
   | { kind: "none" }
+  | { kind: "has-video" }
   | { kind: "missing" }
   | { kind: "stale"; reportHash: string; currentHash: string }
   | { kind: "failed" }
@@ -68,45 +67,20 @@ export function readPackReleaseFile(): PackReleaseFile {
   return packReleaseFile as PackReleaseFile;
 }
 
-export function assessVideoReleaseSignal(topic: Topic, root = process.cwd()): VideoReleaseSignal {
+export function assessVideoReleaseSignal(topic: Topic): VideoReleaseSignal {
   if (!topic.parentVideo) return { kind: "none" };
-
-  const script = buildParentVideoScript(topic);
-  const currentHash = scriptFingerprint(script);
-  const report = readRehearsalReport(root, topic.id);
-
-  if (!report) return { kind: "missing" };
-  if (report.scriptHash !== currentHash) {
-    return { kind: "stale", reportHash: report.scriptHash, currentHash };
-  }
-  if (report.status !== "pass") return { kind: "failed" };
-  return { kind: "current", reportHash: currentHash };
-}
-
-function videoBlocker(video: VideoReleaseSignal): string | null {
-  if (video.kind === "none") return null;
-  if (video.kind === "missing") {
-    return "parent video exists but rehearsal report is missing — run npm run rehearse:parent-video";
-  }
-  if (video.kind === "stale") {
-    return `rehearsal report is stale (${video.reportHash} vs ${video.currentHash}) — re-run rehearsal after pack edits`;
-  }
-  if (video.kind === "failed") {
-    return "rehearsal report failed — fix script and re-run rehearsal";
-  }
-  return null;
+  return { kind: "has-video" };
 }
 
 export function assessPackRelease(
   topic: Topic,
   releaseFile: PackReleaseFile = readPackReleaseFile(),
   decisions: LearningDecisionRecord[] = readCommittedDecisions(),
-  root = process.cwd(),
 ): PackReleaseStatus {
   const structuralIssues = validateTopic(topic);
   const pending = filterPendingRevisions(scanLearningRevisions([topic]), decisions);
   const entry = releaseFile.entries[topic.id];
-  const video = assessVideoReleaseSignal(topic, root);
+  const video = assessVideoReleaseSignal(topic);
   const hasVideo = video.kind !== "none";
 
   const automaticBlockers: string[] = [];
@@ -116,8 +90,6 @@ export function assessPackRelease(
   if (pending.length > 0) {
     automaticBlockers.push(`${pending.length} pending pack learning revision(s) for this lesson`);
   }
-  const videoIssue = videoBlocker(video);
-  if (videoIssue) automaticBlockers.push(videoIssue);
 
   const packRechecked = Boolean(entry?.packRecheckedAt);
   const videoRecheckRequired = hasVideo;
@@ -148,9 +120,8 @@ export function assessAllPackReleases(
   topics: Topic[],
   releaseFile: PackReleaseFile = readPackReleaseFile(),
   decisions: LearningDecisionRecord[] = readCommittedDecisions(),
-  root = process.cwd(),
 ): PackReleaseStatus[] {
-  return topics.map((topic) => assessPackRelease(topic, releaseFile, decisions, root));
+  return topics.map((topic) => assessPackRelease(topic, releaseFile, decisions));
 }
 
 export function releaseBlockers(status: PackReleaseStatus): string[] {
