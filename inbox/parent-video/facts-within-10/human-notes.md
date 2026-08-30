@@ -42,3 +42,10 @@ Applied open `parent-video` notes from the script viewer. Method and intent firs
 - Close ends with “Thanks for watching — enjoy the session together.” instead of restating the pack as source.
 - Point pose only when a diagram is on screen; short up-right jab toward the visual (no long noodle arm into empty space).
 - Re-render as `facts-within-10-parent-briefing-v6.mp4`.
+
+## 2026-08-30 ElevenLabs listen trial
+
+- Added optional fal ElevenLabs v3 provider (`Charlotte`, stability 0.4) behind `PARENT_VIDEO_TTS_PROVIDER=elevenlabs`.
+- Production default stays Kokoro until a human says the trial is comfortable to listen to.
+- Short collage: `inbox/parent-video/facts-within-10/elevenlabs-trial/listen.mp3`
+- Re-run: `npm run trial:elevenlabs-parent-video -- facts-within-10` (add `--full` for every beat).

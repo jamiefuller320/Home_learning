@@ -26,7 +26,7 @@ import {
   writeScriptPreview,
   type RehearsalBeat,
 } from "../src/lib/parent-video-pipeline";
-import { PARENT_VIDEO_TTS } from "../src/lib/parent-video-voice";
+import { PARENT_VIDEO_TTS, speakParentVideo } from "../src/lib/parent-video-voice";
 import { ttsSpeedForRole, type ProsodyRole } from "../src/lib/parent-video-prosody";
 
 const ROOT = path.resolve(__dirname, "..");
@@ -48,30 +48,8 @@ function run(command: string, args: string[], timeoutMs = 60_000) {
 }
 
 async function speak(text: string, dest: string, speed: number = PARENT_VIDEO_TTS.speed): Promise<void> {
-  const key = process.env.FAL_KEY;
-  if (!key) throw new Error("FAL_KEY is missing. Add it as a cloud or shell secret.");
-
-  const response = await fetch(PARENT_VIDEO_TTS.endpoint, {
-    method: "POST",
-    headers: {
-      Authorization: `Key ${key}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      prompt: text,
-      voice: PARENT_VIDEO_TTS.voice,
-      speed,
-    }),
-  });
-  if (!response.ok) {
-    throw new Error(`TTS failed (${response.status}): ${(await response.text()).slice(0, 200)}`);
-  }
-  const payload = (await response.json()) as { audio?: { url?: string } };
-  const url = payload.audio?.url;
-  if (!url) throw new Error("TTS returned no audio URL.");
-  const audio = await fetch(url);
-  if (!audio.ok) throw new Error(`Could not download TTS audio (${audio.status}).`);
-  writeFileSync(dest, Buffer.from(await audio.arrayBuffer()));
+  const spoken = await speakParentVideo({ text, speed });
+  writeFileSync(dest, spoken.bytes);
 }
 
 function audioSeconds(wavPath: string): number {
