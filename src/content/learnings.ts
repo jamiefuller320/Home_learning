@@ -6,6 +6,7 @@
  * - Each learning has a stable id. Do not rewrite an id’s meaning — add a new learning that `supersedes` it.
  * - Declined proposals are sticky (see learning-decisions.json + maintainer session store).
  * - Accepted proposals edit the topic file; the old wording disappears so it is not re-proposed.
+ * - Presentation/layout rules live in presentation-learnings.ts and shared components (see PackProse).
  */
 
 export type LearningKind = "phrase" | "structure";

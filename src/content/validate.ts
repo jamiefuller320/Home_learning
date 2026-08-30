@@ -1,6 +1,11 @@
 import { sortTopicsByPrerequisites } from "./england/ks1/year-1/maths/curriculum";
 import { glossaryTerms } from "./glossary";
 import { CONTENT_LIMITS, type SayThisItem, type Topic } from "./schema";
+import {
+  filterPendingRevisions,
+  readCommittedDecisions,
+  scanLearningRevisions,
+} from "@/lib/learning-revisions";
 
 export type ValidationIssue = {
   topicId: string;
@@ -137,6 +142,21 @@ export function validateTopic(topic: Topic): ValidationIssue[] {
   return issues;
 }
 
+export function validateTopicReviewReady(topic: Topic): ValidationIssue[] {
+  if (topic.reviewStatus !== "reviewed") return [];
+
+  const pending = filterPendingRevisions(scanLearningRevisions([topic]), readCommittedDecisions());
+  if (pending.length === 0) return [];
+
+  return [
+    {
+      topicId: topic.id,
+      field: "reviewStatus",
+      message: `reviewed pack still has ${pending.length} pending learning revision(s) — apply or decline before publishing`,
+    },
+  ];
+}
+
 export function validateGlossary(relatedTopicIds: Set<string>): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
 
@@ -185,6 +205,7 @@ export function validateTopics(topics: Topic[]): ValidationIssue[] {
     ids.add(topic.id);
     slugs.add(topic.slug);
     issues.push(...validateTopic(topic));
+    issues.push(...validateTopicReviewReady(topic));
   }
 
   for (const topic of topics) {

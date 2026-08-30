@@ -3,6 +3,8 @@
  * Restyle via the `stage-meta-box` class (globals) or the classes on this component.
  */
 
+import { PackProse } from "@/components/PackProse";
+
 export type StageMeta = {
   when: string;
   why: string;
@@ -56,7 +58,7 @@ export function StageMetaBox({
         {fields.map(({ key, label }) => (
           <div key={key}>
             <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">{label}</dt>
-            <dd className="mt-1 text-ink leading-6 text-pretty">{values[key]}</dd>
+            <PackProse as="dd" className="mt-1 text-ink leading-6">{values[key]}</PackProse>
           </div>
         ))}
       </dl>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
+import { presentationLearnings } from "@/content/presentation-learnings";
 import {
   buildDecisionsExport,
   clearPendingApply,
@@ -10,6 +11,11 @@ import {
   recordSessionDecision,
   type SessionLearningStore,
 } from "@/lib/learning-decisions-store";
+import {
+  assessAllPacks,
+  planGlobalRevisionSweep,
+  summarizeCompleteness,
+} from "@/lib/pack-completeness";
 import {
   filterPendingRevisions,
   groupRevisionsByTopic,
@@ -46,6 +52,8 @@ export function PackLearningReview() {
   );
   const byTopic = useMemo(() => groupRevisionsByTopic(pending), [pending]);
   const catalog = useMemo(() => learningTitles(), []);
+  const completeness = useMemo(() => assessAllPacks(), []);
+  const completenessSummary = useMemo(() => summarizeCompleteness(completeness), [completeness]);
 
   const visible: ProposedRevision[] =
     selectedTopicId === "all" ? pending : (byTopic.get(selectedTopicId) ?? []);
@@ -82,6 +90,14 @@ export function PackLearningReview() {
     setMessage("Cleared the local apply queue.");
   }
 
+  function exportGlobalSweep(topicId: string) {
+    const sweep = planGlobalRevisionSweep(topicId);
+    downloadJson("global-revision-sweep.json", sweep);
+    setMessage(
+      `Downloaded global revision sweep triggered by ${topicId} — ${sweep.pending.length} pending proposal(s) across ${sweep.draftTopicIds.length} draft pack(s). Review and accept on this page, then export the apply queue.`,
+    );
+  }
+
   return (
     <div className="space-y-8">
       <div>
@@ -92,6 +108,73 @@ export function PackLearningReview() {
           and run as a script (avoids a change / counter-change loop).
         </p>
       </div>
+
+      <section className="rounded-2xl border border-rule bg-white/70 p-5">
+        <h3 className="font-semibold text-ink">Pack completeness</h3>
+        <p className="mt-2 text-sm text-ink-soft">
+          A pack is ready to mark <strong className="text-ink">reviewed</strong> when it passes validation and has no
+          pending pack learnings. Completing one pack is a good time to sweep the rest of the draft corpus — run{" "}
+          <code className="text-xs">npx tsx scripts/complete-pack.ts &lt;topic-id&gt; --mark-reviewed --sweep</code>.
+        </p>
+        <p className="mt-2 text-sm text-ink-soft">
+          {completenessSummary.readyCount} of {completenessSummary.draftCount} draft pack(s) ready ·{" "}
+          {completenessSummary.pendingLearningCount} corpus-wide pending learning proposal(s)
+        </p>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[36rem] text-left text-sm">
+            <thead>
+              <tr className="border-b border-rule text-xs uppercase tracking-[0.14em] text-ink-soft">
+                <th className="py-2 pr-4 font-semibold">Lesson</th>
+                <th className="py-2 pr-4 font-semibold">Status</th>
+                <th className="py-2 pr-4 font-semibold">Structural</th>
+                <th className="py-2 pr-4 font-semibold">Learnings</th>
+                <th className="py-2 font-semibold">Sweep</th>
+              </tr>
+            </thead>
+            <tbody>
+              {completeness.map((row) => (
+                <tr key={row.topicId} className="border-b border-rule/60">
+                  <td className="py-3 pr-4 text-ink">{row.shortTitle}</td>
+                  <td className="py-3 pr-4 text-ink-soft">{row.reviewStatus}</td>
+                  <td className="py-3 pr-4">{row.structuralOk ? "ok" : "fix"}</td>
+                  <td className="py-3 pr-4">
+                    {row.pendingLearningRevisions === 0 ? "clear" : `${row.pendingLearningRevisions} pending`}
+                  </td>
+                  <td className="py-3">
+                    {row.readyToMarkReviewed ? (
+                      <button
+                        type="button"
+                        className="text-teal underline decoration-teal/40"
+                        onClick={() => exportGlobalSweep(row.topicId)}
+                      >
+                        Export sweep
+                      </button>
+                    ) : (
+                      <span className="text-ink-soft">—</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-rule bg-white/70 p-5">
+        <h3 className="font-semibold text-ink">Presentation learnings (global)</h3>
+        <p className="mt-2 text-sm text-ink-soft">
+          Layout and wrapping fixes live in shared components — not in topic files. Future packs inherit these
+          automatically.
+        </p>
+        <ul className="mt-3 space-y-2 text-sm text-ink-soft">
+          {presentationLearnings.map((learning) => (
+            <li key={learning.id}>
+              <span className="font-semibold text-ink">{learning.title}: </span>
+              {learning.principle}
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="rounded-2xl border border-rule bg-white/70 p-5">
         <h3 className="font-semibold text-ink">Active learnings</h3>
