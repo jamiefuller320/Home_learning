@@ -37,6 +37,8 @@ export type RehearsalBeat = {
   durationSec?: number;
   charsPerSec?: number;
   audioFile?: string;
+  /** sha256 prefix of spoken+prosody — enables per-clip reuse. */
+  spokenHash?: string;
 };
 
 export type RehearsalReport = {
@@ -344,7 +346,15 @@ export function readRehearsalReport(root: string, topicId: string): RehearsalRep
   return JSON.parse(readFileSync(file, "utf8")) as RehearsalReport;
 }
 
-export function assertReadyToRender(root: string, topic: Topic, opts: { force?: boolean } = {}): {
+export function assertReadyToRender(
+  root: string,
+  topic: Topic,
+  opts: {
+    force?: boolean;
+    /** Skip hash-matched rehearsal gate — used by --reuse-audio / --audio-only (per-clip planning). */
+    allowStaleRehearsal?: boolean;
+  } = {},
+): {
   script: ParentVideoScript;
   hash: string;
 } {
@@ -365,6 +375,11 @@ export function assertReadyToRender(root: string, topic: Topic, opts: { force?: 
     throw new Error(
       `Spoken delivery blocked production for ${topic.id}. Run npm run script:parent-video -- ${topic.id} and fix the pack. ${sample}`,
     );
+  }
+
+  if (opts.allowStaleRehearsal) {
+    // Per-clip / baked reuse decides audio sources; a drifted script hash is OK.
+    return { script, hash };
   }
 
   const report = readRehearsalReport(root, topic.id);
@@ -389,4 +404,272 @@ export function assertReadyToRender(root: string, topic: Topic, opts: { force?: 
 
 export function sceneSummary(scenes: VideoScene[]): string {
   return scenes.map((scene) => `${scene.id}:${scene.beats.length}`).join(", ");
+}
+
+
+/** Per-topic render scratch (slides / mux). Separate from rehearsal so wipes keep audio. */
+export function renderWorkDir(root: string, topicId: string): string {
+  return path.join(root, ".video-work", "render", topicId);
+}
+
+/** Gap-baked beat audio (spoken + pauseAfter) — safe to reuse across graphics-only re-renders. */
+export function bakedAudioDir(root: string, topicId: string): string {
+  return path.join(root, ".video-work", "baked", topicId);
+}
+
+export function bakedBeatWavPath(root: string, topicId: string, beatIndex: number): string {
+  return path.join(bakedAudioDir(root, topicId), `${String(beatIndex).padStart(2, "0")}.wav`);
+}
+
+export function bakedBeatMetaPath(root: string, topicId: string, beatIndex: number): string {
+  return path.join(bakedAudioDir(root, topicId), `${String(beatIndex).padStart(2, "0")}.json`);
+}
+
+/** Spoken-only rehearsal WAV for beat index (00.wav, 01.wav, …). */
+export function rehearsalSpokenWavPath(root: string, topicId: string, beatIndex: number): string {
+  return path.join(rehearsalAudioDir(root, topicId), `${String(beatIndex).padStart(2, "0")}.wav`);
+}
+
+/** Content-addressed spoken clip — survives partial script edits when the line is unchanged. */
+export function rehearsalClipWavPath(root: string, topicId: string, spokenHash: string): string {
+  return path.join(rehearsalAudioDir(root, topicId), "clips", `${spokenHash}.wav`);
+}
+
+/** Stable hash of what was spoken (and how), for per-clip reuse. */
+export function spokenClipHash(spoken: string, prosody?: string): string {
+  return createHash("sha256")
+    .update(JSON.stringify({ spoken: spoken.trim(), prosody: prosody ?? "" }))
+    .digest("hex")
+    .slice(0, 16);
+}
+
+export type BakedBeatMeta = {
+  spokenHash: string;
+  pauseAfter: number;
+  durationSec?: number;
+};
+
+export function readBakedBeatMeta(root: string, topicId: string, beatIndex: number): BakedBeatMeta | null {
+  const file = bakedBeatMetaPath(root, topicId, beatIndex);
+  if (!existsSync(file)) return null;
+  return JSON.parse(readFileSync(file, "utf8")) as BakedBeatMeta;
+}
+
+export function writeBakedBeatMeta(
+  root: string,
+  topicId: string,
+  beatIndex: number,
+  meta: BakedBeatMeta,
+): void {
+  mkdirSync(bakedAudioDir(root, topicId), { recursive: true });
+  writeFileSync(bakedBeatMetaPath(root, topicId, beatIndex), JSON.stringify(meta, null, 2) + "\n");
+}
+
+/**
+ * Strict all-or-nothing check used when the whole script hash still matches.
+ * Prefer `planBeatAudio` when individual lines may have changed.
+ */
+export function assertReusableRehearsalAudio(
+  root: string,
+  topicId: string,
+  expectedBeats: number,
+  scriptHash: string,
+): string[] {
+  const report = readRehearsalReport(root, topicId);
+  if (!report) {
+    throw new Error(
+      `No rehearsal report for ${topicId}. Run npm run rehearse:parent-video -- ${topicId} before --reuse-audio.`,
+    );
+  }
+  if (report.scriptHash !== scriptHash) {
+    throw new Error(
+      `Rehearsal audio is stale for ${topicId} (report ${report.scriptHash} vs script ${scriptHash}). Re-run npm run rehearse:parent-video -- ${topicId} before --reuse-audio, or rely on per-clip hashes after a partial edit.`,
+    );
+  }
+  if (report.beats.length !== expectedBeats) {
+    throw new Error(
+      `Rehearsal beat count mismatch for ${topicId} (report ${report.beats.length} vs script ${expectedBeats}). Re-run rehearsal.`,
+    );
+  }
+
+  const wavs: string[] = [];
+  for (let index = 0; index < expectedBeats; index += 1) {
+    const wavPath = rehearsalSpokenWavPath(root, topicId, index);
+    if (!existsSync(wavPath)) {
+      throw new Error(
+        `Missing rehearsal WAV ${path.relative(root, wavPath)}. Run npm run rehearse:parent-video -- ${topicId}.`,
+      );
+    }
+    wavs.push(wavPath);
+  }
+  return wavs;
+}
+
+export type AudioPlan =
+  | { source: "baked"; path: string; spokenHash: string }
+  | { source: "rehearsal"; path: string; spokenHash: string; needsGap: true }
+  | { source: "tts"; spokenHash: string; needsGap: true };
+
+/**
+ * Decide how to obtain audio for one beat.
+ * Order: gap-baked match → content-addressed rehearsal clip → index WAV if script hash matches → TTS.
+ */
+export function planBeatAudio(input: {
+  root: string;
+  topicId: string;
+  beatIndex: number;
+  spoken: string;
+  pauseAfter: number;
+  prosody?: string;
+  scriptHash: string;
+  preferReuse: boolean;
+}): AudioPlan {
+  const spokenHash = spokenClipHash(input.spoken, input.prosody);
+
+  if (input.preferReuse) {
+    const bakedMeta = readBakedBeatMeta(input.root, input.topicId, input.beatIndex);
+    const bakedWav = bakedBeatWavPath(input.root, input.topicId, input.beatIndex);
+    if (
+      bakedMeta &&
+      bakedMeta.spokenHash === spokenHash &&
+      Math.abs(bakedMeta.pauseAfter - input.pauseAfter) < 0.001 &&
+      existsSync(bakedWav)
+    ) {
+      return { source: "baked", path: bakedWav, spokenHash };
+    }
+
+    const clipPath = rehearsalClipWavPath(input.root, input.topicId, spokenHash);
+    if (existsSync(clipPath)) {
+      return { source: "rehearsal", path: clipPath, spokenHash, needsGap: true };
+    }
+
+    const report = readRehearsalReport(input.root, input.topicId);
+    if (report && report.scriptHash === input.scriptHash) {
+      const indexPath = rehearsalSpokenWavPath(input.root, input.topicId, input.beatIndex);
+      if (existsSync(indexPath)) {
+        return { source: "rehearsal", path: indexPath, spokenHash, needsGap: true };
+      }
+    }
+  }
+
+  return { source: "tts", spokenHash, needsGap: true };
+}
+
+export type RenderMode = "full" | "reuse-audio" | "slides-only" | "audio-only";
+
+export function parseRenderMode(flags: string[]): RenderMode {
+  const modes = [
+    flags.includes("--reuse-audio") ? ("reuse-audio" as const) : null,
+    flags.includes("--slides-only") ? ("slides-only" as const) : null,
+    flags.includes("--audio-only") ? ("audio-only" as const) : null,
+  ].filter(Boolean) as RenderMode[];
+
+  if (modes.length > 1) {
+    throw new Error("Use only one of --reuse-audio, --slides-only, or --audio-only.");
+  }
+  return modes[0] ?? "full";
+}
+
+export type BeatSelection = {
+  /** Absolute indexes to rebuild. `null` means every beat. */
+  indexes: number[] | null;
+  label: string;
+};
+
+function parseBeatRangeToken(token: string, beatCount: number): number[] {
+  const range = token.match(/^(\d+)\s*-\s*(\d+)$/);
+  if (range) {
+    const start = Number(range[1]);
+    const end = Number(range[2]);
+    if (!Number.isInteger(start) || !Number.isInteger(end) || start < 0 || end < start) {
+      throw new Error(`Invalid --beats range "${token}". Use start-end with start <= end.`);
+    }
+    if (end >= beatCount) {
+      throw new Error(`--beats range "${token}" is out of range (script has ${beatCount} beats, 0..${beatCount - 1}).`);
+    }
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  }
+  const single = Number(token);
+  if (!Number.isInteger(single) || single < 0 || single >= beatCount) {
+    throw new Error(`Invalid --beats index "${token}". Expected 0..${beatCount - 1} or start-end.`);
+  }
+  return [single];
+}
+
+function flagValues(flags: string[], name: string): string[] {
+  const values: string[] = [];
+  for (let i = 0; i < flags.length; i += 1) {
+    const flag = flags[i];
+    if (flag === name) {
+      const value = flags[i + 1];
+      if (!value || value.startsWith("--")) {
+        throw new Error(`${name} requires a value.`);
+      }
+      values.push(value);
+      i += 1;
+      continue;
+    }
+    if (flag.startsWith(`${name}=`)) {
+      values.push(flag.slice(name.length + 1));
+    }
+  }
+  return values;
+}
+
+/**
+ * Parse `--scene school`, `--scenes open,plain`, `--beats 3-7`, `--beats 1,4,9`.
+ * Selection is optional; omitting all of these rebuilds every beat.
+ */
+export function parseBeatSelection(flags: string[], script: ParentVideoScript): BeatSelection {
+  const sceneValues = [
+    ...flagValues(flags, "--scene"),
+    ...flagValues(flags, "--scenes"),
+  ].flatMap((value) => value.split(",").map((part) => part.trim()).filter(Boolean));
+  const beatValues = flagValues(flags, "--beats").flatMap((value) =>
+    value.split(",").map((part) => part.trim()).filter(Boolean),
+  );
+
+  if (sceneValues.length === 0 && beatValues.length === 0) {
+    return { indexes: null, label: "all beats" };
+  }
+
+  const selected = new Set<number>();
+  const labels: string[] = [];
+  let cursor = 0;
+  const sceneSpans = new Map<string, { start: number; end: number }>();
+  for (const scene of script.scenes) {
+    sceneSpans.set(scene.id, { start: cursor, end: cursor + scene.beats.length - 1 });
+    cursor += scene.beats.length;
+  }
+  const beatCount = cursor;
+
+  for (const sceneId of sceneValues) {
+    const span = sceneSpans.get(sceneId);
+    if (!span) {
+      const known = [...sceneSpans.keys()].join(", ");
+      throw new Error(`Unknown scene "${sceneId}". Known scenes: ${known}.`);
+    }
+    if (span.end < span.start) {
+      throw new Error(`Scene "${sceneId}" has no beats.`);
+    }
+    for (let i = span.start; i <= span.end; i += 1) selected.add(i);
+    labels.push(`scene:${sceneId}`);
+  }
+
+  for (const token of beatValues) {
+    for (const index of parseBeatRangeToken(token, beatCount)) {
+      selected.add(index);
+    }
+    labels.push(`beats:${token}`);
+  }
+
+  const indexes = [...selected].sort((a, b) => a - b);
+  if (indexes.length === 0) {
+    throw new Error("Beat selection matched no beats.");
+  }
+  return { indexes, label: labels.join(" + ") };
+}
+
+export function beatIsSelected(selection: BeatSelection, beatIndex: number): boolean {
+  return selection.indexes === null || selection.indexes.includes(beatIndex);
 }

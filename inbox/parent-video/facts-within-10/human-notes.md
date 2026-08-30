@@ -47,9 +47,29 @@ Applied open `parent-video` notes from the script viewer. Method and intent firs
 
 - Added optional fal ElevenLabs v3 provider (`Charlotte`, stability 0.4) behind `PARENT_VIDEO_TTS_PROVIDER=elevenlabs`.
 - Short collage: `inbox/parent-video/facts-within-10/elevenlabs-trial/listen.mp3`
+- Re-run: `npm run trial:elevenlabs-parent-video -- facts-within-10` (add `--full` for every beat).
 
 ## 2026-08-30 adopt ElevenLabs (v7)
 
 - Human listen-pass: Charlotte is worth the extra cost vs Kokoro.
 - Production default is now ElevenLabs Charlotte (stability 0.4); Kokoro remains available via `PARENT_VIDEO_TTS_PROVIDER=kokoro`.
 - Re-render as `facts-within-10-parent-briefing-v7.mp4`.
+
+## 2026-08-30 graphics quality
+
+- Number bond: replaced the CSS “U-bar” (verticals sitting above a crossbar) with a proper cherry / part–whole SVG — two diagonal arms from the whole rim into each part rim.
+- Guide: soft skin/jumper/hair gradients, filled sleeves, collar, steam mug; point pose is a short up-right jab from the left so it never reads as a third bond stem.
+- Ten-frame: panel + counter discs with a soft 3D fill; slide wash uses a light teal/amber atmosphere instead of flat cream.
+- Preview slides: `npx tsx scripts/preview-parent-video-graphics.ts`
+- Re-render with these graphics when iterating (reuse audio where the spoken hash still matches).
+
+## 2026-08-30 building-block render
+
+- Render scratch is now `.video-work/render/<id>/` so wiping it no longer deletes rehearsal WAVs under `.video-work/rehearsal/<id>/`.
+- `npm run render:parent-video -- <id> --reuse-audio` — prefer baked / hash clips / rehearsal; TTS only for gaps.
+- `npm run render:parent-video -- <id> --slides-only` — write beat PNGs, stop before audio/mp4.
+- `npm run render:parent-video -- <id> --audio-only` — gap-bake WAVs + stub frames for voice A/B.
+- Targeting: `--scene open,school` and/or `--beats 0-2,5` (partial stitch keeps sibling mp4s when present).
+- Theme tokens: `src/lib/parent-video-theme.ts` (override with `--theme path/to/theme.json`).
+- Gap-baked audio: `.video-work/baked/<id>/NN.wav` + meta JSON for graphics-only re-renders.
+- Full TTS render unchanged (default). `--force` still skips the rehearsal *gate* for a full speak; it does not invent reusable audio.

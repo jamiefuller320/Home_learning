@@ -12,7 +12,7 @@
  */
 
 import { spawnSync } from "node:child_process";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import type { Topic } from "../src/content/schema";
 import { getTopicById } from "../src/content/england/ks1/year-1/maths/topics";
@@ -22,6 +22,8 @@ import {
   evaluateAudioPace,
   flattenBeats,
   rehearsalAudioDir,
+  rehearsalClipWavPath,
+  spokenClipHash,
   writeRehearsalArtifacts,
   writeScriptPreview,
   type RehearsalBeat,
@@ -104,6 +106,10 @@ async function main() {
     beat.durationSec = durationSec;
     beat.charsPerSec = charsPerSec;
     beat.audioFile = path.relative(ROOT, wavPath);
+    beat.spokenHash = spokenClipHash(beat.spoken, beat.prosody);
+    const clipPath = rehearsalClipWavPath(ROOT, topic.id, beat.spokenHash);
+    mkdirSync(path.dirname(clipPath), { recursive: true });
+    copyFileSync(wavPath, clipPath);
   }
 
   const audioFindings = evaluateAudioPace(beats);
