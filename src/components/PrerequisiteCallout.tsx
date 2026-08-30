@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PackProse } from "@/components/PackProse";
 import type { Topic } from "@/content/schema";
 import { getPrerequisiteTopics } from "@/content/england/ks1/year-1/maths/curriculum";
 
@@ -12,10 +13,10 @@ export function PrerequisiteCallout({ topic, topics }: { topic: Topic; topics: T
   return (
     <aside className="no-print mt-6 rounded-2xl border border-amber/30 bg-[#f8f0e3] p-5">
       <h2 className="font-semibold text-ink">If this does not click yet, go back a step</h2>
-      <p className="mt-2 text-ink-soft">
+      <PackProse className="mt-2 text-ink-soft">
         These earlier topics lay groundwork for {topic.shortTitle.toLowerCase()}. Try one of them first if the idea feels wobbly.
-      </p>
-      <ul className="mt-4 space-y-2">
+      </PackProse>
+      <ul className="mt-4 space-y-2 text-pretty">
         {prerequisites.map((prerequisite) => (
           <li key={prerequisite.id}>
             <Link

@@ -3,6 +3,7 @@ import type { Topic } from "@/content/schema";
 import { DraftBadge } from "./DraftBadge";
 import { GlossaryText } from "./GlossaryText";
 import { HomeTasks, UnderstandingCheck } from "./HomeTasks";
+import { PackProse } from "./PackProse";
 import { ParentBriefing } from "./ParentBriefing";
 import { PrerequisiteCallout } from "./PrerequisiteCallout";
 import { ParentVideo } from "./ParentVideo";
@@ -23,12 +24,12 @@ export function TopicExperience({ topic, topics }: { topic: Topic; topics: Topic
       </div>
 
       <h1 className="serif text-4xl leading-tight text-ink sm:text-5xl">{topic.title}</h1>
-      <p className="text-xl leading-8 text-ink-soft">
+      <PackProse className="text-xl leading-8 text-ink-soft">
         <GlossaryText text={topic.summary} />
-      </p>
-      <p className="text-lg leading-8 text-ink">
+      </PackProse>
+      <PackProse className="text-lg leading-8 text-ink">
         <GlossaryText text={topic.whyThisMatters} />
-      </p>
+      </PackProse>
       <PrerequisiteCallout topic={topic} topics={topics} />
     </div>
   );
