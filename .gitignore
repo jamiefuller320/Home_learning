@@ -34,3 +34,8 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# Parent-video TTS trial intermediates (keep listen.mp3 + README)
+inbox/parent-video/**/elevenlabs-trial/*.raw
+inbox/parent-video/**/elevenlabs-trial/*.wav
+inbox/parent-video/**/elevenlabs-trial/*-gap.wav
