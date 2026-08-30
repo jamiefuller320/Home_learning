@@ -12,10 +12,20 @@ import {
   type SessionLearningStore,
 } from "@/lib/learning-decisions-store";
 import {
-  assessAllPacks,
+  buildPackReleaseExport,
+  clearSessionCandidate,
+  confirmSessionPackRecheck,
+  confirmSessionVideoRecheck,
+  readSessionPackReleaseStore,
+  setSessionCandidate,
+} from "@/lib/pack-release-store";
+import {
+  assessAllPackReleases,
+  mergePackReleaseFile,
   planGlobalRevisionSweep,
-  summarizeCompleteness,
-} from "@/lib/pack-completeness";
+  readPackReleaseFile,
+  summarizePackReleases,
+} from "@/lib/pack-release";
 import {
   filterPendingRevisions,
   groupRevisionsByTopic,
@@ -37,6 +47,7 @@ function downloadJson(filename: string, data: unknown) {
 
 export function PackLearningReview() {
   const [store, setStore] = useState<SessionLearningStore>(() => readSessionLearningStore());
+  const [releaseStore, setReleaseStore] = useState(() => readSessionPackReleaseStore());
   const [selectedTopicId, setSelectedTopicId] = useState<string>("all");
   const [message, setMessage] = useState("");
 
@@ -52,8 +63,15 @@ export function PackLearningReview() {
   );
   const byTopic = useMemo(() => groupRevisionsByTopic(pending), [pending]);
   const catalog = useMemo(() => learningTitles(), []);
-  const completeness = useMemo(() => assessAllPacks(), []);
-  const completenessSummary = useMemo(() => summarizeCompleteness(completeness), [completeness]);
+  const mergedReleaseFile = useMemo(
+    () => mergePackReleaseFile(readPackReleaseFile(), releaseStore),
+    [releaseStore],
+  );
+  const releaseReports = useMemo(
+    () => assessAllPackReleases(year1MathsTopics, mergedReleaseFile),
+    [mergedReleaseFile],
+  );
+  const releaseSummary = useMemo(() => summarizePackReleases(releaseReports), [releaseReports]);
 
   const visible: ProposedRevision[] =
     selectedTopicId === "all" ? pending : (byTopic.get(selectedTopicId) ?? []);
@@ -90,6 +108,11 @@ export function PackLearningReview() {
     setMessage("Cleared the local apply queue.");
   }
 
+  function exportPackRelease() {
+    downloadJson("pack-release.json", buildPackReleaseExport(readPackReleaseFile(), releaseStore));
+    setMessage("Downloaded pack-release.json — commit it under src/content/ to keep release checklists sticky.");
+  }
+
   function exportGlobalSweep(topicId: string) {
     const sweep = planGlobalRevisionSweep(topicId);
     downloadJson("global-revision-sweep.json", sweep);
@@ -110,48 +133,119 @@ export function PackLearningReview() {
       </div>
 
       <section className="rounded-2xl border border-rule bg-white/70 p-5">
-        <h3 className="font-semibold text-ink">Pack completeness</h3>
+        <h3 className="font-semibold text-ink">Pack release (one at a time)</h3>
         <p className="mt-2 text-sm text-ink-soft">
-          A pack is ready to mark <strong className="text-ink">reviewed</strong> when it passes validation and has no
-          pending pack learnings. Completing one pack is a good time to sweep the rest of the draft corpus — run{" "}
-          <code className="text-xs">npx tsx scripts/complete-pack.ts &lt;topic-id&gt; --mark-reviewed --sweep</code>.
+          Finishing a pack is a human decision. Apply learnings, re-read the pack on site, re-run and watch the video
+          if there is one, then release. Only one lesson should be the active candidate at a time. CLI:{" "}
+          <code className="text-xs">npx tsx scripts/release-pack.ts &lt;topic-id&gt; --candidate</code> →{" "}
+          <code className="text-xs">--confirm-pack</code> →{" "}
+          <code className="text-xs">--confirm-video</code> (if needed) →{" "}
+          <code className="text-xs">--release --sweep</code>.
         </p>
         <p className="mt-2 text-sm text-ink-soft">
-          {completenessSummary.readyCount} of {completenessSummary.draftCount} draft pack(s) ready ·{" "}
-          {completenessSummary.pendingLearningCount} corpus-wide pending learning proposal(s)
+          Active candidate:{" "}
+          <strong className="text-ink">{releaseSummary.activeCandidateId ?? "none"}</strong> ·{" "}
+          {releaseSummary.draftCount} draft pack(s) · {releaseSummary.pendingLearningCount} corpus-wide pending learning
+          proposal(s)
         </p>
+        <div className="mt-3 flex flex-wrap gap-3 text-sm">
+          <button
+            type="button"
+            className="rounded-full border border-rule px-4 py-2 hover:border-teal"
+            onClick={exportPackRelease}
+          >
+            Export pack-release.json
+          </button>
+          <button
+            type="button"
+            className="underline decoration-rule"
+            onClick={() => {
+              setReleaseStore(clearSessionCandidate());
+              setMessage("Cleared local release candidate.");
+            }}
+          >
+            Clear local candidate
+          </button>
+        </div>
         <div className="mt-4 overflow-x-auto">
-          <table className="w-full min-w-[36rem] text-left text-sm">
+          <table className="w-full min-w-[48rem] text-left text-sm">
             <thead>
               <tr className="border-b border-rule text-xs uppercase tracking-[0.14em] text-ink-soft">
                 <th className="py-2 pr-4 font-semibold">Lesson</th>
                 <th className="py-2 pr-4 font-semibold">Status</th>
-                <th className="py-2 pr-4 font-semibold">Structural</th>
-                <th className="py-2 pr-4 font-semibold">Learnings</th>
-                <th className="py-2 font-semibold">Sweep</th>
+                <th className="py-2 pr-4 font-semibold">Blockers</th>
+                <th className="py-2 pr-4 font-semibold">Pack recheck</th>
+                <th className="py-2 pr-4 font-semibold">Video</th>
+                <th className="py-2 font-semibold">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {completeness.map((row) => (
+              {releaseReports.map((row) => (
                 <tr key={row.topicId} className="border-b border-rule/60">
-                  <td className="py-3 pr-4 text-ink">{row.shortTitle}</td>
+                  <td className="py-3 pr-4 text-ink">
+                    {row.shortTitle}
+                    {row.isActiveCandidate ? (
+                      <span className="ml-2 rounded-full bg-teal/10 px-2 py-0.5 text-xs font-semibold text-teal">
+                        candidate
+                      </span>
+                    ) : null}
+                  </td>
                   <td className="py-3 pr-4 text-ink-soft">{row.reviewStatus}</td>
-                  <td className="py-3 pr-4">{row.structuralOk ? "ok" : "fix"}</td>
+                  <td className="py-3 pr-4 text-ink-soft">
+                    {row.automaticBlockers.length === 0 ? "none" : row.automaticBlockers.length}
+                  </td>
+                  <td className="py-3 pr-4">{row.packRechecked ? "done" : "needed"}</td>
                   <td className="py-3 pr-4">
-                    {row.pendingLearningRevisions === 0 ? "clear" : `${row.pendingLearningRevisions} pending`}
+                    {!row.hasVideo ? "n/a" : row.videoRechecked ? "done" : row.video.kind}
                   </td>
                   <td className="py-3">
-                    {row.readyToMarkReviewed ? (
+                    <div className="flex flex-wrap gap-2">
                       <button
                         type="button"
                         className="text-teal underline decoration-teal/40"
-                        onClick={() => exportGlobalSweep(row.topicId)}
+                        onClick={() => {
+                          setReleaseStore(setSessionCandidate(row.topicId));
+                          setMessage(`Set ${row.shortTitle} as the local release candidate.`);
+                        }}
                       >
-                        Export sweep
+                        Candidate
                       </button>
-                    ) : (
-                      <span className="text-ink-soft">—</span>
-                    )}
+                      <button
+                        type="button"
+                        className="text-teal underline decoration-teal/40"
+                        onClick={() => {
+                          const note = window.prompt("What did you re-read or check on the pack?");
+                          if (!note?.trim()) return;
+                          setReleaseStore(confirmSessionPackRecheck(row.topicId, note.trim()));
+                          setMessage(`Recorded pack recheck for ${row.shortTitle}.`);
+                        }}
+                      >
+                        Pack OK
+                      </button>
+                      {row.hasVideo ? (
+                        <button
+                          type="button"
+                          className="text-teal underline decoration-teal/40"
+                          onClick={() => {
+                            const note = window.prompt("What did you check on the video?");
+                            if (!note?.trim()) return;
+                            setReleaseStore(confirmSessionVideoRecheck(row.topicId, note.trim()));
+                            setMessage(`Recorded video recheck for ${row.shortTitle}.`);
+                          }}
+                        >
+                          Video OK
+                        </button>
+                      ) : null}
+                      {row.canSweepCorpus ? (
+                        <button
+                          type="button"
+                          className="text-teal underline decoration-teal/40"
+                          onClick={() => exportGlobalSweep(row.topicId)}
+                        >
+                          Sweep
+                        </button>
+                      ) : null}
+                    </div>
                   </td>
                 </tr>
               ))}

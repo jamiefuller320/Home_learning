@@ -19,7 +19,8 @@
     "language-notes": "tsx scripts/language-notes.ts",
     "process-language-notes": "tsx scripts/process-language-notes.ts",
     "apply-learning-revisions": "tsx scripts/apply-learning-revisions.ts",
-    "complete-pack": "tsx scripts/complete-pack.ts",
+    "complete-pack": "tsx scripts/release-pack.ts",
+    "release-pack": "tsx scripts/release-pack.ts",
     "render:parent-video": "tsx scripts/render-parent-video.ts"
   },
   "engines": {
