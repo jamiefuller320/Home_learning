@@ -29,10 +29,13 @@ export function TopicExperience({ topic, topics }: { topic: Topic; topics: Topic
       <p className="text-lg leading-8 text-ink">
         <GlossaryText text={topic.whyThisMatters} />
       </p>
-      {topic.parentVideo ? <ParentVideo src={topic.parentVideo.src} caption={topic.parentVideo.caption} /> : null}
       <PrerequisiteCallout topic={topic} topics={topics} />
     </div>
   );
+
+  const videoPanel = topic.parentVideo ? (
+    <ParentVideo src={topic.parentVideo.src} caption={topic.parentVideo.caption} />
+  ) : undefined;
 
   return (
     <div>
@@ -58,6 +61,7 @@ export function TopicExperience({ topic, topics }: { topic: Topic; topics: Topic
             printPackHref={`/year-1-maths/${topic.slug}/pack`}
             glossaryTermIds={topic.glossaryTerms}
             summary={summaryPanel}
+            video={videoPanel}
             parentLesson={<ParentBriefing topic={topic} />}
             tasks={<HomeTasks topic={topic} />}
             check={<UnderstandingCheck topic={topic} />}

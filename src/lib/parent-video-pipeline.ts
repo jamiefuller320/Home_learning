@@ -218,10 +218,11 @@ export function writeScriptPreview(root: string, topic: Topic): {
   return { script, delivery, hash, markdownPath, jsonPath };
 }
 
-/** Ideal spoken pace for Kokoro teaching clips (characters per second of audio). */
+/** Ideal spoken pace for parent-briefing clips (characters per second of audio). */
 export const PACE = {
   minCharsPerSec: 8,
-  maxCharsPerSec: 18,
+  /** ElevenLabs Charlotte sits a touch quicker than Kokoro on short cues. */
+  maxCharsPerSec: 21,
   minDurationSec: 0.35,
 } as const;
 
@@ -244,7 +245,8 @@ export function evaluateAudioPace(beats: RehearsalBeat[]): AudioFinding[] {
       });
     }
 
-    if (beat.charsPerSec > PACE.maxCharsPerSec) {
+    // Short linking cues naturally spike chars/s; only block sustained rush.
+    if (beat.charsPerSec > PACE.maxCharsPerSec && beat.spoken.replace(/\s+/g, "").length > 24) {
       findings.push({
         severity: "blocking",
         code: "too-fast",

@@ -60,12 +60,12 @@ export default function ForSchoolsPage() {
           mix-up, then tonight’s outline and what good looks like. It does not read every prompt
           and step — those stay on the written page for use beside the child. Example sums and
           asides (including the YouTube link reminder) are separate spoken beats so the delivery
-          can change tone. We use a brighter British Kokoro voice a touch above natural pace;
-          punctuation and short beats do the emphasis — this model has no markup for tone. The
-          adult guide character (mug, teal jumper) is the same drawing in every film — featured
-          when there is no diagram, tucked in the corner when the ten-frame or part–whole picture
-          is on screen. Those diagrams change when the script reaches that fact. We will not
-          generate footage of children or invent a method picture that is not on the page.
+          can change tone. We use ElevenLabs’ Charlotte voice for clearer inflection on short
+          beats; punctuation and beat splits still shape the pacing. The adult guide character
+          (mug, teal jumper) is the same drawing in every film — featured when there is no
+          diagram, tucked in the corner when the ten-frame or part–whole picture is on screen.
+          Those diagrams change when the script reaches that fact. We will not generate footage
+          of children or invent a method picture that is not on the page.
         </p>
       </section>
 
