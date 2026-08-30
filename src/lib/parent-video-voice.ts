@@ -1,11 +1,9 @@
 /**
  * Parent-video TTS providers.
  *
- * Kokoro (default): cheap British voices, no SSML — punctuation + speed only.
- * ElevenLabs (trial): richer inflection via fal; select with
- *   PARENT_VIDEO_TTS_PROVIDER=elevenlabs
- *
- * Do not switch production default until a human listen-pass says it is comfortable.
+ * ElevenLabs (default): richer British inflection via fal v3 — worth the extra cost
+ * for parent briefings that people will actually listen to.
+ * Kokoro (fallback): cheaper; set PARENT_VIDEO_TTS_PROVIDER=kokoro.
  */
 
 export type TtsProviderId = "kokoro" | "elevenlabs";
@@ -33,7 +31,7 @@ export const KOKORO_TTS = {
 };
 
 /**
- * ElevenLabs via fal — prefer v3 for inflection on parent briefings.
+ * ElevenLabs via fal — v3 for inflection on parent briefings.
  * Charlotte is a clear British female; stability slightly under 0.5 for warmth
  * without tipping into theatrical delivery.
  */
@@ -46,20 +44,24 @@ export const ELEVENLABS_TTS = {
   languageCode: "en",
 };
 
-/** Production default stays Kokoro until the ElevenLabs trial is accepted. */
+/**
+ * Production default: ElevenLabs Charlotte.
+ * `speed` is kept for Kokoro fallback / prosody helpers; ElevenLabs ignores it.
+ */
 export const PARENT_VIDEO_TTS = {
-  ...KOKORO_TTS,
-  endpoint: KOKORO_TTS.endpoint,
-  voice: KOKORO_TTS.voice,
-  speed: KOKORO_TTS.speed,
+  ...ELEVENLABS_TTS,
+  endpoint: ELEVENLABS_TTS.endpoint,
+  voice: ELEVENLABS_TTS.voice,
+  speed: 1.0,
 } as const;
 
 export type ParentVideoVoice = (typeof PARENT_VIDEO_TTS)["voice"];
 
 export function resolveTtsProvider(raw: string | undefined = process.env.PARENT_VIDEO_TTS_PROVIDER): TtsProviderId {
-  const value = (raw || "kokoro").trim().toLowerCase();
+  const value = (raw || "elevenlabs").trim().toLowerCase();
+  if (value === "kokoro") return "kokoro";
   if (value === "elevenlabs" || value === "eleven" || value === "el") return "elevenlabs";
-  return "kokoro";
+  return "elevenlabs";
 }
 
 async function downloadAudio(url: string): Promise<Buffer> {
@@ -131,6 +133,6 @@ async function speakElevenLabs(request: TtsRequest): Promise<TtsResult> {
 }
 
 export async function speakParentVideo(request: TtsRequest, provider: TtsProviderId = resolveTtsProvider()): Promise<TtsResult> {
-  if (provider === "elevenlabs") return speakElevenLabs(request);
-  return speakKokoro(request);
+  if (provider === "kokoro") return speakKokoro(request);
+  return speakElevenLabs(request);
 }
