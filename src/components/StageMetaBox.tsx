@@ -11,38 +11,44 @@ export type StageMeta = {
 
 export type StageMetaField = { key: keyof StageMeta; label: string };
 
-export const STAGE_1_META: StageMeta = {
+export type StageMetaConfig = StageMeta & { stage: 1 | 2 };
+
+const STAGE_FIELDS: Record<1 | 2, StageMetaField[]> = {
+  1: [
+    { key: "when", label: "When" },
+    { key: "why", label: "Why" },
+    { key: "equipment", label: "Equipment" },
+  ],
+  2: [
+    { key: "when", label: "When" },
+    { key: "why", label: "What" },
+    { key: "equipment", label: "Equipment" },
+  ],
+};
+
+export const STAGE_1_META: StageMetaConfig = {
+  stage: 1,
   when: "Read this first, before sitting down with your child",
   why: "Learn the topic before teaching",
   equipment: "Household items",
 };
 
-export const STAGE_2_META: StageMeta = {
+export const STAGE_2_META: StageMetaConfig = {
+  stage: 2,
   when: "Tonight with your child",
   why: "One activity with a clear stop rule",
   equipment: "Household items",
 };
 
-export const STAGE_1_FIELDS: StageMetaField[] = [
-  { key: "when", label: "When" },
-  { key: "why", label: "Why" },
-  { key: "equipment", label: "Equipment" },
-];
-
-export const STAGE_2_FIELDS: StageMetaField[] = [
-  { key: "when", label: "When" },
-  { key: "why", label: "What" },
-  { key: "equipment", label: "Equipment" },
-];
-
 export function StageMetaBox({
+  stage = 1,
   when,
   why,
   equipment,
-  fields = STAGE_1_FIELDS,
   className = "",
-}: StageMeta & { fields?: StageMetaField[]; className?: string }) {
+}: StageMetaConfig & { className?: string }) {
   const values: StageMeta = { when, why, equipment };
+  const fields = STAGE_FIELDS[stage];
 
   return (
     <aside className={`stage-meta-box mt-4 rounded-2xl border border-rule bg-white/70 px-5 py-4 ${className}`.trim()}>

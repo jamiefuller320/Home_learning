@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DraftBadge } from "@/components/DraftBadge";
 import { HomePack } from "@/components/HomePack";
-import { STAGE_2_META, STAGE_2_FIELDS, StageMetaBox } from "@/components/StageMetaBox";
+import { STAGE_2_META, StageMetaBox } from "@/components/StageMetaBox";
 import { getTopicBySlug, year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
 
 type PageProps = {
@@ -39,7 +39,7 @@ export default async function PackPage({ params }: PageProps) {
       </div>
       <h1 className="serif mt-4 text-4xl text-ink">{topic.title}</h1>
       <p className="mt-3 text-lg text-ink-soft">Home pack only. If you have not read the parent lesson, go back and do that first.</p>
-      <StageMetaBox {...STAGE_2_META} fields={STAGE_2_FIELDS} />
+      <StageMetaBox {...STAGE_2_META} />
       <div className="mt-10">
         <HomePack topic={topic} />
       </div>
