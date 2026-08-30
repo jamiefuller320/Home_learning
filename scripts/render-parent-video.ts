@@ -5,10 +5,16 @@
  *   npm run script:parent-video -- <id>     # human-readable script + delivery checks
  *   npm run rehearse:parent-video -- <id>   # TTS-only + pace eval
  *
+ * Building-block modes:
+ *   --reuse-audio   reshoot slides + remux using rehearsal WAVs (no TTS)
+ *   --slides-only   write slide PNGs only (no TTS, no mp4)
+ *
  * Voice: Fal Kokoro British English (needs FAL_KEY) — see PARENT_VIDEO_TTS.
  * Pictures: our slides and diagrams only — no generated classroom footage.
  *
  *   npx tsx scripts/render-parent-video.ts facts-within-10
+ *   npx tsx scripts/render-parent-video.ts facts-within-10 --reuse-audio
+ *   npx tsx scripts/render-parent-video.ts facts-within-10 --slides-only
  *   npx tsx scripts/render-parent-video.ts facts-within-10 --force
  */
 
@@ -16,31 +22,28 @@ import { spawnSync } from "node:child_process";
 import { copyFileSync, existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { getTopicById } from "../src/content/england/ks1/year-1/maths/topics";
+import { allBeats, type VideoBeat, type VideoScene } from "../src/lib/parent-video-script";
 import {
-  allBeats,
-  type VideoBeat,
-  type VideoScene,
-} from "../src/lib/parent-video-script";
-import { assertReadyToRender } from "../src/lib/parent-video-pipeline";
+  assertReadyToRender,
+  assertReusableRehearsalAudio,
+  parseRenderMode,
+  renderWorkDir,
+} from "../src/lib/parent-video-pipeline";
 import { escapeHtml, slideVisualSlot, SLIDE_CSS } from "../src/lib/parent-video-visuals";
 import { ttsSpeedForRole } from "../src/lib/parent-video-prosody";
 import { PARENT_VIDEO_TTS, speakParentVideo } from "../src/lib/parent-video-voice";
 
 const ROOT = path.resolve(__dirname, "..");
-const WORK = path.join(ROOT, ".video-work");
 const CHROME = process.env.CHROME_PATH || "google-chrome";
 const args = process.argv.slice(2).filter((arg) => arg !== "--");
 const FORCE = args.includes("--force");
+const MODE = parseRenderMode(args);
 const topicId = args.find((arg) => !arg.startsWith("--")) || "facts-within-10";
 
-function run(command: string, args: string[], timeoutMs = 120_000) {
-  const result = spawnSync(command, args, { encoding: "utf8", timeout: timeoutMs });
-  if (result.error) {
-    throw new Error(`${command} failed: ${result.error.message}`);
-  }
-  if (result.status !== 0) {
-    throw new Error(`${command} failed: ${result.stderr || result.stdout}`);
-  }
+function run(command: string, commandArgs: string[], timeoutMs = 120_000) {
+  const result = spawnSync(command, commandArgs, { encoding: "utf8", timeout: timeoutMs });
+  if (result.error) throw new Error(`${command} failed: ${result.error.message}`);
+  if (result.status !== 0) throw new Error(`${command} failed: ${result.stderr || result.stdout}`);
   return result;
 }
 
@@ -71,8 +74,8 @@ async function speak(text: string, dest: string, speed: number = PARENT_VIDEO_TT
   writeFileSync(dest, spoken.bytes);
 }
 
-function screenshot(htmlPath: string, pngPath: string) {
-  const profile = path.join(WORK, `chrome-profile-${Date.now()}`);
+function screenshot(work: string, htmlPath: string, pngPath: string) {
+  const profile = path.join(work, `chrome-profile-${Date.now()}`);
   mkdirSync(profile, { recursive: true });
   mkdirSync(path.dirname(pngPath), { recursive: true });
   try {
@@ -97,9 +100,7 @@ function screenshot(htmlPath: string, pngPath: string) {
   } catch (error) {
     if (!existsSync(pngPath)) throw error;
   }
-  if (!existsSync(pngPath)) {
-    throw new Error(`Chrome did not write ${pngPath}`);
-  }
+  if (!existsSync(pngPath)) throw new Error(`Chrome did not write ${pngPath}`);
 }
 
 function audioSeconds(wavPath: string): number {
@@ -140,19 +141,69 @@ function concatWav(parts: string[], dest: string) {
   run("ffmpeg", ["-y", "-f", "concat", "-safe", "0", "-i", listPath, "-c", "copy", dest]);
 }
 
+function withPause(work: string, stem: string, spokenPath: string, pauseAfter: number, wavPath: string) {
+  if (pauseAfter > 0.05) {
+    const gapPath = path.join(work, `${stem}-gap.wav`);
+    silenceWav(gapPath, pauseAfter);
+    concatWav([spokenPath, gapPath], wavPath);
+  } else {
+    copyFileSync(spokenPath, wavPath);
+  }
+}
+
+function muxBeat(pngPath: string, wavPath: string, mp4Path: string) {
+  const duration = audioSeconds(wavPath);
+  run("ffmpeg", [
+    "-y",
+    "-loop",
+    "1",
+    "-i",
+    pngPath,
+    "-i",
+    wavPath,
+    "-c:v",
+    "libx264",
+    "-tune",
+    "stillimage",
+    "-c:a",
+    "aac",
+    "-b:a",
+    "128k",
+    "-pix_fmt",
+    "yuv420p",
+    "-t",
+    duration.toFixed(2),
+    "-vf",
+    "scale=1280:720",
+    mp4Path,
+  ]);
+}
+
 async function main() {
   const topic = getTopicById(topicId);
   if (!topic) throw new Error(`Unknown topic ${topicId}`);
 
-  const { script, hash } = assertReadyToRender(ROOT, topic, { force: FORCE });
-  if (FORCE) {
+  // --reuse-audio still needs hash-matched rehearsal audio; --force only skips the gate for full TTS.
+  const gateForce = FORCE && MODE === "full";
+  const { script, hash } = assertReadyToRender(ROOT, topic, { force: gateForce });
+  const beatCount = allBeats(script).length;
+  const work = renderWorkDir(ROOT, topic.id);
+
+  if (gateForce) {
     console.log(`Render forced — skipping rehearsal gate (script ${hash}).`);
   } else {
     console.log(`Rehearsal gate passed (script ${hash}).`);
   }
+  console.log(`Mode: ${MODE}`);
 
-  rmSync(WORK, { recursive: true, force: true });
-  mkdirSync(WORK, { recursive: true });
+  const reusedWavs =
+    MODE === "reuse-audio"
+      ? assertReusableRehearsalAudio(ROOT, topic.id, beatCount, hash)
+      : null;
+
+  // Wipe only this topic's render scratch — never the rehearsal audio tree.
+  rmSync(work, { recursive: true, force: true });
+  mkdirSync(work, { recursive: true });
   mkdirSync(path.join(ROOT, "public/videos"), { recursive: true });
 
   const listLines: string[] = [];
@@ -160,60 +211,45 @@ async function main() {
 
   for (const scene of script.scenes) {
     for (const beat of scene.beats) {
-      const stem = String(beatIndex).padStart(2, "0") + "-" + scene.id;
-      const htmlPath = path.join(WORK, `${stem}.html`);
-      const pngPath = path.join(WORK, `${stem}.png`);
-      const rawPath = path.join(WORK, `${stem}-raw`);
-      const spokenPath = path.join(WORK, `${stem}-spoken.wav`);
-      const wavPath = path.join(WORK, `${stem}.wav`);
-      const mp4Path = path.join(WORK, `${stem}.mp4`);
+      const stem = `${String(beatIndex).padStart(2, "0")}-${scene.id}`;
+      const htmlPath = path.join(work, `${stem}.html`);
+      const pngPath = path.join(work, `${stem}.png`);
+      const spokenPath = path.join(work, `${stem}-spoken.wav`);
+      const wavPath = path.join(work, `${stem}.wav`);
+      const mp4Path = path.join(work, `${stem}.mp4`);
 
       writeFileSync(htmlPath, slideHtml(scene, beat));
-      process.stdout.write(`Slide ${scene.id} (${beatIndex + 1}/${allBeats(script).length})…\n`);
-      screenshot(htmlPath, pngPath);
-      process.stdout.write(`Speaking: ${beat.spoken.slice(0, 72)}…\n`);
-      await speak(beat.spoken, rawPath, ttsSpeedForRole(PARENT_VIDEO_TTS.speed, beat.prosody));
-      toWav(rawPath, spokenPath);
+      process.stdout.write(`Slide ${scene.id} (${beatIndex + 1}/${beatCount})…\n`);
+      screenshot(work, htmlPath, pngPath);
 
-      if (beat.pauseAfter > 0.05) {
-        const gapPath = path.join(WORK, `${stem}-gap.wav`);
-        silenceWav(gapPath, beat.pauseAfter);
-        concatWav([spokenPath, gapPath], wavPath);
-      } else {
-        copyFileSync(spokenPath, wavPath);
+      if (MODE === "slides-only") {
+        beatIndex += 1;
+        continue;
       }
 
-      const duration = audioSeconds(wavPath);
-      run("ffmpeg", [
-        "-y",
-        "-loop",
-        "1",
-        "-i",
-        pngPath,
-        "-i",
-        wavPath,
-        "-c:v",
-        "libx264",
-        "-tune",
-        "stillimage",
-        "-c:a",
-        "aac",
-        "-b:a",
-        "128k",
-        "-pix_fmt",
-        "yuv420p",
-        "-t",
-        duration.toFixed(2),
-        "-vf",
-        "scale=1280:720",
-        mp4Path,
-      ]);
+      if (reusedWavs) {
+        process.stdout.write(`Reusing rehearsal audio ${path.basename(reusedWavs[beatIndex])}…\n`);
+        copyFileSync(reusedWavs[beatIndex], spokenPath);
+      } else {
+        const rawPath = path.join(work, `${stem}-raw`);
+        process.stdout.write(`Speaking: ${beat.spoken.slice(0, 72)}…\n`);
+        await speak(beat.spoken, rawPath, ttsSpeedForRole(PARENT_VIDEO_TTS.speed, beat.prosody));
+        toWav(rawPath, spokenPath);
+      }
+
+      withPause(work, stem, spokenPath, beat.pauseAfter, wavPath);
+      muxBeat(pngPath, wavPath, mp4Path);
       listLines.push(`file '${mp4Path}'`);
       beatIndex += 1;
     }
   }
 
-  const listPath = path.join(WORK, "concat.txt");
+  if (MODE === "slides-only") {
+    console.log(`Wrote ${beatIndex} slide PNGs under ${path.relative(ROOT, work)} (no audio / no mp4).`);
+    return;
+  }
+
+  const listPath = path.join(work, "concat.txt");
   writeFileSync(listPath, listLines.join("\n") + "\n");
   const outName =
     topic.parentVideo?.src.replace(/^\/videos\//, "").replace(/[?#].*$/, "") ||
@@ -222,7 +258,7 @@ async function main() {
   run("ffmpeg", ["-y", "-f", "concat", "-safe", "0", "-i", listPath, "-c", "copy", outPath]);
 
   if (!existsSync(outPath)) throw new Error("Render finished but the mp4 is missing.");
-  console.log(`Wrote ${outPath} (${beatIndex} beats)`);
+  console.log(`Wrote ${outPath} (${beatIndex} beats, mode=${MODE})`);
 }
 
 main().catch((error) => {

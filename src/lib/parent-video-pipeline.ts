@@ -388,3 +388,67 @@ export function assertReadyToRender(root: string, topic: Topic, opts: { force?: 
 export function sceneSummary(scenes: VideoScene[]): string {
   return scenes.map((scene) => `${scene.id}:${scene.beats.length}`).join(", ");
 }
+
+/** Per-topic render scratch (slides / mux). Separate from rehearsal so wipes keep audio. */
+export function renderWorkDir(root: string, topicId: string): string {
+  return path.join(root, ".video-work", "render", topicId);
+}
+
+/** Spoken-only rehearsal WAV for beat index (00.wav, 01.wav, …) — pauses are applied at render. */
+export function rehearsalSpokenWavPath(root: string, topicId: string, beatIndex: number): string {
+  return path.join(rehearsalAudioDir(root, topicId), `${String(beatIndex).padStart(2, "0")}.wav`);
+}
+
+/**
+ * Ensure rehearsal spoken WAVs exist for every beat and match the current script hash.
+ * Used by `render --reuse-audio` so graphics can change without re-paying for TTS.
+ */
+export function assertReusableRehearsalAudio(
+  root: string,
+  topicId: string,
+  expectedBeats: number,
+  scriptHash: string,
+): string[] {
+  const report = readRehearsalReport(root, topicId);
+  if (!report) {
+    throw new Error(
+      `No rehearsal report for ${topicId}. Run npm run rehearse:parent-video -- ${topicId} before --reuse-audio.`,
+    );
+  }
+  if (report.scriptHash !== scriptHash) {
+    throw new Error(
+      `Rehearsal audio is stale for ${topicId} (report ${report.scriptHash} vs script ${scriptHash}). Re-run npm run rehearse:parent-video -- ${topicId} before --reuse-audio.`,
+    );
+  }
+  if (report.beats.length !== expectedBeats) {
+    throw new Error(
+      `Rehearsal beat count mismatch for ${topicId} (report ${report.beats.length} vs script ${expectedBeats}). Re-run rehearsal.`,
+    );
+  }
+
+  const wavs: string[] = [];
+  for (let index = 0; index < expectedBeats; index += 1) {
+    const wavPath = rehearsalSpokenWavPath(root, topicId, index);
+    if (!existsSync(wavPath)) {
+      throw new Error(
+        `Missing rehearsal WAV ${path.relative(root, wavPath)}. Run npm run rehearse:parent-video -- ${topicId}.`,
+      );
+    }
+    wavs.push(wavPath);
+  }
+  return wavs;
+}
+
+export type RenderMode = "full" | "reuse-audio" | "slides-only";
+
+export function parseRenderMode(flags: string[]): RenderMode {
+  const reuse = flags.includes("--reuse-audio");
+  const slidesOnly = flags.includes("--slides-only");
+  if (reuse && slidesOnly) {
+    throw new Error("Use only one of --reuse-audio or --slides-only.");
+  }
+  if (slidesOnly) return "slides-only";
+  if (reuse) return "reuse-audio";
+  return "full";
+}
+

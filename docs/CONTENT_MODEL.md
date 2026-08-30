@@ -79,6 +79,15 @@ npm run rehearse:parent-video -- facts-within-10   # TTS-only + pace eval (needs
 npm run render:parent-video -- facts-within-10     # full film; gated on rehearsal unless --force
 ```
 
+Building-block re-renders (after a successful rehearsal):
+
+```bash
+npm run render:parent-video -- facts-within-10 --slides-only    # every beat PNG, no TTS / no mp4
+npm run render:parent-video -- facts-within-10 --reuse-audio    # reshoot slides + remux; keeps rehearsal WAVs
+```
+
+`--reuse-audio` requires a hash-matched rehearsal (spoken text unchanged). Render scratch lives under `.video-work/render/<id>/` so it never wipes `.video-work/rehearsal/<id>/`.
+
 Lesson pictures are ours: a recurring adult guide, a ten-frame, and a part–whole diagram. They must show a fact already in the pack. Do not generate classroom footage, children, or a cartoon teacher.
 
 ```bash
@@ -86,7 +95,7 @@ Lesson pictures are ours: a recurring adult guide, a ten-frame, and a part–who
 npm run render:parent-video -- facts-within-10
 ```
 
-Re-render after a language or script-shape change. The page stays the source beside the child.
+Re-render after a language or script-shape change (that needs fresh TTS). Graphics-only tweaks can use `--reuse-audio`. The page stays the source beside the child.
 
 ## Review status
 

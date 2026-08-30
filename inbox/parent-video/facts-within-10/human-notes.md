@@ -57,3 +57,10 @@ Applied open `parent-video` notes from the script viewer. Method and intent firs
 - Ten-frame: panel + counter discs with a soft 3D fill; slide wash uses a light teal/amber atmosphere instead of flat cream.
 - Preview slides: `npx tsx scripts/preview-parent-video-graphics.ts`
 - Re-render as `facts-within-10-parent-briefing-v7.mp4` when ready (needs FAL_KEY).
+
+## 2026-08-30 building-block render
+
+- Render scratch is now `.video-work/render/<id>/` so wiping it no longer deletes rehearsal WAVs under `.video-work/rehearsal/<id>/`.
+- `npm run render:parent-video -- <id> --reuse-audio` — reshoot slides + remux using rehearsal WAVs (no TTS). Requires a hash-matched rehearsal.
+- `npm run render:parent-video -- <id> --slides-only` — write every beat PNG, stop before audio/mp4.
+- Full TTS render unchanged (default). `--force` still skips the rehearsal *gate* for a full speak; it does not invent reusable audio.
