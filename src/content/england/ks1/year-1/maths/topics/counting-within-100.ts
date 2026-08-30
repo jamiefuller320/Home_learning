@@ -31,8 +31,14 @@ export const countingWithin100: Topic = {
     howSchoolTeachesIt:
       "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square. Teachers often start from a number in the middle — 16, 28, 45 — so children do not only rely on the count that always starts at 1. They will also count back, which feels much harder and is worth a little extra practice at home.",
     sayThis: [
-      "Start at 14. What comes next?",
-      "Can you count back from 20? I’ll do the first two with you: 20, 19…",
+      {
+        prompt: "Start at 14. What comes next?",
+        listenFor: "15 — the next number after 14.",
+      },
+      {
+        prompt: "Can you count back from 20? I’ll do the first two with you: 20, 19…",
+        listenFor: "18, then 17, 16… stepping down one at a time.",
+      },
       "Touch each piece as you say the number. When they are all in the bowl, we stop.",
       "If you lose your place, we can start that bit again. That is part of counting.",
     ],
