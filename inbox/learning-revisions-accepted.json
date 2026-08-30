@@ -38,18 +38,6 @@
       "kind": "structure"
     },
     {
-      "id": "rev-4981fd2f",
-      "learningId": "say-this-listen-for",
-      "learningTitle": "Say this prompts can reveal what you might hear",
-      "topicId": "counting-within-100",
-      "topicTitle": "Counting forwards and backwards within 100",
-      "fieldPath": "parentBriefing.sayThis",
-      "before": "Start at 14. What comes next? · Can you count back from 20? I’ll do the first two with you: 20, 19… · Touch each piece as you say the number. When they are all in the bowl, we stop. · If you lose your place, we can start that bit again. That is part of counting.",
-      "after": "Add listenFor on prompts that have a clear expected response (see parts-of-10). Decline if prompts are open-ended.",
-      "rationale": "Optional: when a prompt has a clear expected response, add listenFor so parents can check without coaching the child.",
-      "kind": "structure"
-    },
-    {
       "id": "rev-9a8fed13",
       "learningId": "say-this-listen-for",
       "learningTitle": "Say this prompts can reveal what you might hear",
