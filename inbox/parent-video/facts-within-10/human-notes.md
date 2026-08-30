@@ -49,3 +49,11 @@ Applied open `parent-video` notes from the script viewer. Method and intent firs
 - Production default stays Kokoro until a human says the trial is comfortable to listen to.
 - Short collage: `inbox/parent-video/facts-within-10/elevenlabs-trial/listen.mp3`
 - Re-run: `npm run trial:elevenlabs-parent-video -- facts-within-10` (add `--full` for every beat).
+
+## 2026-08-30 graphics quality (v7)
+
+- Number bond: replaced the CSS “U-bar” (verticals sitting above a crossbar) with a proper cherry / part–whole SVG — two diagonal arms from the whole rim into each part rim.
+- Guide: soft skin/jumper/hair gradients, filled sleeves, collar, steam mug; point pose is a short up-right jab from the left so it never reads as a third bond stem.
+- Ten-frame: panel + counter discs with a soft 3D fill; slide wash uses a light teal/amber atmosphere instead of flat cream.
+- Preview slides: `npx tsx scripts/preview-parent-video-graphics.ts`
+- Re-render as `facts-within-10-parent-briefing-v7.mp4` when ready (needs FAL_KEY).
