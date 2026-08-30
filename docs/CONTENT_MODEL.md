@@ -79,14 +79,18 @@ npm run rehearse:parent-video -- facts-within-10   # TTS-only + pace eval (needs
 npm run render:parent-video -- facts-within-10     # full film; gated on rehearsal unless --force
 ```
 
-Building-block re-renders (after a successful rehearsal):
+Building-block re-renders (after a successful rehearsal, or with per-clip reuse):
 
 ```bash
-npm run render:parent-video -- facts-within-10 --slides-only    # every beat PNG, no TTS / no mp4
-npm run render:parent-video -- facts-within-10 --reuse-audio    # reshoot slides + remux; keeps rehearsal WAVs
+npm run render:parent-video -- facts-within-10 --slides-only              # beat PNGs only
+npm run render:parent-video -- facts-within-10 --reuse-audio              # slides + remux; TTS only for gaps
+npm run render:parent-video -- facts-within-10 --audio-only               # gap-bake WAVs + stub frames (voice A/B)
+npm run render:parent-video -- facts-within-10 --reuse-audio --scene open # only selected scenes
+npm run render:parent-video -- facts-within-10 --beats 0-2,5              # only selected beat indexes
+npm run render:parent-video -- facts-within-10 --theme path/to/theme.json # palette / type override
 ```
 
-`--reuse-audio` requires a hash-matched rehearsal (spoken text unchanged). Render scratch lives under `.video-work/render/<id>/` so it never wipes `.video-work/rehearsal/<id>/`.
+`--reuse-audio` / `--audio-only` prefer gap-baked WAVs under `.video-work/baked/<id>/`, then content-addressed rehearsal clips (`.video-work/rehearsal/<id>/clips/<hash>.wav`), then index WAVs when the script hash still matches; otherwise TTS fills gaps. Render scratch lives under `.video-work/render/<id>/` so it never wipes rehearsal or baked audio. Theme tokens live in `src/lib/parent-video-theme.ts`.
 
 Lesson pictures are ours: a recurring adult guide, a ten-frame, and a part–whole diagram. They must show a fact already in the pack. Do not generate classroom footage, children, or a cartoon teacher.
 

@@ -61,6 +61,10 @@ Applied open `parent-video` notes from the script viewer. Method and intent firs
 ## 2026-08-30 building-block render
 
 - Render scratch is now `.video-work/render/<id>/` so wiping it no longer deletes rehearsal WAVs under `.video-work/rehearsal/<id>/`.
-- `npm run render:parent-video -- <id> --reuse-audio` — reshoot slides + remux using rehearsal WAVs (no TTS). Requires a hash-matched rehearsal.
-- `npm run render:parent-video -- <id> --slides-only` — write every beat PNG, stop before audio/mp4.
+- `npm run render:parent-video -- <id> --reuse-audio` — prefer baked / hash clips / rehearsal; TTS only for gaps.
+- `npm run render:parent-video -- <id> --slides-only` — write beat PNGs, stop before audio/mp4.
+- `npm run render:parent-video -- <id> --audio-only` — gap-bake WAVs + stub frames for voice A/B.
+- Targeting: `--scene open,school` and/or `--beats 0-2,5` (partial stitch keeps sibling mp4s when present).
+- Theme tokens: `src/lib/parent-video-theme.ts` (override with `--theme path/to/theme.json`).
+- Gap-baked audio: `.video-work/baked/<id>/NN.wav` + meta JSON for graphics-only re-renders.
 - Full TTS render unchanged (default). `--force` still skips the rehearsal *gate* for a full speak; it does not invent reusable audio.
