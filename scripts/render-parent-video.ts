@@ -5,7 +5,8 @@
  *   npm run script:parent-video -- <id>     # human-readable script + delivery checks
  *   npm run rehearse:parent-video -- <id>   # TTS-only + pace eval
  *
- * Voice: Fal Kokoro British English (needs FAL_KEY) — see PARENT_VIDEO_TTS.
+ * Voice: Fal ElevenLabs Charlotte by default (needs FAL_KEY) — see PARENT_VIDEO_TTS.
+ *          Set PARENT_VIDEO_TTS_PROVIDER=kokoro to fall back.
  * Pictures: our slides and diagrams only — no generated classroom footage.
  *
  *   npx tsx scripts/render-parent-video.ts facts-within-10

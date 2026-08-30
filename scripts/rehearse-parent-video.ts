@@ -5,7 +5,7 @@
  *
  * 1. Dumps/refreshes the script preview
  * 2. Blocks on spoken-delivery findings
- * 3. Generates Kokoro audio only (no slides / no final mp4)
+ * 3. Generates TTS audio only (ElevenLabs Charlotte by default; no slides / no final mp4)
  * 4. Auto-evaluates pace (chars/sec) and writes rehearsal report
  *
  * Needs FAL_KEY. Full render reads the report as a gate.
