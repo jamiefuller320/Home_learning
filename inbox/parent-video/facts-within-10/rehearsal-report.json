@@ -2,7 +2,7 @@
   "topicId": "facts-within-10",
   "title": "Number facts within 10",
   "scriptHash": "021cd51cc6f624c0",
-  "createdAt": "2026-08-29T21:48:15.620Z",
+  "createdAt": "2026-08-30T07:13:40.412Z",
   "status": "pass",
   "delivery": {
     "topicId": "facts-within-10",
@@ -18,8 +18,8 @@
       "line": "Number facts within 10",
       "pauseAfter": 0.5,
       "prosody": "title",
-      "durationSec": 2.45,
-      "charsPerSec": 8.16326530612245,
+      "durationSec": 1.489,
+      "charsPerSec": 13.431833445265278,
       "audioFile": ".video-work/rehearsal/facts-within-10/00.wav"
     },
     {
@@ -29,8 +29,8 @@
       "line": "This is a quick parent briefing.",
       "pauseAfter": 0.58,
       "prosody": "section",
-      "durationSec": 2.5,
-      "charsPerSec": 10.8,
+      "durationSec": 1.724083,
+      "charsPerSec": 15.66049894349634,
       "audioFile": ".video-work/rehearsal/facts-within-10/01.wav"
     },
     {
@@ -40,8 +40,8 @@
       "line": "Not a film for your child to watch!",
       "pauseAfter": 0.58,
       "prosody": "key",
-      "durationSec": 2.625,
-      "charsPerSec": 10.666666666666666,
+      "durationSec": 2.037542,
+      "charsPerSec": 13.742048016678918,
       "audioFile": ".video-work/rehearsal/facts-within-10/02.wav"
     },
     {
@@ -51,8 +51,8 @@
       "line": "You learn the method here.",
       "pauseAfter": 0.58,
       "prosody": "teach",
-      "durationSec": 2,
-      "charsPerSec": 11,
+      "durationSec": 1.149375,
+      "charsPerSec": 19.14083741163676,
       "audioFile": ".video-work/rehearsal/facts-within-10/03.wav"
     },
     {
@@ -62,8 +62,8 @@
       "line": "Then you work from the written page, beside your child.",
       "pauseAfter": 0.36,
       "prosody": "teach",
-      "durationSec": 3.425,
-      "charsPerSec": 13.43065693430657,
+      "durationSec": 2.847333,
+      "charsPerSec": 16.155468995020954,
       "audioFile": ".video-work/rehearsal/facts-within-10/04.wav"
     },
     {
@@ -73,8 +73,8 @@
       "line": "If anything clashes with how your school teaches…",
       "pauseAfter": 0.58,
       "prosody": "aside",
-      "durationSec": 3.2,
-      "charsPerSec": 13.125,
+      "durationSec": 2.50775,
+      "charsPerSec": 16.74808094905792,
       "audioFile": ".video-work/rehearsal/facts-within-10/05.wav"
     },
     {
@@ -84,8 +84,8 @@
       "line": "Follow the school.",
       "pauseAfter": 0.7,
       "prosody": "aside",
-      "durationSec": 1.65,
-      "charsPerSec": 9.696969696969697,
+      "durationSec": 0.914292,
+      "charsPerSec": 17.499879688327145,
       "audioFile": ".video-work/rehearsal/facts-within-10/06.wav"
     },
     {
@@ -95,8 +95,8 @@
       "line": "Here’s the idea.",
       "pauseAfter": 0.5,
       "prosody": "section",
-      "durationSec": 1.9,
-      "charsPerSec": 7.36842105263158,
+      "durationSec": 0.914292,
+      "charsPerSec": 15.31239472728625,
       "audioFile": ".video-work/rehearsal/facts-within-10/07.wav"
     },
     {
@@ -106,8 +106,8 @@
       "line": "A number fact is a small truth.",
       "pauseAfter": 0.36,
       "prosody": "teach",
-      "durationSec": 2.65,
-      "charsPerSec": 9.433962264150944,
+      "durationSec": 2.115917,
+      "charsPerSec": 11.815208252497616,
       "audioFile": ".video-work/rehearsal/facts-within-10/08.wav"
     },
     {
@@ -117,8 +117,8 @@
       "line": "Such as: 6 and 4 make 10.",
       "pauseAfter": 0.5,
       "prosody": "example",
-      "durationSec": 2.65,
-      "charsPerSec": 7.169811320754717,
+      "durationSec": 3.160833,
+      "charsPerSec": 6.011073663176764,
       "audioFile": ".video-work/rehearsal/facts-within-10/09.wav"
     },
     {
@@ -128,8 +128,8 @@
       "line": "Or: 7 take away 2 equals 5.",
       "pauseAfter": 0.5,
       "prosody": "example",
-      "durationSec": 3.1,
-      "charsPerSec": 6.774193548387097,
+      "durationSec": 3.082458,
+      "charsPerSec": 6.812744893847702,
       "audioFile": ".video-work/rehearsal/facts-within-10/10.wav"
     },
     {
@@ -139,8 +139,8 @@
       "line": "Fluency does not mean shouting answers against a timer.",
       "pauseAfter": 0.36,
       "prosody": "teach",
-      "durationSec": 3.825,
-      "charsPerSec": 12.287581699346404,
+      "durationSec": 3.239208,
+      "charsPerSec": 14.509719659867473,
       "audioFile": ".video-work/rehearsal/facts-within-10/11.wav"
     },
     {
@@ -150,8 +150,8 @@
       "line": "It means the child does not have to start at 1 and climb every time.",
       "pauseAfter": 0.7,
       "prosody": "teach",
-      "durationSec": 4.55,
-      "charsPerSec": 11.868131868131869,
+      "durationSec": 3.970625,
+      "charsPerSec": 13.599874075240043,
       "audioFile": ".video-work/rehearsal/facts-within-10/12.wav"
     },
     {
@@ -161,8 +161,8 @@
       "line": "And here’s how school typically teaches it.",
       "pauseAfter": 0.5,
       "prosody": "section",
-      "durationSec": 2.975,
-      "charsPerSec": 12.436974789915967,
+      "durationSec": 2.351042,
+      "charsPerSec": 15.737702686723589,
       "audioFile": ".video-work/rehearsal/facts-within-10/13.wav"
     },
     {
@@ -172,8 +172,8 @@
       "line": "Most schools use a ten-frame.",
       "pauseAfter": 0.36,
       "prosody": "teach",
-      "durationSec": 2.475,
-      "charsPerSec": 10.1010101010101,
+      "durationSec": 1.802458,
+      "charsPerSec": 13.869948703381716,
       "audioFile": ".video-work/rehearsal/facts-within-10/14.wav"
     },
     {
@@ -183,8 +183,8 @@
       "line": "Two rows of five.",
       "pauseAfter": 0.36,
       "prosody": "teach",
-      "durationSec": 1.875,
-      "charsPerSec": 7.466666666666667,
+      "durationSec": 1.306125,
+      "charsPerSec": 10.718729064982295,
       "audioFile": ".video-work/rehearsal/facts-within-10/15.wav"
     },
     {
@@ -194,8 +194,8 @@
       "line": "They pair that with a part–whole picture: one whole number made of two parts.",
       "pauseAfter": 0.36,
       "prosody": "teach",
-      "durationSec": 4.55,
-      "charsPerSec": 14.065934065934066,
+      "durationSec": 5.720833,
+      "charsPerSec": 11.18718200653646,
       "audioFile": ".video-work/rehearsal/facts-within-10/16.wav"
     },
     {
@@ -205,8 +205,8 @@
       "line": "They will teach families of facts together.",
       "pauseAfter": 0.36,
       "prosody": "teach",
-      "durationSec": 2.875,
-      "charsPerSec": 12.869565217391305,
+      "durationSec": 2.194292,
+      "charsPerSec": 16.861930864260547,
       "audioFile": ".video-work/rehearsal/facts-within-10/17.wav"
     },
     {
@@ -216,8 +216,8 @@
       "line": "Such as: 6 plus 4.",
       "pauseAfter": 0.5,
       "prosody": "example",
-      "durationSec": 2.375,
-      "charsPerSec": 5.894736842105263,
+      "durationSec": 2.272667,
+      "charsPerSec": 6.1601633675325065,
       "audioFile": ".video-work/rehearsal/facts-within-10/18.wav"
     },
     {
@@ -227,8 +227,8 @@
       "line": "Or: 4 plus 6.",
       "pauseAfter": 0.5,
       "prosody": "example",
-      "durationSec": 2,
-      "charsPerSec": 5,
+      "durationSec": 1.802458,
+      "charsPerSec": 5.547979481352686,
       "audioFile": ".video-work/rehearsal/facts-within-10/19.wav"
     },
     {
@@ -238,8 +238,8 @@
       "line": "Or: 10 take away 4.",
       "pauseAfter": 0.5,
       "prosody": "example",
-      "durationSec": 2.275,
-      "charsPerSec": 6.593406593406594,
+      "durationSec": 2.194292,
+      "charsPerSec": 6.835917917943465,
       "audioFile": ".video-work/rehearsal/facts-within-10/20.wav"
     },
     {
@@ -249,8 +249,8 @@
       "line": "Or: 10 take away 6.",
       "pauseAfter": 0.5,
       "prosody": "example",
-      "durationSec": 2.25,
-      "charsPerSec": 6.666666666666667,
+      "durationSec": 2.272667,
+      "charsPerSec": 6.600175036641971,
       "audioFile": ".video-work/rehearsal/facts-within-10/21.wav"
     },
     {
@@ -260,8 +260,8 @@
       "line": "School often calls that pair a number bond: two parts that make a whole.",
       "pauseAfter": 0.7,
       "prosody": "teach",
-      "durationSec": 4.4,
-      "charsPerSec": 13.409090909090908,
+      "durationSec": 4.519208,
+      "charsPerSec": 13.055384925854264,
       "audioFile": ".video-work/rehearsal/facts-within-10/22.wav"
     },
     {
@@ -271,8 +271,8 @@
       "line": "Here’s one mix-up to watch for.",
       "pauseAfter": 0.5,
       "prosody": "section",
-      "durationSec": 2.475,
-      "charsPerSec": 10.505050505050505,
+      "durationSec": 1.802458,
+      "charsPerSec": 14.424746651516985,
       "audioFile": ".video-work/rehearsal/facts-within-10/23.wav"
     },
     {
@@ -282,8 +282,8 @@
       "line": "They can do 3 plus 2 with objects but go blank when they see 3 plus 2 written.",
       "pauseAfter": 0.5,
       "prosody": "example",
-      "durationSec": 5.525,
-      "charsPerSec": 11.040723981900452,
+      "durationSec": 4.911042,
+      "charsPerSec": 12.420989272744968,
       "audioFile": ".video-work/rehearsal/facts-within-10/24.wav"
     },
     {
@@ -293,8 +293,8 @@
       "line": "Build it with objects, say it in words, then show the symbols written underneath.",
       "pauseAfter": 0.36,
       "prosody": "key",
-      "durationSec": 4.85,
-      "charsPerSec": 14.020618556701033,
+      "durationSec": 4.440833,
+      "charsPerSec": 15.312442507970916,
       "audioFile": ".video-work/rehearsal/facts-within-10/25.wav"
     },
     {
@@ -304,8 +304,8 @@
       "line": "Don’t use words and symbols as the starting point.",
       "pauseAfter": 0.7,
       "prosody": "key",
-      "durationSec": 3.45,
-      "charsPerSec": 12.17391304347826,
+      "durationSec": 2.50775,
+      "charsPerSec": 16.74808094905792,
       "audioFile": ".video-work/rehearsal/facts-within-10/26.wav"
     },
     {
@@ -315,8 +315,8 @@
       "line": "Tonight’s activity.",
       "pauseAfter": 0.58,
       "prosody": "section",
-      "durationSec": 1.975,
-      "charsPerSec": 9.11392405063291,
+      "durationSec": 1.22775,
+      "charsPerSec": 14.660965180207699,
       "audioFile": ".video-work/rehearsal/facts-within-10/27.wav"
     },
     {
@@ -326,8 +326,8 @@
       "line": "This is the task outline — look at the written instructions for the full task.",
       "pauseAfter": 0.36,
       "prosody": "section",
-      "durationSec": 5.1,
-      "charsPerSec": 12.549019607843139,
+      "durationSec": 4.754292,
+      "charsPerSec": 13.461520663854891,
       "audioFile": ".video-work/rehearsal/facts-within-10/28.wav"
     },
     {
@@ -337,8 +337,8 @@
       "line": "Make 10 in two colours",
       "pauseAfter": 0.5,
       "prosody": "title",
-      "durationSec": 2.2,
-      "charsPerSec": 8.636363636363635,
+      "durationSec": 1.959208,
+      "charsPerSec": 9.697796252363199,
       "audioFile": ".video-work/rehearsal/facts-within-10/29.wav"
     },
     {
@@ -348,8 +348,8 @@
       "line": "Fill 6 spaces on the frame with one colour or type of object.",
       "pauseAfter": 0.36,
       "prosody": "teach",
-      "durationSec": 4.175,
-      "charsPerSec": 11.736526946107785,
+      "durationSec": 4.127333,
+      "charsPerSec": 11.872073321924836,
       "audioFile": ".video-work/rehearsal/facts-within-10/30.wav"
     },
     {
@@ -359,8 +359,8 @@
       "line": "Ask how many empty spaces, then fill them with the other type.",
       "pauseAfter": 0.36,
       "prosody": "teach",
-      "durationSec": 3.925,
-      "charsPerSec": 12.993630573248408,
+      "durationSec": 3.78775,
+      "charsPerSec": 13.464457791564913,
       "audioFile": ".video-work/rehearsal/facts-within-10/31.wav"
     },
     {
@@ -370,8 +370,8 @@
       "line": "Fifteen minutes, or three number bonds, is plenty.",
       "pauseAfter": 0.36,
       "prosody": "aside",
-      "durationSec": 3.25,
-      "charsPerSec": 13.23076923076923,
+      "durationSec": 3.970625,
+      "charsPerSec": 10.829529356209665,
       "audioFile": ".video-work/rehearsal/facts-within-10/32.wav"
     },
     {
@@ -381,8 +381,8 @@
       "line": "Whichever comes first.",
       "pauseAfter": 0.7,
       "prosody": "aside",
-      "durationSec": 1.975,
-      "charsPerSec": 10.126582278481012,
+      "durationSec": 1.22775,
+      "charsPerSec": 16.289961311341887,
       "audioFile": ".video-work/rehearsal/facts-within-10/33.wav"
     },
     {
@@ -392,8 +392,8 @@
       "line": "Here’s what you’re aiming for.",
       "pauseAfter": 0.5,
       "prosody": "section",
-      "durationSec": 2.4,
-      "charsPerSec": 10.833333333333334,
+      "durationSec": 1.567333,
+      "charsPerSec": 16.58868919368124,
       "audioFile": ".video-work/rehearsal/facts-within-10/34.wav"
     },
     {
@@ -403,8 +403,8 @@
       "line": "You can show 7 on a ten-frame and see, without counting from 1, that 3 empty spaces make 10.",
       "pauseAfter": 0.36,
       "prosody": "key",
-      "durationSec": 6.525,
-      "charsPerSec": 11.340996168582375,
+      "durationSec": 7.157542,
+      "charsPerSec": 10.338744781378859,
       "audioFile": ".video-work/rehearsal/facts-within-10/35.wav"
     },
     {
@@ -414,8 +414,8 @@
       "line": "One check from the page.",
       "pauseAfter": 0.58,
       "prosody": "aside",
-      "durationSec": 1.975,
-      "charsPerSec": 10.126582278481012,
+      "durationSec": 1.22775,
+      "charsPerSec": 16.289961311341887,
       "audioFile": ".video-work/rehearsal/facts-within-10/36.wav"
     },
     {
@@ -425,8 +425,8 @@
       "line": "Show 8 on the frame.",
       "pauseAfter": 0.5,
       "prosody": "key",
-      "durationSec": 1.925,
-      "charsPerSec": 8.311688311688311,
+      "durationSec": 1.645708,
+      "charsPerSec": 9.722259355851707,
       "audioFile": ".video-work/rehearsal/facts-within-10/37.wav"
     },
     {
@@ -436,8 +436,8 @@
       "line": "How many more to make 10?",
       "pauseAfter": 0.5,
       "prosody": "key",
-      "durationSec": 2.225,
-      "charsPerSec": 8.988764044943819,
+      "durationSec": 1.489,
+      "charsPerSec": 13.431833445265278,
       "audioFile": ".video-work/rehearsal/facts-within-10/38.wav"
     },
     {
@@ -447,8 +447,8 @@
       "line": "Here’s what you want to see.",
       "pauseAfter": 0.58,
       "prosody": "key",
-      "durationSec": 2.325,
-      "charsPerSec": 9.89247311827957,
+      "durationSec": 1.410625,
+      "charsPerSec": 16.304829419583516,
       "audioFile": ".video-work/rehearsal/facts-within-10/39.wav"
     },
     {
@@ -458,8 +458,8 @@
       "line": "They can say there are 2 empty spaces, or count each empty cell once.",
       "pauseAfter": 0.7,
       "prosody": "key",
-      "durationSec": 4.6,
-      "charsPerSec": 12.173913043478262,
+      "durationSec": 4.989375,
+      "charsPerSec": 11.22385068270074,
       "audioFile": ".video-work/rehearsal/facts-within-10/40.wav"
     },
     {
@@ -469,8 +469,8 @@
       "line": "When you’re ready to sit down together…",
       "pauseAfter": 0.58,
       "prosody": "handoff",
-      "durationSec": 2.5,
-      "charsPerSec": 13.2,
+      "durationSec": 1.645708,
+      "charsPerSec": 20.052159921444144,
       "audioFile": ".video-work/rehearsal/facts-within-10/41.wav"
     },
     {
@@ -480,8 +480,8 @@
       "line": "Open the written page.",
       "pauseAfter": 0.58,
       "prosody": "handoff",
-      "durationSec": 2,
-      "charsPerSec": 9.5,
+      "durationSec": 1.489,
+      "charsPerSec": 12.760241773002013,
       "audioFile": ".video-work/rehearsal/facts-within-10/42.wav"
     },
     {
@@ -491,8 +491,8 @@
       "line": "Keep it beside you for the steps, the words to say, and the live checks.",
       "pauseAfter": 0.58,
       "prosody": "handoff",
-      "durationSec": 3.95,
-      "charsPerSec": 14.683544303797468,
+      "durationSec": 4.205708,
+      "charsPerSec": 13.79078148078754,
       "audioFile": ".video-work/rehearsal/facts-within-10/43.wav"
     },
     {
@@ -502,8 +502,8 @@
       "line": "Don’t run the session from this film alone — return to the written pack when you sit down with your child.",
       "pauseAfter": 0.58,
       "prosody": "handoff",
-      "durationSec": 5.875,
-      "charsPerSec": 14.638297872340425,
+      "durationSec": 5.485708,
+      "charsPerSec": 15.67710129667857,
       "audioFile": ".video-work/rehearsal/facts-within-10/44.wav"
     },
     {
@@ -513,8 +513,8 @@
       "line": "Found this on YouTube?",
       "pauseAfter": 0.58,
       "prosody": "handoff",
-      "durationSec": 2.05,
-      "charsPerSec": 9.26829268292683,
+      "durationSec": 1.149375,
+      "charsPerSec": 16.530723219140835,
       "audioFile": ".video-work/rehearsal/facts-within-10/45.wav"
     },
     {
@@ -524,8 +524,8 @@
       "line": "Use the link in the video description to open that page.",
       "pauseAfter": 0.7,
       "prosody": "handoff",
-      "durationSec": 3.8,
-      "charsPerSec": 12.105263157894738,
+      "durationSec": 2.925708,
+      "charsPerSec": 15.722690029216858,
       "audioFile": ".video-work/rehearsal/facts-within-10/46.wav"
     },
     {
@@ -535,8 +535,8 @@
       "line": "If you teach Year 1…",
       "pauseAfter": 0.58,
       "prosody": "aside",
-      "durationSec": 1.95,
-      "charsPerSec": 8.205128205128206,
+      "durationSec": 1.410625,
+      "charsPerSec": 11.342490031014622,
       "audioFile": ".video-work/rehearsal/facts-within-10/47.wav"
     },
     {
@@ -546,8 +546,8 @@
       "line": "Tell us whether the method matches your school.",
       "pauseAfter": 0.58,
       "prosody": "aside",
-      "durationSec": 3,
-      "charsPerSec": 13.333333333333334,
+      "durationSec": 2.272667,
+      "charsPerSec": 17.600466764378588,
       "audioFile": ".video-work/rehearsal/facts-within-10/48.wav"
     },
     {
@@ -557,8 +557,8 @@
       "line": "Thanks for watching — enjoy the session together.",
       "pauseAfter": 0.22,
       "prosody": "aside",
-      "durationSec": 3.075,
-      "charsPerSec": 13.658536585365853,
+      "durationSec": 2.925708,
+      "charsPerSec": 14.355499591893654,
       "audioFile": ".video-work/rehearsal/facts-within-10/49.wav"
     }
   ]
