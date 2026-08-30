@@ -54,9 +54,9 @@ export function guideSvg(pose: GuidePose, size: GuideSize = "corner"): string {
   // Short up-right jab toward the diagram — never a vertical stem through the cherry model.
   const rightArm =
     pose === "point"
-      ? `<path d="M138 118 C150 100 158 82 168 64" fill="none" stroke="#164843" stroke-width="12" stroke-linecap="round"/>
-         <circle cx="172" cy="58" r="11" fill="#d2b48c"/>
-         <path d="M178 52 L190 40" fill="none" stroke="#d2b48c" stroke-width="5.5" stroke-linecap="round"/>`
+      ? `<path d="M142 124 C152 110 160 96 168 84" fill="none" stroke="#164843" stroke-width="12" stroke-linecap="round"/>
+         <circle cx="172" cy="78" r="11" fill="#d2b48c"/>
+         <path d="M178 72 L190 60" fill="none" stroke="#d2b48c" stroke-width="5.5" stroke-linecap="round"/>`
       : `<path d="M140 120 C158 144 154 168 132 180 C124 184 118 178 120 170 C130 154 132 138 136 124 Z" fill="#164843"/>
          <circle cx="130" cy="180" r="9" fill="#d2b48c"/>`;
 
@@ -147,9 +147,9 @@ function partWholeHtml(whole: number, left: number, right: number): string {
         <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#1d2a28" flood-opacity="0.12"/>
       </filter>
     </defs>
-    <!-- two independent arms (drawn under the circles so ends tuck into the rims) -->
-    <path d="M114 78 L70 146" fill="none" stroke="#1f5f59" stroke-width="5" stroke-linecap="round"/>
-    <path d="M166 78 L210 146" fill="none" stroke="#1f5f59" stroke-width="5" stroke-linecap="round"/>
+    <!-- two independent arms from whole rim into each part rim (wide attach so they never read as a Y-stem) -->
+    <path d="M108 72 L70 146" fill="none" stroke="#1f5f59" stroke-width="5" stroke-linecap="round"/>
+    <path d="M172 72 L210 146" fill="none" stroke="#1f5f59" stroke-width="5" stroke-linecap="round"/>
     <!-- whole -->
     <g filter="url(#bondSoft)">
       <circle cx="140" cy="48" r="40" fill="#e8f3f1" stroke="#1f5f59" stroke-width="5"/>
@@ -226,7 +226,7 @@ export const SLIDE_CSS = `
     .layout { display: flex; gap: 40px; align-items: flex-start; position: relative; z-index: 1; }
     .copy { flex: 1 1 52%; min-width: 0; }
     .visual { flex: 1 1 42%; min-width: 0; }
-    .visual-with-guide { position: relative; padding-bottom: 124px; min-height: 300px; display: flex; flex-direction: column; align-items: flex-start; }
+    .visual-with-guide { position: relative; padding-bottom: 132px; min-height: 300px; display: flex; flex-direction: column; align-items: flex-start; }
     .visual-character { display: flex; align-items: flex-end; justify-content: center; min-height: 420px; padding-top: 24px; }
     .line { font-size: 26px; line-height: 1.4; color: #3d4f4b; margin: 0 0 12px; max-width: 36rem; }
     .frame-panel {
@@ -259,12 +259,12 @@ export const SLIDE_CSS = `
       box-shadow: 0 2px 4px rgba(138, 90, 32, 0.3);
     }
     .caption { font-size: 18px; color: #3d4f4b; margin: 0; max-width: 22rem; }
-    .bond { width: 300px; height: auto; display: block; margin: 4px 0 10px; margin-left: 36px; }
+    .bond { width: 300px; height: auto; display: block; margin: 4px 0 10px; margin-left: 48px; }
     .list { padding: 8px 4px; }
     .list-item { font-size: 22px; line-height: 1.35; color: #7a6d5c; margin: 0 0 10px; }
     .list-item.on { color: #1d2a28; font-weight: 700; }
     /* Sit left of the diagram so a point jab never reads as a third bond stem. */
-    .guide-corner { position: absolute; left: 0; bottom: 0; width: 118px; height: auto; filter: drop-shadow(0 6px 10px rgba(29,42,40,0.12)); }
+    .guide-corner { position: absolute; left: 0; bottom: 0; width: 108px; height: auto; filter: drop-shadow(0 6px 10px rgba(29,42,40,0.12)); }
     .guide-feature { width: 360px; height: auto; filter: drop-shadow(0 12px 18px rgba(29,42,40,0.14)); }
     .mark { position: absolute; right: 64px; bottom: 28px; color: #1f5f59; font-size: 16px; z-index: 1; }
 `;
