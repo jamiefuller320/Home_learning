@@ -24,6 +24,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ```bash
 npm run validate:content   # every topic must satisfy the content model
 npm run judge:lessons      # held-out second reader on packs, then compiled video scripts
+npm run backup:code        # local tarball of git-tracked files (weekly S3 copy in CI)
 npm run build              # static export into /out
 npm run preview            # serve /out locally
 ```
@@ -69,6 +70,7 @@ Dumps land in `inbox/parent-video/<id>/` for human notes. Fix awkward wording in
 
 | Path | What it is |
 |---|---|
+| `docs/CODE_BACKUP.md` | Weekly S3 snapshot of git-tracked source |
 | `docs/FRAMEWORK.md` | How we build, and what “done” means |
 | `docs/DEFERRED.md` | Ideas we are deliberately not building yet |
 | `docs/CONTENT_MODEL.md` | Rules for a topic pack |

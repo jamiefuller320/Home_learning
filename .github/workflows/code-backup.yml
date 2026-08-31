@@ -1,0 +1,159 @@
+name: Weekly code backup
+
+# Sunday snapshot of git-tracked source. Uploads to the same AWS bucket
+# as value_investor (home-learning/code prefix) using those S3 secrets.
+
+on:
+  schedule:
+    - cron: "0 13 * * 0"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even if a code backup already succeeded today"
+        type: boolean
+        default: false
+      upload_s3:
+        description: "Upload to S3 when AWS secrets are configured"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: weekly-code-backup
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.gate.outputs.should_run }}
+    steps:
+      - name: Skip if code backup already ran today
+        id: gate
+        uses: actions/github-script@v7
+        env:
+          FORCE: ${{ github.event.inputs.force || 'false' }}
+        with:
+          script: |
+            const force = process.env.FORCE === 'true';
+            if (force) {
+              core.setOutput('should_run', 'true');
+              return;
+            }
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const workflow_id = 'code-backup.yml';
+            const runId = context.runId;
+            const dayStart = new Date(Date.UTC(
+              new Date().getUTCFullYear(),
+              new Date().getUTCMonth(),
+              new Date().getUTCDate(),
+            )).toISOString();
+            const { data } = await github.rest.actions.listWorkflowRuns({
+              owner, repo, workflow_id, per_page: 20,
+            });
+            const prior = (data.workflow_runs || []).filter((run) =>
+              run.id !== runId
+              && run.created_at >= dayStart
+              && (run.event === 'workflow_dispatch' || run.event === 'schedule')
+            );
+            const succeeded = prior.find((run) => run.conclusion === 'success');
+            if (succeeded) {
+              core.info(`Skipping — code backup already succeeded today (run ${succeeded.id})`);
+              core.setOutput('should_run', 'false');
+              return;
+            }
+            core.setOutput('should_run', 'true');
+
+  backup:
+    needs: check
+    if: needs.check.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Create code snapshot
+        run: |
+          set -euo pipefail
+          npx tsx scripts/code-backup.ts snapshot --json > /tmp/backup.json
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          data = json.loads(Path("/tmp/backup.json").read_text())
+          out = Path(os.environ["GITHUB_OUTPUT"])
+          out.write_text(
+              f"archive_path={data['archive_path']}\n"
+              f"manifest_path={data['manifest_path']}\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Verify checksum
+        run: npx tsx scripts/code-backup.ts verify "$(python3 -c 'import json; print(json.load(open("/tmp/backup.json"))["archive_path"])')"
+
+      - name: Upload GitHub artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-learning-code-backup
+          path: |
+            output/backups/home-learning-code-*.tar.gz
+            output/backups/home-learning-code-*.manifest.json
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Upload to S3
+        if: ${{ github.event_name != 'workflow_dispatch' || format('{0}', github.event.inputs.upload_s3) != 'false' }}
+        env:
+          BACKUP_S3_URI: ${{ secrets.BACKUP_S3_URI }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+        run: |
+          set -euo pipefail
+          if [ -z "${AWS_ACCESS_KEY_ID:-}" ] || [ -z "${AWS_SECRET_ACCESS_KEY:-}" ] || [ -z "${BACKUP_S3_URI:-}" ]; then
+            echo "Missing AWS secrets on this repo."
+            echo "Copy AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION, and BACKUP_S3_URI from value_investor."
+            echo "The weekly archive still landed as the GitHub Actions artifact above."
+            exit 1
+          fi
+          npx tsx scripts/code-backup.ts deliver --from-json /tmp/backup.json --upload --upload-monthly --json
+
+      - name: Backup summary
+        if: always()
+        run: |
+          if [ ! -f /tmp/backup.json ]; then
+            echo "No backup.json — snapshot step did not complete"
+            exit 0
+          fi
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          payload = json.loads(Path("/tmp/backup.json").read_text())
+          manifest = payload.get("manifest") or {}
+          upload = payload.get("upload") or {}
+          monthly = payload.get("upload_monthly") or {}
+          print(
+              f"Snapshot ok: {manifest.get('archive_name')} "
+              f"({manifest.get('bytes', 0):,} bytes, {manifest.get('file_count', 0)} files, "
+              f"{(manifest.get('commit') or '')[:7]})"
+          )
+          if upload.get("uploaded"):
+              print(f"S3 upload ok: {upload.get('archive_dest')}")
+          elif upload:
+              print(f"S3 upload skipped/failed: {upload.get('reason') or upload.get('error')}")
+          if monthly.get("uploaded"):
+              print(f"S3 monthly pin ok: {monthly.get('archive_dest')}")
+          elif monthly:
+              print(f"S3 monthly pin skipped/failed: {monthly.get('reason') or monthly.get('error')}")
+          PY
