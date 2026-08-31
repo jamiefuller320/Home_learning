@@ -19,6 +19,7 @@
 # production
 /build
 /pages-preview/
+/output/
 
 # misc
 .DS_Store
