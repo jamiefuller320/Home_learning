@@ -141,7 +141,7 @@ async function main(): Promise<void> {
       return;
     }
     console.log(
-      `${result.dry_run ? "Would restore" : "Restored"} ${result.members.length} paths into ${result.dest}`,
+      `${result.dry_run ? "Would restore" : "Restored"} ${result.member_count} paths into ${result.dest}`,
     );
     return;
   }

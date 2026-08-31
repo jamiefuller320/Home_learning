@@ -61,6 +61,7 @@ const dry = restoreCodeBackupSnapshot({
   dryRun: true,
 });
 assert.equal(dry.dry_run, true);
+assert.equal(dry.member_count, 3);
 assert.ok(dry.members.includes("README.md"));
 assert.ok(dry.members.includes("src/pack.ts"));
 assert.ok(!dry.members.includes("ignored.log"));

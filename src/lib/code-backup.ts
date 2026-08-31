@@ -308,7 +308,7 @@ export function restoreCodeBackupSnapshot(options: {
   archivePath: string;
   destDir: string;
   dryRun?: boolean;
-}): { archive: string; dest: string; dry_run: boolean; members: string[] } {
+}): { archive: string; dest: string; dry_run: boolean; member_count: number; members: string[] } {
   const archivePath = resolve(options.archivePath);
   const destDir = resolve(options.destDir);
   const listed = spawnSync("tar", ["-tzf", archivePath], { encoding: "utf8" });
@@ -327,6 +327,7 @@ export function restoreCodeBackupSnapshot(options: {
     archive: archivePath,
     dest: destDir,
     dry_run: Boolean(options.dryRun),
+    member_count: members.length,
     members: members.slice(0, 50),
   };
 }
