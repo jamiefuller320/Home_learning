@@ -1,0 +1,11 @@
+# Optional local hook — run: pre-commit install
+# CI still runs gha-secret-hygiene on workflow changes; this catches issues before push.
+repos:
+  - repo: local
+    hooks:
+      - id: gha-secret-hygiene
+        name: GHA secret hygiene
+        entry: npm run gha-secret-hygiene
+        language: system
+        pass_filenames: false
+        files: ^\.github/workflows/
