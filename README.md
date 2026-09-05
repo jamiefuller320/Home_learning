@@ -58,12 +58,12 @@ The `/for-schools` page and the Number facts within 10 topic can show a generate
 
 ```bash
 # Needs FAL_KEY, Chrome, and ffmpeg. Does not invent method.
-npm run script:parent-video -- facts-within-10    # readable script + spoken-delivery checks
-npm run rehearse:parent-video -- facts-within-10  # TTS-only + pace eval
-npm run render:parent-video -- facts-within-10    # full film; gated on rehearsal
+npm run script:parent-video -- counting-within-100   # readable script + spoken-delivery checks
+npm run rehearse:parent-video -- counting-within-100 # TTS-only + pace eval
+npm run render:parent-video -- counting-within-100   # full film; gated on rehearsal
 ```
 
-Dumps land in `inbox/parent-video/<id>/` for human notes. Fix awkward wording in the topic pack, not in the dump.
+Read the compiled briefing on **Maintainer → Video script**, or dump files under `inbox/parent-video/<id>/`. Fix awkward wording in the topic pack, not in the dump.
 
 ## Project map
 

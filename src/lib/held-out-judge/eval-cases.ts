@@ -69,8 +69,16 @@ export const FROZEN_EVAL_CASES: EvalCase[] = [
     id: "script-invent-ten-frame",
     topicId: "shapes-around-us",
     excerpt: "ten-frame",
-    expectedCheck: "coherence",
-    note: "Extracted script must not invent a ten-frame for a shapes pack.",
+    expectedCheck: null,
+    note: "Compiled script must not invent a ten-frame for a shapes pack.",
+    source: "fixture",
+  },
+  {
+    id: "silent-counting-no-ten-frame",
+    topicId: "counting-within-100",
+    excerpt: "ten-frame",
+    expectedCheck: null,
+    note: "Counting to 100 script must compile a track, not a ten-frame.",
     source: "fixture",
   },
 ];

@@ -66,7 +66,10 @@ const scriptTopics = scriptAll
   ? year1MathsTopics
   : scriptId
     ? year1MathsTopics.filter((topic) => topic.id === scriptId)
-    : year1MathsTopics.filter((topic) => topic.id === "facts-within-10" || topic.id === "shapes-around-us");
+    : year1MathsTopics.filter(
+        (topic) =>
+          topic.id === "facts-within-10" || topic.id === "shapes-around-us" || topic.id === "counting-within-100",
+      );
 
 if (scriptFlag || !scriptId) {
   console.log(`\n---\nRecheck after script extraction (${scriptTopics.length} pack${scriptTopics.length === 1 ? "" : "s"})`);

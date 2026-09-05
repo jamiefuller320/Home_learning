@@ -186,6 +186,7 @@ function beatRole(beat: VideoBeat, sceneId: string): JudgeSpanRole {
 
 function visualCaption(beat: VideoBeat): string | undefined {
   if (!beat.visual) return undefined;
+  if (beat.visual.kind === "list") return beat.visual.items.join(" ");
   if ("caption" in beat.visual) return beat.visual.caption;
   return undefined;
 }

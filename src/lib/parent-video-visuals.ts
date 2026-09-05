@@ -176,6 +176,28 @@ function listHtml(items: string[], highlight: number): string {
   return `<div class="list">${rows}</div>`;
 }
 
+function numberTrackHtml(numbers: number[], highlight: number): string {
+  const cells = numbers
+    .map((n) => {
+      const klass = n === highlight ? "track-cell on" : "track-cell";
+      return `<span class="${klass}">${n}</span>`;
+    })
+    .join("");
+  return `<div class="track-panel" aria-hidden="true"><div class="track">${cells}</div></div>`;
+}
+
+function numberLineHtml(start: number, end: number, marks: number[], highlight?: number): string {
+  const span = Math.max(end - start, 1);
+  const ticks = marks
+    .map((mark) => {
+      const left = ((mark - start) / span) * 100;
+      const on = mark === highlight ? " on" : "";
+      return `<span class="nl-mark${on}" style="left:${left}%"><span class="nl-tick"></span><span class="nl-num">${mark}</span></span>`;
+    })
+    .join("");
+  return `<div class="nl-panel" aria-hidden="true"><div class="nl">${ticks}</div></div>`;
+}
+
 export function visualHtml(visual: VideoVisual): string {
   if (visual.kind === "ten-frame") {
     return `${tenFrameHtml(visual.filled, visual.other)}
@@ -183,6 +205,14 @@ export function visualHtml(visual: VideoVisual): string {
   }
   if (visual.kind === "part-whole") {
     return `${partWholeHtml(visual.whole, visual.left, visual.right)}
+      <p class="caption">${escapeHtml(visual.caption)}</p>`;
+  }
+  if (visual.kind === "number-track") {
+    return `${numberTrackHtml(visual.numbers, visual.highlight)}
+      <p class="caption">${escapeHtml(visual.caption)}</p>`;
+  }
+  if (visual.kind === "number-line") {
+    return `${numberLineHtml(visual.start, visual.end, visual.marks, visual.highlight)}
       <p class="caption">${escapeHtml(visual.caption)}</p>`;
   }
   return listHtml(visual.items, visual.highlight);
@@ -263,6 +293,44 @@ ${themeCssVariables(theme)}
       box-shadow: 0 2px 4px color-mix(in srgb, var(--pv-accent-deep) 30%, transparent);
     }
     .caption { font-size: 18px; color: var(--pv-ink-soft); margin: 0; max-width: 22rem; }
+    .track-panel {
+      display: inline-block;
+      padding: 16px 18px 14px;
+      margin: 4px 0 14px;
+      border-radius: 22px;
+      background: var(--pv-panel);
+      border: 1px solid color-mix(in srgb, var(--pv-brand) 18%, transparent);
+      box-shadow: 0 10px 28px color-mix(in srgb, var(--pv-ink) 8%, transparent);
+    }
+    .track { display: flex; flex-wrap: wrap; gap: 8px; max-width: 420px; }
+    .track-cell {
+      min-width: 42px; height: 42px; padding: 0 8px;
+      border-radius: 12px;
+      border: 3px solid var(--pv-brand);
+      background: rgba(255,255,255,0.55);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 18px; color: var(--pv-brand-deep);
+    }
+    .track-cell.on {
+      border-color: var(--pv-brand-deep);
+      background: color-mix(in srgb, var(--pv-brand) 18%, white);
+      box-shadow: 0 2px 4px color-mix(in srgb, var(--pv-brand-deep) 25%, transparent);
+    }
+    .nl-panel {
+      display: block;
+      padding: 28px 18px 12px;
+      margin: 4px 0 14px;
+      border-radius: 22px;
+      background: var(--pv-panel);
+      border: 1px solid color-mix(in srgb, var(--pv-brand) 18%, transparent);
+      min-width: 280px; max-width: 420px;
+    }
+    .nl { position: relative; height: 56px; margin: 0 8px; border-top: 3px solid var(--pv-ink); }
+    .nl-mark { position: absolute; top: -2px; transform: translateX(-50%); text-align: center; }
+    .nl-tick { display: block; width: 2px; height: 14px; margin: 0 auto; background: var(--pv-ink); }
+    .nl-num { display: block; margin-top: 4px; font-size: 16px; font-weight: 700; color: var(--pv-ink-soft); }
+    .nl-mark.on .nl-tick { background: var(--pv-brand-deep); width: 3px; }
+    .nl-mark.on .nl-num { color: var(--pv-brand-deep); }
     .bond { width: 300px; height: auto; display: block; margin: 4px 0 10px; margin-left: 48px; }
     .list { padding: 8px 4px; }
     .list-item { font-size: 22px; line-height: 1.35; color: color-mix(in srgb, var(--pv-ink-soft) 70%, #7a6d5c); margin: 0 0 10px; }

@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MaintainerUnlock } from "@/components/MaintainerUnlock";
 import { PackLearningReview } from "@/components/PackLearningReview";
+import { ParentVideoScriptBrowser } from "@/components/ParentVideoScriptBrowser";
 import { SECTION_LABEL, type LanguageNote } from "@/lib/language-log";
 import { classifyLanguageNote, hasApprovalIssueLink } from "@/lib/language-note-routing";
 import {
@@ -20,7 +22,12 @@ import {
 } from "@/lib/topic-feedback-summary";
 
 type LoadState = "idle" | "loading" | "error";
-type MaintainerTab = "learnings" | "inbox";
+type MaintainerTab = "learnings" | "inbox" | "script";
+
+function tabFromUrl(value: string | null): MaintainerTab {
+  if (value === "inbox" || value === "script") return value;
+  return "learnings";
+}
 
 function formatWhen(iso: string): string {
   if (!iso) return "—";
@@ -40,11 +47,30 @@ function alertStyles(level: TopicFeedbackSummary["alertLevel"]): string {
 }
 
 export function MaintenanceDashboard() {
-  const [tab, setTab] = useState<MaintainerTab>("learnings");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const urlTab = tabFromUrl(searchParams.get("tab"));
+  const [tab, setTabState] = useState<MaintainerTab>(urlTab);
   const [credentials, setCredentials] = useState<MaintainerCredentials | null>(null);
   const [notes, setNotes] = useState<LanguageNote[]>([]);
   const [loadState, setLoadState] = useState<LoadState>("idle");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    setTabState(urlTab);
+  }, [urlTab]);
+
+  function setTab(next: MaintainerTab) {
+    setTabState(next);
+    const nextParams = new URLSearchParams(searchParams.toString());
+    if (next === "learnings") nextParams.delete("tab");
+    else nextParams.set("tab", next);
+    if (next === "script" && !nextParams.get("topic")) {
+      nextParams.set("topic", "counting-within-100");
+    }
+    const qs = nextParams.toString();
+    router.replace(qs ? `/maintenance/?${qs}` : "/maintenance/", { scroll: false });
+  }
 
   const loadNotes = useCallback(async (creds: MaintainerCredentials) => {
     setLoadState("loading");
@@ -109,9 +135,33 @@ export function MaintenanceDashboard() {
         >
           Inbox
         </button>
+        <button
+          type="button"
+          className={`rounded-full px-4 py-2 font-semibold ${tab === "script" ? "bg-teal text-white" : "border border-rule text-ink hover:border-teal"}`}
+          onClick={() => setTab("script")}
+        >
+          Video script
+        </button>
       </div>
 
       {tab === "learnings" ? <PackLearningReview /> : null}
+
+      {tab === "script" ? (
+        <section className="space-y-6">
+          <div>
+            <h2 className="serif text-3xl text-ink">Parent video script</h2>
+            <p className="mt-2 max-w-2xl text-ink-soft">
+              Compiled from the written pack. Counting to 100 is ready for a read-through. Comment on a beat to send it
+              into the language inbox — same loop as “I don’t understand”.
+            </p>
+          </div>
+          <ParentVideoScriptBrowser
+            basePath="/maintenance/"
+            defaultTopicId="counting-within-100"
+            extraParams={{ tab: "script" }}
+          />
+        </section>
+      ) : null}
 
       {tab === "inbox" && !credentials ? <MaintainerUnlock onUnlock={handleUnlock} /> : null}
 

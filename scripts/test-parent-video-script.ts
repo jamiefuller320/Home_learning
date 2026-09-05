@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import path from "node:path";
+import { countingWithin100 } from "../src/content/england/ks1/year-1/maths/topics/counting-within-100";
 import { factsWithin10 } from "../src/content/england/ks1/year-1/maths/topics/facts-within-10";
+import { shapesAroundUs } from "../src/content/england/ks1/year-1/maths/topics/shapes-around-us";
 import {
   allBeats,
   buildParentVideoScript,
@@ -140,4 +142,39 @@ assert.ok(
   `missing rendered file public/${videoRel}`,
 );
 
-console.log(`Parent-video script: ${beats.length} paced beats (examples and asides split for Kokoro).`);
+const countingScript = buildParentVideoScript(countingWithin100);
+const countingSpoken = spokenCorpus(countingScript);
+const countingBeats = allBeats(countingScript);
+const countingVisualKinds = countingBeats.map((beat) => beat.visual?.kind).filter(Boolean);
+
+assert.equal(countingScript.topicId, "counting-within-100");
+assert.ok(countingBeats.length >= 20 && countingBeats.length <= 55, "counting script should stay a concise briefing");
+assert.match(countingSpoken, /start from any number/i);
+assert.match(countingSpoken, /Start anywhere/);
+assert.match(countingSpoken, /Start at 17/);
+assert.match(countingSpoken, /one touch, one word, one thing/i);
+assert.ok(!/ten-frame/i.test(countingSpoken), "counting speech must not invent a ten-frame");
+assert.ok(!countingVisualKinds.includes("ten-frame"), "counting pictures must not invent a ten-frame");
+assert.ok(countingVisualKinds.includes("number-track"), "counting should show a number track compiled from the pack");
+assert.ok(
+  countingBeats.some(
+    (beat) => beat.visual?.kind === "number-track" && beat.visual.numbers[0] === 17 && beat.visual.numbers.at(-1) === 25,
+  ),
+  "criteria picture should be the 17-to-25 check from the pack",
+);
+for (const line of sayThisLines(countingWithin100)) {
+  assert.ok(
+    !countingSpoken.includes(forTheEar(line)) && !countingSpoken.includes(line),
+    `sayThis should not be filmed: ${line}`,
+  );
+}
+
+const shapesScript = buildParentVideoScript(shapesAroundUs);
+assert.ok(
+  !allBeats(shapesScript).some((beat) => beat.visual?.kind === "ten-frame"),
+  "shapes script must not invent a ten-frame picture",
+);
+
+console.log(
+  `Parent-video script: ${beats.length} paced beats for facts-within-10; ${countingBeats.length} for counting-within-100.`,
+);

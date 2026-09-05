@@ -92,7 +92,7 @@ npm run render:parent-video -- facts-within-10 --theme path/to/theme.json # pale
 
 `--reuse-audio` / `--audio-only` prefer gap-baked WAVs under `.video-work/baked/<id>/`, then content-addressed rehearsal clips (`.video-work/rehearsal/<id>/clips/<hash>.wav`), then index WAVs when the script hash still matches; otherwise TTS fills gaps. Render scratch lives under `.video-work/render/<id>/` so it never wipes rehearsal or baked audio. Theme tokens live in `src/lib/parent-video-theme.ts`.
 
-Lesson pictures are ours: a recurring adult guide, a ten-frame, and a part–whole diagram. They must show a fact already in the pack. Do not generate classroom footage, children, or a cartoon teacher.
+Lesson pictures are ours: a recurring adult guide, plus diagrams compiled from the pack (ten-frame, part–whole, number track, or a short list). They must show a fact already in the pack. Do not generate classroom footage, children, or a cartoon teacher.
 
 ```bash
 # Needs FAL_KEY (Kokoro British voice) plus Chrome and ffmpeg

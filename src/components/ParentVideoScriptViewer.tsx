@@ -12,7 +12,7 @@ import {
 } from "@/lib/language-log";
 import { formatParentVideoComment } from "@/lib/parent-video-comments";
 import { PROSODY_LABEL, type ProsodyRole } from "@/lib/parent-video-prosody";
-import { buildParentVideoScript, type VideoBeat, type VideoScene } from "@/lib/parent-video-script";
+import { buildParentVideoScript, visualLabel, type VideoBeat, type VideoScene } from "@/lib/parent-video-script";
 
 type BeatRef = {
   scene: VideoScene;
@@ -127,6 +127,11 @@ export function ParentVideoScriptViewer({ topic }: { topic: Topic }) {
                           {PROSODY_LABEL[role]} · {beat.pauseAfter.toFixed(2)}s gap
                         </p>
                         <p className="mt-1 text-lg leading-7 text-ink">{beat.spoken}</p>
+                        {beat.visual ? (
+                          <p className="mt-1 text-sm text-ink-soft">
+                            Picture: {visualLabel(beat.visual)}
+                          </p>
+                        ) : null}
                       </div>
                       <button
                         type="button"

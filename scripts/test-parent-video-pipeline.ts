@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { countingWithin100 } from "../src/content/england/ks1/year-1/maths/topics/counting-within-100";
 import { factsWithin10 } from "../src/content/england/ks1/year-1/maths/topics/facts-within-10";
 import { buildParentVideoScript, type ParentVideoScript } from "../src/lib/parent-video-script";
 import {
@@ -21,6 +22,10 @@ import {
 const live = buildParentVideoScript(factsWithin10);
 const liveDelivery = evaluateSpokenDelivery(live);
 assert.equal(liveDelivery.blockingCount, 0, "facts-within-10 spoken delivery should be clean");
+
+const counting = buildParentVideoScript(countingWithin100);
+const countingDelivery = evaluateSpokenDelivery(counting);
+assert.equal(countingDelivery.blockingCount, 0, "counting-within-100 spoken delivery should be clean");
 assert.ok(!liveDelivery.findings.some((item) => item.code === "worksheet-brand"));
 assert.ok(!spokenHas(live, /worksheet brand/i));
 assert.ok(!spokenHas(live, /^Looking for:/m));

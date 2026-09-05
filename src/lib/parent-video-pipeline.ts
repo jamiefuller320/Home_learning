@@ -6,6 +6,7 @@ import {
   allBeats,
   buildParentVideoScript,
   spokenCorpus,
+  visualLabel,
   type ParentVideoScript,
   type VideoBeat,
   type VideoScene,
@@ -159,6 +160,9 @@ export function renderScriptMarkdown(
     scene.beats.forEach((beat: VideoBeat, index: number) => {
       const role = beat.prosody ?? "teach";
       lines.push(`${index + 1}. \`[${role}]\` (${beat.pauseAfter.toFixed(2)}s gap) ${beat.spoken}`);
+      if (beat.visual) {
+        lines.push(`   _[${beat.visual.kind}]_ ${visualLabel(beat.visual)}`);
+      }
     });
     lines.push("");
   }

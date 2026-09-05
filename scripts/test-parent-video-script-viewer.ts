@@ -1,8 +1,18 @@
 import assert from "node:assert/strict";
 import { formatParentVideoComment } from "../src/lib/parent-video-comments";
 import { SECTION_LABEL } from "../src/lib/language-log";
+import { scriptTopicHref } from "../src/components/ParentVideoScriptBrowser";
 
 assert.equal(SECTION_LABEL["parent-video"], "Parent video script");
+
+assert.equal(
+  scriptTopicHref("/maintenance/", "counting-within-100", { tab: "script" }),
+  "/maintenance/?tab=script&topic=counting-within-100",
+);
+assert.equal(
+  scriptTopicHref("/for-schools/script/", "counting-within-100"),
+  "/for-schools/script/?topic=counting-within-100",
+);
 
 const unclear = formatParentVideoComment({
   path: "scenes.school.beats[7]",

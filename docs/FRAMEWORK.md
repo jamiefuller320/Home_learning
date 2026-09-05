@@ -122,7 +122,7 @@ The dump is for review, not a second lesson file. Fix awkward lines in the topic
 
 Kokoro (fallback) has **no SSML**, so word-level stress is not available there. Production parent videos use **ElevenLabs Charlotte** via fal for clearer inflection. Beats still carry a **prosody role** (`title`, `section`, `key`, `teach`, `example`, `aside`, `handoff`) shown in the script dump; punctuation and beat splits shape pacing. Remotion/Rive animation stays deferred.
 
-UI: `/for-schools/script` shows the compiled script with colour-coded prosody. A **Comment** button on each beat saves a `language_notes` row with `section = parent-video` (same Supabase inbox / amendment loop as “I don’t understand”).
+UI: **Maintainer → Video script** (`/maintenance/?tab=script`) shows the compiled script with colour-coded prosody (Counting to 100 by default). `/for-schools/script` is the same viewer for school reviewers. A **Comment** button on each beat saves a `language_notes` row with `section = parent-video` (same Supabase inbox / amendment loop as “I don’t understand”).
 
 ### Technical choices for the first slice
 

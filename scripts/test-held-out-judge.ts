@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import { year1MathsTopics } from "../src/content/england/ks1/year-1/maths/topics";
+import { countingWithin100 } from "../src/content/england/ks1/year-1/maths/topics/counting-within-100";
 import { factsWithin10 } from "../src/content/england/ks1/year-1/maths/topics/facts-within-10";
 import { shapesAroundUs } from "../src/content/england/ks1/year-1/maths/topics/shapes-around-us";
 import {
   FROZEN_EVAL_CASES,
   judgeAfterEdit,
   judgeExtractedScript,
+  judgeScript,
   judgeTopic,
   proposeCoversFromMisses,
   scoreCoverage,
@@ -100,9 +102,35 @@ assert.ok(
 );
 
 const shapesScript = judgeExtractedScript(shapesAroundUs, year1MathsTopics);
+assert.equal(
+  shapesScript.findings.filter((item) => item.coverId.startsWith("script-invent-")).length,
+  0,
+  "compiled script must not invent a ten-frame for a shapes pack",
+);
+
+const inventedShapesScript = {
+  topicId: shapesAroundUs.id,
+  title: shapesAroundUs.title,
+  scenes: [
+    {
+      id: "plain",
+      kicker: "The idea",
+      heading: "In plain English",
+      beats: [
+        {
+          spoken: "A square is a special rectangle.",
+          line: "A square is a special rectangle.",
+          pauseAfter: 0.36,
+          visual: { kind: "ten-frame" as const, filled: 6, caption: "A ten-frame." },
+        },
+      ],
+    },
+  ],
+};
+const inventedReport = judgeScript(inventedShapesScript, shapesAroundUs, year1MathsTopics);
 assert.ok(
-  shapesScript.findings.some((item) => item.check === "coherence" && item.coverId.startsWith("script-invent-")),
-  "the same judge must catch a compiled script that invents a ten-frame",
+  inventedReport.findings.some((item) => item.check === "coherence" && item.coverId.startsWith("script-invent-")),
+  "the same judge must still catch a visual caption that invents a ten-frame",
 );
 
 const factsScript = judgeExtractedScript(factsWithin10, year1MathsTopics);
@@ -110,6 +138,13 @@ assert.equal(
   factsScript.findings.filter((item) => item.coverId.startsWith("script-invent-")).length,
   0,
   "facts-within-10 script may reuse terms already in the pack",
+);
+
+const countingScript = judgeExtractedScript(countingWithin100, year1MathsTopics);
+assert.equal(
+  countingScript.findings.filter((item) => item.coverId.startsWith("script-invent-")).length,
+  0,
+  "counting-within-100 script must not invent classroom pictures",
 );
 
 const stripTenFrame = (text: string) => text.replace(/ten-frames?/gi, "grid");
@@ -138,12 +173,12 @@ assert.ok(
 
 const fixtureReports = JUDGE_FIXTURES.map((topic) => judgeTopic(topic, catalog));
 const liveReports = year1MathsTopics.map((topic) => judgeTopic(topic, year1MathsTopics));
-const scriptReports = [factsScript, shapesScript];
+const scriptReports = [factsScript, shapesScript, countingScript];
 const coverage = scoreCoverage(FROZEN_EVAL_CASES, [...fixtureReports, ...liveReports, ...scriptReports]);
 
 assert.equal(coverage.misses, 0, `frozen eval misses: ${coverage.rows.filter((row) => row.outcome === "miss").map((row) => row.caseId).join(", ")}`);
 assert.equal(coverage.noise, 0, `frozen eval noise: ${coverage.rows.filter((row) => row.outcome === "noise").map((row) => row.caseId).join(", ")}`);
-assert.ok(coverage.hits >= 6, "fixture cases should hit");
+assert.ok(coverage.hits >= 5, "fixture cases should hit");
 assert.equal(proposeCoversFromMisses(FROZEN_EVAL_CASES, coverage).length, 0);
 
 const twoMisses = scoreCoverage(
