@@ -62,7 +62,7 @@ export const countingWithin100: Topic = {
     youAreReadyWhen: "You can start at a random number under 40 and count on ten more, then back again, without treating it as a test.",
   },
   homePack: {
-    setup: "You need about 20 objects, or you can use the stairs or a short walk. Put phones away. This should feel like a game, not a recitation exam.",
+    setup: "You need about 20 objects, or you can use the stairs or a\u00a0short\u00a0walk. Put phones away. This should feel like a game, not a recitation exam.",
     activity: {
       title: "Start anywhere",
       steps: [

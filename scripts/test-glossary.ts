@@ -20,7 +20,7 @@ assert.deepEqual(
   "Counting to 100 setup must not wrap everyday words as glossary chips",
 );
 
-assert.match(countingWithin100.homePack.setup, /a short walk/);
+assert.match(countingWithin100.homePack.setup, /a\u00a0short\u00a0walk/);
 assert.equal(
   splitGlossaryText(countingWithin100.homePack.setup).some(
     (part) => part.termId === "compare-length" && part.text.toLowerCase() === "short",
