@@ -20,7 +20,7 @@ export function LanguageLog() {
       <ol className="grid gap-3 sm:grid-cols-3">
         <li className="rounded-2xl bg-white/70 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">1. Flag</p>
-          <p className="mt-2 text-ink-soft">Use the button at the end of a parent briefing or home pack.</p>
+          <p className="mt-2 text-ink-soft">Use the button at the bottom of any lesson tab.</p>
         </li>
         <li className="rounded-2xl bg-white/70 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">2. Keep the note</p>

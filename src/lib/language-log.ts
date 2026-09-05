@@ -1,10 +1,20 @@
 export const LANGUAGE_LOG_KEY = "home-learning-language-log-v1";
 export const GITHUB_REPO = "jamiefuller320/Home_learning";
 
-export const LANGUAGE_SECTIONS = ["parent", "home", "parent-video"] as const;
+export const LANGUAGE_SECTIONS = ["parent", "home", "parent-video", "summary", "video"] as const;
 export type LanguageSection = (typeof LANGUAGE_SECTIONS)[number];
 export const LANGUAGE_NOTE_STATUSES = ["open", "done", "declined"] as const;
 export type LanguageNoteStatus = (typeof LANGUAGE_NOTE_STATUSES)[number];
+
+/** Lesson binder tabs → language-note section, so every tab can flag muddy wording. */
+export const LESSON_TAB_LANGUAGE_SECTION = {
+  summary: "summary",
+  video: "video",
+  parent: "parent",
+  tasks: "home",
+  check: "home",
+} as const satisfies Record<string, LanguageSection>;
+export type LessonTabLanguageId = keyof typeof LESSON_TAB_LANGUAGE_SECTION;
 
 export type LanguageNote = {
   id: string;
@@ -24,6 +34,8 @@ export const SECTION_LABEL: Record<LanguageSection, string> = {
   parent: "Stage 1 · Parent briefing",
   home: "Stage 2 · Home pack",
   "parent-video": "Parent video script",
+  summary: "Lesson summary",
+  video: "Watch video",
 };
 
 export function createNoteId(): string {

@@ -40,6 +40,17 @@ export const presentationLearnings: PresentationLearning[] = [
     appliedIn: ["src/components/StageMetaBox.tsx"],
     sourceNoteIds: ["e829a023-95fa-429d-8d68-bc883c5ca5ca"],
   },
+  {
+    id: "language-feedback-every-lesson-tab",
+    title: "Every lesson tab ends with I don’t understand",
+    principle:
+      "Parents should be able to flag muddy wording from whatever tab they are on, not only Stage 1 or the understanding check. LessonBinder renders LanguageFeedback at the bottom of every tab.",
+    appliedIn: [
+      "src/components/LessonBinder.tsx",
+      "src/components/LanguageFeedback.tsx",
+      "src/lib/language-log.ts",
+    ],
+  },
 ];
 
 export function getPresentationLearningById(id: string): PresentationLearning | undefined {

@@ -41,9 +41,9 @@ export default function HowItWorksPage() {
       <section>
         <h2 className="serif text-3xl text-ink">If the words are muddy</h2>
         <p className="mt-3">
-          At the end of the parent briefing and the home pack there is a button: “I don’t understand
-          something in this section.” Testers can send, share, or copy that note — no GitHub
-          account. Notes also sit in the{" "}
+          At the bottom of every lesson tab there is a button: “I don’t understand something in this
+          section.” Testers can send, share, or copy that note — no GitHub account. Notes also sit
+          in the{" "}
           <Link href="/language" className="font-semibold text-teal hover:underline">
             language log
           </Link>{" "}

@@ -1,4 +1,3 @@
-import { LanguageFeedback } from "@/components/LanguageFeedback";
 import { GlossaryText } from "@/components/GlossaryText";
 import { NumberLineGuide } from "@/components/NumberLineGuide";
 import { PackProse } from "@/components/PackProse";
@@ -94,8 +93,6 @@ export function UnderstandingCheck({ topic }: { topic: Topic }) {
           ))}
         </div>
       </div>
-
-      <LanguageFeedback topic={topic} section="home" />
     </section>
   );
 }

@@ -1,4 +1,3 @@
-import { LanguageFeedback } from "@/components/LanguageFeedback";
 import { GlossaryText } from "@/components/GlossaryText";
 import { PackProse } from "@/components/PackProse";
 import { SayThisList } from "@/components/SayThisList";
@@ -65,8 +64,6 @@ export function ParentBriefing({ topic }: { topic: Topic }) {
         <span className="font-semibold">You are ready when </span>
         <GlossaryText text={parentBriefing.youAreReadyWhen} />
       </PackProse>
-
-      <LanguageFeedback topic={topic} section="parent" />
     </section>
   );
 }

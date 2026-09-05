@@ -5,10 +5,13 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { BinderContinue } from "@/components/BinderContinue";
 import { BinderTabs, type BinderTabItem } from "@/components/BinderTabs";
 import { GlossaryIndex } from "@/components/GlossaryIndex";
+import { LanguageFeedback } from "@/components/LanguageFeedback";
 import { STAGE_1_META, STAGE_2_META, StageMetaBox } from "@/components/StageMetaBox";
+import type { Topic } from "@/content/schema";
+import { LESSON_TAB_LANGUAGE_SECTION, type LessonTabLanguageId } from "@/lib/language-log";
 import { emptyProgress, readProgress, writeProgress, type TopicProgress } from "@/lib/progress";
 
-export type LessonTabId = "summary" | "video" | "parent" | "tasks" | "check";
+export type LessonTabId = LessonTabLanguageId;
 
 const LESSON_TAB_META: Record<
   LessonTabId,
@@ -49,9 +52,11 @@ const LESSON_TAB_META: Record<
 /**
  * Subordinate binder for one lesson — Summary → (Video) → Parent → Tasks → Check,
  * with Continue buttons that advance the sequence. Watch video is optional.
+ * Every tab ends with “I don’t understand something in this section”.
  */
 export function LessonBinder({
   slug,
+  topic,
   printPackHref,
   glossaryTermIds,
   summary,
@@ -61,6 +66,7 @@ export function LessonBinder({
   check,
 }: {
   slug: string;
+  topic: Topic;
   printPackHref: string;
   glossaryTermIds: string[];
   summary: ReactNode;
@@ -249,7 +255,18 @@ export function LessonBinder({
             <p>{meta.blurb}</p>
           </header>
         }
-        sheet={body}
+        sheet={
+          <>
+            {body}
+            <div className="mt-8">
+              <LanguageFeedback
+                key={activeId}
+                topic={topic}
+                section={LESSON_TAB_LANGUAGE_SECTION[activeId]}
+              />
+            </div>
+          </>
+        }
       />
     </div>
   );
