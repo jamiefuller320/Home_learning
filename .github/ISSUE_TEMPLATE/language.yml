@@ -15,8 +15,11 @@ body:
     attributes:
       label: Section
       options:
+        - Lesson summary
+        - Watch video
         - Stage 1 · Parent briefing
         - Stage 2 · Home pack
+        - Parent video script
     validations:
       required: true
   - type: textarea

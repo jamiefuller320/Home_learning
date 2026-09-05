@@ -59,6 +59,7 @@ export function TopicExperience({ topic, topics }: { topic: Topic; topics: Topic
         sheet={
           <LessonBinder
             slug={topic.slug}
+            topic={topic}
             printPackHref={`/year-1-maths/${topic.slug}/pack`}
             glossaryTermIds={topic.glossaryTerms}
             summary={summaryPanel}

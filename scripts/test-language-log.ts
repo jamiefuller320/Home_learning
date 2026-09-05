@@ -6,6 +6,9 @@ import {
   buildMailtoUrl,
   FEEDBACK_EMAIL,
   formatNoteForSharing,
+  LANGUAGE_SECTIONS,
+  LESSON_TAB_LANGUAGE_SECTION,
+  SECTION_LABEL,
 } from "../src/lib/language-log";
 
 const note = {
@@ -39,5 +42,19 @@ assert.doesNotMatch(shared, /GitHub issue/);
 const mailto = buildMailtoUrl(note);
 assert.ok(mailto.startsWith(`mailto:${FEEDBACK_EMAIL}?`));
 assert.ok(mailto.includes("subject="));
+
+assert.deepEqual([...LANGUAGE_SECTIONS].sort(), Object.keys(SECTION_LABEL).sort());
+assert.equal(SECTION_LABEL.summary, "Lesson summary");
+assert.equal(SECTION_LABEL.video, "Watch video");
+assert.equal(LESSON_TAB_LANGUAGE_SECTION.summary, "summary");
+assert.equal(LESSON_TAB_LANGUAGE_SECTION.video, "video");
+assert.equal(LESSON_TAB_LANGUAGE_SECTION.parent, "parent");
+assert.equal(LESSON_TAB_LANGUAGE_SECTION.tasks, "home");
+assert.equal(LESSON_TAB_LANGUAGE_SECTION.check, "home");
+
+const summaryNote = { ...note, section: "summary" as const };
+assert.match(buildIssueTitle(summaryNote), /Lesson summary/);
+const videoNote = { ...note, section: "video" as const };
+assert.match(buildIssueTitle(videoNote), /Watch video/);
 
 console.log("Language-log helpers look good.");

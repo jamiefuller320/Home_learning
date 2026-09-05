@@ -83,4 +83,26 @@ const videoRoundTrip = rowToLanguageNote({
 });
 assert.equal(videoRoundTrip.section, "parent-video");
 
+const summaryNote = noteToInsertRow({
+  ...note,
+  section: "summary",
+  unclear: "Why does this matter tonight?",
+});
+assert.equal(summaryNote.section, "summary");
+assert.equal(
+  rowToLanguageNote({
+    id: "66666666-6666-6666-6666-666666666666",
+    created_at: "2026-09-05T10:00:00.000Z",
+    ...summaryNote,
+  }).section,
+  "summary",
+);
+
+const watchVideoNote = noteToInsertRow({
+  ...note,
+  section: "video",
+  unclear: "The film rushes the ten-frame.",
+});
+assert.equal(watchVideoNote.section, "video");
+
 console.log("Language-notes API helpers look good.");
