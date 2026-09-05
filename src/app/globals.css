@@ -56,6 +56,25 @@ a {
   background: #d7e6e3;
 }
 
+/* Keep glossary chips in the sentence. UA styles make <details>/<summary>
+   block-level, which used to put line breaks around a matched word such as
+   “short” in “a short walk”. */
+.glossary-term,
+.glossary-term details,
+.glossary-term summary {
+  display: inline;
+}
+
+.glossary-term summary {
+  list-style: none;
+}
+
+.glossary-term summary::-webkit-details-marker,
+.glossary-term summary::marker {
+  content: none;
+  display: none;
+}
+
 .glossary-term details[open] > summary {
   color: var(--teal);
 }

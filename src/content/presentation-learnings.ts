@@ -33,6 +33,20 @@ export const presentationLearnings: PresentationLearning[] = [
     sourceNoteIds: ["26782ddb-efc8-4420-a79c-1624fa758f76", "cc2b6ac6-a92d-474b-a5b9-48ea6f6c61c5"],
   },
   {
+    id: "glossary-inline-everyday",
+    title: "Glossary links stay inline and skip everyday words",
+    principle:
+      "Auto-linked glossary terms must stay inside the sentence. details/summary are display:inline so a match cannot put line breaks between neighbouring words. Everyday adjectives such as “short” and “tall” are not aliases — they were splitting “a short walk” on Tasks → Set up. Keep that three-word phrase together with non-breaking spaces so pretty wrapping cannot park “a” or “walk” on its own line.",
+    appliedIn: [
+      "src/components/GlossaryLink.tsx",
+      "src/components/GlossaryText.tsx",
+      "src/app/globals.css",
+      "src/content/glossary/index.ts",
+      "src/content/glossary/terms.ts",
+      "src/content/england/ks1/year-1/maths/topics/counting-within-100.ts",
+    ],
+  },
+  {
     id: "stage-2-meta-what-label",
     title: "Stage 2 meta box labels the middle column What",
     principle:

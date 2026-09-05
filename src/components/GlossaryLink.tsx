@@ -10,8 +10,8 @@ export function GlossaryLink({ termId, children }: { termId: string; children: R
 
   return (
     <span className="glossary-term relative inline">
-      <details className="inline">
-        <summary className="cursor-help list-none font-inherit text-inherit underline decoration-teal/50 decoration-dotted underline-offset-[0.2em] hover:text-teal hover:decoration-teal [&::-webkit-details-marker]:hidden">
+      <details>
+        <summary className="cursor-help font-inherit text-inherit underline decoration-teal/50 decoration-dotted underline-offset-[0.2em] hover:text-teal hover:decoration-teal">
           {children}
         </summary>
         <span className="absolute bottom-full left-0 z-20 mb-2 block w-[min(20rem,calc(100vw-3rem))] rounded-xl border border-rule bg-white p-4 text-left text-base normal-case leading-6 text-ink shadow-sm">
