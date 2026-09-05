@@ -1,5 +1,5 @@
 import { sortTopicsByPrerequisites } from "./england/ks1/year-1/maths/curriculum";
-import { glossaryTerms } from "./glossary";
+import { glossaryTerms, isBlockedEverydayGlossaryAlias } from "./glossary";
 import { CONTENT_LIMITS, type SayThisItem, type Topic } from "./schema";
 import {
   filterPendingRevisions,
@@ -166,6 +166,16 @@ export function validateGlossary(relatedTopicIds: Set<string>): ValidationIssue[
     }
     requiredText(term.term, "term", term.id, issues);
     requiredText(term.plainEnglish, "plainEnglish", term.id, issues);
+
+    for (const phrase of term.aliases ?? []) {
+      if (isBlockedEverydayGlossaryAlias(phrase, term.term)) {
+        issues.push({
+          topicId: term.id,
+          field: "aliases",
+          message: `“${phrase}” is everyday English and must not be a glossary alias (it splits phrases like “a short walk”)`,
+        });
+      }
+    }
 
     for (const relatedTopicId of term.relatedTopics ?? []) {
       if (!relatedTopicIds.has(relatedTopicId)) {

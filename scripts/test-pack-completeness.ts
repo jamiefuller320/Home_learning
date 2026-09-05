@@ -48,5 +48,6 @@ assert.ok(sweep.pending.length > 0);
 
 assert.equal(validateTopicReviewReady(counting).length, 0);
 assert.ok(presentationLearnings.some((learning) => learning.id === "prose-text-pretty"));
+assert.ok(presentationLearnings.some((learning) => learning.id === "glossary-inline-everyday"));
 
 console.log("pack-release tests passed.");

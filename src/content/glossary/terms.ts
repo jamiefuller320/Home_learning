@@ -121,7 +121,7 @@ export const glossaryTerms: GlossaryTerm[] = [
   {
     id: "compare-length",
     term: "longer and shorter",
-    aliases: ["longer", "shorter", "taller", "shorter than", "longer than", "tall", "short"],
+    aliases: ["longer", "shorter", "taller", "shorter than", "longer than", "tall and short"],
     plainEnglish:
       "Words for comparing how far something stretches (longer, shorter) or how high it reaches (taller, shorter). Line objects up at the same starting point before you compare.",
     relatedTopics: ["comparing-length"],
