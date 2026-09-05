@@ -1,0 +1,845 @@
+{
+  "topicId": "counting-within-100",
+  "title": "Counting forwards and backwards within 100",
+  "scriptHash": "071a8e5cc6e74cb1",
+  "delivery": {
+    "topicId": "counting-within-100",
+    "findings": [],
+    "blockingCount": 0
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "kicker": "Home Learning · Year 1 maths",
+      "heading": "Counting forwards and backwards within 100",
+      "beats": [
+        {
+          "spoken": "Counting forwards and backwards within 100.",
+          "line": "Counting forwards and backwards within 100",
+          "pauseAfter": 0.5,
+          "prosody": "title",
+          "guide": "present"
+        },
+        {
+          "spoken": "This is a quick parent briefing.",
+          "line": "This is a quick parent briefing.",
+          "pauseAfter": 0.58,
+          "prosody": "section",
+          "guide": "listen"
+        },
+        {
+          "spoken": "Not a film for your child to watch!",
+          "line": "Not a film for your child to watch!",
+          "pauseAfter": 0.58,
+          "prosody": "key",
+          "guide": "listen"
+        },
+        {
+          "spoken": "You learn the method here.",
+          "line": "You learn the method here.",
+          "pauseAfter": 0.58,
+          "prosody": "teach",
+          "guide": "listen"
+        },
+        {
+          "spoken": "Then you work from the written page, beside your child.",
+          "line": "Then you work from the written page, beside your child.",
+          "pauseAfter": 0.36,
+          "prosody": "teach",
+          "guide": "listen"
+        },
+        {
+          "spoken": "If anything clashes with how your school teaches…",
+          "line": "If anything clashes with how your school teaches…",
+          "pauseAfter": 0.58,
+          "prosody": "aside",
+          "guide": "listen"
+        },
+        {
+          "spoken": "Follow the school…",
+          "line": "Follow the school.",
+          "pauseAfter": 0.7,
+          "prosody": "aside",
+          "guide": "listen"
+        }
+      ]
+    },
+    {
+      "id": "plain",
+      "kicker": "The idea",
+      "heading": "In plain English",
+      "beats": [
+        {
+          "spoken": "Here’s the idea.",
+          "line": "Here’s the idea.",
+          "pauseAfter": 0.5,
+          "prosody": "section",
+          "guide": "present"
+        },
+        {
+          "spoken": "Counting is not just reciting 1, 2, 3.",
+          "line": "Counting is not just reciting 1, 2, 3.",
+          "pauseAfter": 0.36,
+          "prosody": "teach",
+          "guide": "present"
+        },
+        {
+          "spoken": "Year 1 children need to start from any number, keep going past 20 and 30 without a wobble, and count backwards as well as forwards.",
+          "line": "Year 1 children need to start from any number, keep going past 20 and 30 without a wobble, and count backwards as well as forwards.",
+          "pauseAfter": 0.36,
+          "prosody": "teach",
+          "guide": "present"
+        },
+        {
+          "spoken": "They also need to count objects, not only words: one touch, one word, one thing.",
+          "line": "They also need to count objects, not only words: one touch, one word, one thing.",
+          "pauseAfter": 0.7,
+          "prosody": "teach",
+          "guide": "point",
+          "visual": {
+            "kind": "number-track",
+            "numbers": [
+              16,
+              17,
+              18,
+              19,
+              20
+            ],
+            "highlight": 16,
+            "caption": "Start from 16, a number in the middle."
+          }
+        }
+      ]
+    },
+    {
+      "id": "school",
+      "kicker": "At school",
+      "heading": "How school typically teaches it",
+      "beats": [
+        {
+          "spoken": "And here’s how school typically teaches it.",
+          "line": "And here’s how school typically teaches it.",
+          "pauseAfter": 0.5,
+          "prosody": "section",
+          "guide": "point",
+          "visual": {
+            "kind": "number-track",
+            "numbers": [
+              16,
+              17,
+              18,
+              19,
+              20
+            ],
+            "highlight": 16,
+            "caption": "Start from 16, a number in the middle."
+          }
+        },
+        {
+          "spoken": "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square.",
+          "line": "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square.",
+          "pauseAfter": 0.36,
+          "prosody": "teach",
+          "guide": "point",
+          "visual": {
+            "kind": "number-track",
+            "numbers": [
+              16,
+              17,
+              18,
+              19,
+              20
+            ],
+            "highlight": 16,
+            "caption": "Start from 16, a number in the middle."
+          }
+        },
+        {
+          "spoken": "Teachers often start from a number in the middle, such as 16, 28, or 45, so children do not only rely on a count that always starts at 1.",
+          "line": "Teachers often start from a number in the middle, such as 16, 28, or 45, so children do not only rely on a count that always starts at 1.",
+          "pauseAfter": 0.36,
+          "prosody": "teach",
+          "guide": "point",
+          "visual": {
+            "kind": "number-track",
+            "numbers": [
+              16,
+              17,
+              18,
+              19,
+              20
+            ],
+            "highlight": 16,
+            "caption": "Start from 16, a number in the middle."
+          }
+        },
+        {
+          "spoken": "They will also count back, which feels much harder and is worth a little extra practice at home.",
+          "line": "They will also count back, which feels much harder and is worth a little extra practice at home.",
+          "pauseAfter": 0.7,
+          "prosody": "teach",
+          "guide": "point",
+          "visual": {
+            "kind": "number-track",
+            "numbers": [
+              16,
+              17,
+              18,
+              19,
+              20
+            ],
+            "highlight": 16,
+            "caption": "Count backwards as well as forwards."
+          }
+        }
+      ]
+    },
+    {
+      "id": "mix",
+      "kicker": "Watch for this",
+      "heading": "The child skips teen numbers or swaps 13 and 30, 14 and 40.",
+      "beats": [
+        {
+          "spoken": "Here’s one mix-up to watch for.",
+          "line": "Here’s one mix-up to watch for.",
+          "pauseAfter": 0.5,
+          "prosody": "section",
+          "guide": "listen"
+        },
+        {
+          "spoken": "The child skips teen numbers or swaps 13 and 30, 14 and 40.",
+          "line": "The child skips teen numbers or swaps 13 and 30, 14 and 40.",
+          "pauseAfter": 0.36,
+          "prosody": "teach",
+          "guide": "listen"
+        },
+        {
+          "spoken": "Slow down on 12 to 20.",
+          "line": "Slow down on 12 to 20.",
+          "pauseAfter": 0.36,
+          "prosody": "key",
+          "guide": "present"
+        },
+        {
+          "spoken": "Say “thirteen, that’s three and ten” and show ten fingers plus three.",
+          "line": "Say “thirteen, that’s three and ten” and show ten fingers plus three.",
+          "pauseAfter": 0.7,
+          "prosody": "key",
+          "guide": "present"
+        }
+      ]
+    },
+    {
+      "id": "tonight",
+      "kicker": "Tonight · outline",
+      "heading": "Start anywhere",
+      "beats": [
+        {
+          "spoken": "Tonight’s activity.",
+          "line": "Tonight’s activity.",
+          "pauseAfter": 0.58,
+          "prosody": "section",
+          "guide": "present"
+        },
+        {
+          "spoken": "This is the task outline — look at the written instructions for the full task.",
+          "line": "This is the task outline — look at the written instructions for the full task.",
+          "pauseAfter": 0.36,
+          "prosody": "section",
+          "guide": "present"
+        },
+        {
+          "spoken": "Start anywhere.",
+          "line": "Start anywhere",
+          "pauseAfter": 0.5,
+          "prosody": "title",
+          "guide": "point",
+          "visual": {
+            "kind": "number-track",
+            "numbers": [
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "highlight": 8,
+            "caption": "Start anywhere."
+          }
+        },
+        {
+          "spoken": "You say a starting number between 8 and 25.",
+          "line": "You say a starting number between 8 and 25.",
+          "pauseAfter": 0.36,
+          "prosody": "teach",
+          "guide": "point",
+          "visual": {
+            "kind": "number-track",
+            "numbers": [
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "highlight": 8,
+            "caption": "Count on ten more numbers."
+          }
+        },
+        {
+          "spoken": "Your child counts on ten more numbers.",
+          "line": "Your child counts on ten more numbers.",
+          "pauseAfter": 0.36,
+          "prosody": "teach",
+          "guide": "point",
+          "visual": {
+            "kind": "number-track",
+            "numbers": [
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "highlight": 8,
+            "caption": "Count on ten more numbers."
+          }
+        },
+        {
+          "spoken": "Stop after about 12 minutes, or sooner if voices rise.",
+          "line": "Stop after about 12 minutes, or sooner if voices rise.",
+          "pauseAfter": 0.36,
+          "prosody": "aside",
+          "guide": "listen"
+        },
+        {
+          "spoken": "End on a count they can do, even if it is only 1 to 10.",
+          "line": "End on a count they can do, even if it is only 1 to 10.",
+          "pauseAfter": 0.7,
+          "prosody": "aside",
+          "guide": "listen"
+        }
+      ]
+    },
+    {
+      "id": "criteria",
+      "kicker": "Tonight · criteria",
+      "heading": "What good looks like",
+      "beats": [
+        {
+          "spoken": "Here’s what you’re aiming for.",
+          "line": "Here’s what you’re aiming for.",
+          "pauseAfter": 0.5,
+          "prosody": "section",
+          "guide": "present"
+        },
+        {
+          "spoken": "You can start at a random number under 40 and count on ten more, then back again, without treating it as a test.",
+          "line": "You can start at a random number under 40 and count on ten more, then back again, without treating it as a test.",
+          "pauseAfter": 0.36,
+          "prosody": "key",
+          "guide": "point",
+          "visual": {
+            "kind": "number-track",
+            "numbers": [
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25
+            ],
+            "highlight": 17,
+            "caption": "Start at 17. Count on to 25."
+          }
+        },
+        {
+          "spoken": "One check from the page…",
+          "line": "One check from the page.",
+          "pauseAfter": 0.58,
+          "prosody": "aside",
+          "guide": "listen"
+        },
+        {
+          "spoken": "Start at 17.",
+          "line": "Start at 17.",
+          "pauseAfter": 0.5,
+          "prosody": "key",
+          "guide": "listen"
+        },
+        {
+          "spoken": "Count on to 25.",
+          "line": "Count on to 25.",
+          "pauseAfter": 0.5,
+          "prosody": "key",
+          "guide": "listen"
+        },
+        {
+          "spoken": "Here’s what you want to see.",
+          "line": "Here’s what you want to see.",
+          "pauseAfter": 0.58,
+          "prosody": "key",
+          "guide": "listen"
+        },
+        {
+          "spoken": "They keep the sequence without going back to 1.",
+          "line": "They keep the sequence without going back to 1.",
+          "pauseAfter": 0.5,
+          "prosody": "key",
+          "guide": "listen"
+        },
+        {
+          "spoken": "Brief pauses are fine.",
+          "line": "Brief pauses are fine.",
+          "pauseAfter": 0.7,
+          "prosody": "key",
+          "guide": "listen"
+        }
+      ]
+    },
+    {
+      "id": "page",
+      "kicker": "Use the page",
+      "heading": "Open the written pack when you start",
+      "beats": [
+        {
+          "spoken": "When you’re ready to sit down together…",
+          "line": "When you’re ready to sit down together…",
+          "pauseAfter": 0.58,
+          "prosody": "handoff",
+          "guide": "present"
+        },
+        {
+          "spoken": "Open the written page.",
+          "line": "Open the written page.",
+          "pauseAfter": 0.58,
+          "prosody": "handoff",
+          "guide": "present"
+        },
+        {
+          "spoken": "Keep it beside you for the steps, the words to say, and the live checks.",
+          "line": "Keep it beside you for the steps, the words to say, and the live checks.",
+          "pauseAfter": 0.58,
+          "prosody": "handoff",
+          "guide": "present"
+        },
+        {
+          "spoken": "Don’t run the session from this film alone — return to the written pack when you sit down with your child.",
+          "line": "Don’t run the session from this film alone — return to the written pack when you sit down with your child.",
+          "pauseAfter": 0.58,
+          "prosody": "handoff",
+          "guide": "present"
+        },
+        {
+          "spoken": "Found this on YouTube?",
+          "line": "Found this on YouTube?",
+          "pauseAfter": 0.58,
+          "prosody": "handoff",
+          "guide": "present"
+        },
+        {
+          "spoken": "Use the link in the video description to open that page.",
+          "line": "Use the link in the video description to open that page.",
+          "pauseAfter": 0.7,
+          "prosody": "handoff",
+          "guide": "present"
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "kicker": "For schools",
+      "heading": "Does this match how you teach it?",
+      "beats": [
+        {
+          "spoken": "If you teach Year 1…",
+          "line": "If you teach Year 1…",
+          "pauseAfter": 0.58,
+          "prosody": "aside",
+          "guide": "present"
+        },
+        {
+          "spoken": "Tell us whether the method matches your school…",
+          "line": "Tell us whether the method matches your school.",
+          "pauseAfter": 0.58,
+          "prosody": "aside",
+          "guide": "present"
+        },
+        {
+          "spoken": "Thanks for watching — enjoy the session together…",
+          "line": "Thanks for watching — enjoy the session together.",
+          "pauseAfter": 0.22,
+          "prosody": "aside",
+          "guide": "present"
+        }
+      ]
+    }
+  ],
+  "beats": [
+    {
+      "path": "scenes.open.beats[0]",
+      "sceneId": "open",
+      "spoken": "Counting forwards and backwards within 100.",
+      "line": "Counting forwards and backwards within 100",
+      "pauseAfter": 0.5,
+      "prosody": "title"
+    },
+    {
+      "path": "scenes.open.beats[1]",
+      "sceneId": "open",
+      "spoken": "This is a quick parent briefing.",
+      "line": "This is a quick parent briefing.",
+      "pauseAfter": 0.58,
+      "prosody": "section"
+    },
+    {
+      "path": "scenes.open.beats[2]",
+      "sceneId": "open",
+      "spoken": "Not a film for your child to watch!",
+      "line": "Not a film for your child to watch!",
+      "pauseAfter": 0.58,
+      "prosody": "key"
+    },
+    {
+      "path": "scenes.open.beats[3]",
+      "sceneId": "open",
+      "spoken": "You learn the method here.",
+      "line": "You learn the method here.",
+      "pauseAfter": 0.58,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.open.beats[4]",
+      "sceneId": "open",
+      "spoken": "Then you work from the written page, beside your child.",
+      "line": "Then you work from the written page, beside your child.",
+      "pauseAfter": 0.36,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.open.beats[5]",
+      "sceneId": "open",
+      "spoken": "If anything clashes with how your school teaches…",
+      "line": "If anything clashes with how your school teaches…",
+      "pauseAfter": 0.58,
+      "prosody": "aside"
+    },
+    {
+      "path": "scenes.open.beats[6]",
+      "sceneId": "open",
+      "spoken": "Follow the school…",
+      "line": "Follow the school.",
+      "pauseAfter": 0.7,
+      "prosody": "aside"
+    },
+    {
+      "path": "scenes.plain.beats[0]",
+      "sceneId": "plain",
+      "spoken": "Here’s the idea.",
+      "line": "Here’s the idea.",
+      "pauseAfter": 0.5,
+      "prosody": "section"
+    },
+    {
+      "path": "scenes.plain.beats[1]",
+      "sceneId": "plain",
+      "spoken": "Counting is not just reciting 1, 2, 3.",
+      "line": "Counting is not just reciting 1, 2, 3.",
+      "pauseAfter": 0.36,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.plain.beats[2]",
+      "sceneId": "plain",
+      "spoken": "Year 1 children need to start from any number, keep going past 20 and 30 without a wobble, and count backwards as well as forwards.",
+      "line": "Year 1 children need to start from any number, keep going past 20 and 30 without a wobble, and count backwards as well as forwards.",
+      "pauseAfter": 0.36,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.plain.beats[3]",
+      "sceneId": "plain",
+      "spoken": "They also need to count objects, not only words: one touch, one word, one thing.",
+      "line": "They also need to count objects, not only words: one touch, one word, one thing.",
+      "pauseAfter": 0.7,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.school.beats[0]",
+      "sceneId": "school",
+      "spoken": "And here’s how school typically teaches it.",
+      "line": "And here’s how school typically teaches it.",
+      "pauseAfter": 0.5,
+      "prosody": "section"
+    },
+    {
+      "path": "scenes.school.beats[1]",
+      "sceneId": "school",
+      "spoken": "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square.",
+      "line": "School will mix three things: saying the number names in order, counting a set of objects, and finding a number on a track or hundred square.",
+      "pauseAfter": 0.36,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.school.beats[2]",
+      "sceneId": "school",
+      "spoken": "Teachers often start from a number in the middle, such as 16, 28, or 45, so children do not only rely on a count that always starts at 1.",
+      "line": "Teachers often start from a number in the middle, such as 16, 28, or 45, so children do not only rely on a count that always starts at 1.",
+      "pauseAfter": 0.36,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.school.beats[3]",
+      "sceneId": "school",
+      "spoken": "They will also count back, which feels much harder and is worth a little extra practice at home.",
+      "line": "They will also count back, which feels much harder and is worth a little extra practice at home.",
+      "pauseAfter": 0.7,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.mix.beats[0]",
+      "sceneId": "mix",
+      "spoken": "Here’s one mix-up to watch for.",
+      "line": "Here’s one mix-up to watch for.",
+      "pauseAfter": 0.5,
+      "prosody": "section"
+    },
+    {
+      "path": "scenes.mix.beats[1]",
+      "sceneId": "mix",
+      "spoken": "The child skips teen numbers or swaps 13 and 30, 14 and 40.",
+      "line": "The child skips teen numbers or swaps 13 and 30, 14 and 40.",
+      "pauseAfter": 0.36,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.mix.beats[2]",
+      "sceneId": "mix",
+      "spoken": "Slow down on 12 to 20.",
+      "line": "Slow down on 12 to 20.",
+      "pauseAfter": 0.36,
+      "prosody": "key"
+    },
+    {
+      "path": "scenes.mix.beats[3]",
+      "sceneId": "mix",
+      "spoken": "Say “thirteen, that’s three and ten” and show ten fingers plus three.",
+      "line": "Say “thirteen, that’s three and ten” and show ten fingers plus three.",
+      "pauseAfter": 0.7,
+      "prosody": "key"
+    },
+    {
+      "path": "scenes.tonight.beats[0]",
+      "sceneId": "tonight",
+      "spoken": "Tonight’s activity.",
+      "line": "Tonight’s activity.",
+      "pauseAfter": 0.58,
+      "prosody": "section"
+    },
+    {
+      "path": "scenes.tonight.beats[1]",
+      "sceneId": "tonight",
+      "spoken": "This is the task outline — look at the written instructions for the full task.",
+      "line": "This is the task outline — look at the written instructions for the full task.",
+      "pauseAfter": 0.36,
+      "prosody": "section"
+    },
+    {
+      "path": "scenes.tonight.beats[2]",
+      "sceneId": "tonight",
+      "spoken": "Start anywhere.",
+      "line": "Start anywhere",
+      "pauseAfter": 0.5,
+      "prosody": "title"
+    },
+    {
+      "path": "scenes.tonight.beats[3]",
+      "sceneId": "tonight",
+      "spoken": "You say a starting number between 8 and 25.",
+      "line": "You say a starting number between 8 and 25.",
+      "pauseAfter": 0.36,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.tonight.beats[4]",
+      "sceneId": "tonight",
+      "spoken": "Your child counts on ten more numbers.",
+      "line": "Your child counts on ten more numbers.",
+      "pauseAfter": 0.36,
+      "prosody": "teach"
+    },
+    {
+      "path": "scenes.tonight.beats[5]",
+      "sceneId": "tonight",
+      "spoken": "Stop after about 12 minutes, or sooner if voices rise.",
+      "line": "Stop after about 12 minutes, or sooner if voices rise.",
+      "pauseAfter": 0.36,
+      "prosody": "aside"
+    },
+    {
+      "path": "scenes.tonight.beats[6]",
+      "sceneId": "tonight",
+      "spoken": "End on a count they can do, even if it is only 1 to 10.",
+      "line": "End on a count they can do, even if it is only 1 to 10.",
+      "pauseAfter": 0.7,
+      "prosody": "aside"
+    },
+    {
+      "path": "scenes.criteria.beats[0]",
+      "sceneId": "criteria",
+      "spoken": "Here’s what you’re aiming for.",
+      "line": "Here’s what you’re aiming for.",
+      "pauseAfter": 0.5,
+      "prosody": "section"
+    },
+    {
+      "path": "scenes.criteria.beats[1]",
+      "sceneId": "criteria",
+      "spoken": "You can start at a random number under 40 and count on ten more, then back again, without treating it as a test.",
+      "line": "You can start at a random number under 40 and count on ten more, then back again, without treating it as a test.",
+      "pauseAfter": 0.36,
+      "prosody": "key"
+    },
+    {
+      "path": "scenes.criteria.beats[2]",
+      "sceneId": "criteria",
+      "spoken": "One check from the page…",
+      "line": "One check from the page.",
+      "pauseAfter": 0.58,
+      "prosody": "aside"
+    },
+    {
+      "path": "scenes.criteria.beats[3]",
+      "sceneId": "criteria",
+      "spoken": "Start at 17.",
+      "line": "Start at 17.",
+      "pauseAfter": 0.5,
+      "prosody": "key"
+    },
+    {
+      "path": "scenes.criteria.beats[4]",
+      "sceneId": "criteria",
+      "spoken": "Count on to 25.",
+      "line": "Count on to 25.",
+      "pauseAfter": 0.5,
+      "prosody": "key"
+    },
+    {
+      "path": "scenes.criteria.beats[5]",
+      "sceneId": "criteria",
+      "spoken": "Here’s what you want to see.",
+      "line": "Here’s what you want to see.",
+      "pauseAfter": 0.58,
+      "prosody": "key"
+    },
+    {
+      "path": "scenes.criteria.beats[6]",
+      "sceneId": "criteria",
+      "spoken": "They keep the sequence without going back to 1.",
+      "line": "They keep the sequence without going back to 1.",
+      "pauseAfter": 0.5,
+      "prosody": "key"
+    },
+    {
+      "path": "scenes.criteria.beats[7]",
+      "sceneId": "criteria",
+      "spoken": "Brief pauses are fine.",
+      "line": "Brief pauses are fine.",
+      "pauseAfter": 0.7,
+      "prosody": "key"
+    },
+    {
+      "path": "scenes.page.beats[0]",
+      "sceneId": "page",
+      "spoken": "When you’re ready to sit down together…",
+      "line": "When you’re ready to sit down together…",
+      "pauseAfter": 0.58,
+      "prosody": "handoff"
+    },
+    {
+      "path": "scenes.page.beats[1]",
+      "sceneId": "page",
+      "spoken": "Open the written page.",
+      "line": "Open the written page.",
+      "pauseAfter": 0.58,
+      "prosody": "handoff"
+    },
+    {
+      "path": "scenes.page.beats[2]",
+      "sceneId": "page",
+      "spoken": "Keep it beside you for the steps, the words to say, and the live checks.",
+      "line": "Keep it beside you for the steps, the words to say, and the live checks.",
+      "pauseAfter": 0.58,
+      "prosody": "handoff"
+    },
+    {
+      "path": "scenes.page.beats[3]",
+      "sceneId": "page",
+      "spoken": "Don’t run the session from this film alone — return to the written pack when you sit down with your child.",
+      "line": "Don’t run the session from this film alone — return to the written pack when you sit down with your child.",
+      "pauseAfter": 0.58,
+      "prosody": "handoff"
+    },
+    {
+      "path": "scenes.page.beats[4]",
+      "sceneId": "page",
+      "spoken": "Found this on YouTube?",
+      "line": "Found this on YouTube?",
+      "pauseAfter": 0.58,
+      "prosody": "handoff"
+    },
+    {
+      "path": "scenes.page.beats[5]",
+      "sceneId": "page",
+      "spoken": "Use the link in the video description to open that page.",
+      "line": "Use the link in the video description to open that page.",
+      "pauseAfter": 0.7,
+      "prosody": "handoff"
+    },
+    {
+      "path": "scenes.close.beats[0]",
+      "sceneId": "close",
+      "spoken": "If you teach Year 1…",
+      "line": "If you teach Year 1…",
+      "pauseAfter": 0.58,
+      "prosody": "aside"
+    },
+    {
+      "path": "scenes.close.beats[1]",
+      "sceneId": "close",
+      "spoken": "Tell us whether the method matches your school…",
+      "line": "Tell us whether the method matches your school.",
+      "pauseAfter": 0.58,
+      "prosody": "aside"
+    },
+    {
+      "path": "scenes.close.beats[2]",
+      "sceneId": "close",
+      "spoken": "Thanks for watching — enjoy the session together…",
+      "line": "Thanks for watching — enjoy the session together.",
+      "pauseAfter": 0.22,
+      "prosody": "aside"
+    }
+  ]
+}

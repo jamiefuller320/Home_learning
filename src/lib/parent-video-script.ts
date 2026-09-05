@@ -15,7 +15,15 @@ export type GuidePose = "present" | "point" | "listen";
 export type VideoVisual =
   | { kind: "ten-frame"; filled: number; other?: number; caption: string }
   | { kind: "part-whole"; whole: number; left: number; right: number; caption: string }
-  | { kind: "list"; items: string[]; highlight: number };
+  | { kind: "list"; items: string[]; highlight: number }
+  | { kind: "number-track"; numbers: number[]; highlight: number; caption: string }
+  | { kind: "number-line"; start: number; end: number; marks: number[]; highlight?: number; caption: string };
+
+/** Short label for script dumps and the colour-coded viewer. */
+export function visualLabel(visual: VideoVisual): string {
+  if (visual.kind === "list") return visual.items.join(" · ");
+  return visual.caption;
+}
 
 export type VideoBeat = {
   spoken: string;
@@ -269,12 +277,208 @@ function checkBeats(topic: Topic): VideoBeat[] {
   ];
 }
 
+type SceneDiagrams = {
+  plainLast?: VideoVisual;
+  schoolIntro?: VideoVisual;
+  schoolLine: (lineIndex: number) => VideoVisual | undefined;
+  tonightTitle?: VideoVisual;
+  tonightStep?: VideoVisual;
+  criteria?: VideoVisual;
+};
+
+const TEN_FRAME_DIAGRAMS: SceneDiagrams = {
+  plainLast: {
+    kind: "ten-frame",
+    filled: 6,
+    other: 4,
+    caption: "6 and 4 making 10, on a ten-frame.",
+  },
+  schoolIntro: {
+    kind: "ten-frame",
+    filled: 0,
+    caption: "A ten-frame: two rows of five, still empty.",
+  },
+  schoolLine: (lineIndex) =>
+    lineIndex === 0
+      ? { kind: "ten-frame", filled: 0, caption: "Two rows of five. The frame is the picture, not the sum." }
+      : lineIndex === 1
+        ? {
+            kind: "ten-frame",
+            filled: 6,
+            other: 4,
+            caption: "A family of facts: 6 and 4, then 4 and 6.",
+          }
+        : {
+            kind: "part-whole",
+            whole: 10,
+            left: 6,
+            right: 4,
+            caption: "A number bond: two parts that make a whole.",
+          },
+  tonightTitle: {
+    kind: "ten-frame",
+    filled: 6,
+    other: 4,
+    caption: "Fill 6 of one type. The empty spaces are the other part.",
+  },
+  tonightStep: {
+    kind: "ten-frame",
+    filled: 6,
+    other: 4,
+    caption: "6 and 4 make 10.",
+  },
+  criteria: {
+    kind: "ten-frame",
+    filled: 7,
+    caption: "7 filled. 3 empty spaces make 10.",
+  },
+};
+
+function packUsesTenFramePictures(topic: Topic): boolean {
+  return topic.glossaryTerms.includes("ten-frame");
+}
+
+function firstInt(text: string): number | undefined {
+  const match = text.match(/\b(\d{1,3})\b/);
+  return match ? Number(match[1]) : undefined;
+}
+
+function consecutiveNumbers(start: number, end: number, max = 11): number[] {
+  const step = start <= end ? 1 : -1;
+  const numbers: number[] = [];
+  for (let n = start; n !== end + step; n += step) {
+    numbers.push(n);
+    if (numbers.length >= max) break;
+  }
+  return numbers;
+}
+
+function parseCountOnRange(text: string): { start: number; end: number } | undefined {
+  const match = text.match(/start at (\d+)[.\s]*count on to (\d+)/i);
+  if (!match) return undefined;
+  return { start: Number(match[1]), end: Number(match[2]) };
+}
+
+function packUsesCountingTrack(topic: Topic): boolean {
+  const hay = [
+    topic.parentBriefing.inPlainEnglish,
+    topic.parentBriefing.howSchoolTeachesIt,
+    ...topic.homePack.activity.steps,
+  ].join("\n");
+  return /\bon a track\b/i.test(hay) || /\bhundred square\b/i.test(hay) || /\bcount backwards\b/i.test(hay);
+}
+
+function numberLineDiagrams(topic: Topic): SceneDiagrams {
+  const guide = topic.homePack.activity.numberLine;
+  if (!guide) return listDiagrams(topic);
+  const caption = takeSentences(guide.caption, 1)[0] ?? guide.caption;
+  const highlight = guide.marks.find((mark) => mark !== guide.start && mark !== guide.end);
+  const visual: VideoVisual = {
+    kind: "number-line",
+    start: guide.start,
+    end: guide.end,
+    marks: guide.marks,
+    highlight,
+    caption,
+  };
+  return {
+    plainLast: visual,
+    schoolIntro: visual,
+    schoolLine: () => visual,
+    tonightTitle: visual,
+    tonightStep: visual,
+    criteria: visual,
+  };
+}
+
+function countingTrackDiagrams(topic: Topic): SceneDiagrams {
+  const schoolText = topic.parentBriefing.howSchoolTeachesIt;
+  const middleMatch = schoolText.match(/in the middle[^.]*?\b(\d{1,3})\b/i);
+  const schoolStart = middleMatch ? Number(middleMatch[1]) : firstInt(schoolText) ?? 16;
+  const schoolNums = consecutiveNumbers(schoolStart, schoolStart + 4);
+  const schoolVisual: VideoVisual = {
+    kind: "number-track",
+    numbers: schoolNums,
+    highlight: schoolStart,
+    caption: `Start from ${schoolStart}, a number in the middle.`,
+  };
+
+  const firstStep = topic.homePack.activity.steps[0] ?? "";
+  const tonightStart = firstInt(firstStep) ?? schoolStart;
+  const tonightNums = consecutiveNumbers(tonightStart, tonightStart + 10);
+  const title = topic.homePack.activity.title;
+  const tonightVisual: VideoVisual = {
+    kind: "number-track",
+    numbers: tonightNums,
+    highlight: tonightStart,
+    caption: /[.!?]$/.test(title) ? title : `${title}.`,
+  };
+
+  const checkRange = parseCountOnRange(topic.homePack.check[0]?.prompt ?? "");
+  const criteriaNums = checkRange
+    ? consecutiveNumbers(checkRange.start, checkRange.end)
+    : tonightNums;
+  const criteriaVisual: VideoVisual = {
+    kind: "number-track",
+    numbers: criteriaNums,
+    highlight: criteriaNums[0] ?? tonightStart,
+    caption: checkRange
+      ? `Start at ${checkRange.start}. Count on to ${checkRange.end}.`
+      : takeSentences(topic.parentBriefing.youAreReadyWhen, 1)[0] ?? topic.parentBriefing.youAreReadyWhen,
+  };
+
+  return {
+    plainLast: schoolVisual,
+    schoolIntro: schoolVisual,
+    schoolLine: (lineIndex) =>
+      lineIndex >= 2
+        ? {
+            kind: "number-track",
+            numbers: schoolNums,
+            highlight: schoolStart,
+            caption: "Count backwards as well as forwards.",
+          }
+        : schoolVisual,
+    tonightTitle: tonightVisual,
+    tonightStep: {
+      kind: "number-track",
+      numbers: tonightNums,
+      highlight: tonightStart,
+      caption: "Count on ten more numbers.",
+    },
+    criteria: criteriaVisual,
+  };
+}
+
+function listDiagrams(topic: Topic): SceneDiagrams {
+  const items = topic.homePack.activity.steps.slice(0, 3).map((step) => {
+    const first = takeSentences(step, 1)[0] ?? step;
+    return first.length > 90 ? `${first.slice(0, 87)}…` : first;
+  });
+  const list: VideoVisual | undefined = items.length
+    ? { kind: "list", items, highlight: 0 }
+    : undefined;
+  return {
+    schoolLine: () => undefined,
+    tonightTitle: list,
+    tonightStep: list,
+  };
+}
+
+function diagramsFor(topic: Topic): SceneDiagrams {
+  if (packUsesTenFramePictures(topic)) return TEN_FRAME_DIAGRAMS;
+  if (topic.homePack.activity.numberLine) return numberLineDiagrams(topic);
+  if (packUsesCountingTrack(topic)) return countingTrackDiagrams(topic);
+  return listDiagrams(topic);
+}
+
 export function buildParentVideoScript(topic: Topic): ParentVideoScript {
   const briefing = topic.parentBriefing;
   const mix = briefing.commonMisconceptions[0];
   const firstStep = topic.homePack.activity.steps[0];
   const plainLines = takeSentences(briefing.inPlainEnglish, 3);
   const schoolLines = takeSentences(briefing.howSchoolTeachesIt, 4);
+  const diagrams = diagramsFor(topic);
 
   const scenes: VideoScene[] = [
     {
@@ -304,21 +508,14 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
             const isLast = index === plainLines.length - 1;
             return clips.map((clip, clipIndex) => {
               const isExample = MATH_FACT.test(clip) || /^(Such as:|Or:)/i.test(clip);
+              const showDiagram = Boolean(isLast && clipIndex === clips.length - 1 && diagrams.plainLast);
               return makeBeat(
                 clip,
                 isExample ? PAUSE.item : PAUSE.sentence,
                 isExample ? "example" : "teach",
                 {
-                  guide: isLast && clipIndex === clips.length - 1 ? ("point" as const) : ("present" as const),
-                  visual:
-                    isLast && clipIndex === clips.length - 1
-                      ? {
-                          kind: "ten-frame" as const,
-                          filled: 6,
-                          other: 4,
-                          caption: "6 and 4 making 10, on a ten-frame.",
-                        }
-                      : undefined,
+                  guide: showDiagram ? ("point" as const) : ("present" as const),
+                  visual: showDiagram ? diagrams.plainLast : undefined,
                 },
               );
             });
@@ -334,36 +531,14 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       beats: withFinalPause(
         [
           ...linkBeats(SCRIPT_LINKS.school, PAUSE.item, "section", {
-            guide: "point",
-            visual: {
-              kind: "ten-frame",
-              filled: 0,
-              caption: "A ten-frame: two rows of five, still empty.",
-            },
+            guide: diagrams.schoolIntro ? "point" : "present",
+            visual: diagrams.schoolIntro,
           }),
           ...schoolLines.flatMap((line, index) => {
             const clips = spokenClips(line);
             return clips.map((clip, clipIndex) => {
               const isExample = MATH_FACT.test(clip);
-              const visual: VideoVisual | undefined =
-                clipIndex === 0 && index === 0
-                  ? { kind: "ten-frame", filled: 0, caption: "Two rows of five. The frame is the picture, not the sum." }
-                  : clipIndex === 0 && index === 1
-                    ? {
-                        kind: "ten-frame",
-                        filled: 6,
-                        other: 4,
-                        caption: "A family of facts: 6 and 4, then 4 and 6.",
-                      }
-                    : clipIndex === 0 && index >= 2
-                      ? {
-                          kind: "part-whole",
-                          whole: 10,
-                          left: 6,
-                          right: 4,
-                          caption: "A number bond: two parts that make a whole.",
-                        }
-                      : undefined;
+              const visual = clipIndex === 0 ? diagrams.schoolLine(index) : undefined;
               return makeBeat(clip, isExample ? PAUSE.item : PAUSE.sentence, isExample ? "example" : "teach", {
                 // Only point when a diagram is on screen — otherwise the arm aims at empty space.
                 guide: visual ? "point" : "present",
@@ -400,22 +575,12 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
         [
           ...linkBeats(SCRIPT_LINKS.tonight, PAUSE.sentence, "section", { guide: "present" }),
           makeBeat(topic.homePack.activity.title, PAUSE.item, "title", {
-            guide: "point",
-            visual: {
-              kind: "ten-frame",
-              filled: 6,
-              other: 4,
-              caption: "Fill 6 of one type. The empty spaces are the other part.",
-            },
+            guide: diagrams.tonightTitle ? "point" : "present",
+            visual: diagrams.tonightTitle,
           }),
           ...beatsFromText(takeSentences(firstStep, 2).join(" "), PAUSE.sentence, "teach", {
-            guide: "point",
-            visual: {
-              kind: "ten-frame",
-              filled: 6,
-              other: 4,
-              caption: "6 and 4 make 10.",
-            },
+            guide: diagrams.tonightStep ? "point" : "present",
+            visual: diagrams.tonightStep,
           }),
           ...beatsFromText(takeSentences(topic.homePack.stopRule, 1).join(" "), PAUSE.sentence, "aside", {
             guide: "listen",
@@ -432,12 +597,8 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
         [
           ...linkBeats(SCRIPT_LINKS.criteria, PAUSE.item, "section", { guide: "present" }),
           ...beatsFromText(briefing.youAreReadyWhen, PAUSE.sentence, "key", {
-            guide: "point",
-            visual: {
-              kind: "ten-frame",
-              filled: 7,
-              caption: "7 filled. 3 empty spaces make 10.",
-            },
+            guide: diagrams.criteria ? "point" : "present",
+            visual: diagrams.criteria,
           }),
           ...checkBeats(topic),
         ],

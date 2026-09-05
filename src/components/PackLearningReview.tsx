@@ -200,6 +200,12 @@ export function PackLearningReview() {
                   </td>
                   <td className="py-3">
                     <div className="flex flex-wrap gap-2">
+                      <Link
+                        href={`/maintenance/?tab=script&topic=${row.topicId}`}
+                        className="text-teal underline decoration-teal/40"
+                      >
+                        Script
+                      </Link>
                       <button
                         type="button"
                         className="text-teal underline decoration-teal/40"

@@ -63,4 +63,26 @@ const frame = visualHtml({
 assert.match(frame, /frame-panel/);
 assert.match(frame, /class="counter"/, "counters render as filled discs inside cells");
 
-console.log("Parent-video graphics (guide, cherry bond, ten-frame) look good.");
+const track = visualHtml({
+  kind: "number-track",
+  numbers: [16, 17, 18, 19, 20],
+  highlight: 16,
+  caption: "Start from 16, a number in the middle.",
+});
+assert.match(track, /track-panel/);
+assert.match(track, /track-cell on/);
+assert.match(track, />16</);
+assert.match(track, /Start from 16/);
+
+const line = visualHtml({
+  kind: "number-line",
+  start: 0,
+  end: 20,
+  marks: [0, 10, 20],
+  highlight: 10,
+  caption: "10 sits in the middle.",
+});
+assert.match(line, /nl-panel/);
+assert.match(line, /nl-mark on/);
+
+console.log("Parent-video graphics (guide, cherry bond, ten-frame, number track) look good.");

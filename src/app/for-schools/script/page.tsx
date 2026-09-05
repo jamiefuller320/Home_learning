@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ParentVideoScriptViewer } from "@/components/ParentVideoScriptViewer";
-import { factsWithin10 } from "@/content/england/ks1/year-1/maths/topics/facts-within-10";
+import { Suspense } from "react";
+import { ParentVideoScriptBrowser } from "@/components/ParentVideoScriptBrowser";
 
 export const metadata: Metadata = {
   title: "Parent video script",
@@ -17,7 +17,9 @@ export default function ParentVideoScriptPage() {
           ← For schools
         </Link>
       </p>
-      <ParentVideoScriptViewer topic={factsWithin10} />
+      <Suspense fallback={<p className="text-ink-soft">Loading script…</p>}>
+        <ParentVideoScriptBrowser />
+      </Suspense>
       <p className="text-sm text-ink-soft">
         Comments land in Supabase <code className="text-xs">language_notes</code> as section{" "}
         <code className="text-xs">parent-video</code>, then show in the maintainer inbox and language

@@ -18,4 +18,4 @@ npm run render:parent-video -- facts-within-10    # full slides + film (gated)
 
 Do not treat these dumps as a second lesson authoring path. Fix wording in the topic pack, then re-preview.
 
-UI: open `/for-schools/script` for a colour-coded viewer. Beat comments go to Supabase `language_notes` (`section = parent-video`) and appear in the maintainer inbox.
+UI: open **Maintainer → Video script** (`/maintenance/?tab=script&topic=counting-within-100`) for a colour-coded viewer. `/for-schools/script` is the same viewer for school reviewers. Beat comments go to Supabase `language_notes` (`section = parent-video`) and appear in the maintainer inbox.
