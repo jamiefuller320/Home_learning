@@ -31,10 +31,22 @@ export const numbersTo20: Topic = {
     howSchoolTeachesIt:
       "Teachers often start with a number track (boxes with a number in each) and move to a number line (marks on a line). They will ask children to place 0, 10 and 20 first, then drop other numbers in. Comparing uses words like more, fewer, and less — not only plus and minus.",
     sayThis: [
-      "If 0 is here and 20 is here, where would 10 sit?",
-      "Which is more, 7 or 12? How do you know, without counting from 1?",
-      "One more than 14 is the next step along. What number is that?",
-      "Show me a number that is less than 10 but more than 5.",
+      {
+        prompt: "If 0 is here and 20 is here, where would 10 sit?",
+        listenFor: "About in the middle — halfway from 0 to 20.",
+      },
+      {
+        prompt: "Which is more, 7 or 12? How do you know, without counting from 1?",
+        listenFor: "12 — it sits further along the line, past 10.",
+      },
+      {
+        prompt: "One more than 14 is the next step along. What number is that?",
+        listenFor: "15 — the next step after 14.",
+      },
+      {
+        prompt: "Show me a number that is less than 10 but more than 5.",
+        listenFor: "6, 7, 8 or 9 — between 5 and 10 on the line.",
+      },
     ],
     avoidThis: [
       "Turning it into a race to write every numeral perfectly. Reading and placing matter more tonight.",
