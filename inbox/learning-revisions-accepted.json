@@ -38,18 +38,6 @@
       "kind": "structure"
     },
     {
-      "id": "rev-15e549b2",
-      "learningId": "say-this-listen-for",
-      "learningTitle": "Say this prompts can reveal what you might hear",
-      "topicId": "number-words-to-20",
-      "topicTitle": "Numbers to 20 in words",
-      "fieldPath": "parentBriefing.sayThis",
-      "before": "This says fourteen. Can you find 14 to match? · Eleven and twelve are special — they do not follow the -teen pattern. Let’s learn those two first. · Say the word, then write the numeral. Say the numeral, then point to the word. · If you are not sure, count the objects and listen to the word again. The amount checks the word.",
-      "after": "Add listenFor on prompts that have a clear expected response (see parts-of-10). Decline if prompts are open-ended.",
-      "rationale": "Optional: when a prompt has a clear expected response, add listenFor so parents can check without coaching the child.",
-      "kind": "structure"
-    },
-    {
       "id": "rev-abff0d8c",
       "learningId": "say-this-listen-for",
       "learningTitle": "Say this prompts can reveal what you might hear",

@@ -32,7 +32,10 @@ export const numberWordsTo20: Topic = {
     howSchoolTeachesIt:
       "Teachers mix numerals and words on the same card, number track, or line. They highlight the teens pattern: thirteen, fourteen, fifteen… all end in -teen and mean ‘three and ten’, ‘four and ten’, and so on. They do not expect perfect spelling overnight — recognising the word when they see it matters first.",
     sayThis: [
-      "This says fourteen. Can you find 14 to match?",
+      {
+        prompt: "This says fourteen. Can you find 14 to match?",
+        listenFor: "14 — the numeral that matches fourteen.",
+      },
       "Eleven and twelve are special — they do not follow the -teen pattern. Let’s learn those two first.",
       "Say the word, then write the numeral. Say the numeral, then point to the word.",
       "If you are not sure, count the objects and listen to the word again. The amount checks the word.",

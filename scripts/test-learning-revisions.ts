@@ -68,5 +68,6 @@ assert.ok(!live.some((item) => item.topicId === "comparing-length" && item.learn
 assert.ok(!live.some((item) => item.topicId === "number-words-to-20" && item.learningId === "household-examples-such-as"));
 assert.ok(!live.some((item) => item.topicId === "coins" && item.learningId === "household-examples-such-as"));
 assert.ok(!live.some((item) => item.topicId === "numbers-to-20" && item.learningId === "say-this-listen-for"));
+assert.ok(!live.some((item) => item.topicId === "number-words-to-20" && item.learningId === "say-this-listen-for"));
 
 console.log("learning-revisions tests passed.");
