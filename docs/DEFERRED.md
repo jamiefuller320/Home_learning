@@ -20,7 +20,7 @@ Status key: `parked` (good, later) · `research` (needs a decision) · `rejected
 | DEF-008 | Science home investigations | parked | Lovely kitchen-table work; school sequences vary widely | After maths spine |
 | DEF-009 | English writing and SPaG at KS1 | parked | Terminology is school-specific; easy to teach a clashing method | Last KS1 academic track |
 | DEF-010 | EYFS / Reception bridge | parked | Different statutory framework (EYFS, not National Curriculum) | Useful feeder; do not mix into KS1 schema without a phase field |
-| DEF-011 | Term-unlock graph | parked | Year 1 glossary is still a list | A classroom term may be used freely only after its introducing lesson; earlier packs use the plain-English gloss. Primary earns the pictures; DEF-007 reactivates them. Needed before KS2 volume and before secondary refresh. |
+| DEF-011 | Term-unlock graph | parked | Year 1 glossary is still a list | A classroom term may be used freely only after its introducing lesson; earlier packs use the plain-English gloss. Primary earns the pictures; DEF-007 reactivates them. Needed before KS2 volume and before secondary refresh. Parent-facing first-mention colour / later-lesson links now follow that introducing topic (see `glossary-introduce-then-link`); the authoring graph for later key stages stays parked. |
 
 ## Phonics and reading
 

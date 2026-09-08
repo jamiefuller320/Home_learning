@@ -101,6 +101,19 @@ npm run render:parent-video -- facts-within-10
 
 Re-render after a language or script-shape change (that needs fresh TTS). Graphics-only tweaks can use `--reuse-audio`. The page stays the source beside the child.
 
+## Glossary presentation
+
+A classroom term enters the glossary when a topic lists it in `glossaryTerms`. The first topic in prerequisite order that lists the term is the **introducing lesson**.
+
+| Where the mention is | How it is written |
+|---|---|
+| First mention in the introducing lesson | Distinct colour (amber), no glossary link — stay with the explanation |
+| Later mentions in that same lesson | Plain text, still no link |
+| Subsequent lessons that already know the term | Dotted glossary link (popover + “Read in the glossary”) |
+| Mentions before the term has been taught | Plain text — do not auto-link a word the parent has not met |
+
+Do not add a glossary jump on the sentence that teaches the word. The page (and the held-out judge) still need a gloss in that introducing sentence.
+
 ## Review status
 
 `draft` means “structurally complete, not yet teacher-checked”. The app shows that badge on purpose. Do not mark `reviewed` without a named review in the topic file comment or a later review log.

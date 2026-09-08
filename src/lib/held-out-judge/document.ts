@@ -1,5 +1,5 @@
-import { sortTopicsByPrerequisites } from "@/content/england/ks1/year-1/maths/curriculum";
 import type { Topic } from "@/content/schema";
+import { introducingTopicId, unlockedTermIdsFor } from "@/content/glossary/unlock";
 import { sayThisListenFor, sayThisPrompt } from "@/lib/say-this";
 import {
   SCRIPT_LINK_LINES,
@@ -10,32 +10,12 @@ import {
 import { CLASSROOM_TERMS } from "./rules";
 import type { JudgeDocument, JudgeSpan, JudgeSpanRole } from "./types";
 
+export { introducingTopicId, unlockedTermIdsFor };
+
 const SCRIPT_LINK_VALUES = new Set(SCRIPT_LINK_LINES.map((line) => normalize(line)));
 
 export function normalize(text: string): string {
   return text.replace(/\s+/g, " ").trim().toLowerCase();
-}
-
-export function introducingTopicId(termId: string, topics: Topic[]): string | undefined {
-  return sortTopicsByPrerequisites(topics).find((topic) => topic.glossaryTerms.includes(termId))?.id;
-}
-
-export function unlockedTermIdsFor(topic: Topic, topics: Topic[]): string[] {
-  const byId = new Map(topics.map((item) => [item.id, item]));
-  const unlocked = new Set<string>();
-
-  function walk(id: string) {
-    const node = byId.get(id);
-    if (!node) return;
-    for (const prerequisiteId of node.prerequisites) {
-      walk(prerequisiteId);
-      const prerequisite = byId.get(prerequisiteId);
-      prerequisite?.glossaryTerms.forEach((termId) => unlocked.add(termId));
-    }
-  }
-
-  walk(topic.id);
-  return [...unlocked];
 }
 
 export type TermMention = {

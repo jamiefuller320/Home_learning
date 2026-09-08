@@ -79,6 +79,13 @@ a {
   color: var(--teal);
 }
 
+/* First mention in the introducing lesson: colour only, not a link. */
+.glossary-introduce {
+  color: var(--amber);
+  font-style: normal;
+  font-weight: 600;
+}
+
 /* Hook for restyling StageMetaBox without touching every page */
 .stage-meta-box {
   /* intentionally empty — override here when the look changes */
