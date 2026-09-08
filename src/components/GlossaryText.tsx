@@ -14,17 +14,13 @@ export function GlossaryText({ text }: { text: string }): ReactNode {
     return text;
   }
 
-  const seen = new Map<string, number>();
-
   return parts.map((part, index) => {
     if (!part.termId) {
       return <Fragment key={`text-${index}`}>{part.text}</Fragment>;
     }
 
-    const occurrence = seen.get(part.termId) ?? 0;
-    seen.set(part.termId, occurrence + 1);
     const treatment = lesson
-      ? glossaryMentionTreatment(part.termId, text, occurrence, lesson.topic, lesson.topics)
+      ? glossaryMentionTreatment(part.termId, lesson.topic, lesson.topics)
       : "recall";
 
     if (treatment === "introduce") {

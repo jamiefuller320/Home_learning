@@ -107,8 +107,7 @@ A classroom term enters the glossary when a topic lists it in `glossaryTerms`. T
 
 | Where the mention is | How it is written |
 |---|---|
-| First mention in the introducing lesson | Distinct colour (amber), no glossary link — stay with the explanation |
-| Later mentions in that same lesson | Plain text, still no link |
+| Introducing lesson | Distinct colour (amber), no glossary link — stay with the explanation |
 | Subsequent lessons that already know the term | Dotted glossary link (popover + “Read in the glossary”) |
 | Mentions before the term has been taught | Plain text — do not auto-link a word the parent has not met |
 

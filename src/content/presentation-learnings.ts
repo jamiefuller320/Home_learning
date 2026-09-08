@@ -48,9 +48,9 @@ export const presentationLearnings: PresentationLearning[] = [
   },
   {
     id: "glossary-introduce-then-link",
-    title: "First glossary mention is coloured; later lessons link",
+    title: "Introducing lesson colours the term; later lessons link",
     principle:
-      "The first time a classroom term is introduced, mark it in amber with no glossary link so the parent stays in the lesson explanation. Later mentions in that introducing lesson stay plain. Subsequent lessons that already know the term use the dotted glossary link.",
+      "In the lesson that first teaches a classroom term, write every mention in amber with no glossary link so the parent stays with the explanation. Subsequent lessons that already know the term use the dotted glossary link.",
     appliedIn: [
       "src/content/glossary/presentation.ts",
       "src/content/glossary/unlock.ts",

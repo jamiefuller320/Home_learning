@@ -13,7 +13,9 @@ export function HomeTasks({ topic }: { topic: Topic }) {
         <h3 className="serif text-2xl text-ink">What you need</h3>
         <ul className="mt-3 list-disc space-y-1 pl-5 text-lg text-ink-soft text-pretty">
           {topic.householdItems.map((item) => (
-            <li key={item}>{item}</li>
+            <li key={item}>
+              <GlossaryText text={item} />
+            </li>
           ))}
         </ul>
       </div>

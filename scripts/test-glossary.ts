@@ -12,10 +12,7 @@ import {
   isBlockedEverydayGlossaryAlias,
   splitGlossaryText,
 } from "../src/content/glossary";
-import {
-  firstIntroductionInLesson,
-  glossaryMentionTreatment,
-} from "../src/content/glossary/presentation";
+import { glossaryMentionTreatment } from "../src/content/glossary/presentation";
 import { presentationLearnings } from "../src/content/presentation-learnings";
 import { validateGlossary } from "../src/content/validate";
 
@@ -78,53 +75,19 @@ assert.equal(introducingTopicId("part-whole", year1MathsTopics), "parts-of-10");
 assert.equal(introducingTopicId("number-bond", year1MathsTopics), "parts-of-10");
 assert.equal(introducingTopicId("half", year1MathsTopics), "halves");
 
-const firstTenFrame = firstIntroductionInLesson(factsWithin10, "ten-frame");
-assert.ok(firstTenFrame);
-assert.equal(firstTenFrame.occurrence, 0);
-assert.equal(
-  glossaryMentionTreatment("ten-frame", firstTenFrame.text, 0, factsWithin10, year1MathsTopics),
-  "introduce",
-);
-assert.equal(
-  glossaryMentionTreatment("ten-frame", firstTenFrame.text, 1, factsWithin10, year1MathsTopics),
-  "plain",
-);
-assert.equal(
-  glossaryMentionTreatment("ten-frame", factsWithin10.homePack.setup, 0, factsWithin10, year1MathsTopics),
-  "plain",
-);
+assert.equal(glossaryMentionTreatment("ten-frame", factsWithin10, year1MathsTopics), "introduce");
+assert.equal(glossaryMentionTreatment("number-fact", factsWithin10, year1MathsTopics), "introduce");
+assert.equal(glossaryMentionTreatment("fluency", factsWithin10, year1MathsTopics), "introduce");
+assert.equal(glossaryMentionTreatment("part-whole", factsWithin10, year1MathsTopics), "recall");
+assert.equal(glossaryMentionTreatment("number-bond", factsWithin10, year1MathsTopics), "recall");
 
-const firstPartWhole = firstIntroductionInLesson(partsOf10, "part-whole");
-assert.ok(firstPartWhole);
-assert.equal(
-  glossaryMentionTreatment("part-whole", firstPartWhole.text, 0, partsOf10, year1MathsTopics),
-  "introduce",
-);
-assert.equal(
-  glossaryMentionTreatment(
-    "part-whole",
-    factsWithin10.parentBriefing.howSchoolTeachesIt,
-    0,
-    factsWithin10,
-    year1MathsTopics,
-  ),
-  "recall",
-);
-assert.equal(
-  glossaryMentionTreatment("part-whole", plusMinusEquals.summary, 0, plusMinusEquals, year1MathsTopics),
-  "recall",
-);
-assert.equal(
-  glossaryMentionTreatment("ten-frame", countingWithin100.homePack.setup, 0, countingWithin100, year1MathsTopics),
-  "plain",
-);
+assert.equal(glossaryMentionTreatment("part-whole", partsOf10, year1MathsTopics), "introduce");
+assert.equal(glossaryMentionTreatment("compose", partsOf10, year1MathsTopics), "introduce");
+assert.equal(glossaryMentionTreatment("part-whole", plusMinusEquals, year1MathsTopics), "recall");
+assert.equal(glossaryMentionTreatment("ten-frame", countingWithin100, year1MathsTopics), "plain");
 
-const firstHalf = firstIntroductionInLesson(halves, "half");
-assert.ok(firstHalf);
-assert.equal(glossaryMentionTreatment("half", firstHalf.text, 0, halves, year1MathsTopics), "introduce");
-assert.equal(
-  glossaryMentionTreatment("half", quarters.parentBriefing.inPlainEnglish, 0, quarters, year1MathsTopics),
-  "recall",
-);
+assert.equal(glossaryMentionTreatment("half", halves, year1MathsTopics), "introduce");
+assert.equal(glossaryMentionTreatment("half", quarters, year1MathsTopics), "recall");
+assert.equal(glossaryMentionTreatment("quarter", quarters, year1MathsTopics), "introduce");
 
 console.log("glossary tests passed.");

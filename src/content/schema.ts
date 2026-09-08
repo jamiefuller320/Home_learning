@@ -82,7 +82,7 @@ export type Topic = {
   /**
    * Glossary term ids this topic introduces or reuses.
    * The first topic in prerequisite order that lists a term is its introducing lesson:
-   * that first mention is coloured, not linked. Later lessons link to the glossary.
+   * mentions there are coloured, not linked. Later lessons link to the glossary.
    */
   glossaryTerms: string[];
   parentMinutes: number;
