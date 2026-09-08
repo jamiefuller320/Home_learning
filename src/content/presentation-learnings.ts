@@ -47,6 +47,20 @@ export const presentationLearnings: PresentationLearning[] = [
     ],
   },
   {
+    id: "glossary-introduce-then-link",
+    title: "First glossary mention is coloured; later lessons link",
+    principle:
+      "The first time a classroom term is introduced, mark it in amber with no glossary link so the parent stays in the lesson explanation. Later mentions in that introducing lesson stay plain. Subsequent lessons that already know the term use the dotted glossary link.",
+    appliedIn: [
+      "src/content/glossary/presentation.ts",
+      "src/content/glossary/unlock.ts",
+      "src/components/GlossaryText.tsx",
+      "src/components/GlossaryIntroduction.tsx",
+      "src/components/LessonGlossary.tsx",
+      "src/app/globals.css",
+    ],
+  },
+  {
     id: "stage-2-meta-what-label",
     title: "Stage 2 meta box labels the middle column What",
     principle:

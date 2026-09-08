@@ -79,7 +79,11 @@ export type Topic = {
   strand: string;
   /** Topic ids that should feel solid before this one. Empty means no required prior step. */
   prerequisites: string[];
-  /** Glossary term ids highlighted in this topic’s text. */
+  /**
+   * Glossary term ids this topic introduces or reuses.
+   * The first topic in prerequisite order that lists a term is its introducing lesson:
+   * that first mention is coloured, not linked. Later lessons link to the glossary.
+   */
   glossaryTerms: string[];
   parentMinutes: number;
   homeMinutes: number;

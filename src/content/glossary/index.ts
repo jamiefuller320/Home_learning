@@ -2,6 +2,7 @@ import type { GlossaryTerm } from "@/content/schema";
 import { glossaryTerms } from "./terms";
 
 export { glossaryTerms };
+export { introducingTopicId, unlockedTermIdsFor } from "./unlock";
 
 /**
  * Everyday adjectives that must never be auto-linked as glossary aliases.
