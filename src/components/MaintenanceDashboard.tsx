@@ -101,7 +101,6 @@ export function MaintenanceDashboard() {
 
   async function handleUnlock(creds: MaintainerCredentials) {
     setCredentials(creds);
-    setTab("inbox");
     await loadNotes(creds);
   }
 
@@ -144,7 +143,9 @@ export function MaintenanceDashboard() {
         </button>
       </div>
 
-      {tab === "learnings" ? <PackLearningReview /> : null}
+      {!credentials ? <MaintainerUnlock onUnlock={handleUnlock} /> : null}
+
+      {tab === "learnings" ? <PackLearningReview credentials={credentials} /> : null}
 
       {tab === "script" ? (
         <section className="space-y-6">
@@ -162,8 +163,6 @@ export function MaintenanceDashboard() {
           />
         </section>
       ) : null}
-
-      {tab === "inbox" && !credentials ? <MaintainerUnlock onUnlock={handleUnlock} /> : null}
 
       {tab === "inbox" && credentials ? (
         <>

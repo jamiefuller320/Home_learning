@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Topic } from "@/content/schema";
+import type { LivePublicationMap } from "@/lib/pack-publish-api";
 import { resolvePublicationStatus } from "@/lib/publication";
 import { readPackReleaseFile } from "@/lib/pack-release";
 import { DraftBadge } from "./DraftBadge";
@@ -9,12 +10,19 @@ export function TopicCard({
   topic,
   briefingDone,
   showPublicationStatus = false,
+  liveMap,
 }: {
   topic: Topic;
   briefingDone?: boolean;
   showPublicationStatus?: boolean;
+  liveMap?: LivePublicationMap;
 }) {
-  const publicationStatus = resolvePublicationStatus(readPackReleaseFile().entries[topic.id], topic.reviewStatus);
+  const publicationStatus = resolvePublicationStatus(
+    readPackReleaseFile().entries[topic.id],
+    topic.reviewStatus,
+    liveMap,
+    topic.id,
+  );
   return (
     <Link
       href={`/year-1-maths/${topic.slug}`}

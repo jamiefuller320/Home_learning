@@ -1,8 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
+import { useMaintainerPublishPoll } from "@/hooks/useMaintainerPublishPoll";
+import type { MaintainerCredentials } from "@/lib/language-notes-admin";
+import {
+  setRemoteActiveCandidate,
+  upsertRemotePublishEntry,
+} from "@/lib/pack-publish-admin";
 import {
   assessAllPublishWorkflows,
   buildPublishRequest,
@@ -15,20 +21,9 @@ import {
 } from "@/lib/pack-publishing";
 import { readPackReleaseFile } from "@/lib/pack-release";
 import {
-  confirmSessionFinalCheck,
-  approveSessionLesson,
-  approveSessionScript,
-  approveSessionVideo,
   buildPackReleaseExport,
-  markSessionReleased,
-  markSessionVideoGenerated,
-  markSessionVideoQueued,
   mergePackReleaseStores,
   readSessionPackReleaseStore,
-  refreshSessionScript,
-  restoreSessionRelease,
-  setSessionCandidate,
-  suspendSessionRelease,
   writeSessionPackReleaseStore,
 } from "@/lib/pack-release-store";
 
@@ -86,27 +81,37 @@ function WorkflowSteps({ view }: { view: PublishWorkflowView }) {
   );
 }
 
-export function PackPublishingPipeline() {
+export function PackPublishingPipeline({ credentials }: { credentials?: MaintainerCredentials | null }) {
   const [releaseStore, setReleaseStore] = useState(() => readSessionPackReleaseStore());
   const [message, setMessage] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(releaseStore.activeCandidateId);
+  const [busy, setBusy] = useState(false);
+  const { mergedFile, loading, error, lastFetchedAt, refresh } = useMaintainerPublishPoll(credentials ?? null);
 
-  const mergedReleaseFile = useMemo(
-    () => mergePackReleaseStores(readPackReleaseFile(), releaseStore),
-    [releaseStore],
-  );
+  const mergedReleaseFile = useMemo(() => {
+    if (credentials) return mergedFile;
+    return mergePackReleaseStores(readPackReleaseFile(), releaseStore);
+  }, [credentials, mergedFile, releaseStore]);
+
   const workflows = useMemo(
     () => assessAllPublishWorkflows(year1MathsTopics, mergedReleaseFile),
     [mergedReleaseFile],
   );
 
+  useEffect(() => {
+    if (credentials && mergedFile.activeCandidateId) {
+      setExpandedId(mergedFile.activeCandidateId);
+    }
+  }, [credentials, mergedFile.activeCandidateId]);
+
   const activeCandidate = workflows.find((row) => row.isActiveCandidate);
   const liveCount = workflows.filter((row) => row.stage === "live").length;
   const inProgress = workflows.filter((row) => row.stage !== "live" && row.stage !== "suspended" && row.stage !== "editing");
+  const liveMode = Boolean(credentials);
 
   function exportPackRelease() {
     downloadJson("pack-release.json", buildPackReleaseExport(readPackReleaseFile(), releaseStore));
-    setMessage("Downloaded pack-release.json — commit under src/content/ to persist workflow state.");
+    setMessage("Downloaded pack-release.json — optional git backup; Supabase is live when unlocked.");
   }
 
   function exportPublishRequest(view: PublishWorkflowView, action: PublishRequest["action"], note?: string): void {
@@ -118,7 +123,13 @@ export function PackPublishingPipeline() {
     );
   }
 
-  function runAction(view: PublishWorkflowView, action: PublishAction) {
+  async function persistEntry(topicId: string, update: Parameters<typeof upsertRemotePublishEntry>[2]) {
+    if (!credentials) return;
+    await upsertRemotePublishEntry(credentials, topicId, update);
+    await refresh();
+  }
+
+  async function runAction(view: PublishWorkflowView, action: PublishAction) {
     const topic = year1MathsTopics.find((item) => item.id === view.topicId);
     if (!topic) return;
 
@@ -142,79 +153,328 @@ export function PackPublishingPipeline() {
     const note = action === "queue_video" ? undefined : window.prompt(notePrompt, "");
     if (action !== "queue_video" && note === null) return;
     const trimmed = note?.trim() ?? "";
+    const now = new Date().toISOString();
 
-    switch (action) {
-      case "approve_lesson": {
-        if (!trimmed) return;
-        const preview = buildScriptPreviewBundle(topic);
-        setReleaseStore(approveSessionLesson(topic, trimmed));
-        downloadJson(`script-preview-${topic.id}.json`, preview.scriptJson);
-        setMessage(
-          `Lesson approved and script generated (${preview.hash.slice(0, 8)}…). Review in Video script tab, then approve script.`,
-        );
-        setExpandedId(topic.id);
-        break;
+    setBusy(true);
+    setMessage("");
+    try {
+      switch (action) {
+        case "approve_lesson": {
+          if (!trimmed) return;
+          const preview = buildScriptPreviewBundle(topic);
+          if (liveMode && credentials) {
+            await persistEntry(topic.id, {
+              topicId: topic.id,
+              lessonApprovedAt: now,
+              lessonApprovalNote: trimmed,
+              packRecheckedAt: now,
+              packRecheckNote: trimmed,
+              scriptGeneratedAt: now,
+              scriptHashAtGeneration: preview.hash,
+            });
+          } else {
+            setReleaseStore((current) => ({
+              ...current,
+              entries: {
+                ...current.entries,
+                [topic.id]: {
+                  ...current.entries[topic.id],
+                  topicId: topic.id,
+                  lessonApprovedAt: now,
+                  lessonApprovalNote: trimmed,
+                  packRecheckedAt: now,
+                  packRecheckNote: trimmed,
+                  scriptGeneratedAt: now,
+                  scriptHashAtGeneration: preview.hash,
+                },
+              },
+            }));
+          }
+          downloadJson(`script-preview-${topic.id}.json`, preview.scriptJson);
+          setMessage(
+            `Lesson approved and script generated (${preview.hash.slice(0, 8)}…). Review in Video script tab, then approve script.`,
+          );
+          setExpandedId(topic.id);
+          break;
+        }
+        case "approve_script": {
+          if (!trimmed) return;
+          if (liveMode && credentials) {
+            await persistEntry(topic.id, {
+              topicId: topic.id,
+              scriptApprovedAt: now,
+              scriptApprovalNote: trimmed,
+              videoGeneratedHash: view.scriptHash,
+            });
+          } else {
+            setReleaseStore((current) => ({
+              ...current,
+              entries: {
+                ...current.entries,
+                [topic.id]: {
+                  ...current.entries[topic.id],
+                  topicId: topic.id,
+                  scriptApprovedAt: now,
+                  scriptApprovalNote: trimmed,
+                  videoGeneratedHash: view.scriptHash,
+                },
+              },
+            }));
+          }
+          exportPublishRequest(view, "generate-video", trimmed);
+          setMessage(
+            liveMode
+              ? "Script approved in Supabase. Video job exported — run rehearsal locally or via GitHub Actions."
+              : "Script approved locally. Downloaded publish-request for video generation.",
+          );
+          break;
+        }
+        case "queue_video": {
+          exportPublishRequest(view, "generate-video");
+          setMessage("Downloaded video generation request.");
+          break;
+        }
+        case "approve_video": {
+          if (!trimmed) return;
+          if (liveMode && credentials) {
+            await persistEntry(topic.id, {
+              topicId: topic.id,
+              videoApprovedAt: now,
+              videoApprovalNote: trimmed,
+              videoRecheckedAt: now,
+              videoRecheckNote: trimmed,
+            });
+          } else {
+            setReleaseStore((current) => ({
+              ...current,
+              entries: {
+                ...current.entries,
+                [topic.id]: {
+                  ...current.entries[topic.id],
+                  topicId: topic.id,
+                  videoApprovedAt: now,
+                  videoApprovalNote: trimmed,
+                  videoRecheckedAt: now,
+                  videoRecheckNote: trimmed,
+                },
+              },
+            }));
+          }
+          setMessage("Video approved — run final check when ready.");
+          break;
+        }
+        case "final_check": {
+          if (!trimmed) return;
+          if (liveMode && credentials) {
+            await persistEntry(topic.id, { topicId: topic.id, finalCheckedAt: now, finalCheckNote: trimmed });
+          } else {
+            setReleaseStore((current) => ({
+              ...current,
+              entries: {
+                ...current.entries,
+                [topic.id]: { ...current.entries[topic.id], topicId: topic.id, finalCheckedAt: now, finalCheckNote: trimmed },
+              },
+            }));
+          }
+          setMessage("Final check recorded — you can release when blockers are clear.");
+          break;
+        }
+        case "release": {
+          if (!trimmed) return;
+          if (liveMode && credentials) {
+            await persistEntry(topic.id, {
+              topicId: topic.id,
+              releasedAt: now,
+              releaseNote: trimmed,
+              suspendedAt: undefined,
+              suspendNote: undefined,
+            });
+            await setRemoteActiveCandidate(credentials, null);
+            await refresh();
+          } else {
+            setReleaseStore((current) => ({
+              activeCandidateId: null,
+              entries: {
+                ...current.entries,
+                [topic.id]: {
+                  ...current.entries[topic.id],
+                  topicId: topic.id,
+                  releasedAt: now,
+                  releaseNote: trimmed,
+                  suspendedAt: undefined,
+                  suspendNote: undefined,
+                },
+              },
+            }));
+            exportPublishRequest(view, "release", trimmed);
+          }
+          setMessage(
+            liveMode
+              ? `${view.shortTitle} is live — public lesson list updates on the next Supabase poll (~30s).`
+              : "Release queued locally. Commit publish-request to inbox/ for git sync.",
+          );
+          break;
+        }
+        case "suspend": {
+          if (!trimmed) return;
+          if (liveMode && credentials) {
+            await persistEntry(topic.id, { topicId: topic.id, suspendedAt: now, suspendNote: trimmed });
+          } else {
+            setReleaseStore((current) => ({
+              ...current,
+              entries: {
+                ...current.entries,
+                [topic.id]: { ...current.entries[topic.id], topicId: topic.id, suspendedAt: now, suspendNote: trimmed },
+              },
+            }));
+            exportPublishRequest(view, "suspend", trimmed);
+          }
+          setMessage(liveMode ? `${view.shortTitle} suspended — hidden from the public index shortly.` : "Suspend request downloaded.");
+          break;
+        }
+        case "restore": {
+          if (!trimmed) return;
+          if (liveMode && credentials) {
+            await persistEntry(topic.id, {
+              topicId: topic.id,
+              suspendedAt: undefined,
+              suspendNote: undefined,
+              restoredAt: now,
+              releaseNote: trimmed,
+            });
+          } else {
+            setReleaseStore((current) => ({
+              ...current,
+              entries: {
+                ...current.entries,
+                [topic.id]: {
+                  ...current.entries[topic.id],
+                  topicId: topic.id,
+                  suspendedAt: undefined,
+                  suspendNote: undefined,
+                  restoredAt: now,
+                  releaseNote: trimmed,
+                },
+              },
+            }));
+            exportPublishRequest(view, "restore", trimmed);
+          }
+          setMessage(liveMode ? `${view.shortTitle} restored live.` : "Restore request downloaded.");
+          break;
+        }
       }
-      case "approve_script": {
-        if (!trimmed) return;
-        setReleaseStore(approveSessionScript(topic.id, trimmed));
-        setReleaseStore(markSessionVideoQueued(topic.id, view.scriptHash ?? ""));
-        exportPublishRequest(view, "generate-video", trimmed);
-        setMessage(
-          "Script approved. Downloaded publish-request — commit to inbox/ to run rehearsal/render via GitHub Actions, or run npm run rehearse:parent-video locally.",
-        );
-        break;
-      }
-      case "queue_video": {
-        exportPublishRequest(view, "generate-video");
-        setMessage("Downloaded video generation request — commit to inbox/ or run the parent-video pipeline locally.");
-        break;
-      }
-      case "approve_video": {
-        if (!trimmed) return;
-        setReleaseStore(approveSessionVideo(topic.id, trimmed));
-        setMessage("Video approved — run final check when ready.");
-        break;
-      }
-      case "final_check": {
-        if (!trimmed) return;
-        setReleaseStore(confirmSessionFinalCheck(topic.id, trimmed));
-        setMessage("Final check recorded — you can release when blockers are clear.");
-        break;
-      }
-      case "release": {
-        if (!trimmed) return;
-        setReleaseStore(markSessionReleased(topic.id, trimmed));
-        exportPublishRequest(view, "release", trimmed);
-        setMessage(
-          "Release queued locally. Downloaded publish-request — commit to inbox/ to flip reviewStatus and go live via GitHub Actions.",
-        );
-        break;
-      }
-      case "suspend": {
-        if (!trimmed) return;
-        setReleaseStore(suspendSessionRelease(topic.id, trimmed));
-        exportPublishRequest(view, "suspend", trimmed);
-        setMessage("Suspend request downloaded — commit to inbox/ to hide this lesson on the public index.");
-        break;
-      }
-      case "restore": {
-        if (!trimmed) return;
-        setReleaseStore(restoreSessionRelease(topic.id, trimmed));
-        exportPublishRequest(view, "restore", trimmed);
-        setMessage("Restore request downloaded — commit to inbox/ to show this lesson live again.");
-        break;
-      }
+    } catch (actionError) {
+      setMessage(actionError instanceof Error ? actionError.message : "Publishing update failed.");
+    } finally {
+      setBusy(false);
     }
   }
 
-  function refreshScript(view: PublishWorkflowView) {
+  async function refreshScript(view: PublishWorkflowView) {
     const topic = year1MathsTopics.find((item) => item.id === view.topicId);
     if (!topic) return;
     const preview = buildScriptPreviewBundle(topic);
-    setReleaseStore(refreshSessionScript(topic));
-    downloadJson(`script-preview-${topic.id}.json`, preview.scriptJson);
-    setMessage(`Regenerated script for ${view.shortTitle} (${preview.hash.slice(0, 8)}…).`);
+    const now = new Date().toISOString();
+    setBusy(true);
+    try {
+      if (liveMode && credentials) {
+        await persistEntry(topic.id, {
+          topicId: topic.id,
+          scriptGeneratedAt: now,
+          scriptHashAtGeneration: preview.hash,
+          scriptApprovedAt: undefined,
+          scriptApprovalNote: undefined,
+          videoGeneratedAt: undefined,
+          videoGeneratedHash: undefined,
+          videoApprovedAt: undefined,
+          videoApprovalNote: undefined,
+          finalCheckedAt: undefined,
+          finalCheckNote: undefined,
+        });
+      } else {
+        setReleaseStore((current) => ({
+          ...current,
+          entries: {
+            ...current.entries,
+            [topic.id]: {
+              ...current.entries[topic.id],
+              topicId: topic.id,
+              scriptGeneratedAt: now,
+              scriptHashAtGeneration: preview.hash,
+            },
+          },
+        }));
+      }
+      downloadJson(`script-preview-${topic.id}.json`, preview.scriptJson);
+      setMessage(`Regenerated script for ${view.shortTitle} (${preview.hash.slice(0, 8)}…).`);
+    } catch (refreshError) {
+      setMessage(refreshError instanceof Error ? refreshError.message : "Could not refresh script.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function chooseCandidate(topicId: string, shortTitle: string) {
+    setBusy(true);
+    try {
+      if (liveMode && credentials) {
+        await setRemoteActiveCandidate(credentials, topicId);
+        await refresh();
+      } else {
+        const now = new Date().toISOString();
+        setReleaseStore((current) => ({
+          activeCandidateId: topicId,
+          entries: {
+            ...current.entries,
+            [topicId]: { ...current.entries[topicId], topicId, candidateSince: current.entries[topicId]?.candidateSince ?? now },
+          },
+        }));
+      }
+      setExpandedId(topicId);
+      setMessage(`Set ${shortTitle} as the active candidate.`);
+    } catch (candidateError) {
+      setMessage(candidateError instanceof Error ? candidateError.message : "Could not set candidate.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function markVideoReady(view: PublishWorkflowView) {
+    const note = window.prompt("Confirm video rehearsal/render is ready", "Watched rehearsal pass");
+    if (!note?.trim() || !view.scriptHash) return;
+    const now = new Date().toISOString();
+    setBusy(true);
+    try {
+      if (liveMode && credentials) {
+        await persistEntry(view.topicId, {
+          topicId: view.topicId,
+          videoGeneratedAt: now,
+          videoGeneratedHash: view.scriptHash,
+          videoRecheckedAt: now,
+          videoRecheckNote: note.trim(),
+        });
+      } else {
+        setReleaseStore((current) => ({
+          ...current,
+          entries: {
+            ...current.entries,
+            [view.topicId]: {
+              ...current.entries[view.topicId],
+              topicId: view.topicId,
+              videoGeneratedAt: now,
+              videoGeneratedHash: view.scriptHash,
+              videoRecheckedAt: now,
+              videoRecheckNote: note.trim(),
+            },
+          },
+        }));
+      }
+      setMessage(`Marked video ready for ${view.shortTitle}. Approve video when satisfied.`);
+    } catch (videoError) {
+      setMessage(videoError instanceof Error ? videoError.message : "Could not mark video ready.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -223,33 +483,49 @@ export function PackPublishingPipeline() {
         <h3 className="font-semibold text-ink">Publishing pipeline</h3>
         <p className="mt-2 max-w-3xl text-sm text-ink-soft">
           One pack at a time: approve the lesson (auto-generates a script), approve the script (queues video
-          generation), approve the video, final check, then release live. Suspended lessons stay in the repo but
-          disappear from the public lesson list. Export{" "}
-          <code className="text-xs">pack-release.json</code> to persist progress; commit publish requests in{" "}
-          <code className="text-xs">inbox/</code> for GitHub Actions to apply release and video steps.
+          generation), approve the video, final check, then release live. When maintainer access is unlocked, state
+          syncs to Supabase and the public lesson list polls every 30 seconds — no redeploy needed for release or
+          suspend.
         </p>
         <p className="mt-2 text-sm text-ink-soft">
-          Active candidate:{" "}
-          <strong className="text-ink">{activeCandidate?.shortTitle ?? "none"}</strong> · {liveCount} live ·{" "}
-          {inProgress.length} in progress
+          {liveMode ? (
+            <>
+              <span className="font-semibold text-teal">Live via Supabase</span>
+              {lastFetchedAt ? ` · synced ${new Date(lastFetchedAt).toLocaleTimeString("en-GB")}` : ""}
+              {loading ? " · refreshing…" : ""}
+            </>
+          ) : (
+            <span>Offline mode — unlock maintainer access below the tabs to sync live.</span>
+          )}
+          {" · "}
+          Active candidate: <strong className="text-ink">{activeCandidate?.shortTitle ?? "none"}</strong> · {liveCount}{" "}
+          live · {inProgress.length} in progress
         </p>
       </div>
+
+      {error ? <p className="rounded-2xl border border-clay/30 bg-[#f6e4e0] px-4 py-3 text-sm text-ink">{error}</p> : null}
 
       <div className="flex flex-wrap gap-3 text-sm">
         <button type="button" className="rounded-full border border-rule px-4 py-2 hover:border-teal" onClick={exportPackRelease}>
           Export pack-release.json
         </button>
-        <button
-          type="button"
-          className="underline decoration-rule"
-          onClick={() => {
-            writeSessionPackReleaseStore({ activeCandidateId: null, entries: {} });
-            setReleaseStore({ activeCandidateId: null, entries: {} });
-            setMessage("Cleared local publishing session.");
-          }}
-        >
-          Reset local session
-        </button>
+        {!liveMode ? (
+          <button
+            type="button"
+            className="underline decoration-rule"
+            onClick={() => {
+              writeSessionPackReleaseStore({ activeCandidateId: null, entries: {} });
+              setReleaseStore({ activeCandidateId: null, entries: {} });
+              setMessage("Cleared local publishing session.");
+            }}
+          >
+            Reset local session
+          </button>
+        ) : (
+          <button type="button" className="underline decoration-rule" disabled={loading} onClick={() => void refresh()}>
+            Refresh from Supabase
+          </button>
+        )}
       </div>
 
       {message ? <p className="rounded-2xl bg-[#e5efe8] px-4 py-3 text-sm text-ink">{message}</p> : null}
@@ -301,12 +577,6 @@ export function PackPublishingPipeline() {
                     <dt className="text-ink-soft">Publication</dt>
                     <dd className="capitalize text-ink">{view.publicationStatus}</dd>
                   </div>
-                  {view.entry?.lessonApprovalNote ? (
-                    <div className="sm:col-span-2">
-                      <dt className="text-ink-soft">Lesson note</dt>
-                      <dd className="text-ink">{view.entry.lessonApprovalNote}</dd>
-                    </div>
-                  ) : null}
                 </dl>
               ) : null}
 
@@ -314,42 +584,30 @@ export function PackPublishingPipeline() {
                 {!view.isActiveCandidate && view.stage !== "live" && view.stage !== "suspended" ? (
                   <button
                     type="button"
-                    className="rounded-full border border-rule px-3 py-1.5 hover:border-teal"
-                    onClick={() => {
-                      setReleaseStore(setSessionCandidate(view.topicId));
-                      setExpandedId(view.topicId);
-                      setMessage(`Set ${view.shortTitle} as the active candidate.`);
-                    }}
+                    disabled={busy}
+                    className="rounded-full border border-rule px-3 py-1.5 hover:border-teal disabled:opacity-60"
+                    onClick={() => void chooseCandidate(view.topicId, view.shortTitle)}
                   >
                     Set candidate
                   </button>
                 ) : null}
-                <Link
-                  href={`/maintenance/?tab=script&topic=${view.topicId}`}
-                  className="rounded-full border border-rule px-3 py-1.5 hover:border-teal"
-                >
+                <Link href={`/maintenance/?tab=script&topic=${view.topicId}`} className="rounded-full border border-rule px-3 py-1.5 hover:border-teal">
                   Open script
                 </Link>
-                <Link
-                  href={`/year-1-maths/${view.topicId}`}
-                  className="rounded-full border border-rule px-3 py-1.5 hover:border-teal"
-                >
+                <Link href={`/year-1-maths/${view.topicId}`} className="rounded-full border border-rule px-3 py-1.5 hover:border-teal">
                   Open lesson
                 </Link>
                 {view.scriptStale || (view.entry?.scriptGeneratedAt && view.stage === "script_review") ? (
-                  <button
-                    type="button"
-                    className="underline decoration-rule"
-                    onClick={() => refreshScript(view)}
-                  >
+                  <button type="button" disabled={busy} className="underline decoration-rule" onClick={() => void refreshScript(view)}>
                     Refresh script
                   </button>
                 ) : null}
                 {view.nextAction ? (
                   <button
                     type="button"
-                    className="rounded-full bg-teal px-4 py-1.5 font-semibold text-white hover:bg-teal-deep"
-                    onClick={() => runAction(view, view.nextAction!)}
+                    disabled={busy}
+                    className="rounded-full bg-teal px-4 py-1.5 font-semibold text-white hover:bg-teal-deep disabled:opacity-60"
+                    onClick={() => void runAction(view, view.nextAction!)}
                   >
                     {publishActionLabel(view.nextAction)}
                   </button>
@@ -357,16 +615,7 @@ export function PackPublishingPipeline() {
                 {view.stage === "video_pending" && !view.entry?.videoGeneratedAt ? (
                   <>
                     <span className="self-center text-xs text-ink-soft">Waiting for video pipeline…</span>
-                    <button
-                      type="button"
-                      className="underline decoration-rule"
-                      onClick={() => {
-                        const note = window.prompt("Confirm video rehearsal/render is ready", "Watched rehearsal pass");
-                        if (!note?.trim() || !view.scriptHash) return;
-                        setReleaseStore(markSessionVideoGenerated(view.topicId, view.scriptHash, note.trim()));
-                        setMessage(`Marked video ready for ${view.shortTitle}. Approve video when satisfied.`);
-                      }}
-                    >
+                    <button type="button" disabled={busy} className="underline decoration-rule" onClick={() => void markVideoReady(view)}>
                       Mark video ready
                     </button>
                   </>

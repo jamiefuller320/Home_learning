@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
 import { presentationLearnings } from "@/content/presentation-learnings";
 import { PackPublishingPipeline } from "@/components/PackPublishingPipeline";
+import type { MaintainerCredentials } from "@/lib/language-notes-admin";
 import {
   buildDecisionsExport,
   clearPendingApply,
@@ -31,7 +32,7 @@ function downloadJson(filename: string, data: unknown) {
   URL.revokeObjectURL(url);
 }
 
-export function PackLearningReview() {
+export function PackLearningReview({ credentials }: { credentials?: MaintainerCredentials | null }) {
   const [store, setStore] = useState<SessionLearningStore>(() => readSessionLearningStore());
   const [selectedTopicId, setSelectedTopicId] = useState<string>("all");
   const [message, setMessage] = useState("");
@@ -94,7 +95,7 @@ export function PackLearningReview() {
         </p>
       </div>
 
-      <PackPublishingPipeline />
+      <PackPublishingPipeline credentials={credentials} />
 
       <section className="rounded-2xl border border-rule bg-white/70 p-5">
         <h3 className="font-semibold text-ink">Presentation learnings (global)</h3>

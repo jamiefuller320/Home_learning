@@ -2,15 +2,18 @@
 
 import { useEffect, useState } from "react";
 import type { Topic } from "@/content/schema";
+import type { LivePublicationMap } from "@/lib/pack-publish-api";
 import { countFinishedBriefings, readAllProgress } from "@/lib/progress";
 import { TopicCard } from "./TopicCard";
 
 export function TopicIndex({
   topics,
   showPublicationStatus = false,
+  liveMap,
 }: {
   topics: Topic[];
   showPublicationStatus?: boolean;
+  liveMap?: LivePublicationMap;
 }) {
   const [done, setDone] = useState<Record<string, boolean>>({});
   const [finishedCount, setFinishedCount] = useState(0);
@@ -37,6 +40,7 @@ export function TopicIndex({
             topic={topic}
             briefingDone={done[topic.slug]}
             showPublicationStatus={showPublicationStatus}
+            liveMap={liveMap}
           />
         ))}
       </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TopicIndexWithPublication } from "@/components/TopicIndexWithPublication";
+import { LiveTopicIndexWithPublication } from "@/components/LiveTopicIndexWithPublication";
 import { Year1TopTabs } from "@/components/Year1TopTabs";
 import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
 
@@ -28,7 +28,7 @@ export default function Year1MathsPage() {
               <p>Open a pack — summary, parent lesson, tasks, then a quick check.</p>
             </header>
           }
-          sheet={<TopicIndexWithPublication topics={year1MathsTopics} />}
+          sheet={<LiveTopicIndexWithPublication topics={year1MathsTopics} />}
         />
       </div>
     </div>
