@@ -17,8 +17,8 @@ export default function MaintenancePage() {
       <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal">Maintainer</p>
       <h1 className="serif mt-3 text-4xl text-ink sm:text-5xl">Maintenance</h1>
       <p className="mt-4 max-w-2xl text-lg leading-8 text-ink-soft">
-        Review proposed pack updates from durable learnings, read the compiled parent-video script, then unlock the
-        inbox for feature requests and language notes.
+        Walk packs through the publishing pipeline, review proposed learning updates, read parent-video scripts, then
+        unlock the inbox for feature requests and language notes.
       </p>
       <div className="mt-10">
         <Suspense fallback={<p className="text-ink-soft">Loading maintainer tools…</p>}>

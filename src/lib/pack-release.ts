@@ -19,12 +19,29 @@ export type PackReleaseFile = {
 export type PackReleaseEntry = {
   topicId: string;
   candidateSince?: string;
+  /** Legacy attestation — kept for CLI compatibility. */
   packRecheckedAt?: string;
   packRecheckNote?: string;
+  /** Legacy attestation — kept for CLI compatibility. */
   videoRecheckedAt?: string;
   videoRecheckNote?: string;
+  lessonApprovedAt?: string;
+  lessonApprovalNote?: string;
+  scriptGeneratedAt?: string;
+  scriptHashAtGeneration?: string;
+  scriptApprovedAt?: string;
+  scriptApprovalNote?: string;
+  videoGeneratedAt?: string;
+  videoGeneratedHash?: string;
+  videoApprovedAt?: string;
+  videoApprovalNote?: string;
+  finalCheckedAt?: string;
+  finalCheckNote?: string;
   releasedAt?: string;
   releaseNote?: string;
+  suspendedAt?: string;
+  suspendNote?: string;
+  restoredAt?: string;
 };
 
 export type VideoReleaseSignal =

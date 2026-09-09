@@ -5,7 +5,13 @@ import type { Topic } from "@/content/schema";
 import { countFinishedBriefings, readAllProgress } from "@/lib/progress";
 import { TopicCard } from "./TopicCard";
 
-export function TopicIndex({ topics }: { topics: Topic[] }) {
+export function TopicIndex({
+  topics,
+  showPublicationStatus = false,
+}: {
+  topics: Topic[];
+  showPublicationStatus?: boolean;
+}) {
   const [done, setDone] = useState<Record<string, boolean>>({});
   const [finishedCount, setFinishedCount] = useState(0);
 
@@ -26,7 +32,12 @@ export function TopicIndex({ topics }: { topics: Topic[] }) {
       </p>
       <div className="mt-6 space-y-4">
         {topics.map((topic) => (
-          <TopicCard key={topic.id} topic={topic} briefingDone={done[topic.slug]} />
+          <TopicCard
+            key={topic.id}
+            topic={topic}
+            briefingDone={done[topic.slug]}
+            showPublicationStatus={showPublicationStatus}
+          />
         ))}
       </div>
     </div>
