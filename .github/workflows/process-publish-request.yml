@@ -1,0 +1,68 @@
+name: Process publish request
+
+# When a maintainer commits a publish request to inbox/, apply release / video / suspend steps.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - inbox/publish-request*.json
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: process-publish-request
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Find publish requests
+        id: inbox
+        run: |
+          shopt -s nullglob
+          files=(inbox/publish-request*.json)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "has_request=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_request=true" >> "$GITHUB_OUTPUT"
+            printf '%s\n' "${files[@]}"
+          fi
+
+      - name: Apply publish request
+        if: steps.inbox.outputs.has_request == 'true'
+        run: npx tsx scripts/process-publish-request.ts
+
+      - name: Validate content and tests
+        if: steps.inbox.outputs.has_request == 'true'
+        run: npm test
+
+      - name: Commit publish changes
+        if: steps.inbox.outputs.has_request == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/pack-release.json
+          git add src/content/england/ks1/year-1/maths/topics/*.ts
+          git add inbox/parent-video/**/*
+          git add inbox/publish-request*.json
+          if git diff --staged --quiet; then
+            echo "Nothing to commit after publish request."
+            exit 0
+          fi
+          git commit -m "Apply maintainer publish request from inbox"
+          git push

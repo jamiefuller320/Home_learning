@@ -7,6 +7,7 @@ import {
   verifyMaintainerCredentials,
   type MaintainerCredentials,
 } from "@/lib/language-notes-admin";
+import { verifyPublishTables } from "@/lib/pack-publish-admin";
 
 export function MaintainerUnlock({ onUnlock }: { onUnlock: (credentials: MaintainerCredentials) => void }) {
   const [url, setUrl] = useState(readDefaultSupabaseUrl());
@@ -26,6 +27,7 @@ export function MaintainerUnlock({ onUnlock }: { onUnlock: (credentials: Maintai
 
     try {
       await verifyMaintainerCredentials(credentials);
+      await verifyPublishTables(credentials);
       storeCredentials(credentials);
       onUnlock(credentials);
     } catch (submitError) {
@@ -39,9 +41,10 @@ export function MaintainerUnlock({ onUnlock }: { onUnlock: (credentials: Maintai
     <form className="rounded-2xl border border-rule bg-white/70 p-6" onSubmit={handleSubmit}>
       <h2 className="serif text-2xl text-ink">Maintainer access</h2>
       <p className="mt-3 text-ink-soft">
-        This page reads the Supabase inbox with your <strong className="font-semibold text-ink">service_role</strong>{" "}
-        key. The key stays in this browser tab only (session storage) and is never sent anywhere except your Supabase
-        project.
+        This unlocks the Supabase inbox and live publishing pipeline with your{" "}
+        <strong className="font-semibold text-ink">service_role</strong> key. The key stays in this browser tab only
+        (session storage) and is never sent anywhere except your Supabase project. Run{" "}
+        <code className="text-xs">supabase/pack_publish.sql</code> once if publishing tables are missing.
       </p>
 
       <div className="mt-6 space-y-4">

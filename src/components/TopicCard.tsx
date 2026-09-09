@@ -1,8 +1,28 @@
 import Link from "next/link";
 import type { Topic } from "@/content/schema";
+import type { LivePublicationMap } from "@/lib/pack-publish-api";
+import { resolvePublicationStatus } from "@/lib/publication";
+import { readPackReleaseFile } from "@/lib/pack-release";
 import { DraftBadge } from "./DraftBadge";
+import { PublicationBadge } from "./PublicationBadge";
 
-export function TopicCard({ topic, briefingDone }: { topic: Topic; briefingDone?: boolean }) {
+export function TopicCard({
+  topic,
+  briefingDone,
+  showPublicationStatus = false,
+  liveMap,
+}: {
+  topic: Topic;
+  briefingDone?: boolean;
+  showPublicationStatus?: boolean;
+  liveMap?: LivePublicationMap;
+}) {
+  const publicationStatus = resolvePublicationStatus(
+    readPackReleaseFile().entries[topic.id],
+    topic.reviewStatus,
+    liveMap,
+    topic.id,
+  );
   return (
     <Link
       href={`/year-1-maths/${topic.slug}`}
@@ -17,6 +37,10 @@ export function TopicCard({ topic, briefingDone }: { topic: Topic; briefingDone?
         </span>
         {briefingDone ? (
           <span className="rounded-full bg-[#d9e8df] px-2 py-0.5 font-semibold text-sage">Briefing done</span>
+        ) : showPublicationStatus ? (
+          <PublicationBadge status={publicationStatus} />
+        ) : publicationStatus === "live" ? (
+          <PublicationBadge status="live" />
         ) : (
           <DraftBadge status={topic.reviewStatus} />
         )}

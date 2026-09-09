@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { TopicExperience } from "@/components/TopicExperience";
+import { TopicPublicationGate } from "@/components/TopicPublicationGate";
 import { getTopicBySlug, year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
 
 type PageProps = {
@@ -22,5 +22,6 @@ export default async function TopicPage({ params }: PageProps) {
   const { slug } = await params;
   const topic = getTopicBySlug(slug);
   if (!topic) notFound();
-  return <TopicExperience topic={topic} topics={year1MathsTopics} />;
+
+  return <TopicPublicationGate topic={topic} topics={year1MathsTopics} />;
 }

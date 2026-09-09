@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TopicIndex } from "@/components/TopicIndex";
+import { LiveTopicIndexWithPublication } from "@/components/LiveTopicIndexWithPublication";
 import { Year1TopTabs } from "@/components/Year1TopTabs";
 import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
 
@@ -16,8 +16,8 @@ export default function Year1MathsPage() {
       </p>
       <h1 className="serif mt-3 text-4xl text-ink sm:text-5xl">Maths topics</h1>
       <p className="mt-4 max-w-2xl text-lg leading-8 text-ink-soft">
-        Pick the idea you want to sit with tonight. Use the tabs for the skills tree or glossary when you need a
-        step back or a word explained. Every topic is still a draft until a teacher has checked the method.
+        Pick a live lesson to sit with tonight. Use the tabs for the skills tree or glossary when you need a step
+        back or a word explained. Lessons in preparation stay visible here for transparency but are not live yet.
       </p>
       <div className="mt-10">
         <Year1TopTabs
@@ -28,7 +28,7 @@ export default function Year1MathsPage() {
               <p>Open a pack — summary, parent lesson, tasks, then a quick check.</p>
             </header>
           }
-          sheet={<TopicIndex topics={year1MathsTopics} />}
+          sheet={<LiveTopicIndexWithPublication topics={year1MathsTopics} />}
         />
       </div>
     </div>
