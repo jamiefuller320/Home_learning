@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
-import { useMaintainerPublishPoll } from "@/hooks/useMaintainerPublishPoll";
+import { LessonRevisionPanel } from "@/components/LessonRevisionPanel";
+import type { MaintainerSyncPoll } from "@/hooks/useMaintainerSyncPoll";
+import type { ProposedRevision } from "@/lib/learning-revisions";
 import type { MaintainerCredentials } from "@/lib/language-notes-admin";
 import {
   setRemoteActiveCandidate,
@@ -81,17 +83,44 @@ function WorkflowSteps({ view }: { view: PublishWorkflowView }) {
   );
 }
 
-export function PackPublishingPipeline({ credentials }: { credentials?: MaintainerCredentials | null }) {
+type RevisionControls = {
+  byTopic: Map<string, ProposedRevision[]>;
+  liveMode: boolean;
+  busyRevisionId: string | null;
+  decide: (revision: ProposedRevision, decision: "accepted" | "declined") => void | Promise<void>;
+  error?: string;
+  loading?: boolean;
+  lastFetchedAt?: string | null;
+};
+
+export function PackPublishingPipeline({
+  credentials,
+  syncPoll,
+  revisions,
+}: {
+  credentials?: MaintainerCredentials | null;
+  syncPoll?: MaintainerSyncPoll;
+  revisions?: RevisionControls;
+}) {
   const [releaseStore, setReleaseStore] = useState(() => readSessionPackReleaseStore());
   const [message, setMessage] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(releaseStore.activeCandidateId);
   const [busy, setBusy] = useState(false);
-  const { mergedFile, loading, error, lastFetchedAt, refresh } = useMaintainerPublishPoll(credentials ?? null);
+  const loading = syncPoll?.loading ?? false;
+  const error = syncPoll?.error ?? "";
+  const lastFetchedAt = syncPoll?.lastFetchedAt ?? null;
+  const refresh = syncPoll?.refresh ?? (async () => null);
+  const byTopic = revisions?.byTopic ?? new Map<string, ProposedRevision[]>();
+  const revisionsLiveMode = revisions?.liveMode ?? false;
+  const busyRevisionId = revisions?.busyRevisionId ?? null;
+  const decideRevision = revisions?.decide ?? (() => undefined);
+  const revisionError = revisions?.error ?? "";
+  const revisionsLoading = revisions?.loading ?? false;
 
   const mergedReleaseFile = useMemo(() => {
-    if (credentials) return mergedFile;
+    if (credentials && syncPoll) return syncPoll.mergedFile;
     return mergePackReleaseStores(readPackReleaseFile(), releaseStore);
-  }, [credentials, mergedFile, releaseStore]);
+  }, [credentials, syncPoll, releaseStore]);
 
   const workflows = useMemo(
     () => assessAllPublishWorkflows(year1MathsTopics, mergedReleaseFile),
@@ -99,15 +128,15 @@ export function PackPublishingPipeline({ credentials }: { credentials?: Maintain
   );
 
   useEffect(() => {
-    if (credentials && mergedFile.activeCandidateId) {
-      setExpandedId(mergedFile.activeCandidateId);
+    if (credentials && syncPoll?.mergedFile.activeCandidateId) {
+      setExpandedId(syncPoll.mergedFile.activeCandidateId);
     }
-  }, [credentials, mergedFile.activeCandidateId]);
+  }, [credentials, syncPoll?.mergedFile.activeCandidateId]);
 
   const activeCandidate = workflows.find((row) => row.isActiveCandidate);
   const liveCount = workflows.filter((row) => row.stage === "live").length;
   const inProgress = workflows.filter((row) => row.stage !== "live" && row.stage !== "suspended" && row.stage !== "editing");
-  const liveMode = Boolean(credentials);
+  const liveMode = syncPoll?.liveMode ?? Boolean(credentials);
 
   function exportPackRelease() {
     downloadJson("pack-release.json", buildPackReleaseExport(readPackReleaseFile(), releaseStore));
@@ -485,14 +514,14 @@ export function PackPublishingPipeline({ credentials }: { credentials?: Maintain
           One pack at a time: approve the lesson (auto-generates a script), approve the script (queues video
           generation), approve the video, final check, then release live. When maintainer access is unlocked, state
           syncs to Supabase and the public lesson list polls every 30 seconds — no redeploy needed for release or
-          suspend.
+          suspend. Pending pack learning revisions appear on each lesson tile with live accept/decline when unlocked.
         </p>
         <p className="mt-2 text-sm text-ink-soft">
           {liveMode ? (
             <>
               <span className="font-semibold text-teal">Live via Supabase</span>
               {lastFetchedAt ? ` · synced ${new Date(lastFetchedAt).toLocaleTimeString("en-GB")}` : ""}
-              {loading ? " · refreshing…" : ""}
+              {loading || revisionsLoading ? " · refreshing…" : ""}
             </>
           ) : (
             <span>Offline mode — unlock maintainer access below the tabs to sync live.</span>
@@ -503,7 +532,11 @@ export function PackPublishingPipeline({ credentials }: { credentials?: Maintain
         </p>
       </div>
 
-      {error ? <p className="rounded-2xl border border-clay/30 bg-[#f6e4e0] px-4 py-3 text-sm text-ink">{error}</p> : null}
+      {error || revisionError ? (
+        <p className="rounded-2xl border border-clay/30 bg-[#f6e4e0] px-4 py-3 text-sm text-ink">
+          {error || revisionError}
+        </p>
+      ) : null}
 
       <div className="flex flex-wrap gap-3 text-sm">
         <button type="button" className="rounded-full border border-rule px-4 py-2 hover:border-teal" onClick={exportPackRelease}>
@@ -522,7 +555,12 @@ export function PackPublishingPipeline({ credentials }: { credentials?: Maintain
             Reset local session
           </button>
         ) : (
-          <button type="button" className="underline decoration-rule" disabled={loading} onClick={() => void refresh()}>
+          <button
+            type="button"
+            className="underline decoration-rule"
+            disabled={loading || revisionsLoading}
+            onClick={() => void refresh()}
+          >
             Refresh from Supabase
           </button>
         )}
@@ -533,6 +571,7 @@ export function PackPublishingPipeline({ credentials }: { credentials?: Maintain
       <div className="space-y-4">
         {workflows.map((view) => {
           const expanded = expandedId === view.topicId;
+          const topicRevisions = byTopic.get(view.topicId) ?? [];
           return (
             <article key={view.topicId} className={`rounded-2xl border p-5 ${stageStyles(view.stage)}`}>
               <div className="flex flex-wrap items-start justify-between gap-3">
@@ -566,6 +605,14 @@ export function PackPublishingPipeline({ credentials }: { credentials?: Maintain
                   ))}
                 </ul>
               ) : null}
+
+              <LessonRevisionPanel
+                revisions={topicRevisions}
+                compact={!expanded}
+                liveMode={revisionsLiveMode}
+                busyRevisionId={busyRevisionId}
+                onDecide={decideRevision}
+              />
 
               {expanded ? (
                 <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
