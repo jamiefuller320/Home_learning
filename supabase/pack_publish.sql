@@ -1,8 +1,6 @@
 -- Pack publishing workflow — live state shared between maintainers and the public site.
--- Run in the Supabase SQL editor after language_notes.sql.
---
--- Public (anon): read lesson_publication table only — which lessons are live or suspended.
--- Maintainers (service_role): read/write full workflow state on pack_publish_state.
+-- Run the WHOLE file in Supabase SQL editor (after language_notes.sql).
+-- Safe to re-run: uses IF NOT EXISTS / OR REPLACE throughout.
 
 create table if not exists public.pack_publish_meta (
   id int primary key default 1 check (id = 1),
@@ -41,7 +39,9 @@ create table if not exists public.pack_publish_state (
   restored_at timestamptz
 );
 
--- Public read model (table, not view — Supabase RLS requires a real table).
+-- Drop old view if an earlier script version created one.
+drop view if exists public.lesson_publication;
+
 create table if not exists public.lesson_publication (
   topic_id text primary key references public.pack_publish_state (topic_id) on delete cascade,
   released_at timestamptz,
@@ -73,7 +73,6 @@ after insert or update on public.pack_publish_state
 for each row
 execute function public.sync_lesson_publication();
 
--- Back-fill if pack_publish_state already has rows.
 insert into public.lesson_publication (topic_id, released_at, suspended_at, updated_at)
 select topic_id, released_at, suspended_at, updated_at
 from public.pack_publish_state
