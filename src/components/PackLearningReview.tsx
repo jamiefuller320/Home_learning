@@ -7,6 +7,7 @@ import { presentationLearnings } from "@/content/presentation-learnings";
 import { LessonRevisionPanel } from "@/components/LessonRevisionPanel";
 import { PackPublishingPipeline } from "@/components/PackPublishingPipeline";
 import { useLearningRevisionDecisions } from "@/hooks/useLearningRevisionDecisions";
+import { useMaintainerSyncPoll } from "@/hooks/useMaintainerSyncPoll";
 import type { MaintainerCredentials } from "@/lib/language-notes-admin";
 import { clearPendingApply } from "@/lib/learning-decisions-store";
 import { learningTitles, type ProposedRevision } from "@/lib/learning-revisions";
@@ -25,6 +26,7 @@ export function PackLearningReview({ credentials }: { credentials?: MaintainerCr
   const [selectedTopicId, setSelectedTopicId] = useState<string>("all");
   const [message, setMessage] = useState("");
 
+  const syncPoll = useMaintainerSyncPoll(credentials ?? null);
   const {
     liveMode,
     pending,
@@ -37,7 +39,7 @@ export function PackLearningReview({ credentials }: { credentials?: MaintainerCr
     error,
     loading,
     lastFetchedAt,
-  } = useLearningRevisionDecisions(credentials ?? null);
+  } = useLearningRevisionDecisions(credentials ?? null, syncPoll);
 
   const catalog = useMemo(() => learningTitles(), []);
   const visible: ProposedRevision[] =
@@ -94,6 +96,7 @@ export function PackLearningReview({ credentials }: { credentials?: MaintainerCr
 
       <PackPublishingPipeline
         credentials={credentials}
+        syncPoll={syncPoll}
         revisions={{
           byTopic,
           liveMode,

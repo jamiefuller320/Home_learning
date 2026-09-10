@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
 import { LessonRevisionPanel } from "@/components/LessonRevisionPanel";
-import { useMaintainerPublishPoll } from "@/hooks/useMaintainerPublishPoll";
+import type { MaintainerSyncPoll } from "@/hooks/useMaintainerSyncPoll";
 import type { ProposedRevision } from "@/lib/learning-revisions";
 import type { MaintainerCredentials } from "@/lib/language-notes-admin";
 import {
@@ -95,28 +95,32 @@ type RevisionControls = {
 
 export function PackPublishingPipeline({
   credentials,
+  syncPoll,
   revisions,
 }: {
   credentials?: MaintainerCredentials | null;
+  syncPoll?: MaintainerSyncPoll;
   revisions?: RevisionControls;
 }) {
   const [releaseStore, setReleaseStore] = useState(() => readSessionPackReleaseStore());
   const [message, setMessage] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(releaseStore.activeCandidateId);
   const [busy, setBusy] = useState(false);
-  const { mergedFile, loading, error, lastFetchedAt, refresh } = useMaintainerPublishPoll(credentials ?? null);
+  const loading = syncPoll?.loading ?? false;
+  const error = syncPoll?.error ?? "";
+  const lastFetchedAt = syncPoll?.lastFetchedAt ?? null;
+  const refresh = syncPoll?.refresh ?? (async () => null);
   const byTopic = revisions?.byTopic ?? new Map<string, ProposedRevision[]>();
   const revisionsLiveMode = revisions?.liveMode ?? false;
   const busyRevisionId = revisions?.busyRevisionId ?? null;
   const decideRevision = revisions?.decide ?? (() => undefined);
   const revisionError = revisions?.error ?? "";
   const revisionsLoading = revisions?.loading ?? false;
-  const revisionsFetchedAt = revisions?.lastFetchedAt ?? null;
 
   const mergedReleaseFile = useMemo(() => {
-    if (credentials) return mergedFile;
+    if (credentials && syncPoll) return syncPoll.mergedFile;
     return mergePackReleaseStores(readPackReleaseFile(), releaseStore);
-  }, [credentials, mergedFile, releaseStore]);
+  }, [credentials, syncPoll, releaseStore]);
 
   const workflows = useMemo(
     () => assessAllPublishWorkflows(year1MathsTopics, mergedReleaseFile),
@@ -124,15 +128,15 @@ export function PackPublishingPipeline({
   );
 
   useEffect(() => {
-    if (credentials && mergedFile.activeCandidateId) {
-      setExpandedId(mergedFile.activeCandidateId);
+    if (credentials && syncPoll?.mergedFile.activeCandidateId) {
+      setExpandedId(syncPoll.mergedFile.activeCandidateId);
     }
-  }, [credentials, mergedFile.activeCandidateId]);
+  }, [credentials, syncPoll?.mergedFile.activeCandidateId]);
 
   const activeCandidate = workflows.find((row) => row.isActiveCandidate);
   const liveCount = workflows.filter((row) => row.stage === "live").length;
   const inProgress = workflows.filter((row) => row.stage !== "live" && row.stage !== "suspended" && row.stage !== "editing");
-  const liveMode = Boolean(credentials);
+  const liveMode = syncPoll?.liveMode ?? Boolean(credentials);
 
   function exportPackRelease() {
     downloadJson("pack-release.json", buildPackReleaseExport(readPackReleaseFile(), releaseStore));
@@ -516,10 +520,7 @@ export function PackPublishingPipeline({
           {liveMode ? (
             <>
               <span className="font-semibold text-teal">Live via Supabase</span>
-              {lastFetchedAt ? ` · publishing synced ${new Date(lastFetchedAt).toLocaleTimeString("en-GB")}` : ""}
-              {revisionsFetchedAt
-                ? ` · revisions synced ${new Date(revisionsFetchedAt).toLocaleTimeString("en-GB")}`
-                : ""}
+              {lastFetchedAt ? ` · synced ${new Date(lastFetchedAt).toLocaleTimeString("en-GB")}` : ""}
               {loading || revisionsLoading ? " · refreshing…" : ""}
             </>
           ) : (
@@ -554,7 +555,12 @@ export function PackPublishingPipeline({
             Reset local session
           </button>
         ) : (
-          <button type="button" className="underline decoration-rule" disabled={loading} onClick={() => void refresh()}>
+          <button
+            type="button"
+            className="underline decoration-rule"
+            disabled={loading || revisionsLoading}
+            onClick={() => void refresh()}
+          >
             Refresh from Supabase
           </button>
         )}
