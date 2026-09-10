@@ -7,6 +7,7 @@ import {
   verifyMaintainerCredentials,
   type MaintainerCredentials,
 } from "@/lib/language-notes-admin";
+import { verifyLearningRevisionTables } from "@/lib/learning-revisions-admin";
 import { verifyPublishTables } from "@/lib/pack-publish-admin";
 
 export function MaintainerUnlock({ onUnlock }: { onUnlock: (credentials: MaintainerCredentials) => void }) {
@@ -28,6 +29,7 @@ export function MaintainerUnlock({ onUnlock }: { onUnlock: (credentials: Maintai
     try {
       await verifyMaintainerCredentials(credentials);
       await verifyPublishTables(credentials);
+      await verifyLearningRevisionTables(credentials);
       storeCredentials(credentials);
       onUnlock(credentials);
     } catch (submitError) {
@@ -44,7 +46,8 @@ export function MaintainerUnlock({ onUnlock }: { onUnlock: (credentials: Maintai
         This unlocks the Supabase inbox and live publishing pipeline with your{" "}
         <strong className="font-semibold text-ink">service_role</strong> key. The key stays in this browser tab only
         (session storage) and is never sent anywhere except your Supabase project. Run{" "}
-        <code className="text-xs">supabase/pack_publish.sql</code> once if publishing tables are missing.
+        <code className="text-xs">supabase/pack_publish.sql</code> and{" "}
+        <code className="text-xs">supabase/learning_revision_decisions.sql</code> once if tables are missing.
       </p>
 
       <div className="mt-6 space-y-4">
