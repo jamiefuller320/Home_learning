@@ -27,9 +27,9 @@ export const numbersTo20: Topic = {
     "Children can chant to 20 and still not know that 8 sits closer to 10 than to 0. That ‘where does it live?’ sense is what school means by the linear number system.",
   parentBriefing: {
     inPlainEnglish:
-      "A number line is a picture of order and distance. 0 is at one end, 20 at the other, and 10 sits in the middle. ‘One more’ is one step right. ‘One less’ is one step left. The point is not pretty handwriting. It is knowing that 12 is after 11 and a bit past 10.",
+      "A number line is a picture of order and distance. 0 is at one end, 20 at the other, and 10 sits in the middle. ‘One more’ is one step right. ‘One less’ is one step left. Picture a straight path with evenly spaced posts — the digits can look bigger or smaller, but each step along the path is the same size. The point is not pretty handwriting. It is knowing that 12 is after 11 and a bit past 10.",
     howSchoolTeachesIt:
-      "Teachers often start with a number track (boxes with a number in each) and move to a number line (marks on a line). They will ask children to place 0, 10 and 20 first, then drop other numbers in. Comparing uses words like more, fewer, and less — not only plus and minus.",
+      "Teachers often start with a number track — a row of boxes, one number sitting in each box — then move to a number line, where marks sit on an open line instead of in boxes. They will ask children to place 0, 10 and 20 first, then drop other numbers in. Comparing uses words like more, fewer, and less — not only plus and minus.",
     sayThis: [
       {
         prompt: "If 0 is here and 20 is here, where would 10 sit?",
@@ -57,16 +57,18 @@ export const numbersTo20: Topic = {
       {
         misconception: "They think bigger numbers should take more space, so 18 is drawn huge and 2 is tiny.",
         why: "They are mixing ‘how many’ with ‘where it sits’.",
-        instead: "Keep the marks evenly spaced. The number name changes; the step size does not.",
+        instead:
+          "Keep the marks evenly spaced. The digits can look bigger or smaller; the gap between each mark stays the same.",
       },
       {
         misconception: "They can say one more, but point to the wrong side of the line.",
-        why: "Left and right on a line is a new code.",
+        why: "Knowing which way is “more” on a line is a new skill — left toward 0, right toward 20 — not the same as higher or lower piles.",
         instead:
           "Make a line on the floor. Put a shoe at the left end for 0 and a shoe at the right end for 20. Walk along it together.",
       },
     ],
-    youAreReadyWhen: "You can draw a rough 0–20 line, forget to write 8, and know roughly where it belongs.",
+    youAreReadyWhen:
+      "You can draw a rough 0–20 line without filling every number in order, and still know roughly where 8 belongs.",
   },
   homePack: {
     setup:
@@ -110,7 +112,8 @@ export const numbersTo20: Topic = {
       },
     ],
     stretch: "Ask them to place 7 and 17 and talk about what is the same about the words and what is different about the place.",
-    stopRule: "Twelve minutes is enough. If the line turns into a drawing lesson, fold the paper and try placing only 0, 10 and 20 tomorrow.",
+    stopRule:
+      "Twelve minutes is enough. If the line turns into a drawing lesson, fold the paper and try something easier tomorrow: place only 0, 10 and 20.",
   },
   reviewStatus: "draft",
 };

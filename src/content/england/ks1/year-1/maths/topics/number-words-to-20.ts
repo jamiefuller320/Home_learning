@@ -13,7 +13,7 @@ export const numberWordsTo20: Topic = {
   subject: "maths",
   strand: "Number and place value",
   prerequisites: ["numbers-to-20"],
-  glossaryTerms: ["number-word"],
+  glossaryTerms: ["number-word", "numeral"],
   parentMinutes: 6,
   homeMinutes: 12,
   householdItems: [
@@ -28,12 +28,12 @@ export const numberWordsTo20: Topic = {
     "School expects children to read and write number words as well as numerals. The tricky ones are not one to ten — they are the teens, where the word order (fourteen) does not match how we say the digits (one, then four).",
   parentBriefing: {
     inPlainEnglish:
-      "A numeral is the symbol: 14. A number word is how we say and write it in letters: fourteen. Your child probably knows the chant to twenty. This topic is about matching a handful of numbers they meet in books and on worksheets to the words school uses.",
+      "A numeral is the symbol: 14. A\u00a0number\u00a0word is how we say and write it in letters: fourteen. Your child probably knows the chant to twenty. This topic is about matching a handful of numbers they meet in books and on worksheets to the words school uses.",
     howSchoolTeachesIt:
-      "Teachers mix numerals and words on the same card, number track, or line. They highlight the teens pattern: thirteen, fourteen, fifteen… all end in -teen and mean ‘three and ten’, ‘four and ten’, and so on. They do not expect perfect spelling overnight — recognising the word when they see it matters first.",
+      "Teachers mix numerals and words on the same card, number\u00a0track, or line. They highlight the teens pattern: thirteen, fourteen, fifteen… all end in -teen and mean ‘three and ten’, ‘four and ten’, and so on. They do not expect perfect spelling overnight — recognising the word when they see it matters first.",
     sayThis: [
       {
-        prompt: "This says fourteen. Can you find 14 to match?",
+        prompt: "This says fourteen. Can you find the number 14 to match?",
         listenFor: "14 — the numeral that matches fourteen.",
       },
       "Eleven and twelve are special — they do not follow the -teen pattern. Let’s learn those two first.",
@@ -49,7 +49,8 @@ export const numberWordsTo20: Topic = {
       {
         misconception: "They write 41 for fourteen because they hear ‘four’ then ‘teen’.",
         why: "The spoken order feels like tens then ones, but the numeral is the other way round.",
-        instead: "Lay out 14 objects. Say “fourteen is one ten and four ones” while they count. Then write 14 together.",
+        instead:
+          "Lay out 14 objects. Say “fourteen — here’s the 1 for ten, and here’s the 4” while they count. Then write 14 together.",
       },
       {
         misconception: "They know the counting song but cannot pick out “sixteen” on a page.",
@@ -61,14 +62,15 @@ export const numberWordsTo20: Topic = {
       "You can show three teen words (for example eleven, fourteen, seventeen) and your child can match each to the right numeral with objects nearby.",
   },
   homePack: {
-    setup: "Write five number words on sticky notes: eleven, twelve, fourteen, sixteen, and eighteen. Write the matching numerals on five more notes.",
+    setup:
+      "Write these five words on sticky notes: eleven, twelve, fourteen, sixteen, and eighteen. Write the matching numerals on five more notes.",
     activity: {
       title: "Word and numeral pairs",
       steps: [
-        "Start with eleven and twelve only. Match word to numeral. Make a pile of 11 objects and 12 objects to check.",
+        "Start with eleven and twelve only. Put the word card next to the matching numeral. Build a pile of 11 objects and a pile of 12, then check each pair with the piles.",
         "Add fourteen. Count 14 together, then match the word card to 14.",
         "Mix the three pairs face up. Ask your child to find a match. You find one too, so it feels like a game.",
-        "If that is steady, add sixteen and eighteen one at a time with objects to check.",
+        "If that is steady, add the word sixteen next (with objects to check), then eighteen the same way — one new pair at a time, not both at once.",
         "Finish by shuffling all five pairs and seeing how many they can match without counting every time.",
       ],
       tip: "Leave tricky spellings on the card. They can copy the word; the job tonight is linking word, numeral, and amount.",
@@ -94,7 +96,8 @@ export const numberWordsTo20: Topic = {
       },
     ],
     stretch: "Write nineteen and 19. Talk about “nine and ten”. Only if the five pairs already feel easy.",
-    stopRule: "Stop after five words sit comfortably. Teens arrive in school over weeks — one calm evening is enough.",
+    stopRule:
+      "Stop after five words sit comfortably. School introduces the -teen words over weeks — one calm evening is enough.",
   },
   reviewStatus: "draft",
 };

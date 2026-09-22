@@ -116,6 +116,16 @@ export const glossaryTerms: GlossaryTerm[] = [
     aliases: ["number words", "in words"],
     plainEnglish:
       "How we write a number using letters — fourteen, not 14. School expects children to link teen words to numerals, especially eleven, twelve, and the -teen numbers.",
+    seeAlso: ["numeral"],
+    relatedTopics: ["number-words-to-20"],
+  },
+  {
+    id: "numeral",
+    term: "numeral",
+    aliases: ["numerals"],
+    plainEnglish:
+      "The digit symbol for a number — 14, not fourteen. School asks children to read and write both the numeral and the number word.",
+    seeAlso: ["number-word"],
     relatedTopics: ["number-words-to-20"],
   },
   {

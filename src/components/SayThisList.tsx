@@ -29,7 +29,7 @@ export function SayThisList({ items }: { items: SayThisItem[] }) {
               <GlossaryText text={prompt} />
               {showListenFor && listenFor ? (
                 <p className="mt-1 text-sm text-ink-soft text-pretty">
-                  <span className="font-semibold text-ink">Might sound like: </span>
+                  <span className="font-semibold text-ink">Should sound like: </span>
                   <GlossaryText text={listenFor} />
                 </p>
               ) : null}

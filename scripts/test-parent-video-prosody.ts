@@ -9,7 +9,7 @@ import {
 import { PARENT_VIDEO_TTS } from "../src/lib/parent-video-voice";
 
 assert.equal(shapeProsody("Number facts within 10", "title"), "Number facts within 10.");
-assert.equal(shapeProsody("Here’s the idea", "section"), "Here’s the idea.");
+assert.equal(shapeProsody("Here is the idea", "section"), "Here is the idea.");
 assert.equal(shapeProsody("Follow the school.", "aside"), "Follow the school…");
 assert.equal(
   shapeProsody("Then you work from the written page, beside your child.", "aside"),

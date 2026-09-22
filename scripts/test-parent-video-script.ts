@@ -48,13 +48,13 @@ assert.ok(spoken.toLowerCase().includes(factsWithin10.parentBriefing.youAreReady
 assert.match(spoken, /fifteen minutes.*three number bonds.*plenty/i);
 assert.match(spoken, /How many more to make 10/i);
 assert.match(spoken, /Don.?t run the session from this film alone/i);
-assert.match(spoken, /Here.?s what you want to see/i);
+assert.match(spoken, /Here is what you want to see/i);
 assert.match(spoken, /2 empty spaces/i);
 assert.ok(!/worksheet brand/i.test(spoken), "worksheet-brand aside should not be filmed");
 assert.ok(!/^Looking for:/m.test(spoken), "UI chrome Looking for should not be filmed");
 
 // Example sums must be separate clips, not one rushed list.
-assert.match(spoken, /Such as:\s*6 and 4 make 10/i);
+assert.match(spoken, /Such as…\s*\n\s*6 and 4 make 10/i);
 assert.match(spoken, /Or:\s*7 take away 2 equals 5/i);
 assert.ok(
   spoken.split("\n").some((line) => /^(Such as:\s*)?6 plus 4\.?$/i.test(line.trim())),
@@ -80,6 +80,24 @@ const openBeats = script.scenes.find((scene) => scene.id === "open")?.beats.map(
 assert.ok(openBeats.some((line) => /^Not a film for your child/i.test(line)));
 assert.ok(openBeats.some((line) => /^Follow the school/i.test(line)));
 
+const draftClash = script.scenes
+  .find((scene) => scene.id === "open")
+  ?.beats.find((beat) => /clashes with how your school teaches/i.test(beat.spoken));
+assert.ok(draftClash);
+assert.ok(
+  draftClash.pauseAfter <= 0.3,
+  "school-clash aside should not leave a long empty gap before Follow the school",
+);
+
+const tonightSpoken =
+  script.scenes.find((scene) => scene.id === "tonight")?.beats.map((beat) => beat.spoken).join("\n") ?? "";
+assert.match(tonightSpoken, /Tonight.?s activity is Make 10 in two colours/i);
+assert.match(tonightSpoken, /First, fill 6 spaces/i);
+assert.match(spoken, /written instructions/i);
+assert.ok(!/open that page/i.test(spoken));
+assert.ok(!/\bHere.?s what you/i.test(spoken), "avoid Here’s for TTS (here-ess)");
+assert.ok(spoken.includes("Here is what you want to see") || spoken.includes("Here is what you are aiming for"));
+
 // Say-this and avoid lists stay on the written pack for live use beside the child.
 for (const line of sayThisLines(factsWithin10)) {
   assert.ok(!spoken.includes(forTheEar(line)) && !spoken.includes(line), `sayThis should not be filmed: ${line}`);
@@ -92,7 +110,7 @@ assert.equal(forTheEar("6 + 4 = 10 or 7 − 2 = 5"), "6 and 4 make 10 or 7 take 
 assert.equal(forTheEar("They can do 3 + 2 with objects."), "They can do 3 plus 2 with objects.");
 assert.deepEqual(
   splitExampleSums("A number fact is a small truth such as 6 + 4 = 10 or 7 − 2 = 5."),
-  ["A number fact is a small truth.", "Such as: 6 and 4 make 10.", "Or: 7 take away 2 equals 5."],
+  ["A number fact is a small truth.", "Such as…", "6 and 4 make 10.", "Or: 7 take away 2 equals 5."],
 );
 assert.deepEqual(
   splitExampleSums("They will teach families of facts together: 6 + 4, 4 + 6, 10 − 4, 10 − 6."),
@@ -102,7 +120,8 @@ assert.deepEqual(
   splitExampleSums("They will teach families of facts together, such as: 6 + 4, 4 + 6, 10 − 4, 10 − 6."),
   [
     "They will teach families of facts together.",
-    "Such as: 6 plus 4.",
+    "Such as…",
+    "6 plus 4.",
     "Or: 4 plus 6.",
     "Or: 10 take away 4.",
     "Or: 10 take away 6.",

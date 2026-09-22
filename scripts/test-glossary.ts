@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { year1MathsTopics } from "../src/content/england/ks1/year-1/maths/topics";
 import { countingWithin100 } from "../src/content/england/ks1/year-1/maths/topics/counting-within-100";
 import { factsWithin10 } from "../src/content/england/ks1/year-1/maths/topics/facts-within-10";
+import { numberWordsTo20 } from "../src/content/england/ks1/year-1/maths/topics/number-words-to-20";
 import { partsOf10 } from "../src/content/england/ks1/year-1/maths/topics/parts-of-10";
 import { halves } from "../src/content/england/ks1/year-1/maths/topics/halves";
 import { plusMinusEquals } from "../src/content/england/ks1/year-1/maths/topics/plus-minus-equals";
@@ -77,6 +78,14 @@ assert.equal(introducingTopicId("ten-frame", year1MathsTopics), "facts-within-10
 assert.equal(introducingTopicId("part-whole", year1MathsTopics), "parts-of-10");
 assert.equal(introducingTopicId("number-bond", year1MathsTopics), "parts-of-10");
 assert.equal(introducingTopicId("half", year1MathsTopics), "halves");
+assert.equal(introducingTopicId("numeral", year1MathsTopics), "number-words-to-20");
+assert.equal(introducingTopicId("number-word", year1MathsTopics), "number-words-to-20");
+
+assert.ok(presentationLearnings.some((learning) => learning.id === "glossary-popup-dismiss"));
+assert.match(
+  numberWordsTo20.parentBriefing.inPlainEnglish,
+  /A\u00a0number\u00a0word is/,
+);
 
 const firstTenFrame = firstIntroductionInLesson(factsWithin10, "ten-frame");
 assert.ok(firstTenFrame);

@@ -36,7 +36,7 @@ export const presentationLearnings: PresentationLearning[] = [
     id: "glossary-inline-everyday",
     title: "Glossary links stay inline and skip everyday words",
     principle:
-      "Auto-linked glossary terms must stay inside the sentence. details/summary are display:inline so a match cannot put line breaks between neighbouring words. Everyday adjectives such as “short” and “tall” are not aliases — they were splitting “a short walk” on Tasks → Set up. Keep that three-word phrase together with non-breaking spaces so pretty wrapping cannot park “a” or “walk” on its own line.",
+      "Auto-linked glossary terms must stay inside the sentence. details/summary are display:inline so a match cannot put line breaks between neighbouring words. Everyday adjectives such as “short” and “tall” are not aliases — they were splitting “a short walk” on Tasks → Set up. Keep that three-word phrase together with non-breaking spaces so pretty wrapping cannot park “a” or “walk” on its own line. The same NBSP trick holds “number word” / “number track” against the next word when a chip would otherwise orphan a fragment.",
     appliedIn: [
       "src/components/GlossaryLink.tsx",
       "src/components/GlossaryText.tsx",
@@ -44,7 +44,21 @@ export const presentationLearnings: PresentationLearning[] = [
       "src/content/glossary/index.ts",
       "src/content/glossary/terms.ts",
       "src/content/england/ks1/year-1/maths/topics/counting-within-100.ts",
+      "src/content/england/ks1/year-1/maths/topics/number-words-to-20.ts",
     ],
+    sourceNoteIds: [
+      "c93aa1e6-33bb-405b-8047-e1d8097f5c09",
+      "408f469a-15e7-4b14-93d6-724455558145",
+      "57490933-4e2e-42e2-85ce-e3e0eb3a90ac",
+    ],
+  },
+  {
+    id: "glossary-popup-dismiss",
+    title: "Glossary popups close on outside click or Escape",
+    principle:
+      "A glossary chip popup must not stick open after the parent has read it. Close on pointer-down outside the details, on Escape, and when another glossary chip opens.",
+    appliedIn: ["src/components/GlossaryLink.tsx"],
+    sourceNoteIds: ["2389a529-c28f-462c-9f9a-ccf4d3eacb15"],
   },
   {
     id: "glossary-introduce-then-link",

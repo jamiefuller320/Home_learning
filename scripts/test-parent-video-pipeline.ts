@@ -29,7 +29,7 @@ assert.equal(countingDelivery.blockingCount, 0, "counting-within-100 spoken deli
 assert.ok(!liveDelivery.findings.some((item) => item.code === "worksheet-brand"));
 assert.ok(!spokenHas(live, /worksheet brand/i));
 assert.ok(!spokenHas(live, /^Looking for:/m));
-assert.ok(spokenHas(live, /Here.?s what you want to see/i) || spokenHas(live, /label for that idea/i));
+assert.ok(spokenHas(live, /Here is what you want to see/i) || spokenHas(live, /label for that idea/i));
 
 // The awkward paper-aside that sounded wrong aloud must still be caught.
 const awkward: ParentVideoScript = {
