@@ -39,7 +39,7 @@ export const countingWithin100: Topic = {
         prompt: "Can you count back from 20? I’ll do the first two with you: 20, 19…",
         listenFor: "18, then 17, 16… stepping down one at a time.",
       },
-      "Touch each piece as you say the number. When they are all in the bowl, we stop.",
+      "Move each piece into the bowl as you say its number — one move, one word. When they are all in, we stop.",
       "If you lose your place, we can start that bit again. That is part of counting.",
     ],
     avoidThis: [
