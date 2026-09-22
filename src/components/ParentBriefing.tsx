@@ -1,10 +1,18 @@
 import { GlossaryText } from "@/components/GlossaryText";
+import { NumberLineGuide } from "@/components/NumberLineGuide";
 import { PackProse } from "@/components/PackProse";
 import { SayThisList } from "@/components/SayThisList";
 import type { Topic } from "@/content/schema";
 
 export function ParentBriefing({ topic }: { topic: Topic }) {
   const { parentBriefing } = topic;
+  const parentLineGuide = topic.homePack.activity.numberLine
+    ? {
+        ...topic.homePack.activity.numberLine,
+        caption:
+          "A number line: marks on an open line (not boxes). A number track would put each number in its own box instead.",
+      }
+    : null;
 
   return (
     <section className="space-y-8">
@@ -20,6 +28,7 @@ export function ParentBriefing({ topic }: { topic: Topic }) {
         <PackProse className="mt-3 text-lg leading-8 text-ink-soft">
           <GlossaryText text={parentBriefing.howSchoolTeachesIt} />
         </PackProse>
+        {parentLineGuide ? <NumberLineGuide guide={parentLineGuide} /> : null}
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">

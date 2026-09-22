@@ -68,14 +68,13 @@ export const SCRIPT_LINKS = {
     "If anything clashes with how your school teaches…",
     "Follow the school.",
   ],
-  plain: ["Here’s the idea."],
-  school: ["And here’s how school typically teaches it."],
-  mix: ["Here’s one mix-up to watch for."],
-  tonight: [
-    "Tonight’s activity.",
+  plain: ["Here is the idea."],
+  school: ["And here is how school typically teaches it."],
+  mix: ["Here is one mix-up to watch for."],
+  tonightOutline: [
     "This is the task outline — look at the written instructions for the full task.",
   ],
-  criteria: ["Here’s what you’re aiming for."],
+  criteria: ["Here is what you are aiming for."],
   page: [
     "When you’re ready to sit down together…",
     "Open the written page.",
@@ -84,7 +83,7 @@ export const SCRIPT_LINKS = {
   ],
   youtube: [
     "Found this on YouTube?",
-    "Use the link in the video description to open that page.",
+    "Use the link in the video description for the written instructions.",
   ],
   close: [
     "If you teach Year 1…",
@@ -166,8 +165,8 @@ export function splitExampleSums(sentence: string): string[] {
       const facts = parts
         .map((part) => part.trim().replace(/[.!?]+$/, ""))
         .filter((part) => part && MATH_FACT.test(part))
-        .map((fact, index) => endSentence(index === 0 ? `Such as: ${fact}` : `Or: ${fact}`));
-      if (facts.length >= 2) return [lead, ...facts].filter(Boolean);
+        .map((fact, index) => endSentence(index === 0 ? fact : `Or: ${fact}`));
+      if (facts.length >= 2) return [lead, "Such as…", ...facts].filter(Boolean);
     }
   }
 
@@ -229,9 +228,11 @@ function beatsFromClips(
   extras: Partial<VideoBeat> = {},
 ): VideoBeat[] {
   return clips.map((clip) => {
-    const isExample = /^(Such as:|Or:)/i.test(clip) || MATH_FACT.test(clip);
-    const role: ProsodyRole = isExample ? "example" : prosody;
-    return makeBeat(clip, isExample ? PAUSE.item : pauseAfter, role, extras);
+    const isSuchAsCue = /^Such as/i.test(clip) && !MATH_FACT.test(clip);
+    const isExample = /^(Or:)/i.test(clip) || MATH_FACT.test(clip);
+    const role: ProsodyRole = isSuchAsCue ? "aside" : isExample ? "example" : prosody;
+    const gap = isSuchAsCue ? PAUSE.aside : isExample ? PAUSE.item : pauseAfter;
+    return makeBeat(clip, gap, role, extras);
   });
 }
 
@@ -249,9 +250,10 @@ function linkBeats(
   pauseAfter: number,
   prosody: ProsodyRole,
   extras: Partial<VideoBeat> = {},
+  midPause: number = PAUSE.aside,
 ): VideoBeat[] {
   return lines.map((line, index) =>
-    makeBeat(line, index === lines.length - 1 ? pauseAfter : PAUSE.aside, prosody, extras),
+    makeBeat(line, index === lines.length - 1 ? pauseAfter : midPause, prosody, extras),
   );
 }
 
@@ -272,7 +274,7 @@ function checkBeats(topic: Topic): VideoBeat[] {
   return [
     ...linkBeats(["One check from the page."], PAUSE.aside, "aside", { guide: "listen" }),
     ...beatsFromClips(spokenClips(item.prompt), PAUSE.item, "key", { guide: "listen" }),
-    ...linkBeats(["Here’s what you want to see."], PAUSE.aside, "key", { guide: "listen" }),
+    ...linkBeats(["Here is what you want to see."], PAUSE.aside, "key", { guide: "listen" }),
     ...beatsFromClips(spokenClips(item.looksLike), PAUSE.item, "key", { guide: "listen" }),
   ];
 }
@@ -491,7 +493,7 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
           ...linkBeats([SCRIPT_LINKS.open[0]], PAUSE.aside, "section", { guide: "listen" }),
           ...linkBeats([SCRIPT_LINKS.open[1]], PAUSE.aside, "key", { guide: "listen" }),
           ...linkBeats(SCRIPT_LINKS.open.slice(2), PAUSE.sentence, "teach", { guide: "listen" }),
-          ...linkBeats(SCRIPT_LINKS.draft, PAUSE.sentence, "aside", { guide: "listen" }),
+          ...linkBeats(SCRIPT_LINKS.draft, PAUSE.sentence, "aside", { guide: "listen" }, PAUSE.short),
         ],
         PAUSE.section,
       ),
@@ -507,12 +509,13 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
             const clips = spokenClips(line);
             const isLast = index === plainLines.length - 1;
             return clips.map((clip, clipIndex) => {
-              const isExample = MATH_FACT.test(clip) || /^(Such as:|Or:)/i.test(clip);
+              const isSuchAsCue = /^Such as/i.test(clip) && !MATH_FACT.test(clip);
+              const isExample = /^(Or:)/i.test(clip) || MATH_FACT.test(clip);
               const showDiagram = Boolean(isLast && clipIndex === clips.length - 1 && diagrams.plainLast);
               return makeBeat(
                 clip,
-                isExample ? PAUSE.item : PAUSE.sentence,
-                isExample ? "example" : "teach",
+                isSuchAsCue ? PAUSE.aside : isExample ? PAUSE.item : PAUSE.sentence,
+                isSuchAsCue ? "aside" : isExample ? "example" : "teach",
                 {
                   guide: showDiagram ? ("point" as const) : ("present" as const),
                   visual: showDiagram ? diagrams.plainLast : undefined,
@@ -573,11 +576,11 @@ export function buildParentVideoScript(topic: Topic): ParentVideoScript {
       heading: topic.homePack.activity.title,
       beats: withFinalPause(
         [
-          ...linkBeats(SCRIPT_LINKS.tonight, PAUSE.sentence, "section", { guide: "present" }),
-          makeBeat(topic.homePack.activity.title, PAUSE.item, "title", {
+          makeBeat(`Tonight’s activity is ${topic.homePack.activity.title}.`, PAUSE.sentence, "section", {
             guide: diagrams.tonightTitle ? "point" : "present",
             visual: diagrams.tonightTitle,
           }),
+          ...linkBeats(SCRIPT_LINKS.tonightOutline, PAUSE.sentence, "aside", { guide: "listen" }),
           ...beatsFromText(takeSentences(firstStep, 2).join(" "), PAUSE.sentence, "teach", {
             guide: diagrams.tonightStep ? "point" : "present",
             visual: diagrams.tonightStep,

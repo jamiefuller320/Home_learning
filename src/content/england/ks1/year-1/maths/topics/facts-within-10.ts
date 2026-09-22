@@ -65,7 +65,7 @@ export const factsWithin10: Topic = {
     activity: {
       title: "Make 10 in two colours",
       steps: [
-        "Fill 6 spaces on the frame with one colour or type of object. Ask how many empty spaces, then fill them with the other type. Say “6 and 4 make 10”.",
+        "First, fill 6 spaces on the frame with one colour or type of object. Ask how many empty spaces, then fill them with the other type. Say “6 and 4 make 10”.",
         "Tip them out and hide the 4. Ask “I still have 6. How many are hiding if the whole was 10?”",
         "Repeat with 5 and 5, then 9 and 1. Keep the language: part, part, whole.",
         "If that is steady, try 7 + 2 on the frame without making 10, just to see a fact that is not a bond to 10.",
@@ -74,7 +74,7 @@ export const factsWithin10: Topic = {
     },
     check: [
       {
-        prompt: "Show 8 on the frame. How many more to make 10?",
+        prompt: "Show 8 on the frame. Ask: how many more to make 10?",
         looksLike: "They can say there are 2 empty spaces, or count each empty cell once.",
         notYet: "They recount all 8 from the start and still cannot name the complement.",
         nudge: "Count the empty spaces on the frame, or ask what goes with 8 to make 10.",
