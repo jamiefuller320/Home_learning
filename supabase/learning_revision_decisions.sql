@@ -1,7 +1,8 @@
 -- Pack learning revision decisions — shared between maintainers.
 -- Run in the Supabase SQL editor after pack_publish.sql.
+-- Safe to re-run; includes explicit service_role grants.
 --
--- Maintainers (service_role): read/write decisions and accepted revision snapshots.
+-- Maintainers (service_role / secret key): read/write decisions and accepted revision snapshots.
 
 create table if not exists public.learning_revision_decisions (
   revision_id text primary key,
@@ -19,3 +20,4 @@ create index if not exists learning_revision_decisions_topic_id_idx
 alter table public.learning_revision_decisions enable row level security;
 
 revoke all on table public.learning_revision_decisions from anon, authenticated;
+grant select, insert, update, delete on table public.learning_revision_decisions to service_role;

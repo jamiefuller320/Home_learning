@@ -1,8 +1,10 @@
 -- Home Learning language notes.
 -- Testers (anon / publishable key): INSERT only.
--- Maintainers (service_role / table editor): read, update, delete.
+-- Maintainers (service_role / secret key / table editor): read, update, delete.
 --
 -- Run the whole file in the Supabase SQL editor.
+-- Safe to re-run. Explicit service_role grants matter on projects that no longer
+-- auto-grant Data API roles on new public tables.
 
 create table if not exists public.language_notes (
   id uuid primary key default gen_random_uuid(),
@@ -24,6 +26,7 @@ alter table public.language_notes enable row level security;
 
 revoke all on table public.language_notes from anon, authenticated;
 grant insert on table public.language_notes to anon;
+grant select, insert, update, delete on table public.language_notes to service_role;
 
 drop policy if exists testers_can_select on public.language_notes;
 drop policy if exists testers_can_insert on public.language_notes;

@@ -60,7 +60,7 @@ npx tsx scripts/language-notes.ts list           # read the inbox
 Maintainer UI: `/maintenance` (linked discreetly in the footer).
 
 - **Pack learnings** (no unlock): scan every lesson against durable learnings in `src/content/learnings.ts`. Accept or decline each proposed revision. Declines stick (export/commit `learning-decisions.json`) so the same change does not bounce back. Accepteds export as JSON; commit to `inbox/learning-revisions-accepted.json` on `main` to auto-apply via GitHub Actions, or run `npx tsx scripts/apply-learning-revisions.ts --record-decisions --archive`.
-- **Inbox** (service_role unlock): feature requests, open language fixes, lessons flagged for repeated feedback; mark done / decline / annotate.
+- **Inbox** (legacy service_role JWT unlock): feature requests, open language fixes, lessons flagged for repeated feedback; mark done / decline / annotate. Preferred `sb_secret_…` keys are blocked in the browser — use Legacy keys in the Supabase dashboard, or the CLI with a secret key.
 
 When a language note teaches a reusable rule, add it to `src/content/learnings.ts` (new id — do not rewrite an old id’s meaning). Future packs must pass validation that encodes hard rules (for example every check needs a `nudge`). Soft style rules stay as scan proposals.
 
