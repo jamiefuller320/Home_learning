@@ -1,8 +1,9 @@
 /**
  * Maintainer access to language_notes.
  *
- * Needs SUPABASE_SERVICE_ROLE_KEY plus NEXT_PUBLIC_SUPABASE_URL
- * (or SUPABASE_URL). The service role is never shipped to the site.
+ * Needs SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY plus
+ * NEXT_PUBLIC_SUPABASE_URL (or SUPABASE_URL). Privileged keys are never shipped
+ * to the static site.
  *
  *   npx tsx scripts/language-notes.ts list
  *   npx tsx scripts/language-notes.ts list all
@@ -12,34 +13,22 @@
  */
 
 import { rowToLanguageNote, type LanguageNoteRow } from "../src/lib/language-notes-api";
+import { maintainerRest } from "../src/lib/maintainer-rest";
 
 function readServiceEnv(): { url: string; serviceKey: string } {
   const url = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "").replace(/\/$/, "");
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+  const serviceKey =
+    process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
   if (!url || !serviceKey) {
     throw new Error(
-      "Set NEXT_PUBLIC_SUPABASE_URL (or SUPABASE_URL) and SUPABASE_SERVICE_ROLE_KEY. Use the service_role key, not the anon key.",
+      "Set NEXT_PUBLIC_SUPABASE_URL (or SUPABASE_URL) and SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY. Use a secret/service_role key, not the anon/publishable key.",
     );
   }
   return { url, serviceKey };
 }
 
 async function rest<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const env = readServiceEnv();
-  const headers = new Headers(init.headers);
-  headers.set("apikey", env.serviceKey);
-  headers.set("Authorization", `Bearer ${env.serviceKey}`);
-  headers.set("Accept", "application/json");
-  if (init.body && !headers.has("Content-Type")) {
-    headers.set("Content-Type", "application/json");
-  }
-  const response = await fetch(`${env.url}${path}`, { ...init, headers });
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`Supabase ${response.status}: ${body.slice(0, 240)}`);
-  }
-  if (response.status === 204) return [] as T;
-  return (await response.json()) as T;
+  return maintainerRest<T>(readServiceEnv(), path, init);
 }
 
 function printNotes(notes: ReturnType<typeof rowToLanguageNote>[], label: string) {

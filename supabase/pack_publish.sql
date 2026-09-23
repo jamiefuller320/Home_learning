@@ -1,8 +1,9 @@
 -- Pack publishing workflow — live state shared between maintainers and the public site.
 -- Run in the Supabase SQL editor after language_notes.sql.
+-- Safe to re-run; includes explicit service_role grants.
 --
 -- Public (anon): read lesson_publication view only — which lessons are live or suspended.
--- Maintainers (service_role): read/write full workflow state.
+-- Maintainers (service_role / secret key): read/write full workflow state.
 
 create table if not exists public.pack_publish_meta (
   id int primary key default 1 check (id = 1),
@@ -56,7 +57,10 @@ revoke all on table public.pack_publish_meta from anon, authenticated;
 revoke all on table public.pack_publish_state from anon, authenticated;
 revoke all on table public.lesson_publication from anon, authenticated;
 
+grant select, insert, update, delete on table public.pack_publish_meta to service_role;
+grant select, insert, update, delete on table public.pack_publish_state to service_role;
 grant select on public.lesson_publication to anon;
+grant select on public.lesson_publication to service_role;
 
 drop policy if exists public_read_lesson_publication on public.lesson_publication;
 create policy public_read_lesson_publication

@@ -7,6 +7,7 @@ import {
   verifyMaintainerCredentials,
   type MaintainerCredentials,
 } from "@/lib/language-notes-admin";
+import { assertBrowserMaintainerKey } from "@/lib/maintainer-rest";
 import { verifyLearningRevisionTables } from "@/lib/learning-revisions-admin";
 import { verifyPublishTables } from "@/lib/pack-publish-admin";
 
@@ -27,6 +28,7 @@ export function MaintainerUnlock({ onUnlock }: { onUnlock: (credentials: Maintai
     };
 
     try {
+      assertBrowserMaintainerKey(credentials.serviceKey);
       await verifyMaintainerCredentials(credentials);
       await verifyPublishTables(credentials);
       await verifyLearningRevisionTables(credentials);
@@ -43,11 +45,14 @@ export function MaintainerUnlock({ onUnlock }: { onUnlock: (credentials: Maintai
     <form className="rounded-2xl border border-rule bg-white/70 p-6" onSubmit={handleSubmit}>
       <h2 className="serif text-2xl text-ink">Maintainer access</h2>
       <p className="mt-3 text-ink-soft">
-        This unlocks the Supabase inbox and live publishing pipeline with your{" "}
-        <strong className="font-semibold text-ink">service_role</strong> key. The key stays in this browser tab only
-        (session storage) and is never sent anywhere except your Supabase project. Run{" "}
-        <code className="text-xs">supabase/pack_publish.sql</code> and{" "}
-        <code className="text-xs">supabase/learning_revision_decisions.sql</code> once if tables are missing.
+        Unlock the Supabase inbox and live publishing pipeline with the{" "}
+        <strong className="font-semibold text-ink">legacy service_role</strong> JWT (starts with{" "}
+        <code className="text-xs">eyJ</code>). Find it under Supabase → Settings → API Keys →{" "}
+        <strong className="font-semibold text-ink">Legacy keys</strong>. Preferred{" "}
+        <code className="text-xs">sb_secret_…</code> keys are blocked in the browser by Supabase — use those only in
+        CLI / Actions. The key stays in this browser tab (session storage) and is only sent to your Supabase project.
+        Re-run <code className="text-xs">supabase/*.sql</code> once if tables are missing or unlock still fails with
+        permission errors.
       </p>
 
       <div className="mt-6 space-y-4">
@@ -63,7 +68,7 @@ export function MaintainerUnlock({ onUnlock }: { onUnlock: (credentials: Maintai
           />
         </label>
         <label className="block">
-          <span className="font-semibold text-ink">Service role key</span>
+          <span className="font-semibold text-ink">Legacy service_role key</span>
           <input
             required
             type="password"
@@ -71,7 +76,7 @@ export function MaintainerUnlock({ onUnlock }: { onUnlock: (credentials: Maintai
             value={serviceKey}
             onChange={(event) => setServiceKey(event.target.value)}
             className="mt-2 w-full rounded-xl border border-rule bg-white p-3 text-ink"
-            placeholder="Paste from Supabase → Settings → API"
+            placeholder="eyJ… from Settings → API Keys → Legacy"
           />
         </label>
       </div>

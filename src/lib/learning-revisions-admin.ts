@@ -1,4 +1,5 @@
-import type { MaintainerCredentials } from "@/lib/language-notes-admin";
+import type { MaintainerCredentials } from "@/lib/maintainer-rest";
+import { maintainerRest } from "@/lib/maintainer-rest";
 import type { ProposedRevision, RevisionDecision } from "@/lib/learning-revisions";
 import {
   acceptedSnapshotsFromRows,
@@ -8,28 +9,6 @@ import {
   rowsToDecisionRecords,
   type LearningRevisionDecisionRow,
 } from "@/lib/learning-revisions-sync";
-
-async function maintainerRest<T>(
-  credentials: MaintainerCredentials,
-  path: string,
-  init: RequestInit = {},
-): Promise<T> {
-  const headers = new Headers(init.headers);
-  headers.set("apikey", credentials.serviceKey);
-  headers.set("Authorization", `Bearer ${credentials.serviceKey}`);
-  headers.set("Accept", "application/json");
-  if (init.body && !headers.has("Content-Type")) {
-    headers.set("Content-Type", "application/json");
-  }
-
-  const response = await fetch(`${credentials.url}${path}`, { ...init, headers });
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`Supabase ${response.status}: ${body.slice(0, 240)}`);
-  }
-  if (response.status === 204) return [] as T;
-  return (await response.json()) as T;
-}
 
 export async function verifyLearningRevisionTables(credentials: MaintainerCredentials): Promise<void> {
   await maintainerRest<LearningRevisionDecisionRow[]>(

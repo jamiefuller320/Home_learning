@@ -4,8 +4,8 @@
  *   npx tsx scripts/process-language-notes.ts route
  *   npx tsx scripts/process-language-notes.ts list
  *
- * Needs SUPABASE_SERVICE_ROLE_KEY + NEXT_PUBLIC_SUPABASE_URL (or SUPABASE_URL).
- * For feature routing, set GITHUB_TOKEN (Actions provides this automatically).
+ * Needs SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY + NEXT_PUBLIC_SUPABASE_URL
+ * (or SUPABASE_URL). For feature routing, set GITHUB_TOKEN (Actions provides this).
  */
 
 import { GITHUB_REPO, SECTION_LABEL, type LanguageNote } from "../src/lib/language-log";
@@ -15,34 +15,22 @@ import {
   type LanguageNoteKind,
 } from "../src/lib/language-note-routing";
 import { rowToLanguageNote, type LanguageNoteRow } from "../src/lib/language-notes-api";
+import { maintainerRest } from "../src/lib/maintainer-rest";
 
 function readServiceEnv(): { url: string; serviceKey: string } {
   const url = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "").replace(/\/$/, "");
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+  const serviceKey =
+    process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
   if (!url || !serviceKey) {
     throw new Error(
-      "Set NEXT_PUBLIC_SUPABASE_URL (or SUPABASE_URL) and SUPABASE_SERVICE_ROLE_KEY.",
+      "Set NEXT_PUBLIC_SUPABASE_URL (or SUPABASE_URL) and SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY.",
     );
   }
   return { url, serviceKey };
 }
 
 async function rest<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const env = readServiceEnv();
-  const headers = new Headers(init.headers);
-  headers.set("apikey", env.serviceKey);
-  headers.set("Authorization", `Bearer ${env.serviceKey}`);
-  headers.set("Accept", "application/json");
-  if (init.body && !headers.has("Content-Type")) {
-    headers.set("Content-Type", "application/json");
-  }
-  const response = await fetch(`${env.url}${path}`, { ...init, headers });
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`Supabase ${response.status}: ${body.slice(0, 240)}`);
-  }
-  if (response.status === 204) return [] as T;
-  return (await response.json()) as T;
+  return maintainerRest<T>(readServiceEnv(), path, init);
 }
 
 async function fetchOpenNotes(): Promise<LanguageNote[]> {

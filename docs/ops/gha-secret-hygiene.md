@@ -22,10 +22,13 @@ PR head branch names and fork commits as **untrusted input**.
 |--------|----------|-------|
 | `NEXT_PUBLIC_SUPABASE_URL` | `pages.yml`, `supabase-check.yml`, `language-notes-process.yml` | Public; baked into static export |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Same | Public; RLS limits to insert-only on `language_notes` |
-| `SUPABASE_SERVICE_ROLE_KEY` | `language-notes-process.yml` only | Never in Pages build; maintainer CLI / scheduled inbox routing |
+| `SUPABASE_SERVICE_ROLE_KEY` | `language-notes-process.yml` only | Never in Pages build; maintainer CLI / scheduled inbox routing. Prefer a secret key (`sb_secret_…`) in Actions/CLI; legacy JWT still accepted. |
 
-Maintainer **service_role** for `/maintenance` is entered in the browser and stored in
-**sessionStorage** only — not in GitHub secrets or the static bundle.
+Maintainer unlock on `/maintenance` must use the **legacy service_role JWT** (`eyJ…` from
+Settings → API Keys → Legacy keys). Supabase **blocks preferred secret keys in browsers**
+(User-Agent → 401), so `sb_secret_…` cannot unlock the static UI. The JWT is entered in the
+browser and stored in **sessionStorage** only — not in GitHub secrets or the static bundle.
+Re-run `supabase/*.sql` if unlock fails with permission denied (explicit `service_role` grants).
 
 ## Automated daily check
 
