@@ -42,7 +42,12 @@ create table if not exists public.pack_publish_state (
   restored_at timestamptz
 );
 
-create or replace view public.lesson_publication as
+-- Must be a view over pack_publish_state. Drop a leftover table/view first —
+-- CREATE OR REPLACE VIEW fails with 42809 if the name is already a table.
+drop view if exists public.lesson_publication;
+drop table if exists public.lesson_publication;
+
+create view public.lesson_publication as
 select
   topic_id,
   released_at,
@@ -55,7 +60,7 @@ alter table public.pack_publish_state enable row level security;
 
 revoke all on table public.pack_publish_meta from anon, authenticated;
 revoke all on table public.pack_publish_state from anon, authenticated;
-revoke all on table public.lesson_publication from anon, authenticated;
+revoke all on public.lesson_publication from anon, authenticated;
 
 grant select, insert, update, delete on table public.pack_publish_meta to service_role;
 grant select, insert, update, delete on table public.pack_publish_state to service_role;
