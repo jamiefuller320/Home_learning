@@ -42,27 +42,29 @@ create table if not exists public.pack_publish_state (
   restored_at timestamptz
 );
 
--- Must be a view over pack_publish_state. DROP VIEW IF EXISTS still errors when
--- the name is already a table (42809); detect relkind and drop the right kind.
+-- Public read model: always a view over pack_publish_state (not a base table).
+-- CREATE OR REPLACE VIEW is enough when it is already a view; if a base table
+-- still exists under this name, rename it aside first, then create the view.
 do $$
 declare
-  kind "char";
+  kind text;
 begin
-  select c.relkind into kind
+  select c.relkind::text into kind
   from pg_class c
   join pg_namespace n on n.oid = c.relnamespace
   where n.nspname = 'public' and c.relname = 'lesson_publication';
 
-  if kind = 'r' then
-    drop table public.lesson_publication;
-  elsif kind = 'v' then
-    drop view public.lesson_publication;
+  if kind = 'r' or kind = 'p' then
+    alter table public.lesson_publication rename to lesson_publication_legacy_table;
   elsif kind = 'm' then
     drop materialized view public.lesson_publication;
+  elsif kind = 'f' then
+    drop foreign table public.lesson_publication;
   end if;
+  -- kind = 'v' (view): leave in place for CREATE OR REPLACE VIEW below
 end $$;
 
-create view public.lesson_publication as
+create or replace view public.lesson_publication as
 select
   topic_id,
   released_at,
