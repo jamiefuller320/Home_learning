@@ -42,10 +42,25 @@ create table if not exists public.pack_publish_state (
   restored_at timestamptz
 );
 
--- Must be a view over pack_publish_state. Drop a leftover table/view first —
--- CREATE OR REPLACE VIEW fails with 42809 if the name is already a table.
-drop view if exists public.lesson_publication;
-drop table if exists public.lesson_publication;
+-- Must be a view over pack_publish_state. DROP VIEW IF EXISTS still errors when
+-- the name is already a table (42809); detect relkind and drop the right kind.
+do $$
+declare
+  kind "char";
+begin
+  select c.relkind into kind
+  from pg_class c
+  join pg_namespace n on n.oid = c.relnamespace
+  where n.nspname = 'public' and c.relname = 'lesson_publication';
+
+  if kind = 'r' then
+    drop table public.lesson_publication;
+  elsif kind = 'v' then
+    drop view public.lesson_publication;
+  elsif kind = 'm' then
+    drop materialized view public.lesson_publication;
+  end if;
+end $$;
 
 create view public.lesson_publication as
 select
