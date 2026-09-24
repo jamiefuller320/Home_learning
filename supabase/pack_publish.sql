@@ -4,6 +4,10 @@
 --
 -- Public (anon): read lesson_publication view only — which lessons are live or suspended.
 -- Maintainers (service_role / secret key): read/write full workflow state.
+--
+-- Note: do not put RLS policies on lesson_publication. Policies on views require
+-- PG15+ view-RLS support and otherwise fail with 42809 ("is not a table").
+-- Public read is GRANT SELECT on the view; the view owner reads pack_publish_state.
 
 create table if not exists public.pack_publish_meta (
   id int primary key default 1 check (id = 1),
@@ -42,10 +46,7 @@ create table if not exists public.pack_publish_state (
   restored_at timestamptz
 );
 
--- lesson_publication must be a plain view. It may already exist as a table,
--- view, or materialized view — DROP the right kind, then CREATE VIEW.
--- (CREATE OR REPLACE VIEW errors with 42809 when the name is not already a view;
--- DROP TABLE / DROP VIEW each error when the name is the other kind.)
+-- Replace whatever currently occupies the name with a plain view.
 do $$
 declare
   kind text;
@@ -89,10 +90,3 @@ grant select, insert, update, delete on table public.pack_publish_meta to servic
 grant select, insert, update, delete on table public.pack_publish_state to service_role;
 grant select on public.lesson_publication to anon;
 grant select on public.lesson_publication to service_role;
-
-drop policy if exists public_read_lesson_publication on public.lesson_publication;
-create policy public_read_lesson_publication
-  on public.lesson_publication
-  for select
-  to anon
-  using (true);
