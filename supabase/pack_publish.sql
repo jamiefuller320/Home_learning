@@ -42,9 +42,10 @@ create table if not exists public.pack_publish_state (
   restored_at timestamptz
 );
 
--- Public read model: always a view over pack_publish_state (not a base table).
--- CREATE OR REPLACE VIEW is enough when it is already a view; if a base table
--- still exists under this name, rename it aside first, then create the view.
+-- lesson_publication must be a plain view. It may already exist as a table,
+-- view, or materialized view — DROP the right kind, then CREATE VIEW.
+-- (CREATE OR REPLACE VIEW errors with 42809 when the name is not already a view;
+-- DROP TABLE / DROP VIEW each error when the name is the other kind.)
 do $$
 declare
   kind text;
@@ -54,17 +55,22 @@ begin
   join pg_namespace n on n.oid = c.relnamespace
   where n.nspname = 'public' and c.relname = 'lesson_publication';
 
-  if kind = 'r' or kind = 'p' then
-    alter table public.lesson_publication rename to lesson_publication_legacy_table;
+  if kind is null then
+    raise notice 'lesson_publication does not exist yet';
+  elsif kind in ('r', 'p') then
+    execute 'drop table public.lesson_publication cascade';
+  elsif kind = 'v' then
+    execute 'drop view public.lesson_publication cascade';
   elsif kind = 'm' then
-    drop materialized view public.lesson_publication;
+    execute 'drop materialized view public.lesson_publication cascade';
   elsif kind = 'f' then
-    drop foreign table public.lesson_publication;
+    execute 'drop foreign table public.lesson_publication cascade';
+  else
+    raise exception 'public.lesson_publication has unsupported relkind %', kind;
   end if;
-  -- kind = 'v' (view): leave in place for CREATE OR REPLACE VIEW below
 end $$;
 
-create or replace view public.lesson_publication as
+create view public.lesson_publication as
 select
   topic_id,
   released_at,
