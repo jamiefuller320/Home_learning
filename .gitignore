@@ -35,6 +35,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+# python emit helpers
+scripts/__pycache__/
+
 # Parent-video TTS trial intermediates (keep listen.mp3 + README)
 inbox/parent-video/**/elevenlabs-trial/*.raw
 inbox/parent-video/**/elevenlabs-trial/*.wav

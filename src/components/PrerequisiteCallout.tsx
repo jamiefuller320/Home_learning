@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { PackProse } from "@/components/PackProse";
 import type { Topic } from "@/content/schema";
-import { getPrerequisiteTopics } from "@/content/england/ks1/year-1/maths/curriculum";
+import { getPrerequisiteTopics } from "@/content/curriculum";
+import { topicHref } from "@/lib/topic-path";
 
 export function PrerequisiteCallout({ topic, topics }: { topic: Topic; topics: Topic[] }) {
   const prerequisites = getPrerequisiteTopics(topic, topics);
@@ -20,7 +21,7 @@ export function PrerequisiteCallout({ topic, topics }: { topic: Topic; topics: T
         {prerequisites.map((prerequisite) => (
           <li key={prerequisite.id}>
             <Link
-              href={`/year-1-maths/${prerequisite.slug}`}
+              href={topicHref(prerequisite)}
               prefetch={false}
               className="font-medium text-teal hover:underline"
             >

@@ -1,4 +1,4 @@
-import { sortTopicsByPrerequisites } from "@/content/england/ks1/year-1/maths/curriculum";
+import { sortTopicsByPrerequisites } from "@/content/curriculum";
 import type { Topic } from "@/content/schema";
 
 /** First topic in prerequisite order that lists the term — that lesson introduces it. */
@@ -22,5 +22,14 @@ export function unlockedTermIdsFor(topic: Topic, topics: Topic[]): string[] {
   }
 
   walk(topic.id);
+
+  // Later-year packs do not list earlier years as prerequisites, but those
+  // introducing lessons have already taught the words.
+  for (const earlier of topics) {
+    if (earlier.year < topic.year) {
+      earlier.glossaryTerms.forEach((termId) => unlocked.add(termId));
+    }
+  }
+
   return [...unlocked];
 }

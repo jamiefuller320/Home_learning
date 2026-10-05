@@ -1,10 +1,14 @@
 import Link from "next/link";
 import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
+import { year2MathsTopics } from "@/content/england/ks1/year-2";
+import { ks2MathsTopics } from "@/content/england/ks2";
 
 export default function HomePage() {
+  const primaryDrafts = year2MathsTopics.length + ks2MathsTopics.length;
+
   return (
     <div>
-      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal">England · Key Stage 1</p>
+      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal">England · Primary maths</p>
       <h1 className="serif mt-3 text-5xl leading-[1.1] text-ink sm:text-6xl">
         You learn the idea.
         <br />
@@ -23,24 +27,30 @@ export default function HomePage() {
           Start Year 1 maths
         </Link>
         <Link
+          href="/syllabus"
+          className="rounded-full border border-rule px-6 py-3 font-semibold text-ink hover:border-teal"
+        >
+          Browse Years 1 to 6
+        </Link>
+        <Link
           href="/how-it-works"
           className="rounded-full border border-rule px-6 py-3 font-semibold text-ink hover:border-teal"
         >
           How this works
         </Link>
-        <Link
-          href="/for-schools"
-          className="rounded-full border border-rule px-6 py-3 font-semibold text-ink hover:border-teal"
-        >
-          For schools
-        </Link>
       </div>
 
       <section className="mt-16 grid gap-4 sm:grid-cols-3">
         <article className="rounded-2xl bg-white/70 p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">First slice</p>
-          <p className="serif mt-2 text-2xl">{year1MathsTopics.length} Year 1 maths topics</p>
-          <p className="mt-2 text-ink-soft">The ready-to-progress spine, plus halves, coins and time.</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">Coverage</p>
+          <p className="serif mt-2 text-2xl">
+            {year1MathsTopics.length} Year 1 · {year2MathsTopics.length} Year 2 drafts · {ks2MathsTopics.length} KS2
+            drafts
+          </p>
+          <p className="mt-2 text-ink-soft">
+            Year 1 is the first slice. Year 2 finishes KS1 as a school preview. Years 3–6 map KS2 ({primaryDrafts}{" "}
+            drafts in all).
+          </p>
         </article>
         <article className="rounded-2xl bg-white/70 p-5">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal">Stage 1</p>

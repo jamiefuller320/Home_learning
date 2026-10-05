@@ -1,4 +1,4 @@
-import { sortTopicsByPrerequisites } from "./england/ks1/year-1/maths/curriculum";
+import { sortTopicsByPrerequisites } from "./curriculum";
 import { glossaryTerms, isBlockedEverydayGlossaryAlias } from "./glossary";
 import { CONTENT_LIMITS, type SayThisItem, type Topic } from "./schema";
 import {
@@ -48,10 +48,24 @@ export function validateTopic(topic: Topic): ValidationIssue[] {
   requiredText(topic.homePack.activity.title, "homePack.activity.title", id, issues);
   requiredText(topic.homePack.stopRule, "homePack.stopRule", id, issues);
 
-  if (topic.year !== 1) issues.push({ topicId: id, field: "year", message: "first slice is Year 1 only" });
-  if (topic.jurisdiction !== "england") issues.push({ topicId: id, field: "jurisdiction", message: "first slice is England only" });
-  if (topic.keyStage !== "ks1") issues.push({ topicId: id, field: "keyStage", message: "first slice is KS1 only" });
-  if (topic.subject !== "maths") issues.push({ topicId: id, field: "subject", message: "first slice is maths only" });
+  if (topic.jurisdiction !== "england") {
+    issues.push({ topicId: id, field: "jurisdiction", message: "England only in this slice" });
+  }
+  if (topic.subject !== "maths") {
+    issues.push({ topicId: id, field: "subject", message: "maths only in this slice" });
+  }
+  if (topic.keyStage === "ks1" && topic.year !== 1 && topic.year !== 2) {
+    issues.push({ topicId: id, field: "year", message: "KS1 years are 1 and 2" });
+  }
+  if (topic.keyStage === "ks2" && (topic.year < 3 || topic.year > 6)) {
+    issues.push({ topicId: id, field: "year", message: "KS2 years are 3 to 6" });
+  }
+  if ((topic.year === 1 || topic.year === 2) && topic.keyStage !== "ks1") {
+    issues.push({ topicId: id, field: "keyStage", message: "Years 1 and 2 are KS1" });
+  }
+  if (topic.year >= 3 && topic.keyStage !== "ks2") {
+    issues.push({ topicId: id, field: "keyStage", message: "Years 3 to 6 are KS2" });
+  }
 
   if (topic.parentMinutes < CONTENT_LIMITS.minParentMinutes || topic.parentMinutes > CONTENT_LIMITS.maxParentMinutes) {
     issues.push({

@@ -2,7 +2,7 @@
 
 Every published idea is a **topic**. A topic is one thing a parent can learn and then practise with their child the same day.
 
-Topics live in `src/content/england/ks1/year-1/maths/topics/` and must satisfy `src/content/schema.ts`. Run `npm run validate:content` after any edit.
+Topics live under `src/content/england/` (Year 1 in `ks1/year-1/maths/topics/`, Year 2 drafts in `ks1/year-2/maths/`, KS2 drafts in `ks2/year-*/maths/`) and must satisfy `src/content/schema.ts`. Run `npm run validate:content` after any edit.
 
 ## Identity
 
@@ -12,8 +12,8 @@ Topics live in `src/content/england/ks1/year-1/maths/topics/` and must satisfy `
 | `slug` | URL piece. Same stability rule as `id`. |
 | `title` | Parent-facing, spoken English. “Number bonds to 10”, not “1NF-1”. |
 | `jurisdiction` | `england` for the first slice |
-| `keyStage` | `ks1` |
-| `year` | `1` |
+| `keyStage` | `ks1` or `ks2` |
+| `year` | `1`–`6` (KS1 is 1–2; KS2 is 3–6) |
 | `subject` | `maths` |
 | `reviewStatus` | `draft` until a human has signed it off |
 

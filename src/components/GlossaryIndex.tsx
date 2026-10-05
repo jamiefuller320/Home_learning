@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { glossaryTerms } from "@/content/glossary";
-import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
+import { getAnyTopicById } from "@/content/catalogue";
+import { topicHref } from "@/lib/topic-path";
 import type { GlossaryTerm } from "@/content/schema";
 
 function initialLetter(term: string): string {
@@ -19,16 +20,18 @@ export function GlossaryIndex({
   initialTermId,
   revealOnly = false,
   termIds,
+  glossaryHref = "/year-1-maths/glossary",
 }: {
   /** Open this card when the page loads (e.g. hash deep link). */
   initialTermId?: string;
   /** When true, only list the given term ids (lesson-scoped peek). */
   revealOnly?: boolean;
   termIds?: string[];
+  glossaryHref?: string;
 }) {
   const sortedTerms = useMemo(() => {
     const source =
-      termIds && termIds.length > 0
+      termIds !== undefined
         ? glossaryTerms.filter((term) => termIds.includes(term.id))
         : glossaryTerms;
     return [...source].sort((a, b) => a.term.localeCompare(b.term, "en-GB"));
@@ -120,14 +123,14 @@ export function GlossaryIndex({
         })}
       </ul>
 
-      {openTerm ? <GlossaryCard term={openTerm} /> : null}
+      {openTerm ? <GlossaryCard term={openTerm} glossaryHref={glossaryHref} /> : null}
     </div>
   );
 }
 
-function GlossaryCard({ term }: { term: GlossaryTerm }) {
+function GlossaryCard({ term, glossaryHref }: { term: GlossaryTerm; glossaryHref: string }) {
   const relatedTopics = (term.relatedTopics ?? [])
-    .map((topicId) => year1MathsTopics.find((topic) => topic.id === topicId))
+    .map((topicId) => getAnyTopicById(topicId))
     .filter((topic): topic is NonNullable<typeof topic> => Boolean(topic));
 
   const seeAlsoTerms = (term.seeAlso ?? [])
@@ -151,7 +154,7 @@ function GlossaryCard({ term }: { term: GlossaryTerm }) {
           {seeAlsoTerms.map((related, index) => (
             <span key={related.id}>
               {index > 0 ? (index === seeAlsoTerms.length - 1 ? " and " : ", ") : null}
-              <Link href={`/year-1-maths/glossary#${related.id}`} className="font-medium text-teal hover:underline">
+              <Link href={`${glossaryHref}#${related.id}`} className="font-medium text-teal hover:underline">
                 {related.term}
               </Link>
             </span>
@@ -166,7 +169,7 @@ function GlossaryCard({ term }: { term: GlossaryTerm }) {
             <span key={topic.id}>
               {index > 0 ? (index === relatedTopics.length - 1 ? " and " : ", ") : null}
               <Link
-                href={`/year-1-maths/${topic.slug}`}
+                href={topicHref(topic)}
                 prefetch={false}
                 className="font-medium text-teal hover:underline"
               >

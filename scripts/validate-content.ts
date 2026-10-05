@@ -1,7 +1,8 @@
-import { year1MathsTopics } from "../src/content/england/ks1/year-1/maths/topics";
+import { allMathsTopics, year1MathsTopics, year2MathsTopics } from "../src/content/catalogue";
+import { ks2MathsTopics } from "../src/content/england/ks2";
 import { validateTopics } from "../src/content/validate";
 
-const issues = validateTopics(year1MathsTopics);
+const issues = validateTopics(allMathsTopics);
 
 if (issues.length > 0) {
   for (const issue of issues) {
@@ -11,4 +12,6 @@ if (issues.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${year1MathsTopics.length} Year 1 maths topics. No issues.`);
+console.log(
+  `Validated ${allMathsTopics.length} maths topics (${year1MathsTopics.length} Year 1, ${year2MathsTopics.length} Year 2 drafts, ${ks2MathsTopics.length} KS2 drafts). No issues.`,
+);

@@ -3,6 +3,7 @@ import type { Topic } from "@/content/schema";
 import type { LivePublicationMap } from "@/lib/pack-publish-api";
 import { resolvePublicationStatus } from "@/lib/publication";
 import { readPackReleaseFile } from "@/lib/pack-release";
+import { topicHref } from "@/lib/topic-path";
 import { DraftBadge } from "./DraftBadge";
 import { PublicationBadge } from "./PublicationBadge";
 
@@ -25,7 +26,7 @@ export function TopicCard({
   );
   return (
     <Link
-      href={`/year-1-maths/${topic.slug}`}
+      href={topicHref(topic)}
       prefetch={false}
       className="block rounded-2xl border border-rule bg-white/70 p-5 transition hover:border-teal hover:bg-white"
     >

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, type ReactNode } from "react";
-import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
+import { allMathsTopics } from "@/content/catalogue";
 import type { Topic } from "@/content/schema";
 
 type LessonGlossaryValue = {
@@ -13,7 +13,7 @@ const LessonGlossaryContext = createContext<LessonGlossaryValue | null>(null);
 
 export function LessonGlossaryProvider({
   topic,
-  topics = year1MathsTopics,
+  topics = allMathsTopics,
   children,
 }: {
   topic: Topic;

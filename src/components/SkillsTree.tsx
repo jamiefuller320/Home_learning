@@ -1,15 +1,13 @@
 import Link from "next/link";
 import type { Topic } from "@/content/schema";
-import {
-  getPrerequisiteTopics,
-  sortTopicsByPrerequisites,
-} from "@/content/england/ks1/year-1/maths/curriculum";
+import { getPrerequisiteTopics, sortTopicsByPrerequisites } from "@/content/curriculum";
+import { topicHref } from "@/lib/topic-path";
 
 export function SkillsTree({ topics }: { topics: Topic[] }) {
   const ordered = sortTopicsByPrerequisites(topics);
 
   return (
-    <nav aria-label="Year 1 maths skills tree">
+    <nav aria-label="Maths skills tree">
       <ol className="space-y-4">
         {ordered.map((topic) => {
           const prerequisites = getPrerequisiteTopics(topic, topics);
@@ -17,7 +15,7 @@ export function SkillsTree({ topics }: { topics: Topic[] }) {
           return (
             <li key={topic.id} className="border-l-2 border-teal/30 pl-4">
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <Link href={`/year-1-maths/${topic.slug}`} prefetch={false} className="serif text-xl text-ink hover:text-teal">
+                <Link href={topicHref(topic)} prefetch={false} className="serif text-xl text-ink hover:text-teal">
                   {topic.shortTitle}
                 </Link>
                 <span className="text-xs text-ink-soft">{topic.strand}</span>
@@ -29,7 +27,7 @@ export function SkillsTree({ topics }: { topics: Topic[] }) {
                     <span key={prerequisite.id}>
                       {index > 0 ? (index === prerequisites.length - 1 ? " and " : ", ") : null}
                       <Link
-                        href={`/year-1-maths/${prerequisite.slug}`}
+                        href={topicHref(prerequisite)}
                         prefetch={false}
                         className="font-medium text-teal hover:underline"
                       >

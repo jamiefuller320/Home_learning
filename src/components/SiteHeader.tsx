@@ -7,11 +7,14 @@ export function SiteHeader() {
         Home Learning
       </Link>
       <nav className="flex flex-wrap justify-end gap-x-5 gap-y-2 text-sm text-ink-soft">
-        <Link href="/year-1-maths" className="hover:text-teal">
-          Year 1 maths
+        <Link href="/syllabus" className="hover:text-teal">
+          Primary maths
         </Link>
-        <Link href="/year-1-maths/skills" className="hover:text-teal">
-          Skills tree
+        <Link href="/year-1-maths" className="hover:text-teal">
+          Year 1
+        </Link>
+        <Link href="/year-2-maths" className="hover:text-teal">
+          Year 2
         </Link>
         <Link href="/year-1-maths/glossary" className="hover:text-teal">
           Glossary

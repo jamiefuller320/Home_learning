@@ -10,6 +10,7 @@ import { ParentVideo } from "./ParentVideo";
 import { LessonBinder } from "./LessonBinder";
 import { LessonGlossaryProvider } from "./LessonGlossary";
 import { Year1TopTabs } from "./Year1TopTabs";
+import { yearMathsHref, topicPackHref, keyStageLabel } from "@/lib/topic-path";
 
 export function TopicExperience({ topic, topics }: { topic: Topic; topics: Topic[] }) {
   const summaryPanel = (
@@ -43,18 +44,20 @@ export function TopicExperience({ topic, topics }: { topic: Topic; topics: Topic
     <LessonGlossaryProvider topic={topic} topics={topics}>
       <div>
         <p className="no-print mb-6 text-sm">
-          <Link href="/year-1-maths" prefetch={false} className="text-teal hover:underline">
-            ← All Year 1 maths topics
+          <Link href={yearMathsHref(topic.year)} prefetch={false} className="text-teal hover:underline">
+            ← All Year {topic.year} maths topics
           </Link>
         </p>
 
         <Year1TopTabs
+          year={topic.year}
           activeId="lessons"
           sheetHeader={
             <header className="binder-sheet-head">
               <h3>{topic.shortTitle}</h3>
               <p>
-                {topic.parentMinutes} min parent · {topic.homeMinutes} min home · {topic.strand}
+                {topic.parentMinutes} min parent · {topic.homeMinutes} min home · {topic.strand} ·{" "}
+                {keyStageLabel(topic)}
               </p>
             </header>
           }
@@ -62,7 +65,7 @@ export function TopicExperience({ topic, topics }: { topic: Topic; topics: Topic
             <LessonBinder
               slug={topic.slug}
               topic={topic}
-              printPackHref={`/year-1-maths/${topic.slug}/pack`}
+              printPackHref={topicPackHref(topic)}
               glossaryTermIds={topic.glossaryTerms}
               summary={summaryPanel}
               video={videoPanel}

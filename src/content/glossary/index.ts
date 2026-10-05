@@ -3,6 +3,7 @@ import { glossaryTerms } from "./terms";
 
 export { glossaryTerms };
 export { introducingTopicId, unlockedTermIdsFor } from "./unlock";
+export { glossaryTermIdsUpToYear } from "./by-year";
 
 /**
  * Everyday adjectives that must never be auto-linked as glossary aliases.
