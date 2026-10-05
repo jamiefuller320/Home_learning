@@ -157,9 +157,9 @@ Success looks like:
 - Try them with a small group of Year 1 families
 - Watch for: briefing too long, activity needs kit we promised not to need, method clashes with a common school scheme
 
-### Phase 3 — Year 2 maths
+### Phase 3 — Year 2 maths (draft syllabus preview)
 
-Same model. Do not add new product surfaces until Year 1 packs have been reviewed.
+Same parent-as-teacher model as Year 1. Packs stay `draft` so a school can browse the rest of KS1. Teacher review still waits on the Year 1 loop. Held-out judge and pack-publishing stay Year 1 only.
 
 ### Phase 4 — Phonics / early reading track
 
@@ -167,7 +167,7 @@ Separate spine. Must align to the child’s school phonics programme, not invent
 
 ### Phase 3a — KS2 draft syllabus preview (Years 3–6 maths)
 
-Same parent-as-teacher model as Year 1. Packs stay `draft` so a school can browse what a lesson across the KS2 programme of study might look like. Teacher review and Year 2 still come later.
+Same parent-as-teacher model as Year 1. Packs stay `draft` so a school can browse what a lesson across the KS2 programme of study might look like. Teacher-reviewed KS2 still comes later.
 
 ### Later phases
 

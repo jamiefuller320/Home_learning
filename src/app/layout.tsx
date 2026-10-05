@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · Home Learning",
   },
   description:
-    "Short parent briefings and kitchen-table packs for England primary maths, from Year 1 through a draft KS2 syllabus.",
+    "Short parent briefings and kitchen-table packs for England primary maths, from Year 1 through draft KS1 Year 2 and KS2 syllabuses.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

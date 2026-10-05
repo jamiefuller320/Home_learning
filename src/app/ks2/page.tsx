@@ -21,6 +21,14 @@ export default function Ks2IndexPage() {
         Year 6. They are not teacher-checked yet. If a pack clashes with how you teach it, follow the school.
       </p>
 
+      <p className="mt-4 max-w-2xl text-lg leading-8 text-ink-soft">
+        Need KS1 as well? Year 2 draft packs finish that key stage on the{" "}
+        <Link href="/syllabus" className="font-semibold text-teal hover:underline">
+          primary syllabus
+        </Link>{" "}
+        page.
+      </p>
+
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {KS2_YEARS.map((year) => {
           const topics = ks2MathsTopicsByYear[year];

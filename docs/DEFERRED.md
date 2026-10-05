@@ -16,6 +16,7 @@ Status key: `parked` (good, later) · `research` (needs a decision) · `rejected
 | DEF-004 | Wales, Scotland, Northern Ireland curricula | parked | Four different systems | England KS1 first. Revisit only after the parent loop works |
 | DEF-005 | 2028 National Curriculum remap | parked | Final programmes of study due spring 2027; first teaching Sept 2028 | Keep outcome codes and source URLs so remap is data, not a rewrite |
 | DEF-006 | KS2 maths (reviewed product) | parked | Draft syllabus packs exist for school preview | Full teacher-reviewed KS2 still waits on Year 1 / Year 2 review. Draft Y3–Y6 maths packs are in `src/content/england/ks2/`. |
+| DEF-006b | Year 2 maths (reviewed product) | parked | Draft syllabus packs exist for school preview | Full teacher-reviewed Year 2 still waits on the Year 1 loop. Draft Y2 maths packs are in `src/content/england/ks1/year-2/`. |
 | DEF-007 | KS3 / GCSE parent refresh (helpful friend) | parked | Different product, after the primary loop is proven | Agreed 2026-08-28: beyond KS2 the job is to **upskill the parent**, not to teach the teenager. Refresh GCSE-level knowledge so a parent can be a helpful friend — stay in the conversation, ask one precise question, avoid their own schooldays method, know when to back off. Teenagers will not take the KS1 sit-down activity. Stage 2 becomes “how to be useful tonight”, not a household pack. Stacks on the primary concept spine (DEF-011) as a reactivation of earned terms, for continuity parents and walk-in Year 10 parents. Do not close a teaching gap or write a lesson for the teen. `avoidThis` is the main contamination field. |
 | DEF-008 | Science home investigations | parked | Lovely kitchen-table work; school sequences vary widely | After maths spine |
 | DEF-009 | English writing and SPaG at KS1 | parked | Terminology is school-specific; easy to teach a clashing method | Last KS1 academic track |
@@ -66,6 +67,7 @@ Status key: `parked` (good, later) · `research` (needs a decision) · `rejected
 | ID | Promoted on | Into | Why now |
 |---|---|---|---|
 | DEF-006 (draft preview) | 2026-10-05 | Phase 3a — KS2 Year 3–6 maths draft packs | A school needs to see what lessons across the KS2 syllabus might look like. Packs stay `draft`. |
+| DEF-006b (draft preview) | 2026-10-05 | Phase 3 — Year 2 maths draft packs | The same school preview needs the rest of KS1, not only KS2. Packs stay `draft`. |
 
 ## Rejected
 

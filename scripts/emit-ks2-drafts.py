@@ -56,14 +56,14 @@ def emit_checks(items: list[dict], indent: int) -> str:
     return "\n".join(blocks)
 
 
-def emit_spec(spec: dict) -> str:
+def emit_spec(spec: dict, helper: str = "ks2MathsDraft") -> str:
     prereq = spec.get("prerequisites") or []
     rtp = spec.get("readyToProgress") or []
     tip = spec.get("tip")
     stretch = spec.get("stretch")
     stop = spec.get("stopRule")
     lines = [
-        "  ks2MathsDraft({",
+        f"  {helper}({{",
         f"    id: {q(spec['id'])},",
         f"    year: {spec['year']},",
         f"    strand: {q(spec['strand'])},",
@@ -122,6 +122,22 @@ def write_year(year: int, specs: list[dict]) -> None:
         """
     ) + body + "\n];\n"
     path = ROOT / f"src/content/england/ks2/year-{year}/maths/topics.ts"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text)
+    print(f"wrote {path} ({len(specs)} topics)")
+
+
+def write_year2(specs: list[dict]) -> None:
+    body = "\n".join(emit_spec(spec, "ks1Year2Draft") for spec in specs)
+    text = dedent(
+        """\
+        import { ks1Year2Draft } from "@/content/england/ks1/year-2/maths/draft";
+        import type { Topic } from "@/content/schema";
+
+        export const year2MathsTopics: Topic[] = [
+        """
+    ) + body + "\n];\n"
+    path = ROOT / "src/content/england/ks1/year-2/maths/topics.ts"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text)
     print(f"wrote {path} ({len(specs)} topics)")
@@ -1130,8 +1146,19 @@ def main() -> None:
     write_year(4, year4)
     write_year(5, year5)
     write_year(6, year6)
-    print(f"total {len(YEAR3) + len(year4) + len(year5) + len(year6)} KS2 topics")
+    year2 = runpy.run_path(str(ROOT / "scripts/ks1_year2.py"))["YEAR2"]
+    write_year2(year2)
+    ks2_total = len(YEAR3) + len(year4) + len(year5) + len(year6)
+    print(f"total {ks2_total} KS2 topics, {len(year2)} Year 2 topics")
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+
+    if "--year2-only" in sys.argv:
+        import runpy
+
+        year2 = runpy.run_path(str(ROOT / "scripts/ks1_year2.py"))["YEAR2"]
+        write_year2(year2)
+    else:
+        main()

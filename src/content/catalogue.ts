@@ -1,11 +1,12 @@
 import type { Topic } from "@/content/schema";
 import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
+import { year2MathsTopics } from "@/content/england/ks1/year-2";
 import { ks2MathsTopics } from "@/content/england/ks2";
 
-export { year1MathsTopics };
+export { year1MathsTopics, year2MathsTopics };
 export { ks2MathsTopics };
 
-export const allMathsTopics: Topic[] = [...year1MathsTopics, ...ks2MathsTopics];
+export const allMathsTopics: Topic[] = [...year1MathsTopics, ...year2MathsTopics, ...ks2MathsTopics];
 
 export function getAnyTopicBySlug(slug: string): Topic | undefined {
   return allMathsTopics.find((topic) => topic.slug === slug);

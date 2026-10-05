@@ -2,7 +2,7 @@
 
 Every published idea is a **topic**. A topic is one thing a parent can learn and then practise with their child the same day.
 
-Topics live under `src/content/england/` (Year 1 in `ks1/year-1/maths/topics/`, KS2 drafts in `ks2/year-*/maths/`) and must satisfy `src/content/schema.ts`. Run `npm run validate:content` after any edit.
+Topics live under `src/content/england/` (Year 1 in `ks1/year-1/maths/topics/`, Year 2 drafts in `ks1/year-2/maths/`, KS2 drafts in `ks2/year-*/maths/`) and must satisfy `src/content/schema.ts`. Run `npm run validate:content` after any edit.
 
 ## Identity
 

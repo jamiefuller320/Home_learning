@@ -1,4 +1,4 @@
-import { allMathsTopics, year1MathsTopics } from "../src/content/catalogue";
+import { allMathsTopics, year1MathsTopics, year2MathsTopics } from "../src/content/catalogue";
 import { ks2MathsTopics } from "../src/content/england/ks2";
 import { validateTopics } from "../src/content/validate";
 
@@ -13,5 +13,5 @@ if (issues.length > 0) {
 }
 
 console.log(
-  `Validated ${allMathsTopics.length} maths topics (${year1MathsTopics.length} Year 1, ${ks2MathsTopics.length} KS2 drafts). No issues.`,
+  `Validated ${allMathsTopics.length} maths topics (${year1MathsTopics.length} Year 1, ${year2MathsTopics.length} Year 2 drafts, ${ks2MathsTopics.length} KS2 drafts). No issues.`,
 );

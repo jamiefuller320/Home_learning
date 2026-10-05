@@ -24,17 +24,19 @@ export default function HowItWorksPage() {
       <section>
         <h2 className="serif text-3xl text-ink">What this first slice covers</h2>
         <p className="mt-3">
-          England Year 1 maths is the first slice. There is also a draft KS2 map: Years 3–6 maths
-          packs covering the National Curriculum programme of study, so a school can see the shape
-          of a parent lesson through the end of Year 6. Those packs stay draft until a teacher checks them.
+          England Year 1 maths is the first slice. Year 2 draft packs finish KS1. Years 3–6 map KS2.
+          Together they cover the National Curriculum programme of study through the end of Year 6,
+          so a school can see the shape of a parent lesson across primary. Year 2–6 packs stay draft
+          until a teacher checks them.
         </p>
       </section>
       <section>
         <h2 className="serif text-3xl text-ink">What we are not doing yet</h2>
         <p className="mt-3">
           We are not scraping school websites, reproducing White Rose or phonics schemes, or storing
-          anything about your child. Progress lives in this browser only. Year 2, other subjects and
-          UK nations sit in a deferred-ideas list. KS2 maths exists here as a draft syllabus preview.
+          anything about your child. Progress lives in this browser only. Other subjects and UK
+          nations sit in a deferred-ideas list. Year 2 and KS2 maths exist here as a draft syllabus
+          preview — not a teacher-reviewed product yet.
         </p>
       </section>
       <section>
@@ -69,8 +71,8 @@ export default function HowItWorksPage() {
         </p>
       </section>
       <p>
-        <Link href="/ks2" className="font-semibold text-teal hover:underline">
-          Browse the KS2 draft syllabus →
+        <Link href="/syllabus" className="font-semibold text-teal hover:underline">
+          Browse the primary draft syllabus →
         </Link>
       </p>
     </article>

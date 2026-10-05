@@ -2,6 +2,7 @@ import type { Topic } from "@/content/schema";
 
 export function yearMathsHref(year: Topic["year"]): string {
   if (year === 1) return "/year-1-maths";
+  if (year === 2) return "/year-2-maths";
   return `/ks2/year-${year}`;
 }
 
