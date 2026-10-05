@@ -23,6 +23,16 @@ export const ks2MathsTopics: Topic[] = [
   ...year6MathsTopics,
 ];
 
+export function ks2YearKey(year: Ks2Year): string {
+  return `year-${year}`;
+}
+
+export function parseKs2YearKey(yearKey: string): Ks2Year | undefined {
+  const match = /^year-([3-6])$/.exec(yearKey);
+  if (!match) return undefined;
+  return Number(match[1]) as Ks2Year;
+}
+
 export function getKs2TopicsForYear(year: number): Topic[] | undefined {
   if (year === 3 || year === 4 || year === 5 || year === 6) {
     return ks2MathsTopicsByYear[year];
@@ -32,4 +42,17 @@ export function getKs2TopicsForYear(year: number): Topic[] | undefined {
 
 export function getKs2TopicBySlug(year: number, slug: string): Topic | undefined {
   return getKs2TopicsForYear(year)?.find((topic) => topic.slug === slug);
+}
+
+export function ks2YearStaticParams(): { yearKey: string }[] {
+  return KS2_YEARS.map((year) => ({ yearKey: ks2YearKey(year) }));
+}
+
+export function ks2TopicStaticParams(): { yearKey: string; slug: string }[] {
+  return KS2_YEARS.flatMap((year) =>
+    (getKs2TopicsForYear(year) ?? []).map((topic) => ({
+      yearKey: ks2YearKey(year),
+      slug: topic.slug,
+    })),
+  );
 }

@@ -4,29 +4,29 @@ import { notFound } from "next/navigation";
 import { DraftBadge } from "@/components/DraftBadge";
 import { HomePack } from "@/components/HomePack";
 import { STAGE_2_META, StageMetaBox } from "@/components/StageMetaBox";
-import { KS2_YEARS, getKs2TopicBySlug, getKs2TopicsForYear } from "@/content/england/ks2";
+import { getKs2TopicBySlug, ks2TopicStaticParams, parseKs2YearKey } from "@/content/england/ks2";
 import { topicHref } from "@/lib/topic-path";
 
 type PageProps = {
-  params: Promise<{ year: string; slug: string }>;
+  params: Promise<{ yearKey: string; slug: string }>;
 };
 
 export function generateStaticParams() {
-  return KS2_YEARS.flatMap((year) =>
-    (getKs2TopicsForYear(year) ?? []).map((topic) => ({ year: String(year), slug: topic.slug })),
-  );
+  return ks2TopicStaticParams();
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { year, slug } = await params;
-  const topic = getKs2TopicBySlug(Number(year), slug);
+  const { yearKey, slug } = await params;
+  const year = parseKs2YearKey(yearKey);
+  const topic = year ? getKs2TopicBySlug(year, slug) : undefined;
   if (!topic) return { title: "Home pack" };
   return { title: `${topic.shortTitle} home pack` };
 }
 
 export default async function Ks2PackPage({ params }: PageProps) {
-  const { year, slug } = await params;
-  const topic = getKs2TopicBySlug(Number(year), slug);
+  const { yearKey, slug } = await params;
+  const year = parseKs2YearKey(yearKey);
+  const topic = year ? getKs2TopicBySlug(year, slug) : undefined;
   if (!topic) notFound();
 
   return (

@@ -1,27 +1,29 @@
 import type { Metadata } from "next";
 import { SkillsTree } from "@/components/SkillsTree";
 import { Year1TopTabs } from "@/components/Year1TopTabs";
-import { KS2_YEARS, getKs2TopicsForYear, type Ks2Year } from "@/content/england/ks2";
+import { getKs2TopicsForYear, ks2YearStaticParams, parseKs2YearKey } from "@/content/england/ks2";
 import { notFound } from "next/navigation";
 
 type PageProps = {
-  params: Promise<{ year: string }>;
+  params: Promise<{ yearKey: string }>;
 };
 
 export function generateStaticParams() {
-  return KS2_YEARS.map((year) => ({ year: String(year) }));
+  return ks2YearStaticParams();
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { year } = await params;
+  const { yearKey } = await params;
+  const year = parseKs2YearKey(yearKey);
+  if (!year) return { title: "Skills tree" };
   return { title: `Year ${year} skills tree` };
 }
 
 export default async function Ks2YearSkillsPage({ params }: PageProps) {
-  const { year: yearParam } = await params;
-  const year = Number(yearParam) as Ks2Year;
-  const topics = getKs2TopicsForYear(year);
-  if (!topics) notFound();
+  const { yearKey } = await params;
+  const year = parseKs2YearKey(yearKey);
+  const topics = year ? getKs2TopicsForYear(year) : undefined;
+  if (!year || !topics) notFound();
 
   return (
     <div>
