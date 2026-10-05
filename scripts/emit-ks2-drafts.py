@@ -65,7 +65,10 @@ def emit_spec(spec: dict, helper: str = "ks2MathsDraft") -> str:
     lines = [
         f"  {helper}({{",
         f"    id: {q(spec['id'])},",
-        f"    year: {spec['year']},",
+    ]
+    if helper == "ks2MathsDraft":
+        lines.append(f"    year: {spec['year']},")
+    lines += [
         f"    strand: {q(spec['strand'])},",
         f"    title: {q(spec['title'])},",
         f"    shortTitle: {q(spec['shortTitle'])},",

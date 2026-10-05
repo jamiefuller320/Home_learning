@@ -4,7 +4,6 @@ import type { Topic } from "@/content/schema";
 export const year2MathsTopics: Topic[] = [
   ks1Year2Draft({
     id: "y2-tens-and-ones",
-    year: 2,
     strand: "Number and place value",
     title: "Tens and ones in two-digit numbers",
     shortTitle: "Tens and ones",
@@ -78,7 +77,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-numbers-to-100-on-a-line",
-    year: 2,
     strand: "Number and place value",
     title: "Numbers to 100 on a line",
     shortTitle: "Numbers on a line",
@@ -149,7 +147,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-order-to-100",
-    year: 2,
     strand: "Number and place value",
     title: "Compare and order numbers to 100",
     shortTitle: "Order to 100",
@@ -220,7 +217,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-count-in-2-3-5-10",
-    year: 2,
     strand: "Number and place value",
     title: "Counting in 2s, 3s, 5s and 10s",
     shortTitle: "Count in 2, 3, 5, 10",
@@ -292,7 +288,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-number-words-to-100",
-    year: 2,
     strand: "Number and place value",
     title: "Read and write numbers to 100",
     shortTitle: "Number words to 100",
@@ -364,7 +359,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-facts-to-20",
-    year: 2,
     strand: "Addition and subtraction",
     title: "Addition and subtraction facts to 20",
     shortTitle: "Facts to 20",
@@ -436,7 +430,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-related-facts-to-100",
-    year: 2,
     strand: "Addition and subtraction",
     title: "Related facts to 100",
     shortTitle: "Related facts to 100",
@@ -507,7 +500,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-add-subtract-across-10",
-    year: 2,
     strand: "Addition and subtraction",
     title: "Add and subtract across 10",
     shortTitle: "Across 10",
@@ -580,7 +572,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-difference-how-many-more",
-    year: 2,
     strand: "Addition and subtraction",
     title: "Difference: how many more?",
     shortTitle: "How many more?",
@@ -651,7 +642,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-add-subtract-1s-or-10s",
-    year: 2,
     strand: "Addition and subtraction",
     title: "Add or subtract ones, or tens, to a two-digit number",
     shortTitle: "+/− 1s or 10s",
@@ -723,7 +713,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-add-subtract-two-2-digit",
-    year: 2,
     strand: "Addition and subtraction",
     title: "Add and subtract two two-digit numbers",
     shortTitle: "TO +/− TO",
@@ -796,7 +785,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-add-three-ones",
-    year: 2,
     strand: "Addition and subtraction",
     title: "Add three one-digit numbers",
     shortTitle: "Add three ones",
@@ -867,7 +855,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-inverse-and-missing-numbers",
-    year: 2,
     strand: "Addition and subtraction",
     title: "Inverse and missing numbers",
     shortTitle: "Inverse and missing",
@@ -939,7 +926,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-tables-2-5-10",
-    year: 2,
     strand: "Multiplication and division",
     title: "The 2, 5 and 10 times tables",
     shortTitle: "2, 5 and 10 tables",
@@ -1012,7 +998,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-odd-and-even",
-    year: 2,
     strand: "Multiplication and division",
     title: "Odd and even numbers",
     shortTitle: "Odd and even",
@@ -1083,7 +1068,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-arrays-and-grouping",
-    year: 2,
     strand: "Multiplication and division",
     title: "Arrays, grouping and sharing",
     shortTitle: "Arrays and grouping",
@@ -1155,7 +1139,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-thirds-and-quarters",
-    year: 2,
     strand: "Fractions",
     title: "Thirds and quarters of shapes and sets",
     shortTitle: "Thirds and quarters",
@@ -1228,7 +1211,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-half-and-two-quarters",
-    year: 2,
     strand: "Fractions",
     title: "Two quarters and one half",
     shortTitle: "Half and two quarters",
@@ -1299,7 +1281,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-units-of-measure",
-    year: 2,
     strand: "Measurement",
     title: "Metres, centimetres, kilograms and litres",
     shortTitle: "Units of measure",
@@ -1372,7 +1353,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-money-pounds-and-pence",
-    year: 2,
     strand: "Measurement",
     title: "Pounds and pence",
     shortTitle: "Money",
@@ -1445,7 +1425,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-time-to-five-minutes",
-    year: 2,
     strand: "Measurement",
     title: "Time to five minutes",
     shortTitle: "Time to five minutes",
@@ -1518,7 +1497,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-2d-3d-properties",
-    year: 2,
     strand: "Geometry",
     title: "Properties of 2-D and 3-D shapes",
     shortTitle: "2-D and 3-D properties",
@@ -1593,7 +1571,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-turns-and-right-angles",
-    year: 2,
     strand: "Geometry",
     title: "Turns, patterns and right angles",
     shortTitle: "Turns and right angles",
@@ -1666,7 +1643,6 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-pictograms-and-tables",
-    year: 2,
     strand: "Statistics",
     title: "Pictograms, tallies, blocks and tables",
     shortTitle: "Pictograms and tables",
