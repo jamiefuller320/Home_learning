@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { glossaryTerms } from "@/content/glossary";
-import { year1MathsTopics } from "@/content/england/ks1/year-1/maths/topics";
+import { getAnyTopicById } from "@/content/catalogue";
+import { topicHref } from "@/lib/topic-path";
 import type { GlossaryTerm } from "@/content/schema";
 
 function initialLetter(term: string): string {
@@ -127,7 +128,7 @@ export function GlossaryIndex({
 
 function GlossaryCard({ term }: { term: GlossaryTerm }) {
   const relatedTopics = (term.relatedTopics ?? [])
-    .map((topicId) => year1MathsTopics.find((topic) => topic.id === topicId))
+    .map((topicId) => getAnyTopicById(topicId))
     .filter((topic): topic is NonNullable<typeof topic> => Boolean(topic));
 
   const seeAlsoTerms = (term.seeAlso ?? [])
@@ -166,7 +167,7 @@ function GlossaryCard({ term }: { term: GlossaryTerm }) {
             <span key={topic.id}>
               {index > 0 ? (index === relatedTopics.length - 1 ? " and " : ", ") : null}
               <Link
-                href={`/year-1-maths/${topic.slug}`}
+                href={topicHref(topic)}
                 prefetch={false}
                 className="font-medium text-teal hover:underline"
               >

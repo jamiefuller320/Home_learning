@@ -11,12 +11,13 @@ export const metadata: Metadata = {
 export default function ForSchoolsPage() {
   return (
     <article className="space-y-8 text-lg leading-8 text-ink-soft">
-      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal">For Year 1 teams</p>
+      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal">For school teams</p>
       <h1 className="serif text-4xl text-ink sm:text-5xl">Does this match how you teach it?</h1>
       <p>
         Home Learning is a parent-method coach, not a child app and not a rival scheme. Stage 1
         teaches the adult the current classroom method. Stage 2 is a short kitchen-table pack.
-        Packs stay draft until a teacher has reviewed them.
+        Packs stay draft until a teacher has reviewed them. There is a full Year 3–6 maths draft
+        syllabus so you can see what a lesson across KS2 might look like — still honestly draft.
       </p>
 
       <ParentVideo
@@ -78,9 +79,12 @@ export default function ForSchoolsPage() {
         </p>
       </section>
 
-      <p>
+      <p className="flex flex-wrap gap-x-6 gap-y-2">
+        <Link href="/ks2" className="font-semibold text-teal hover:underline">
+          Browse the KS2 draft syllabus →
+        </Link>
         <Link href="/year-1-maths" className="font-semibold text-teal hover:underline">
-          Browse the Year 1 maths topics →
+          Year 1 maths →
         </Link>
       </p>
     </article>

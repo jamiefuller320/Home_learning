@@ -1,13 +1,13 @@
 # Home Learning
 
-Parent-first home learning packs for English Key Stage 1, starting with Year 1 maths.
+Parent-first home learning packs for English primary maths, starting with Year 1 and with a draft Key Stage 2 syllabus (Years 3–6) for school preview.
 
 You read a short briefing on how school teaches an idea now. Then you get one 10–15 minute activity that uses things already in the house.
 
 ## First slice
 
-- England, KS1, Year 1 maths
-- Thirteen topics, including the ready-to-progress spine plus halves, quarters, coins, time, number words, and comparing length
+- England, KS1, Year 1 maths (thirteen topics)
+- Draft KS2 maths, Years 3–6, covering the National Curriculum programme of study so a school can see the lesson shape
 - Two stages on every topic: parent briefing, then home pack
 - Content stays `draft` until a human has reviewed the method
 - One proof-of-concept parent video (`Number facts within 10`) on `/for-schools` — an AI voice reading the written pack, not a child lesson
@@ -72,7 +72,8 @@ Read the compiled briefing on **Maintainer → Video script**, or dump files und
 | `docs/FRAMEWORK.md` | How we build, and what “done” means |
 | `docs/DEFERRED.md` | Ideas we are deliberately not building yet |
 | `docs/CONTENT_MODEL.md` | Rules for a topic pack |
-| `src/content/england/ks1/year-1/maths/` | The first-slice topics |
+| `src/content/england/ks1/year-1/maths/` | The first-slice Year 1 topics |
+| `src/content/england/ks2/` | Draft Year 3–6 maths packs |
 | `src/app` | Parent-facing reader |
 | `/language` | Language-improvement log (unclear phrases → team inbox → rewrite) |
 

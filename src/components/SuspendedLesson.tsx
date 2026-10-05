@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Topic } from "@/content/schema";
+import { yearMathsHref } from "@/lib/topic-path";
 
 export function SuspendedLesson({ topic }: { topic: Topic }) {
   return (
@@ -10,8 +11,8 @@ export function SuspendedLesson({ topic }: { topic: Topic }) {
         This lesson has been withdrawn while we fix something. The pack is still in the repo for maintainers, but it
         is hidden from the public lesson list until we restore it.
       </p>
-      <Link href="/year-1-maths/" className="mt-6 inline-block text-teal underline">
-        Back to live lessons
+      <Link href={yearMathsHref(topic.year)} className="mt-6 inline-block text-teal underline">
+        Back to this year’s lessons
       </Link>
     </article>
   );

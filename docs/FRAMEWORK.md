@@ -23,7 +23,7 @@ We are not building a child-facing lesson platform, a homework-doer, or a scrape
 6. **A wrong method is worse than no help.** Content ships as `draft` until a human has reviewed it.
 7. **Short and stoppable.** Every home pack has a stop rule. Fifteen focused minutes beats a battle.
 8. **Do not widen gaps.** Language stays everyday. Activities work in a kitchen, on a walk, or on a sofa. No assumption of quiet study space or extra kit.
-9. **England KS1 first.** Other nations, key stages, and subjects wait in `docs/DEFERRED.md`.
+9. **England primary maths first.** Year 1 remains the reviewed product slice. KS2 Years 3–6 may ship as honest `draft` packs so a school can see the syllabus shape. Other nations and subjects wait in `docs/DEFERRED.md`.
 10. **Remap, do not hard-wire 2014.** The 2014 National Curriculum is current; a replacement is due for first teaching in 2028. Topics carry source links and outcome codes so they can be remapped.
 
 ## Content pipeline
@@ -165,9 +165,13 @@ Same model. Do not add new product surfaces until Year 1 packs have been reviewe
 
 Separate spine. Must align to the child’s school phonics programme, not invent a fifth one. See deferred ideas.
 
+### Phase 3a — KS2 draft syllabus preview (Years 3–6 maths)
+
+Same parent-as-teacher model as Year 1. Packs stay `draft` so a school can browse what a lesson across the KS2 programme of study might look like. Teacher review and Year 2 still come later.
+
 ### Later phases
 
-KS2 maths (same parent-as-teacher model), science packs, school-scheme tags, Oak import, 2028 curriculum remap, and much later a **KS3/GCSE parent refresh**: upskill the adult to be a helpful friend, not a pseudo-teacher, by reactivating the primary concept spine. All listed in `docs/DEFERRED.md` (`DEF-006`, `DEF-007`, `DEF-011`).
+Science packs, school-scheme tags, Oak import, 2028 curriculum remap, and much later a **KS3/GCSE parent refresh**: upskill the adult to be a helpful friend, not a pseudo-teacher, by reactivating the primary concept spine. All listed in `docs/DEFERRED.md` (`DEF-007`, `DEF-011`).
 
 ## What we will not do in Phase 1
 

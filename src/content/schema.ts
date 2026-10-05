@@ -1,12 +1,14 @@
 export const JURISDICTIONS = ["england"] as const;
-export const KEY_STAGES = ["ks1"] as const;
+export const KEY_STAGES = ["ks1", "ks2"] as const;
 export const SUBJECTS = ["maths"] as const;
 export const REVIEW_STATUSES = ["draft", "reviewed"] as const;
+export const YEAR_GROUPS = [1, 2, 3, 4, 5, 6] as const;
 
 export type Jurisdiction = (typeof JURISDICTIONS)[number];
 export type KeyStage = (typeof KEY_STAGES)[number];
 export type Subject = (typeof SUBJECTS)[number];
 export type ReviewStatus = (typeof REVIEW_STATUSES)[number];
+export type YearGroup = (typeof YEAR_GROUPS)[number];
 
 export type Source = {
   label: string;
@@ -74,7 +76,7 @@ export type Topic = {
   summary: string;
   jurisdiction: Jurisdiction;
   keyStage: KeyStage;
-  year: 1;
+  year: YearGroup;
   subject: Subject;
   strand: string;
   /** Topic ids that should feel solid before this one. Empty means no required prior step. */

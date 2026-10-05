@@ -24,18 +24,17 @@ export default function HowItWorksPage() {
       <section>
         <h2 className="serif text-3xl text-ink">What this first slice covers</h2>
         <p className="mt-3">
-          England only. Key Stage 1. Year 1 maths. Ten topics mapped to the National Curriculum
-          programme of study and, where they exist, the DfE ready-to-progress criteria. Halves,
-          coins and time are included because parents meet them at home even when they are not on
-          the ready-to-progress list.
+          England Year 1 maths is the first slice. There is also a draft KS2 map: Years 3–6 maths
+          packs covering the National Curriculum programme of study, so a school can see the shape
+          of a parent lesson through the end of Year 6. Those packs stay draft until a teacher checks them.
         </p>
       </section>
       <section>
         <h2 className="serif text-3xl text-ink">What we are not doing yet</h2>
         <p className="mt-3">
           We are not scraping school websites, reproducing White Rose or phonics schemes, or storing
-          anything about your child. Progress lives in this browser only. Other subjects, year
-          groups and UK nations sit in a deferred-ideas list until this loop works.
+          anything about your child. Progress lives in this browser only. Year 2, other subjects and
+          UK nations sit in a deferred-ideas list. KS2 maths exists here as a draft syllabus preview.
         </p>
       </section>
       <section>
@@ -70,8 +69,8 @@ export default function HowItWorksPage() {
         </p>
       </section>
       <p>
-        <Link href="/year-1-maths" className="font-semibold text-teal hover:underline">
-          Browse the Year 1 maths topics →
+        <Link href="/ks2" className="font-semibold text-teal hover:underline">
+          Browse the KS2 draft syllabus →
         </Link>
       </p>
     </article>

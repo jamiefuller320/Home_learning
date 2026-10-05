@@ -1,4 +1,4 @@
-import { sortTopicsByPrerequisites } from "@/content/england/ks1/year-1/maths/curriculum";
+import { sortTopicsByPrerequisites } from "@/content/curriculum";
 import type { Topic } from "@/content/schema";
 
 /** First topic in prerequisite order that lists the term — that lesson introduces it. */
