@@ -4,6 +4,7 @@ import type { Topic } from "@/content/schema";
 export const year4MathsTopics: Topic[] = [
   ks2MathsDraft({
     id: "y4-thousands",
+    glossaryTerms: ["place-value", "rounding", "compose"],
     year: 4,
     strand: "Number and place value",
     title: "Thousands, hundreds, tens and ones",
@@ -17,7 +18,7 @@ export const year4MathsTopics: Topic[] = [
     readyToProgress: ["4NPV-1", "4NPV-2"],
     whyThisMatters: "4,058 is four thousands, no hundreds, five tens and eight ones. Written methods in Year 4 fall apart if that picture is fuzzy.",
     inPlainEnglish: "A thousand is ten hundreds. In 4,058 the 4 is 4,000, the 0 holds the hundreds place, the 5 is 50, the 8 is 8. You can also think of 4,058 as 40 hundreds and 58 ones.",
-    howSchoolTeachesIt: "School uses place-value charts, sliders, and Gattegno-style charts. They compose and decompose with standard and non-standard partitions, and they place numbers on a line to 10,000.",
+    howSchoolTeachesIt: "School uses place-value charts, sliders, and tens-column charts. They compose and decompose with standard and non-standard partitions, and they place numbers on a line to 10,000.",
     sayThis: [
       { prompt: "What is the 5 worth in 4,058?", listenFor: "50, or five tens." },
       "Make 4,058 with thousands and hundreds in two different ways.",
@@ -77,6 +78,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-count-6-7-9-25-1000",
+    glossaryTerms: ["number-line", "place-value", "quarter"],
     year: 4,
     strand: "Number and place value",
     title: "Counting in 6s, 7s, 9s, 25s and 1,000s",
@@ -149,6 +151,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-negative-numbers",
+    glossaryTerms: ["negative-number", "number-line", "numeral"],
     year: 4,
     strand: "Number and place value",
     title: "Counting through zero",
@@ -159,7 +162,7 @@ export const year4MathsTopics: Topic[] = [
       "Count backwards through 0 to include negative numbers",
     ],
     readyToProgress: [],
-    whyThisMatters: "Weather, lifts and later coordinates all use numbers below zero. Year 4 is the number line, not calculating with negatives yet.",
+    whyThisMatters: "Weather, lifts and later map grids all use numbers below zero. Year 4 is the number line, not calculating with negatives yet.",
     inPlainEnglish: "After 1, 0, comes −1, −2, −3. Negative is a direction on the line, the other side of zero. −3 is less than −1.",
     howSchoolTeachesIt: "School uses a number line that crosses 0, temperature, and sometimes a lift going below ground. They compare positions, and they do not yet do 3 − 5 as a written algorithm unless the line is there.",
     sayThis: [
@@ -220,6 +223,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-rounding",
+    glossaryTerms: ["rounding", "multiple", "estimate"],
     year: 4,
     strand: "Number and place value",
     title: "Round to the nearest 10, 100 or 1,000",
@@ -290,6 +294,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-roman-to-100",
+    glossaryTerms: ["roman-numeral", "place-value", "numeral"],
     year: 4,
     strand: "Number and place value",
     title: "Roman numerals to 100",
@@ -362,6 +367,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-written-add-subtract-4-digit",
+    glossaryTerms: ["place-value", "estimate", "rounding", "fluency", "inverse"],
     year: 4,
     strand: "Addition and subtraction",
     title: "Written add and subtract with 4-digit numbers",
@@ -434,6 +440,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-tables-to-12",
+    glossaryTerms: ["fluency", "array"],
     year: 4,
     strand: "Multiplication and division",
     title: "Multiplication facts to 12 × 12",
@@ -505,6 +512,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-factor-pairs",
+    glossaryTerms: ["factor", "array"],
     year: 4,
     strand: "Multiplication and division",
     title: "Factor pairs and multiplying three numbers",
@@ -516,7 +524,7 @@ export const year4MathsTopics: Topic[] = [
       "Recognise and use factor pairs and commutativity in mental calculations",
     ],
     readyToProgress: ["4MD-2"],
-    whyThisMatters: "Factor pairs later unlock fractions and primes. Grouping 4 × 12 × 5 as 4 × 5 × 12 is a mental superpower.",
+    whyThisMatters: "Factor pairs later unlock fractions. Grouping 4 × 12 × 5 as 4 × 5 × 12 is a mental superpower.",
     inPlainEnglish: "Factors of 12 are pairs: 1 and 12, 2 and 6, 3 and 4. Multiplying by 1 leaves a number. Multiplying by 0 gives 0. 2 × 3 × 4 can be (2×3)×4 or 2×(3×4).",
     howSchoolTeachesIt: "School uses arrays that split, factor bugs, and regrouping. They are careful with ×0, which children find rude.",
     sayThis: [
@@ -577,6 +585,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-short-multiplication",
+    glossaryTerms: ["estimate", "array", "area"],
     year: 4,
     strand: "Multiplication and division",
     title: "Multiply 2-digit and 3-digit numbers by a 1-digit number",
@@ -648,6 +657,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-remainders",
+    glossaryTerms: ["remainder"],
     year: 4,
     strand: "Multiplication and division",
     title: "Division with remainders",
@@ -658,9 +668,9 @@ export const year4MathsTopics: Topic[] = [
       "Solve problems involving multiplying and adding, including … integer scaling problems and harder correspondence problems",
     ],
     readyToProgress: ["4NF-2"],
-    whyThisMatters: "Year 5 short division needs remainders that mean something in the story, not just ‘r 2’ as wallpaper.",
+    whyThisMatters: "Year 5 written sharing needs remainders that mean something in the story, not just ‘r 2’ as wallpaper.",
     inPlainEnglish: "17 ÷ 5 is 3 each with 2 left over, if we cannot split objects. If the story is cars holding 5, you may need a 4th car. The remainder’s meaning follows the story.",
-    howSchoolTeachesIt: "School uses objects, then short division with a remainder. They ask ‘what does the leftover mean?’ before they write r.",
+    howSchoolTeachesIt: "School uses objects, then a written share with a remainder. They ask ‘what does the leftover mean?’ before they write r.",
     sayThis: [
       "How many equal groups? What is left?",
       "Does this leftover need another group in the story?",
@@ -668,7 +678,7 @@ export const year4MathsTopics: Topic[] = [
     ],
     avoidThis: [
       "Always writing r without a sentence.",
-      "Decimals remaining in Year 4 as the default.",
+      "Writing leftover amounts with a point as the default in Year 4.",
     ],
     misconceptions: [
       {
@@ -719,6 +729,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-multiply-divide-by-10-100",
+    glossaryTerms: ["decimal", "place-value", "hundredths", "tenths"],
     year: 4,
     strand: "Multiplication and division",
     title: "Multiply and divide by 10 and 100",
@@ -730,8 +741,8 @@ export const year4MathsTopics: Topic[] = [
     ],
     readyToProgress: ["4MD-1", "4NF-3"],
     whyThisMatters: "This is the engine of decimals, money and converting centimetres to metres.",
-    inPlainEnglish: "3 × 10 = 30: the 3 ones become 3 tens. 3 × 100 = 300. 30 ÷ 10 = 3. 5 ÷ 10 = 5/10 = 0.5 if school has shown tenths as decimals. The digits slide; zeros hold empty places.",
-    howSchoolTeachesIt: "Place-value sliders / Gattegno. They show tenths and hundredths when dividing ones. They avoid ‘add a zero’ without place talk.",
+    inPlainEnglish: "3 × 10 = 30: the 3 ones become 3 tens. 3 × 100 = 300. 30 ÷ 10 = 3. 5 ÷ 10 = 5/10. School may write that as a decimal — a number with a point that separates ones from tenths, so 0.5 is 5 tenths. The digits slide; zeros hold empty places.",
+    howSchoolTeachesIt: "Place-value sliders and a tens chart. They show tenths and hundredths when dividing ones. They avoid ‘add a zero’ without place talk.",
     sayThis: [
       "Did the digits get 10 times the size, or 100?",
       "What sits in the ones place now?",
@@ -790,6 +801,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-equivalent-fraction-families",
+    glossaryTerms: ["equivalent-fraction", "common-factor", "denominator", "multiple", "numeral", "quarter", "factor", "half", "third"],
     year: 4,
     strand: "Fractions",
     title: "Families of equivalent fractions",
@@ -861,6 +873,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-hundredths",
+    glossaryTerms: ["denominator", "hundredths", "tenths", "decimal"],
     year: 4,
     strand: "Fractions",
     title: "Hundredths",
@@ -932,6 +945,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-mixed-numbers",
+    glossaryTerms: ["improper-fraction", "mixed-number", "number-line", "denominator", "place-value", "numerator", "remainder", "quarter", "third"],
     year: 4,
     strand: "Fractions",
     title: "Mixed numbers and improper fractions",
@@ -951,7 +965,7 @@ export const year4MathsTopics: Topic[] = [
       "Show 1 3/4 as only quarters.",
     ],
     avoidThis: [
-      "A convert formula with no bars.",
+      "A convert shortcut with no bars.",
       "Calling improper ‘wrong’ — the name is unlucky; it is a useful form.",
     ],
     misconceptions: [
@@ -1003,6 +1017,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-add-subtract-fractions",
+    glossaryTerms: ["mixed-number", "denominator"],
     year: 4,
     strand: "Fractions",
     title: "Add and subtract fractions, including bridging 1",
@@ -1074,6 +1089,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-decimal-equivalents",
+    glossaryTerms: ["decimal", "number-line", "place-value", "hundredths", "quarter", "half", "tenths"],
     year: 4,
     strand: "Fractions",
     title: "Decimal equivalents of tenths, hundredths and halves",
@@ -1146,6 +1162,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-compare-decimals",
+    glossaryTerms: ["number-line", "place-value", "hundredths", "decimal", "rounding", "compare-length", "tenths"],
     year: 4,
     strand: "Fractions",
     title: "Compare decimals with up to 2 decimal places",
@@ -1220,6 +1237,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-convert-measures",
+    glossaryTerms: ["number-line", "place-value", "decimal", "half"],
     year: 4,
     strand: "Measurement",
     title: "Convert units, including time",
@@ -1293,6 +1311,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-perimeter-and-area",
+    glossaryTerms: ["right-angle", "perimeter", "area", "half"],
     year: 4,
     strand: "Measurement",
     title: "Perimeter of rectilinear shapes and area by counting squares",
@@ -1365,6 +1384,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-12-and-24-hour",
+    glossaryTerms: ["number-line", "quarter"],
     year: 4,
     strand: "Measurement",
     title: "Analogue, digital, 12-hour and 24-hour time",
@@ -1436,6 +1456,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-shape-properties",
+    glossaryTerms: ["right-angle", "parallel", "obtuse-angle", "vertex", "acute-angle"],
     year: 4,
     strand: "Geometry",
     title: "Triangles, quadrilaterals and angles",
@@ -1509,6 +1530,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-symmetry",
+    glossaryTerms: ["line-of-symmetry", "perpendicular", "horizontal", "reflection", "vertical"],
     year: 4,
     strand: "Geometry",
     title: "Line symmetry",
@@ -1582,6 +1604,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-coordinates-and-translations",
+    glossaryTerms: ["translation", "coordinate", "number-word", "vertical", "quarter"],
     year: 4,
     strand: "Geometry",
     title: "Coordinates and translations in the first quadrant",
@@ -1655,6 +1678,7 @@ export const year4MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y4-time-graphs",
+    glossaryTerms: ["bar-chart", "estimate", "third"],
     year: 4,
     strand: "Statistics",
     title: "Bar charts, time graphs and comparison questions",

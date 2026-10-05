@@ -12,7 +12,8 @@ export function yearSkillsHref(year: Topic["year"]): string {
 
 export function yearGlossaryHref(year: Topic["year"]): string {
   if (year === 1) return "/year-1-maths/glossary";
-  return "/year-1-maths/glossary";
+  if (year === 2) return "/year-2-maths/glossary";
+  return `/ks2/year-${year}/glossary`;
 }
 
 export function topicHref(topic: Topic): string {

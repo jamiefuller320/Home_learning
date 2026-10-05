@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
+import { allMathsTopics } from "../src/content/catalogue";
 import { year1MathsTopics } from "../src/content/england/ks1/year-1/maths/topics";
+import { year2MathsTopics } from "../src/content/england/ks1/year-2";
 import { countingWithin100 } from "../src/content/england/ks1/year-1/maths/topics/counting-within-100";
 import { factsWithin10 } from "../src/content/england/ks1/year-1/maths/topics/facts-within-10";
 import { numberWordsTo20 } from "../src/content/england/ks1/year-1/maths/topics/number-words-to-20";
@@ -9,10 +11,12 @@ import { plusMinusEquals } from "../src/content/england/ks1/year-1/maths/topics/
 import { quarters } from "../src/content/england/ks1/year-1/maths/topics/quarters";
 import {
   BLOCKED_EVERYDAY_GLOSSARY_ALIASES,
+  glossaryTermIdsUpToYear,
   introducingTopicId,
   isBlockedEverydayGlossaryAlias,
   splitGlossaryText,
 } from "../src/content/glossary";
+import { yearGlossaryHref } from "../src/lib/topic-path";
 import {
   firstIntroductionInLesson,
   glossaryMentionTreatment,
@@ -135,5 +139,17 @@ assert.equal(
   glossaryMentionTreatment("half", quarters.parentBriefing.inPlainEnglish, 0, quarters, year1MathsTopics),
   "recall",
 );
+
+assert.equal(introducingTopicId("place-value", allMathsTopics), "y2-tens-and-ones");
+assert.equal(introducingTopicId("numeral", allMathsTopics), "number-words-to-20");
+assert.equal(introducingTopicId("denominator", allMathsTopics), "y3-unit-and-non-unit-fractions");
+assert.ok(year2MathsTopics.find((topic) => topic.id === "y2-tens-and-ones")?.glossaryTerms.includes("place-value"));
+assert.ok(year2MathsTopics.find((topic) => topic.id === "y2-number-words-to-100")?.glossaryTerms.includes("numeral"));
+assert.equal(glossaryTermIdsUpToYear(1).includes("place-value"), false);
+assert.ok(glossaryTermIdsUpToYear(2).includes("place-value"));
+assert.ok(glossaryTermIdsUpToYear(3).includes("denominator"));
+assert.equal(yearGlossaryHref(1), "/year-1-maths/glossary");
+assert.equal(yearGlossaryHref(2), "/year-2-maths/glossary");
+assert.equal(yearGlossaryHref(4), "/ks2/year-4/glossary");
 
 console.log("glossary tests passed.");

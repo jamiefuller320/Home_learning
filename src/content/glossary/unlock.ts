@@ -22,5 +22,14 @@ export function unlockedTermIdsFor(topic: Topic, topics: Topic[]): string[] {
   }
 
   walk(topic.id);
+
+  // Later-year packs do not list earlier years as prerequisites, but those
+  // introducing lessons have already taught the words.
+  for (const earlier of topics) {
+    if (earlier.year < topic.year) {
+      earlier.glossaryTerms.forEach((termId) => unlocked.add(termId));
+    }
+  }
+
   return [...unlocked];
 }

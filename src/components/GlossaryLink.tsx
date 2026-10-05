@@ -3,9 +3,13 @@
 import Link from "next/link";
 import { useEffect, useId, useRef } from "react";
 import { getGlossaryTermById } from "@/content/glossary";
+import { yearGlossaryHref } from "@/lib/topic-path";
+import { useLessonGlossary } from "./LessonGlossary";
 
 export function GlossaryLink({ termId, children }: { termId: string; children: React.ReactNode }) {
   const term = getGlossaryTermById(termId);
+  const lesson = useLessonGlossary();
+  const glossaryHref = yearGlossaryHref(lesson?.topic.year ?? 1);
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const popupId = useId();
 
@@ -65,7 +69,7 @@ export function GlossaryLink({ termId, children }: { termId: string; children: R
           <span className="block font-semibold text-teal">{term.term}</span>
           <span className="mt-2 block text-ink-soft">{term.plainEnglish}</span>
           <Link
-            href={`/year-1-maths/glossary#${term.id}`}
+            href={`${glossaryHref}#${term.id}`}
             prefetch={false}
             className="mt-3 inline-block text-sm font-semibold text-teal hover:underline"
           >

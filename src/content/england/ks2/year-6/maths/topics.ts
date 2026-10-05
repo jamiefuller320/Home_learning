@@ -4,6 +4,7 @@ import type { Topic } from "@/content/schema";
 export const year6MathsTopics: Topic[] = [
   ks2MathsDraft({
     id: "y6-numbers-to-10-million",
+    glossaryTerms: ["place-value", "partition", "decimal"],
     year: 6,
     strand: "Number and place value",
     title: "Numbers to 10 million",
@@ -75,6 +76,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-rounding-and-negatives",
+    glossaryTerms: ["negative-number", "multiple", "number-line", "rounding", "numeral"],
     year: 6,
     strand: "Number and place value",
     title: "Rounding to any degree of accuracy, and intervals across zero",
@@ -147,6 +149,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-long-multiplication",
+    glossaryTerms: ["long-multiplication", "estimate", "decimal", "fluency", "inverse"],
     year: 6,
     strand: "Calculation",
     title: "Long multiplication of 4-digit by 2-digit",
@@ -218,6 +221,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-long-division",
+    glossaryTerms: ["short-division", "long-division", "remainder", "multiple", "estimate", "rounding", "decimal"],
     year: 6,
     strand: "Calculation",
     title: "Long and short division by 2-digit numbers",
@@ -290,6 +294,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-order-of-operations",
+    glossaryTerms: ["order-of-operations"],
     year: 6,
     strand: "Calculation",
     title: "Order of operations",
@@ -303,7 +308,7 @@ export const year6MathsTopics: Topic[] = [
     readyToProgress: [],
     whyThisMatters: "Secondary maths assumes this. A wrong order is a wrong method in costume.",
     inPlainEnglish: "Do brackets first. Then multiply and divide (left to right). Then add and subtract (left to right). 2+1×3=5 because 1×3 happens before adding. (2+1)×3=9.",
-    howSchoolTeachesIt: "Schools may say BODMAS/BIDMAS/PEMDAS. The idea is the same. They explore 2+1×3 vs (2+1)×3. Indices if they appear are later; Year 6 statutory is the four operations plus brackets.",
+    howSchoolTeachesIt: "Schools may say BODMAS, BIDMAS or PEMDAS — names for the same order: brackets, then multiply and divide left to right, then add and subtract left to right. They explore 2+1×3 vs (2+1)×3. Indices if they appear are later; Year 6 statutory is the four operations plus brackets.",
     sayThis: [
       "Are there brackets?",
       "Any multiply or divide before we add?",
@@ -362,6 +367,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-common-factors-and-multiples",
+    glossaryTerms: ["lcm", "hcf", "common-factor", "multiple", "factor", "prime"],
     year: 6,
     strand: "Calculation",
     title: "Common factors, common multiples and primes",
@@ -432,6 +438,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-simplify-and-compare-fractions",
+    glossaryTerms: ["common-factor", "denominator", "multiple", "quarter", "factor", "hcf", "lcm"],
     year: 6,
     strand: "Fractions",
     title: "Simplify fractions and compare any two fractions",
@@ -504,6 +511,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-add-subtract-unlike-fractions",
+    glossaryTerms: ["equivalent-fraction", "mixed-number", "denominator", "half", "third", "lcm"],
     year: 6,
     strand: "Fractions",
     title: "Add and subtract fractions with different denominators",
@@ -574,6 +582,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-multiply-and-divide-fractions",
+    glossaryTerms: ["denominator", "numerator", "quarter", "inverse", "third", "area", "half"],
     year: 6,
     strand: "Fractions",
     title: "Multiply fractions and divide a fraction by a whole number",
@@ -646,6 +655,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-decimals-and-percentages",
+    glossaryTerms: ["short-division", "percentage", "place-value", "hundredths", "remainder", "decimal", "tenths"],
     year: 6,
     strand: "Fractions",
     title: "Decimal place value, calculating, and FDP equivalents",
@@ -721,6 +731,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-percentages-of-amounts",
+    glossaryTerms: ["percentage", "bar-model", "decimal", "tenths", "half"],
     year: 6,
     strand: "Ratio and proportion",
     title: "Percentages of amounts",
@@ -731,7 +742,7 @@ export const year6MathsTopics: Topic[] = [
       "Solve problems involving the calculation of percentages and the use of percentages for comparison",
     ],
     readyToProgress: [],
-    whyThisMatters: "Pie charts, sales, and SATs all ask 15% of. Building from 10% and 1% keeps the method school-like, not a calculator-only leap.",
+    whyThisMatters: "Sales, comparison questions, and SATs all ask 15% of. Building from 10% and 1% keeps the method school-like, not a calculator-only leap.",
     inPlainEnglish: "10% is a tenth. 5% is half of that. 1% is 1/100. 15% = 10% + 5%. 15% of 360: 10% is 36, 5% is 18, total 54.",
     howSchoolTeachesIt: "Bar models of 100%, then 10% chunks. Comparison: which is larger, 20% of 50 or 10% of 120?",
     sayThis: [
@@ -792,6 +803,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-ratio",
+    glossaryTerms: ["percentage", "bar-model", "third", "ratio"],
     year: 6,
     strand: "Ratio and proportion",
     title: "Ratio as ‘for every’",
@@ -863,6 +875,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-scale-factors",
+    glossaryTerms: ["scale-factor", "factor", "ratio", "area"],
     year: 6,
     strand: "Ratio and proportion",
     title: "Scale factors and similar shapes",
@@ -934,6 +947,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-unequal-sharing",
+    glossaryTerms: ["multiple", "ratio"],
     year: 6,
     strand: "Ratio and proportion",
     title: "Unequal sharing and grouping",
@@ -1005,23 +1019,24 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-simple-formulae",
+    glossaryTerms: ["perimeter", "formula", "number-word", "inverse", "area", "half"],
     year: 6,
     strand: "Algebra",
     title: "Simple formulae",
     shortTitle: "Formulae",
-    summary: "Use a formula such as p = 2(l + w) or d = 2r by substituting numbers, in maths and in familiar science-like contexts.",
+    summary: "Use a formula such as p = 2(l + w) by substituting numbers, in maths and in familiar measure contexts.",
     prerequisites: [],
     statutoryOutcomes: [
       "Use simple formulae",
     ],
     readyToProgress: [],
     whyThisMatters: "Secondary algebra is this with more letters. Tonight: a letter stands for a number you can swap in, not a plus-shaped mystery.",
-    inPlainEnglish: "A formula is a recipe with letters. Perimeter of a rectangle p = 2(l + w). If l=5 and w=3, p=16. Diameter d = 2 × r. The letter is a place-holder.",
+    inPlainEnglish: "A formula is a recipe with letters. Perimeter of a rectangle p = 2(l + w). If l=5 and w=3, p=16. The letter is a place-holder you swap a number into.",
     howSchoolTeachesIt: "Substitute into perimeter, area, even speed if they meet it. They write the formula in words as well as letters.",
     sayThis: [
       "What does this letter stand for tonight?",
       "Swap in 5 and 3. Brackets first.",
-      "If d=10, what is r?",
+      "If p=16 and w=3, what is l?",
     ],
     avoidThis: [
       "Solving for two unknowns here — that is a later pack.",
@@ -1039,7 +1054,7 @@ export const year6MathsTopics: Topic[] = [
         instead: "Two lots of (l+w).",
       },
     ],
-    youAreReadyWhen: "You can use p=2(l+w) and d=2r with given numbers, including one inverse (find r from d).",
+    youAreReadyWhen: "You can use p=2(l+w) with given numbers, including finding a missing length when the perimeter is known.",
     householdItems: [
       "A book to measure l and w",
       "Paper",
@@ -1048,9 +1063,9 @@ export const year6MathsTopics: Topic[] = [
     activityTitle: "Measure, substitute, inverse",
     steps: [
       "Measure l and w. Compute p. Check by adding four sides.",
-      "d=2r with r=6, d=12.",
-      "Given d=10, r=5.",
-      "a+b=b+a with 4 and 7 as a commutativity formula.",
+      "Swap: if p=24 and w=4, find l.",
+      "Write the same recipe in words: perimeter is two lots of length plus width.",
+      "a+b=b+a with 4 and 7 as a swap-order formula.",
     ],
     check: [
       {
@@ -1060,22 +1075,23 @@ export const year6MathsTopics: Topic[] = [
         nudge: "2×11.",
       },
       {
-        prompt: "r=4, d=2r.",
-        looksLike: "8.",
-        notYet: "6.",
-        nudge: "2×4.",
+        prompt: "p=20, w=4, l?",
+        looksLike: "6.",
+        notYet: "16 or 24.",
+        nudge: "Half of 20 is 10, then take off the width.",
       },
       {
-        prompt: "d=18, r?",
-        looksLike: "9.",
-        notYet: "36.",
-        nudge: "Halve.",
+        prompt: "Does 2(l+w) equal 2l+2w for l=5, w=3?",
+        looksLike: "Yes — both 16.",
+        notYet: "They only distribute onto l.",
+        nudge: "Two lots of the whole sum.",
       },
     ],
     stretch: "Area a=l×w with the same book. Different formula, different answer.",
   }),
   ks2MathsDraft({
     id: "y6-sequences-and-missing-numbers",
+    glossaryTerms: ["formula", "number-word", "inverse"],
     year: 6,
     strand: "Algebra",
     title: "Sequences and missing-number sentences",
@@ -1148,6 +1164,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-two-unknowns",
+    glossaryTerms: [],
     year: 6,
     strand: "Algebra",
     title: "Pairs of numbers for two unknowns",
@@ -1220,6 +1237,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-convert-measures",
+    glossaryTerms: ["percentage", "place-value", "decimal", "ratio"],
     year: 6,
     strand: "Measurement",
     title: "Convert measures, including miles and kilometres",
@@ -1293,6 +1311,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-area-triangles-parallelograms",
+    glossaryTerms: ["perpendicular", "right-angle", "perimeter", "formula", "area", "half"],
     year: 6,
     strand: "Measurement",
     title: "Area of triangles and parallelograms, and same-area different-perimeter",
@@ -1366,6 +1385,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-volume-cuboids",
+    glossaryTerms: ["estimate", "formula", "volume", "area"],
     year: 6,
     strand: "Measurement",
     title: "Volume of cubes and cuboids",
@@ -1437,6 +1457,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-circles",
+    glossaryTerms: ["circumference", "diameter", "estimate", "radius"],
     year: 6,
     strand: "Geometry",
     title: "Radius, diameter and circumference",
@@ -1509,6 +1530,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-missing-angles",
+    glossaryTerms: [],
     year: 6,
     strand: "Geometry",
     title: "Missing angles, including vertically opposite",
@@ -1583,6 +1605,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-four-quadrants",
+    glossaryTerms: ["negative-number", "coordinate", "translation", "horizontal", "reflection", "rounding"],
     year: 6,
     strand: "Geometry",
     title: "Four quadrants, translation and reflection in the axes",
@@ -1654,6 +1677,7 @@ export const year6MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y6-pie-charts-and-mean",
+    glossaryTerms: ["percentage", "pie-chart", "mean", "quarter", "formula", "half"],
     year: 6,
     strand: "Statistics",
     title: "Pie charts, line graphs and the mean",

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TopicPublicationGate } from "@/components/TopicPublicationGate";
+import { allMathsTopics } from "@/content/catalogue";
 import {
   getKs2TopicBySlug,
   getKs2TopicsForYear,
@@ -27,9 +28,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function Ks2TopicPage({ params }: PageProps) {
   const { yearKey, slug } = await params;
   const year = parseKs2YearKey(yearKey);
-  const topics = year ? getKs2TopicsForYear(year) : undefined;
+  const inYear = year ? getKs2TopicsForYear(year) : undefined;
   const topic = year ? getKs2TopicBySlug(year, slug) : undefined;
-  if (!topics || !topic) notFound();
+  if (!inYear || !topic) notFound();
 
-  return <TopicPublicationGate topic={topic} topics={topics} />;
+  return <TopicPublicationGate topic={topic} topics={allMathsTopics} />;
 }

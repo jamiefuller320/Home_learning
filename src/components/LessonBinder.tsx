@@ -9,6 +9,7 @@ import { LanguageFeedback } from "@/components/LanguageFeedback";
 import { STAGE_1_META, STAGE_2_META, StageMetaBox } from "@/components/StageMetaBox";
 import type { Topic } from "@/content/schema";
 import { LESSON_TAB_LANGUAGE_SECTION, type LessonTabLanguageId } from "@/lib/language-log";
+import { yearGlossaryHref } from "@/lib/topic-path";
 import { emptyProgress, readProgress, writeProgress, type TopicProgress } from "@/lib/progress";
 
 export type LessonTabId = LessonTabLanguageId;
@@ -148,7 +149,11 @@ export function LessonBinder({
           <div className="mt-10 border-t border-rule pt-8">
             <h3 className="serif text-2xl text-ink">Words in this lesson</h3>
             <div className="mt-4">
-              <GlossaryIndex revealOnly termIds={glossaryTermIds} />
+              <GlossaryIndex
+                revealOnly
+                termIds={glossaryTermIds}
+                glossaryHref={yearGlossaryHref(topic.year)}
+              />
             </div>
           </div>
         ) : null}

@@ -8,6 +8,7 @@ export type Ks1Year2DraftSpec = {
   shortTitle: string;
   summary: string;
   prerequisites?: string[];
+  glossaryTerms?: string[];
   statutoryOutcomes: string[];
   readyToProgress?: string[];
   whyThisMatters: string;
@@ -42,7 +43,7 @@ export function ks1Year2Draft(spec: Ks1Year2DraftSpec): Topic {
     subject: "maths",
     strand: spec.strand,
     prerequisites: spec.prerequisites ?? [],
-    glossaryTerms: [],
+    glossaryTerms: spec.glossaryTerms ?? [],
     parentMinutes: spec.parentMinutes ?? 7,
     homeMinutes: spec.homeMinutes ?? 12,
     householdItems: spec.householdItems,

@@ -4,6 +4,7 @@ import type { Topic } from "@/content/schema";
 export const year3MathsTopics: Topic[] = [
   ks2MathsDraft({
     id: "y3-hundreds-tens-ones",
+    glossaryTerms: ["place-value"],
     year: 3,
     strand: "Number and place value",
     title: "Hundreds, tens and ones",
@@ -16,7 +17,7 @@ export const year3MathsTopics: Topic[] = [
     ],
     readyToProgress: ["3NPV-2"],
     whyThisMatters: "Later written methods only work if 4 in 405 is four hundreds, not four ones. Year 3 locks that in.",
-    inPlainEnglish: "In 405, the 4 is four hundreds, the 0 is no tens, and the 5 is five ones. The place of a digit tells you its worth. 405 is not 4, 0 and 5 sitting as three small numbers.",
+    inPlainEnglish: "In 405, the 4 is four hundreds, the 0 is no tens, and the 5 is five ones. Place value is still what each digit is worth because of where it sits. 405 is not 4, 0 and 5 sitting as three small numbers.",
     howSchoolTeachesIt: "School builds the number with hundreds, tens and ones — straws in bundles, base-ten blocks, or money (pounds as hundreds if you treat 1p as one). They also split the number in unusual ways, such as 405 as 3 hundreds and 10 tens and 5 ones, so the child is not stuck on only one picture.",
     sayThis: [
       { prompt: "In 372, what is the 7 worth?", listenFor: "70, or seven tens." },
@@ -78,6 +79,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-ten-or-hundred-more-less",
+    glossaryTerms: ["number-line", "place-value", "fluency"],
     year: 3,
     strand: "Number and place value",
     title: "Ten or a hundred more or less",
@@ -150,6 +152,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-count-in-4-8-50-100",
+    glossaryTerms: ["number-line", "half"],
     year: 3,
     strand: "Number and place value",
     title: "Counting in 4s, 8s, 50s and 100s",
@@ -222,6 +225,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-order-numbers-to-1000",
+    glossaryTerms: ["number-line", "place-value", "estimate"],
     year: 3,
     strand: "Number and place value",
     title: "Compare and order numbers to 1,000",
@@ -294,6 +298,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-mental-add-subtract",
+    glossaryTerms: ["place-value"],
     year: 3,
     strand: "Addition and subtraction",
     title: "Add and subtract 1s, 10s or 100s in your head",
@@ -366,6 +371,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-written-add-subtract",
+    glossaryTerms: ["estimate"],
     year: 3,
     strand: "Addition and subtraction",
     title: "The written method for 3-digit add and subtract",
@@ -438,6 +444,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-complements-to-100",
+    glossaryTerms: [],
     year: 3,
     strand: "Addition and subtraction",
     title: "Pairs that make 100",
@@ -509,6 +516,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-tables-3-4-8",
+    glossaryTerms: ["number-line", "array"],
     year: 3,
     strand: "Multiplication and division",
     title: "The 3, 4 and 8 times tables",
@@ -580,6 +588,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-multiply-2-digit-by-1-digit",
+    glossaryTerms: ["place-value", "partition"],
     year: 3,
     strand: "Multiplication and division",
     title: "Multiply a 2-digit number by a 1-digit number",
@@ -592,7 +601,7 @@ export const year3MathsTopics: Topic[] = [
     readyToProgress: ["3MD-1"],
     whyThisMatters: "23 × 4 is not a new kind of maths. It is 20 × 4 and 3 × 4 joined. School’s written layout is that split on paper.",
     inPlainEnglish: "23 × 4 means 23, four times. Partition 23 into 20 and 3. Four twenties are 80. Four threes are 12. 80 and 12 make 92.",
-    howSchoolTeachesIt: "School uses a grid (area) picture or an expanded written method: 20 × 4 and 3 × 4 written one under the other, then a compact version. They do not start with a mysterious ‘put a zero’ without saying it is tens.",
+    howSchoolTeachesIt: "School uses a grid picture or an expanded written method: 20 × 4 and 3 × 4 written one under the other, then a compact version. They do not start with a mysterious ‘put a zero’ without saying it is tens.",
     sayThis: [
       "Split 23 into tens and ones. Multiply each by 4.",
       "Four twenties — how many?",
@@ -651,6 +660,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-scaling-and-correspondence",
+    glossaryTerms: ["third", "compare-length"],
     year: 3,
     strand: "Multiplication and division",
     title: "Times as many, and matching groups",
@@ -723,6 +733,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-tenths",
+    glossaryTerms: ["number-line", "place-value", "tenths"],
     year: 3,
     strand: "Fractions",
     title: "Tenths",
@@ -733,7 +744,7 @@ export const year3MathsTopics: Topic[] = [
       "Count up and down in tenths; recognise that tenths arise from dividing an object into 10 equal parts and in dividing one-digit numbers or quantities by 10",
     ],
     readyToProgress: [],
-    whyThisMatters: "Tenths are the bridge from fractions to decimal money and measures in Year 4.",
+    whyThisMatters: "Tenths are the bridge from fractions to money and measures written with a point in Year 4.",
     inPlainEnglish: "If a chocolate bar is split into 10 equal pieces, each piece is one tenth. If you share 1 whole equally with 10 people, each gets one tenth. Counting 1/10, 2/10, 3/10 is like counting in a new unit.",
     howSchoolTeachesIt: "School uses a bar split into 10, a number line from 0 to 1 marked in tenths, and place-value talk: 3 tenths is 3/10. They count forwards and backwards through 1, such as 8/10, 9/10, 10/10 = 1, 11/10.",
     sayThis: [
@@ -748,7 +759,7 @@ export const year3MathsTopics: Topic[] = [
     misconceptions: [
       {
         misconception: "They think 1/10 is smaller than 1/12 because 10 is smaller than 12.",
-        why: "They compare denominators as if bigger means more.",
+        why: "They compare the bottom numbers as if bigger means more.",
         instead: "More equal parts means each part is smaller. Ten tenths fill the same whole as twelve twelfths.",
       },
       {
@@ -795,6 +806,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-unit-and-non-unit-fractions",
+    glossaryTerms: ["unit-fraction", "denominator", "number-line", "numerator", "tenths"],
     year: 3,
     strand: "Fractions",
     title: "Unit fractions and other fractions of a set",
@@ -867,6 +879,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-equivalent-fractions",
+    glossaryTerms: ["equivalent-fraction", "denominator", "quarter", "half", "third"],
     year: 3,
     strand: "Fractions",
     title: "Equivalent fractions with small denominators",
@@ -939,6 +952,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-add-subtract-fractions",
+    glossaryTerms: ["denominator", "numerator"],
     year: 3,
     strand: "Fractions",
     title: "Add and subtract fractions with the same denominator",
@@ -1011,6 +1025,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-length-mass-capacity",
+    glossaryTerms: ["compare-length", "quarter"],
     year: 3,
     strand: "Measurement",
     title: "Length, mass and capacity",
@@ -1021,7 +1036,7 @@ export const year3MathsTopics: Topic[] = [
       "Measure, compare, add and subtract: lengths (m/cm/mm); mass (kg/g); volume/capacity (l/ml)",
     ],
     readyToProgress: [],
-    whyThisMatters: "School science, cooking, and later decimals all sit on these units. Year 3 is practical measuring, not converting everything in a table.",
+    whyThisMatters: "School science, cooking, and later numbers with a point all sit on these units. Year 3 is practical measuring, not converting everything in a table.",
     inPlainEnglish: "A metre is 100 centimetres. A kilogram is 1000 grams. A litre is 1000 millilitres. You compare by measuring, and you can add two lengths or two masses with the same unit.",
     howSchoolTeachesIt: "School uses rulers, scales and jugs. They compare mixed amounts such as 1 kg and 200 g. They connect doubling a length to multiplication.",
     sayThis: [
@@ -1083,6 +1098,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-perimeter",
+    glossaryTerms: ["perimeter", "compare-length", "area"],
     year: 3,
     strand: "Measurement",
     title: "Perimeter of simple shapes",
@@ -1102,7 +1118,7 @@ export const year3MathsTopics: Topic[] = [
       "Opposite sides of this rectangle — are they equal?",
     ],
     avoidThis: [
-      "The formula 2(l + w) before they have added four sides.",
+      "Jumping to 2(l + w) before they have added four sides.",
       "Calling the space inside ‘perimeter’.",
     ],
     misconceptions: [
@@ -1155,6 +1171,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-money",
+    glossaryTerms: ["number-line"],
     year: 3,
     strand: "Measurement",
     title: "Pounds and pence, including change",
@@ -1165,9 +1182,9 @@ export const year3MathsTopics: Topic[] = [
       "Add and subtract amounts of money to give change, using both £ and p in practical contexts",
     ],
     readyToProgress: [],
-    whyThisMatters: "Year 4 will write money with a decimal point. Year 3 keeps £ and p spoken clearly so the point later has meaning.",
+    whyThisMatters: "Year 4 will write money with a point between pounds and pence. Year 3 keeps £ and p spoken clearly so that point later has meaning.",
     inPlainEnglish: "£2 and 40p plus 80p is £3 and 20p, because 40p and 80p make 120p, which is £1 and 20p. Change from £5 for something costing £3.70 is the gap to £5.",
-    howSchoolTeachesIt: "School uses coins and a number line to the next pound. They record £ and p separately. They do not rush the decimal point.",
+    howSchoolTeachesIt: "School uses coins and a number line to the next pound. They record £ and p separately. They do not rush a point between pounds and pence.",
     sayThis: [
       "How many pence in a pound?",
       "Count the pence first — do they make another pound?",
@@ -1200,7 +1217,7 @@ export const year3MathsTopics: Topic[] = [
       "Buy 35p and 80p. Make the total with coins. Exchange 100p for £1 if needed.",
       "Pay with £2. Count on from the total to £2 for change.",
       "Buy the £1 and 20p item with £2. Find change.",
-      "Write the totals as £ and p words, not a decimal, unless they already use school’s decimal money.",
+      "Write the totals as pounds and pence words, not with a point, unless they already use school’s money notation.",
     ],
     check: [
       {
@@ -1226,6 +1243,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-time-to-the-minute",
+    glossaryTerms: ["roman-numeral", "numeral", "half"],
     year: 3,
     strand: "Measurement",
     title: "Time to the nearest minute",
@@ -1299,6 +1317,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-right-angles",
+    glossaryTerms: ["right-angle", "quarter", "half"],
     year: 3,
     strand: "Geometry",
     title: "Right angles as square corners and as turns",
@@ -1310,7 +1329,7 @@ export const year3MathsTopics: Topic[] = [
       "Identify right angles, recognise that 2 right angles make a half-turn, 3 make three-quarters of a turn and 4 a complete turn; identify whether angles are greater than or less than a right angle",
     ],
     readyToProgress: ["3G-1"],
-    whyThisMatters: "Later degree measures sit on this picture. ‘Bigger than a right angle’ is enough in Year 3 — names acute and obtuse can wait until Year 4 if school waits.",
+    whyThisMatters: "Later degree measures sit on this picture. ‘Bigger than a right angle’ is enough in Year 3 — extra names for smaller and larger corners can wait.",
     inPlainEnglish: "The corner of a book is a right angle. A quarter-turn on the spot is also a right angle. An angle can be a corner of a shape or an amount of turn.",
     howSchoolTeachesIt: "School uses a right-angle tester (a card square corner) on shapes and on turns. Children compare corners to the tester: smaller, the same, or larger.",
     sayThis: [
@@ -1372,6 +1391,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-parallel-and-perpendicular",
+    glossaryTerms: ["perpendicular", "parallel", "right-angle", "horizontal", "vertical"],
     year: 3,
     strand: "Geometry",
     title: "Parallel and perpendicular lines",
@@ -1444,6 +1464,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-2d-and-3d-shapes",
+    glossaryTerms: ["2d-shape", "right-angle", "3d-shape", "vertex"],
     year: 3,
     strand: "Geometry",
     title: "Draw 2-D shapes and build 3-D shapes",
@@ -1516,6 +1537,7 @@ export const year3MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y3-bar-charts-and-tables",
+    glossaryTerms: ["bar-chart", "pictogram", "half"],
     year: 3,
     strand: "Statistics",
     title: "Bar charts, pictograms and tables",

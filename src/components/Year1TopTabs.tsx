@@ -9,7 +9,7 @@ import type { YearGroup } from "@/content/schema";
 export type Year1TopTabId = "lessons" | "skills" | "glossary";
 
 /**
- * Year maths binder: Lessons, Skills tree, and Glossary (Year 1 only).
+ * Year maths binder: Lessons, Skills tree, and Glossary.
  * Navigates between routes so deep links and static export stay intact.
  */
 export function Year1TopTabs({
@@ -28,12 +28,10 @@ export function Year1TopTabs({
     const tabs: BinderTabItem<Year1TopTabId>[] = [
       { id: "lessons", label: "Lessons", shortLabel: "Lessons", step: 1 },
       { id: "skills", label: "Skills tree", shortLabel: "Skills", step: 2 },
+      { id: "glossary", label: "Glossary", shortLabel: "Glossary", step: 3 },
     ];
-    if (year === 1) {
-      tabs.push({ id: "glossary", label: "Glossary", shortLabel: "Glossary", step: 3 });
-    }
     return tabs;
-  }, [year]);
+  }, []);
 
   const hrefs = useMemo(
     (): Record<Year1TopTabId, string> => ({

@@ -4,6 +4,7 @@ import type { Topic } from "@/content/schema";
 export const year5MathsTopics: Topic[] = [
   ks2MathsDraft({
     id: "y5-numbers-to-a-million",
+    glossaryTerms: ["place-value"],
     year: 5,
     strand: "Number and place value",
     title: "Numbers to a million",
@@ -75,6 +76,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-powers-of-10",
+    glossaryTerms: ["place-value", "decimal", "tenths"],
     year: 5,
     strand: "Number and place value",
     title: "Counting in powers of 10",
@@ -146,6 +148,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-negative-numbers-in-context",
+    glossaryTerms: ["negative-number", "number-line", "numeral"],
     year: 5,
     strand: "Number and place value",
     title: "Negative numbers in context",
@@ -213,10 +216,11 @@ export const year5MathsTopics: Topic[] = [
         nudge: "4 to reach 0, then 3 more.",
       },
     ],
-    stretch: "If school wants the interval now: |2 − (−5)| as hops, not a formula.",
+    stretch: "If school wants the interval now: |2 − (−5)| as hops, not a letter recipe.",
   }),
   ks2MathsDraft({
     id: "y5-rounding-large-numbers",
+    glossaryTerms: ["rounding", "multiple", "number-line", "estimate"],
     year: 5,
     strand: "Number and place value",
     title: "Round numbers up to 1,000,000",
@@ -287,6 +291,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-roman-to-1000",
+    glossaryTerms: ["roman-numeral", "place-value", "numeral"],
     year: 5,
     strand: "Number and place value",
     title: "Roman numerals to 1,000 and years",
@@ -358,6 +363,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-written-add-subtract-large",
+    glossaryTerms: ["place-value", "bar-model", "estimate", "rounding", "inverse", "third"],
     year: 5,
     strand: "Addition and subtraction",
     title: "Add and subtract more than 4 digits",
@@ -431,6 +437,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-factors-multiples-primes",
+    glossaryTerms: ["common-factor", "prime", "factor", "multiple", "array"],
     year: 5,
     strand: "Multiplication and division",
     title: "Factors, multiples and primes",
@@ -504,6 +511,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-squares-and-cubes",
+    glossaryTerms: ["square-number", "cube-number", "multiple", "factor", "array", "prime", "area"],
     year: 5,
     strand: "Multiplication and division",
     title: "Square and cube numbers",
@@ -514,9 +522,9 @@ export const year5MathsTopics: Topic[] = [
       "Recognise and use square numbers and cube numbers, and the notation for squared (²) and cubed (³)",
     ],
     readyToProgress: [],
-    whyThisMatters: "Area of squares and volume of cubes later use this. 5² is 5×5, not 5×2.",
+    whyThisMatters: "Area of squares and later the space inside cubes use this. 5² is 5×5, not 5×2.",
     inPlainEnglish: "A square number makes a square array: 1,4,9,16,25… 5² = 25. A cube number makes a cube: 1,8,27,64… 3³ = 27.",
-    howSchoolTeachesIt: "Build squares and cubes. Link ² to area of a square, ³ to volume. They still multiply, they do not ‘add the little 2’.",
+    howSchoolTeachesIt: "Build squares and cubes. Link ² to a square array, ³ to a cube of cubes. They still multiply, they do not ‘add the little 2’.",
     sayThis: [
       "Show 4² as a square of 4 by 4.",
       "Why is 5² not 10?",
@@ -575,6 +583,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-long-multiplication",
+    glossaryTerms: ["long-multiplication", "multiple", "estimate", "factor", "prime"],
     year: 5,
     strand: "Multiplication and division",
     title: "Multiply 4-digit by 1-digit and 2-digit numbers",
@@ -646,6 +655,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-short-division",
+    glossaryTerms: ["short-division", "remainder", "decimal", "rounding"],
     year: 5,
     strand: "Multiplication and division",
     title: "Short division and interpreting remainders",
@@ -717,6 +727,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-multiply-divide-by-10-100-1000",
+    glossaryTerms: ["decimal", "place-value", "hundredths", "tenths"],
     year: 5,
     strand: "Multiplication and division",
     title: "Multiply and divide by 10, 100 and 1,000, including decimals",
@@ -788,6 +799,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-equivalent-and-mixed-fractions",
+    glossaryTerms: ["equivalent-fraction", "improper-fraction", "mixed-number", "denominator", "hundredths", "multiple", "remainder", "quarter", "factor", "prime", "tenths"],
     year: 5,
     strand: "Fractions",
     title: "Equivalent fractions, mixed numbers and improper fractions",
@@ -860,6 +872,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-add-subtract-related-fractions",
+    glossaryTerms: ["mixed-number", "denominator", "multiple", "half"],
     year: 5,
     strand: "Fractions",
     title: "Add and subtract fractions with related denominators",
@@ -881,7 +894,7 @@ export const year5MathsTopics: Topic[] = [
     ],
     avoidThis: [
       "Adding 1/2 + 1/8 = 2/10.",
-      "Lowest common multiple language before the picture, unless they are ready.",
+      "Common-multiple language before the picture, unless they are ready.",
     ],
     misconceptions: [
       {
@@ -931,6 +944,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-multiply-fractions-by-wholes",
+    glossaryTerms: ["mixed-number", "denominator", "number-line", "numerator", "quarter", "factor", "third"],
     year: 5,
     strand: "Fractions",
     title: "Multiply proper fractions and mixed numbers by whole numbers",
@@ -1001,6 +1015,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-decimals-to-3dp",
+    glossaryTerms: ["number-line", "place-value", "hundredths", "decimal", "rounding", "tenths"],
     year: 5,
     strand: "Fractions",
     title: "Thousandths and decimals to 3 decimal places",
@@ -1075,6 +1090,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-percentages",
+    glossaryTerms: ["percentage", "hundredths", "decimal", "half"],
     year: 5,
     strand: "Fractions",
     title: "Percentages as parts per hundred",
@@ -1147,6 +1163,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-metric-and-imperial",
+    glossaryTerms: ["place-value", "factor"],
     year: 5,
     strand: "Measurement",
     title: "Metric conversion and common imperial equivalents",
@@ -1220,6 +1237,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-perimeter-composite",
+    glossaryTerms: ["perimeter", "parallel", "compare-length", "vertex", "area"],
     year: 5,
     strand: "Measurement",
     title: "Perimeter of composite rectilinear shapes",
@@ -1291,6 +1309,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-area-of-rectangles",
+    glossaryTerms: ["perimeter", "estimate", "number-word", "array", "compare-length", "area", "half"],
     year: 5,
     strand: "Measurement",
     title: "Area of rectangles, including squares",
@@ -1303,7 +1322,7 @@ export const year5MathsTopics: Topic[] = [
     readyToProgress: ["5G-2"],
     whyThisMatters: "Counting squares in Y4 becomes a multiplication. Comparing area and perimeter of the same rectangle stops the mix-up.",
     inPlainEnglish: "A 7 cm by 4 cm rectangle covers 28 square centimetres. You can see 7 rows of 4 squares. Irregular lakes: count full squares, then guess the almost-full ones.",
-    howSchoolTeachesIt: "Arrays of 1 cm², then formula in words. They compare two rectangles’ areas and estimate blobs on squared paper.",
+    howSchoolTeachesIt: "Arrays of 1 cm², then length times width in words. They compare two rectangles’ areas and estimate blobs on squared paper.",
     sayThis: [
       "How many 1 cm squares would cover this?",
       "Why cm² not cm?",
@@ -1331,7 +1350,7 @@ export const year5MathsTopics: Topic[] = [
       "A 7 by 4 rectangle and a blob",
     ],
     setup: "Draw 7 by 4 and a potato-shape blob.",
-    activityTitle: "Array, formula, blob",
+    activityTitle: "Array, multiply, blob",
     steps: [
       "Count 28 squares. Say 7×4.",
       "A 5 cm by 5 cm square: 25 cm².",
@@ -1362,6 +1381,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-volume-of-cubes",
+    glossaryTerms: ["estimate", "volume", "half"],
     year: 5,
     strand: "Measurement",
     title: "Volume as cubes, capacity as pours",
@@ -1372,7 +1392,7 @@ export const year5MathsTopics: Topic[] = [
       "Estimate volume, for example using 1 cm³ blocks to build cuboids, and capacity, for example using water",
     ],
     readyToProgress: [],
-    whyThisMatters: "Year 6 will use l×w×h. Year 5 should feel 12 cubes as 12 cm³, not jump to a formula empty-handed.",
+    whyThisMatters: "Year 6 will use l×w×h. Year 5 should feel 12 cubes as 12 cm³, not jump to a letter recipe empty-handed.",
     inPlainEnglish: "Volume is how much space a solid takes. 1 cm³ is a cube 1 cm on each edge. Capacity is how much a container holds — millilitres of water. Related, not identical language.",
     howSchoolTeachesIt: "Multilink / centimetre cubes, then a jug. They count layers: 3 by 2 by 2 = 12 cubes.",
     sayThis: [
@@ -1433,6 +1453,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-angles-in-degrees",
+    glossaryTerms: ["acute-angle", "right-angle", "estimate", "parallel", "obtuse-angle", "reflex-angle", "half"],
     year: 5,
     strand: "Geometry",
     title: "Angles in degrees",
@@ -1506,6 +1527,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-3d-from-2d",
+    glossaryTerms: ["3d-shape", "perimeter", "area"],
     year: 5,
     strand: "Geometry",
     title: "3-D shapes from 2-D pictures, regular polygons",
@@ -1579,6 +1601,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-reflection-and-translation",
+    glossaryTerms: ["perpendicular", "coordinate", "translation", "reflection", "parallel", "vertex", "vertical"],
     year: 5,
     strand: "Geometry",
     title: "Reflection and translation",
@@ -1650,6 +1673,7 @@ export const year5MathsTopics: Topic[] = [
   }),
   ks2MathsDraft({
     id: "y5-line-graphs-and-timetables",
+    glossaryTerms: ["decimal"],
     year: 5,
     strand: "Statistics",
     title: "Line graphs and timetables",

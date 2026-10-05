@@ -4,6 +4,7 @@ import type { Topic } from "@/content/schema";
 export const year2MathsTopics: Topic[] = [
   ks1Year2Draft({
     id: "y2-tens-and-ones",
+    glossaryTerms: ["place-value", "ten-frame"],
     strand: "Number and place value",
     title: "Tens and ones in two-digit numbers",
     shortTitle: "Tens and ones",
@@ -15,7 +16,7 @@ export const year2MathsTopics: Topic[] = [
     ],
     readyToProgress: ["2NPV-1"],
     whyThisMatters: "47 is four tens and seven ones, not a 4 glued to a 7. Later adding and subtracting only work if that picture is solid.",
-    inPlainEnglish: "In 47 the 4 is forty — four tens — and the 7 is seven ones. You can also split 47 as 30 and 17, or 40 and 7. The digits are not two separate small numbers sitting side by side.",
+    inPlainEnglish: "In 47 the 4 is forty — four tens — and the 7 is seven ones. You can also split 47 as 30 and 17, or 40 and 7. The digits are not two separate small numbers sitting side by side. That worth, depending on where the digit sits, is what school calls place value.",
     howSchoolTeachesIt: "School builds numbers with ten-sticks and ones, place-value cards, or ten-frames stacked. They ask for the usual split (tens and ones) and for unusual splits, so the child is not stuck on only one picture.",
     sayThis: [
       { prompt: "In 47, what is the 4 worth?", listenFor: "40, or four tens." },
@@ -77,6 +78,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-numbers-to-100-on-a-line",
+    glossaryTerms: ["multiple", "number-line", "estimate"],
     strand: "Number and place value",
     title: "Numbers to 100 on a line",
     shortTitle: "Numbers on a line",
@@ -86,9 +88,9 @@ export const year2MathsTopics: Topic[] = [
       "Identify, represent and estimate numbers using different representations, including the number line",
     ],
     readyToProgress: ["2NPV-2"],
-    whyThisMatters: "A number line is how children later estimate, round, and check whether an answer is sensible. 47 sits between 40 and 50, closer to 50 than to 40.",
-    inPlainEnglish: "Imagine a straight path from 0 to 100 marked in tens. 47 lives after 40 and before 50. The previous ten is 40; the next ten is 50. You do not need to count from 0 every time.",
-    howSchoolTeachesIt: "School uses a blank 0–100 line, a hundred square, and bead strings of 100. They ask children to place a number, then name the multiples of 10 on either side, then say which is closer.",
+    whyThisMatters: "A number line is how children later estimate and check whether an answer is sensible. 47 sits between 40 and 50, closer to 50 than to 40.",
+    inPlainEnglish: "Imagine a straight path from 0 to 100 marked in tens. 47 lives after 40 and before 50. The previous ten is 40; the next ten is 50. Estimate means a sensible about-where, not a lucky guess. You do not need to count from 0 every time.",
+    howSchoolTeachesIt: "School uses a blank 0–100 line, a hundred square, and bead strings of 100. They ask children to place a number, then name the multiples of 10 on either side (40, 50, 60… — numbers in the 10 times list), then say which is closer.",
     sayThis: [
       "About where would 47 sit between 40 and 50?",
       "What is the ten just before 47? The ten just after?",
@@ -147,6 +149,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-order-to-100",
+    glossaryTerms: ["number-line", "place-value", "number-word"],
     strand: "Number and place value",
     title: "Compare and order numbers to 100",
     shortTitle: "Order to 100",
@@ -217,6 +220,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-count-in-2-3-5-10",
+    glossaryTerms: ["skip-counting", "multiple", "number-line"],
     strand: "Number and place value",
     title: "Counting in 2s, 3s, 5s and 10s",
     shortTitle: "Count in 2, 3, 5, 10",
@@ -288,6 +292,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-number-words-to-100",
+    glossaryTerms: ["number-word", "numeral"],
     strand: "Number and place value",
     title: "Read and write numbers to 100",
     shortTitle: "Number words to 100",
@@ -298,7 +303,7 @@ export const year2MathsTopics: Topic[] = [
     ],
     readyToProgress: [],
     whyThisMatters: "Thirteen and thirty sound alike. Getting the word wrong is how 13 and 30 swap on the page.",
-    inPlainEnglish: "47 is forty-seven: the tens word, then the ones word. Teens (thirteen to nineteen) are the awkward family. Forty does not start like four.",
+    inPlainEnglish: "A numeral is the digit symbol (47). A number word is the letters (forty-seven): the tens word, then the ones word. Teens (thirteen to nineteen) are the awkward family. Forty does not start like four.",
     howSchoolTeachesIt: "School matches numeral cards to word cards, and they say the tens-and-ones split as they write. They practise the teen / -ty pairs on purpose: 13 and 30, 14 and 40, 15 and 50.",
     sayThis: [
       "Read this: 40. Now 14. What is different?",
@@ -359,6 +364,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-facts-to-20",
+    glossaryTerms: ["part-whole", "ten-frame", "fluency"],
     strand: "Addition and subtraction",
     title: "Addition and subtraction facts to 20",
     shortTitle: "Facts to 20",
@@ -430,6 +436,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-related-facts-to-100",
+    glossaryTerms: ["place-value"],
     strand: "Addition and subtraction",
     title: "Related facts to 100",
     shortTitle: "Related facts to 100",
@@ -441,7 +448,7 @@ export const year2MathsTopics: Topic[] = [
     readyToProgress: [],
     whyThisMatters: "This is how 30 + 40 stops being a new sum. It is the same fact, scaled into tens.",
     inPlainEnglish: "3 ones and 4 ones make 7 ones. 3 tens and 4 tens make 7 tens, which is 70. 70 − 40 is 30 for the same reason. You are not counting 70 objects.",
-    howSchoolTeachesIt: "School puts ones facts next to tens facts, often with place-value equipment or a Gattegno-style chart. They say ‘3 + 4 = 7, so 3 tens + 4 tens = 7 tens’.",
+    howSchoolTeachesIt: "School puts ones facts next to tens facts, often with place-value equipment or a chart of tens columns. They say ‘3 + 4 = 7, so 3 tens + 4 tens = 7 tens’.",
     sayThis: [
       "If 3 + 4 is 7, what is 30 + 40?",
       "3 tens and 4 tens — how many tens?",
@@ -500,6 +507,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-add-subtract-across-10",
+    glossaryTerms: ["part-whole", "ten-frame"],
     strand: "Addition and subtraction",
     title: "Add and subtract across 10",
     shortTitle: "Across 10",
@@ -572,6 +580,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-difference-how-many-more",
+    glossaryTerms: ["compare-length"],
     strand: "Addition and subtraction",
     title: "Difference: how many more?",
     shortTitle: "How many more?",
@@ -642,6 +651,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-add-subtract-1s-or-10s",
+    glossaryTerms: ["place-value"],
     strand: "Addition and subtraction",
     title: "Add or subtract ones, or tens, to a two-digit number",
     shortTitle: "+/− 1s or 10s",
@@ -713,6 +723,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-add-subtract-two-2-digit",
+    glossaryTerms: ["number-line"],
     strand: "Addition and subtraction",
     title: "Add and subtract two two-digit numbers",
     shortTitle: "TO +/− TO",
@@ -785,6 +796,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-add-three-ones",
+    glossaryTerms: ["ten-frame"],
     strand: "Addition and subtraction",
     title: "Add three one-digit numbers",
     shortTitle: "Add three ones",
@@ -855,6 +867,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-inverse-and-missing-numbers",
+    glossaryTerms: ["part-whole", "inverse"],
     strand: "Addition and subtraction",
     title: "Inverse and missing numbers",
     shortTitle: "Inverse and missing",
@@ -865,7 +878,7 @@ export const year2MathsTopics: Topic[] = [
     ],
     readyToProgress: [],
     whyThisMatters: "If 8 + 6 = 14, then 14 − 6 should bring you back to 8. That check, and □ + 6 = 14, is algebra later without the scary name.",
-    inPlainEnglish: "Addition and subtraction undo each other. A missing number is a part you have not been told. 14 − □ = 8 is asking for the other part of 14.",
+    inPlainEnglish: "Addition and subtraction undo each other — school calls that the inverse. A missing number is a part you have not been told. 14 − □ = 8 is asking for the other part of 14.",
     howSchoolTeachesIt: "School uses part–whole pictures and fact families: 8 + 6, 6 + 8, 14 − 6, 14 − 8. They put a box in different places and ask which part is missing.",
     sayThis: [
       "If 8 and 6 make 14, what is 14 take 6?",
@@ -926,6 +939,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-tables-2-5-10",
+    glossaryTerms: ["skip-counting", "array"],
     strand: "Multiplication and division",
     title: "The 2, 5 and 10 times tables",
     shortTitle: "2, 5 and 10 tables",
@@ -939,7 +953,7 @@ export const year2MathsTopics: Topic[] = [
     readyToProgress: ["2MD-1"],
     whyThisMatters: "Times tables in Year 2 are equal-group stories first, then a chant. Division is the same facts the other way.",
     inPlainEnglish: "4 × 5 means four groups of five, or five four times. That is 20. 20 ÷ 5 is ‘how many 5s in 20?’ Multiplication can swap: 4 × 5 = 5 × 4. Division cannot: 20 ÷ 5 is not 5 ÷ 20.",
-    howSchoolTeachesIt: "School uses arrays (rows and columns), number-line jumps, and skip-counting. They write × and ÷ in the same session as the story. They do not want a chant with no groups.",
+    howSchoolTeachesIt: "School uses arrays — objects in equal rows and columns — number-line jumps, and skip-counting. They write × and ÷ in the same session as the story. They do not want a chant with no groups.",
     sayThis: [
       "Show me 4 groups of 5.",
       "If 4 × 5 is 20, what is 5 × 4?",
@@ -998,6 +1012,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-odd-and-even",
+    glossaryTerms: [],
     strand: "Multiplication and division",
     title: "Odd and even numbers",
     shortTitle: "Odd and even",
@@ -1068,6 +1083,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-arrays-and-grouping",
+    glossaryTerms: ["array"],
     strand: "Multiplication and division",
     title: "Arrays, grouping and sharing",
     shortTitle: "Arrays and grouping",
@@ -1077,9 +1093,9 @@ export const year2MathsTopics: Topic[] = [
       "Solve problems involving multiplication and division, using materials, arrays, repeated addition, mental methods, and multiplication and division facts, including problems in contexts",
     ],
     readyToProgress: ["2MD-2"],
-    whyThisMatters: "‘I have 20. Groups of 5 — how many groups?’ is division where the number of groups is unknown. That is the missing-factor idea Year 3 will need.",
+    whyThisMatters: "‘I have 20. Groups of 5 — how many groups?’ is division where the number of groups is unknown. Year 3 will need that missing-number times sentence.",
     inPlainEnglish: "An array is objects in equal rows. 3 rows of 5 is 15, and also 5 columns of 3. Grouping asks how many 5s fit into 15. Sharing asks what each person gets if 15 is split between 3.",
-    howSchoolTeachesIt: "School builds arrays, then hides a factor: □ × 5 = 15. They contrast grouping (quotitive) with sharing (partitive) using the same numbers, so children see both stories.",
+    howSchoolTeachesIt: "School builds arrays, then hides a number: □ × 5 = 15. They contrast grouping (how many groups) with sharing (how many each) using the same numbers, so children see both stories.",
     sayThis: [
       "How many equal rows? How many in each row?",
       "I have 15. Groups of 5 — how many groups?",
@@ -1113,11 +1129,11 @@ export const year2MathsTopics: Topic[] = [
       "Make 3 rows of 5. Write 3 × 5 = 15. Turn the array. Write 5 × 3 = 15.",
       "Put the 15 into bags of 5. How many bags? Write 15 ÷ 5 = 3.",
       "Share the 15 onto 3 plates. How many each? Write 15 ÷ 3 = 5.",
-      "Hide a factor: □ × 5 = 15. Point to the missing rows.",
+      "Hide a number: □ × 5 = 15. Point to the missing rows.",
     ],
     check: [
       {
-        prompt: "2 rows of 10. Product?",
+        prompt: "2 rows of 10. How many altogether?",
         looksLike: "20.",
         notYet: "12.",
         nudge: "Two tens.",
@@ -1139,6 +1155,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-thirds-and-quarters",
+    glossaryTerms: ["quarter", "third", "half"],
     strand: "Fractions",
     title: "Thirds and quarters of shapes and sets",
     shortTitle: "Thirds and quarters",
@@ -1169,7 +1186,7 @@ export const year2MathsTopics: Topic[] = [
       },
       {
         misconception: "They think 1/4 is bigger than 1/3 because 4 is bigger than 3.",
-        why: "They compare denominators as if bigger means more.",
+        why: "They compare the bottom numbers as if bigger means more.",
         instead: "More equal parts means each part is smaller. Four quarters fill the same whole as three thirds.",
       },
     ],
@@ -1211,6 +1228,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-half-and-two-quarters",
+    glossaryTerms: ["equivalent-fraction", "quarter", "half", "third"],
     strand: "Fractions",
     title: "Two quarters and one half",
     shortTitle: "Half and two quarters",
@@ -1281,6 +1299,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-units-of-measure",
+    glossaryTerms: ["compare-length", "estimate"],
     strand: "Measurement",
     title: "Metres, centimetres, kilograms and litres",
     shortTitle: "Units of measure",
@@ -1353,6 +1372,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-money-pounds-and-pence",
+    glossaryTerms: ["number-line", "place-value"],
     strand: "Measurement",
     title: "Pounds and pence",
     shortTitle: "Money",
@@ -1366,7 +1386,7 @@ export const year2MathsTopics: Topic[] = [
     readyToProgress: [],
     whyThisMatters: "Money is place value you can hold. Same amount, different coins is the non-standard split idea again. Change is a difference story.",
     inPlainEnglish: "100 pence make £1. You can make 30p with three 10p, or with a 20p and a 10p. Change from 50p for something costing 35p is the gap: 15p. Keep pounds with pounds and pence with pence tonight.",
-    howSchoolTeachesIt: "School uses real or plastic coins, a number line to the next 10p or pound, and shop problems in one unit. They write £ and p. They do not rush a decimal point.",
+    howSchoolTeachesIt: "School uses real or plastic coins, a number line to the next 10p or pound, and shop problems in one unit. They write £ and p. They do not rush a point between pounds and pence unless school already does.",
     sayThis: [
       "How many pence in a pound?",
       "Make 30p another way.",
@@ -1399,7 +1419,7 @@ export const year2MathsTopics: Topic[] = [
       "Make 30p with three 10p. Then make 30p another way.",
       "Buy 12p and 20p. Total in pence. Pay with 50p. Count on for change.",
       "Buy 35p with 50p. Find change.",
-      "Write one amount with £ if you make 100p, as £1, not as a decimal unless school already does.",
+      "Write one amount with £ if you make 100p, as £1, not with a point between pounds and pence unless school already does.",
     ],
     check: [
       {
@@ -1425,6 +1445,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-time-to-five-minutes",
+    glossaryTerms: ["quarter", "half"],
     strand: "Measurement",
     title: "Time to five minutes",
     shortTitle: "Time to five minutes",
@@ -1497,10 +1518,11 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-2d-3d-properties",
+    glossaryTerms: ["line-of-symmetry", "2d-shape", "3d-shape", "vertex", "half"],
     strand: "Geometry",
     title: "Properties of 2-D and 3-D shapes",
     shortTitle: "2-D and 3-D properties",
-    summary: "Describe sides, vertices, edges, faces and a vertical line of symmetry, and spot 2-D faces on 3-D objects.",
+    summary: "Describe sides, vertices, edges, faces and a fold line that matches both halves, and spot 2-D faces on 3-D objects.",
     prerequisites: [],
     statutoryOutcomes: [
       "Identify and describe the properties of 2-D shapes, including the number of sides and line symmetry in a vertical line",
@@ -1510,7 +1532,7 @@ export const year2MathsTopics: Topic[] = [
     ],
     readyToProgress: ["2G-1"],
     whyThisMatters: "Naming is not enough. School wants properties you can count: sides, corners, faces. A cuboid is not a cube just because it is boxy.",
-    inPlainEnglish: "2-D is flat: triangles, pentagons, hexagons. Count sides and corners (vertices). A vertical line of symmetry is a fold down the middle that matches. 3-D you can hold: faces, edges, vertices. A cylinder has a circle face.",
+    inPlainEnglish: "2-D is flat: triangles, pentagons, hexagons. Count sides and corners (vertices). A line of symmetry is a fold down the middle that matches. 3-D you can hold: faces, edges, vertices. A cylinder has a circle face.",
     howSchoolTeachesIt: "School sorts shapes, folds for symmetry, and feels boxes, tins and balls. They look at 3-D objects from odd angles so a square face is still a square.",
     sayThis: [
       "How many sides? How many corners?",
@@ -1533,7 +1555,7 @@ export const year2MathsTopics: Topic[] = [
         instead: "Turn it. Count sides. Still four equal sides and square corners.",
       },
     ],
-    youAreReadyWhen: "You can describe a 2-D shape by sides and a vertical fold, and a 3-D object by faces and edges, including a 2-D face you can see.",
+    youAreReadyWhen: "You can describe a 2-D shape by sides and a fold down the middle, and a 3-D object by faces and edges, including a 2-D face you can see.",
     householdItems: [
       "Scrap paper to fold",
       "A cereal box, a tin, a ball",
@@ -1543,7 +1565,7 @@ export const year2MathsTopics: Topic[] = [
     activityTitle: "Fold, count, then feel the box",
     steps: [
       "Count sides and corners on a rectangle and a pentagon.",
-      "Fold the rectangle in half vertically. Do the halves match? Try a scribbled blob that will not match.",
+      "Fold the rectangle in half down the middle. Do the halves match? Try a scribbled blob that will not match.",
       "Feel the cereal box. Count faces, edges, corners. Name a face (rectangle).",
       "Compare the tin (circles) and the ball (curved all round).",
     ],
@@ -1571,6 +1593,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-turns-and-right-angles",
+    glossaryTerms: ["right-angle", "quarter", "half"],
     strand: "Geometry",
     title: "Turns, patterns and right angles",
     shortTitle: "Turns and right angles",
@@ -1643,6 +1666,7 @@ export const year2MathsTopics: Topic[] = [
   }),
   ks1Year2Draft({
     id: "y2-pictograms-and-tables",
+    glossaryTerms: ["pictogram", "half"],
     strand: "Statistics",
     title: "Pictograms, tallies, blocks and tables",
     shortTitle: "Pictograms and tables",
